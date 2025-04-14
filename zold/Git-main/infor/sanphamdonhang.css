@@ -1,0 +1,212 @@
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 150px auto;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 25%;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.sidebar ul li a:hover {
+    color: #007bff;
+}
+
+.main-content-infor {
+    width: 75%;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-content-infor h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.order-progress-title {
+    font-size: 13px;
+    text-align: center;
+    justify-content:left;
+    display: flex;
+    
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    position: relative;
+}
+
+.progress-line {
+    width: 80%;
+    z-index: 1;
+    height: 2px;
+    position: absolute;
+    background-color: #4caf50;
+}
+
+.step {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    flex: 1;
+}
+
+.step .progress-word {
+    font-size: 12px;
+    margin-top: 100px;
+    font-weight: bold;
+}   
+
+.step-icon, .in-icon , .progress-line {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.step-icon {
+    background-color: #4caf50;
+    color: white;
+    border-radius: 50%;
+    width: 54px;
+    height: 54px;
+    display: inline-block;
+    z-index: 1; /* Để icon số nằm phía dưới nếu cần */
+}
+
+#titlebar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px 0;
+    border-bottom: 2px solid #ddd;
+}
+
+#titlebar ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+}
+
+#titlebar ul li a {
+    text-decoration: none;
+    color: #e43c04;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+#titlebar ul li a:hover {
+    color: #696767;
+}
+
+
+.in-icon {
+    background-color: white; /* Hoặc không nền nếu cần */
+    color: #6fc16f;
+    border-radius: 50%;
+    width: 50px; /* Kích thước trùng với step-icon */
+    height: 50px; /* Kích thước trùng với step-icon */
+    z-index: 2; /* Để icon số nằm phía trên */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.progress-words {
+    display: flex;
+    padding: 20px 80px; /* Điều chỉnh lại khoảng cách */
+    font-weight: bold;
+    font-size: 10px; /* Giảm kích thước chữ */
+    align-items: center;
+    justify-content: space-between;
+    text-align: center; /* Căn chữ chính giữa dưới các bước */
+}
+
+.step-description {
+    margin-top: 5px;
+}
+
+.buttons {
+    margin: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: var(--emphasis-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-secondary {
+    background-color: #ddd;
+    color: #333;
+}
+
+.timeline {
+    width: 80%;
+    width: 100%;
+    background-color: #f0eded;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.step-alt {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    position: relative;
+    left: 50px;
+    font-size: 13px;
+}
+
+.circle {
+    width: 40px;
+    height: 40px;
+    background-color: #e2dfdf;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 13px;
+    position: absolute;
+    left: -50px;
+}

@@ -1,0 +1,276 @@
+/* Thiết lập chung */
+
+
+.order-container {
+    max-width: 900px;
+    margin: 140px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 20px;
+    color:#ec2a2a;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* Địa chỉ nhận hàng */
+.shipping-address, .product-section {
+    margin-bottom: 25px;
+}
+
+.address-details p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: black;
+}
+
+.address-options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.default {
+    background-color: #f8d7da;
+    padding: 5px 10px;
+    font-size: 12px;
+    color: #721c24;
+    border-radius: 4px;
+}
+
+.change {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.change:hover {
+    text-decoration: underline;
+}
+
+/* Bảng sản phẩm */
+.product-table {
+    width: 100%;
+    border-top: 1px solid #e0e0e0;
+}
+
+.table-header, .table-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table-header span {
+    font-weight: bold;
+    color: #333;
+}
+
+.table-row span {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Phần thông tin sản phẩm */
+.product-info {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.product-info img {
+    width: 80px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.product-info p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.product-info a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.product-info a:hover {
+    text-decoration: underline;
+}
+
+
+.price, .quantity, .total {
+    flex: 1;
+    text-align: right;
+    font-size: 14px;
+    color: #333;
+}
+
+.total {
+    font-weight: bold;
+    color: #000;
+}
+
+
+.notes input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.voucher-section p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.voucher-section a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+/* Thông tin vận chuyển */
+.delivery-info {
+    font-size: 14px;
+    color: #555;
+}
+
+.shipping-type {
+    font-weight: bold;
+}
+
+.shipping-fee {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    text-align: right;
+}
+/* Phương thức thanh toán */
+.payment-method {
+    margin-bottom: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.payment-method h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.payment-details p {
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.payment-details .change-payment {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.payment-details .change-payment:hover {
+    text-decoration: underline;
+}
+
+.payment-summary {
+    margin-top: 10px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 10px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.summary-item .label {
+    font-size: 14px;
+    color: #555;
+}
+
+.summary-item .value {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.summary-item.total .label {
+    font-size: 16px;
+    color: #000;
+    font-weight: bold;
+}
+
+.summary-item.total .value {
+    font-size: 16px;
+    color: #d9534f; 
+}
+
+.place-order-btn {
+    background-color: #ec2a2a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.place-order-btn:hover {
+    background-color: #e64a19;
+}
+
+/* Success Message Popup */
+.success-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    color: rgb(229, 65, 65);
+    padding: 20px 30px;
+    border: 1px solid #ccc;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1000;
+    border-radius: 10px;
+  }
+  
+  .success-message p {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  
+  .success-message button {
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #007bff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .success-message button:hover {
+    background-color: #f0f0f0;
+  }
+  
