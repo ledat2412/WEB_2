@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Li-Ning</title>
-    <link rel="stylesheet" href="/Git/public/css/base.css">
-    <link rel="stylesheet" href="/Git/public/css/header.css">
-    <link rel="icon" href="/Git/public/img/logo_compact.png" type="image/x-icon">
+    <link rel="stylesheet" href="/WEB_2/public/css/base.css">
+    <link rel="stylesheet" href="/WEB_2/public/css/header.css">
+    <link rel="icon" href="/WEB_2/public/img/logo_compact.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <script src="/Git/public/js/header.js"></script>
+    <script src="/WEB_2/public/js/header.js"></script>
 </head>
 
 <div class="all-header-:v">
@@ -40,7 +40,7 @@
         </div>
         <!-- Div Center -->
         <div class="header-center">
-            <a href="/Git/app/controller/main.php?act=home"><img class="logo" src="/Git/public/img/logo_compact.png" alt="logo" /></a>
+            <a href="/WEB_2/app/controller/main.php?act=home"><img class="logo" src="/WEB_2/public/img/logo_compact.png" alt="logo" /></a>
         </div>
         <!-- Div Right -->
         <div class="header-right">
@@ -60,15 +60,35 @@
             <div class="user-icon" id="non-log">
                 <button class="dropdown-btn"><i class="fa-regular fa-user"></i></button>
                 <div class="dropdown-content">
-                    <a href="/Git/app/controller/main.php?act=login" class="icon-user-btn">Đăng nhập</a>
-                    <a href="/Git/app/controller/main.php?act=register" class="icon-user-btn">Đăng ký</a>
+                    <?php
+                    if(isset($_SESSION['username'])) {
+                        // Menu cho người dùng đã đăng nhập
+                        echo '<a href="/WEB_2/app/view/user/profile.php" class="icon-user-btn">Thông tin</a>';
+                        echo "\n";
+                        echo '<a href="/WEB_2/app/controller/Auth.php?logout=true" class="icon-user-btn">Đăng xuất</a>';
+                    } else {
+                        // Menu cho khách
+                        echo '<a href="/WEB_2/app/controller/main.php?act=login" class="icon-user-btn">Đăng nhập</a>';
+                        echo "\n";
+                        echo '<a href="/WEB_2/app/controller/main.php?act=register" class="icon-user-btn">Đăng ký</a>';
+                    }
+                    ?>
                 </div>
             </div>
 
             <div class="guest-icon-shopping">
-                <a href="/Git/app/view/log/signin.php" class="guest-left-icon-shopping">
+                <?php
+                if(isset($_SESSION['username'])) {
+                    echo '<a href="/WEB_2/app/view/cart/cart.php" class="left-icon-shopping">
                     <i class="fa-solid fa-cart-shopping" id="icon-shopping"></i>
-                </a>
+                    <div class="total-products">3</div>
+                </a>';
+                } else {
+                    echo '<a href="/WEB_2/app/view/log/signin.php" class="guest-left-icon-shopping">
+                    <i class="fa-solid fa-cart-shopping" id="icon-shopping"></i>
+                </a>';
+                }
+                ?>
             </div>
 
             <!-- <div class="filter-icon" id="non-filter">
@@ -127,10 +147,10 @@
     <!-- Product Menu (PC Only) -->
     <nav class="product-menu">
         <ul>
-            <li><a href="/Git/app/controller/main.php?act=giaychaybo.php">Giày bóng rổ</a></li>
-            <li><a href="/web/product-web/giaychaybo.html">Giày chạy bộ</a></li>
-            <li><a href="/web/product-web/giaychaybo.html">Giày thời trang</a></li>
-            <li><a href="/web/product-web/giaychaybo.html">Giày cầu lông</a></li>
+            <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày bóng rổ</a></li>
+            <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày chạy bộ</a></li>
+            <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày thời trang</a></li>
+            <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày cầu lông</a></li>
         </ul>
     </nav>
     <!-- Overlay for background dimming -->
@@ -155,19 +175,19 @@
             <!-- Các mục menu khác -->
             <li onclick="toggleSubMenu1()">Tài khoản</li>
             <ul class="sub-menu" id="subMenu1">
-                <li><a href="/web/log/Login.html">Login</a></li>
-                <li><a href="/web/log/Register.html">Register</a></li>
+                <li><a href="/WEB_2/app/view/log/signin.php">Login</a></li>
+                <li><a href="/WEB_2/app/view/log/signup.php">Register</a></li>
             </ul>
 
             <li onclick="toggleSubMenu2()">Sản phẩm</li>
             <ul class="sub-menu" id="subMenu2">
-                <li><a href="/web/product-web/giaychaybo.html">Giày bóng rổ</a></li>
-                <li><a href="/web/product-web/giaychaybo.html">Giày chạy bộ</a></li>
-                <li><a href="/web/product-web/giaychaybo.html">Giày thời trang</a></li>
-                <li><a href="/web/product-web/giaychaybo.html">Giày cầu lông</a></li>
+                <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày bóng rổ</a></li>
+                <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày chạy bộ</a></li>
+                <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày thời trang</a></li>
+                <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày cầu lông</a></li>
             </ul>
 
-            <li><a href="/web/log/Login.html">Giỏ hàng</a></li>
+            <li><a href="/WEB_2/app/view/log/signin.php">Giỏ hàng</a></li>
 
             <li>
                 <div class="contact-us" id="contactUs">

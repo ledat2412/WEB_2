@@ -1,14 +1,7 @@
 <?php
-require_once 'database.php';
+require_once '../database.php';
 
-// Khởi tạo kết nối database
 $db = new DB();
-
-
-$table_roles = $db->exec("CREATE TABLE IF NOT EXISTS roles (
-    id_role TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    role_name VARCHAR(50) NOT NULL
-)");
 
 // Kiểm tra xem bảng roles đã có dữ liệu chưa
 $check_roles = $db->exec("SELECT * FROM roles");
@@ -20,5 +13,8 @@ if(!$roles_data) {
         (0, 'user'),
         (1, 'admin')
     ");
+    echo "Đã thêm dữ liệu vào bảng roles thành công";
+} else {
+    echo "Bảng roles đã có dữ liệu";
 }
 ?>

@@ -1,6 +1,7 @@
 <?php
 ob_start();
-// include "app/controller/main.php";
+include "app/model/database.php";
+include "app/controller/main.php";
 
 if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
 	$uri = 'https://';
@@ -8,6 +9,6 @@ if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
 	$uri = 'http://';
 }
 $uri .= $_SERVER['HTTP_HOST'];
-header('Location: '.$uri.'/Git/app/controller/main.php');
+header('Location: '.$uri.'/WEB_2/app/controller/main.php');
 exit;
 ?>

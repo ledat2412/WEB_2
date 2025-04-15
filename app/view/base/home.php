@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Li-Ning</title>
-    <link rel="stylesheet" href="/Git/public/css/base.css">
-    <link rel="stylesheet" href="/Git/public/css/home.css">
-    <link rel="icon" href="/Git/public/img/logo_compact.png" type="image/x-icon">
+    <link rel="stylesheet" href="/WEB_2/public/css/base.css">
+    <link rel="stylesheet" href="/WEB_2/public/css/home.css">
+    <link rel="icon" href="/WEB_2/public/img/logo_compact.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
 
 <!-- banner 1 -->
 <div class="banner-1">
-    <a href="/web/product-web/giaychaybo.html">
-        <img class="banner-img-1" src="/Git/public/img/Sản Phẩm/Banner/hinh 1.jpg" alt="ảnh pr sản phẩm">
+    <a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">
+        <img class="banner-img-1" src="/WEB_2/public/img/Sản Phẩm/Banner/hinh 1.jpg" alt="ảnh pr sản phẩm">
     </a>
 </div>
 <!-- chọn khân khúc tier  -->
@@ -25,26 +25,26 @@
     </div>
     <div class="tier-list">
         <div class="tier-item">
-            <a href="/web/product-web/giaychaybo.html">
-                <img src="/Git/public/img/Sản Phẩm/group buy/groupbuy_1_img_compact.jpg">
+            <a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">
+                <img src="/WEB_2/public/img/Sản Phẩm/group buy/groupbuy_1_img_compact.jpg">
                 <h3>chạy bộ</h3>
             </a>
         </div>
         <div class="tier-item">
-            <a href="/web/product-web/giaychaybo.html">
-                <img src="/Git/public/img/Sản Phẩm/group buy/groupbuy_2_img_compact.jpg" href="">
+            <a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">
+                <img src="/WEB_2/public/img/Sản Phẩm/group buy/groupbuy_2_img_compact.jpg" href="">
                 <h3>thời trang</h3>
             </a>
         </div>
         <div class="tier-item">
-            <a href="/web/product-web/giaychaybo.html">
-                <img src="/Git/public/img/Sản Phẩm/group buy/groupbuy_3_img_compact.jpg" href="">
+            <a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">
+                <img src="/WEB_2/public/img/Sản Phẩm/group buy/groupbuy_3_img_compact.jpg" href="">
                 <h3>bóng rổ</h3>
             </a>
         </div>
         <div class="tier-item">
-            <a href="/web/product-web/giaychaybo.html">
-                <img src="/Git/public/img/Sản Phẩm/group buy/groupbuy_4_img_compact.jpg" href="">
+            <a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">
+                <img src="/WEB_2/public/img/Sản Phẩm/group buy/groupbuy_4_img_compact.jpg" href="">
                 <h3>cầu lông</h3>
             </a>
         </div>
