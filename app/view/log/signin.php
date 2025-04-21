@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập</title>
-    <link rel="stylesheet" href="/WEB_2/public/css/signin.css">
-    <link rel="stylesheet" href="/WEB_2/public/css/base.css">
+    <link rel="stylesheet" href="/WEB_2/public/assets/css/signin.css">
+    <link rel="stylesheet" href="/WEB_2/public/assets/css/base.css">
     <link rel="icon" href="/WEB_2/public/img/logo_compact.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
@@ -47,7 +47,7 @@
         </div>
     </form>
 </body>
-<script src="/WEB_2/public/js/script.js"></script>
+<script src="/WEB_2/public/assets/js/script.js"></script>
 
 </html>
 

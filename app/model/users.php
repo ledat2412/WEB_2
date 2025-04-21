@@ -10,7 +10,6 @@ $table_users = $users->exec("CREATE TABLE IF NOT EXISTS users (
     firstName VARCHAR(50) DEFAULT '',
     lastName VARCHAR(50) DEFAULT '',
     email VARCHAR(50) NOT NULL,
-    phone_number VARCHAR(20) DEFAULT '',
     password VARCHAR(50) NOT NULL,
     role TINYINT UNSIGNED NOT NULL DEFAULT 0,
     FOREIGN KEY (role) REFERENCES roles(id_role)
@@ -24,7 +23,6 @@ class Users {
     private $password;
     private $firstName = null;     // Để null hoặc rỗng
     private $lastName = null;      // Để null hoặc rỗng
-    private $phone_number = null;  // Để null hoặc rỗng
     private $role = 0;            // Mặc định là user thường
     private $db;
 
@@ -57,23 +55,6 @@ class Users {
         return "Đăng ký thất bại";
     }
 
-    // // Phương thức đăng nhập
-    // public function login($username, $password) {
-    //     $sql = "SELECT * FROM USERS WHERE username = '$username' AND password = '$password'";
-    //     $this->db->exec($sql);
-    //     $data = $this->db->getData();
-
-    //     if($data) {
-    //         // Chỉ lưu các thông tin cần thiết vào session
-    //         $_SESSION['user_id'] = $data[0]['id_users'];
-    //         $_SESSION['username'] = $data[0]['username'];
-    //         $_SESSION['email'] = $data[0]['email'];
-    //         $_SESSION['role'] = $data[0]['role'];
-    //         return "Đăng nhập thành công";
-    //     }
-    //     return "Thông tin đăng nhập không đúng";
-    // }
-
     // Phương thức đăng nhập
     public function login($account, $password) {
         // Tìm kiếm user theo username hoặc email
@@ -93,11 +74,10 @@ class Users {
     }
 
     // Phương thức cập nhật thông tin bổ sung sau
-    public function updateProfile($id, $firstName, $lastName, $phone_number) {
+    public function updateProfile($id, $firstName, $lastName) {
         $sql = "UPDATE USERS SET 
                 firstName = '$firstName',
                 lastName = '$lastName',
-                phone_number = '$phone_number'
                 WHERE id_users = $id";
         
         if($this->db->exec($sql)) {

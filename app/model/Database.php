@@ -4,12 +4,12 @@ if (!class_exists('DB')) {
         private $host = "localhost";
         private $username = "root";
         private $password = "";
-        private $db_name = "lining";
+        private $db_name = "lining_1";
 
         private $conn = null;
         private $result = null;
 
-        // Thêm constructor để tự động kết nối khi khởi tạo
+        //constructor để tự động kết nối khi khởi tạo
         public function __construct() {
             $this->connect();
         }
@@ -55,7 +55,6 @@ if (!class_exists('DB')) {
         //func insert
         public function insert(){
             $sql = "INSERT INTO () VALUES ()";
-            // return $this->exec($sql);  
             if (!$this->exec($sql)){
                 return false;
             }else{
@@ -67,7 +66,6 @@ if (!class_exists('DB')) {
         //func update
         public function update(){
             $sql = "UPDATE () SET () WHERE ()";
-            // return $this->exec($sql);
             if (!$this->exec($sql)){
                 return false;
             }else{
@@ -79,7 +77,6 @@ if (!class_exists('DB')) {
         //func delete
         public function delete(){
             $sql = "DELETE FROM () WHERE ()";
-            // return $this->exec($sql);
             if (!$this->exec($sql)){
                 return false;
             }else{

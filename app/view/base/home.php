@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Li-Ning</title>
-    <link rel="stylesheet" href="/WEB_2/public/css/base.css">
-    <link rel="stylesheet" href="/WEB_2/public/css/home.css">
-    <link rel="icon" href="/WEB_2/public/img/logo_compact.png" type="image/x-icon">
+    <link rel="stylesheet" href="/WEB_2/public/assets/css/base.css">
+    <link rel="stylesheet" href="/WEB_2/public/assets/css/home.css">
+    <link rel="icon" href="/WEB_2/public/assets/img/logo_compact.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
@@ -15,7 +15,7 @@
 <!-- banner 1 -->
 <div class="banner-1">
     <a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">
-        <img class="banner-img-1" src="/WEB_2/public/img/Sản Phẩm/Banner/hinh 1.jpg" alt="ảnh pr sản phẩm">
+        <img class="banner-img-1" src="/WEB_2/public/assets/img/Sản Phẩm/Banner/hinh 1.jpg" alt="ảnh pr sản phẩm">
     </a>
 </div>
 <!-- chọn khân khúc tier  -->
@@ -26,25 +26,25 @@
     <div class="tier-list">
         <div class="tier-item">
             <a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">
-                <img src="/WEB_2/public/img/Sản Phẩm/group buy/groupbuy_1_img_compact.jpg">
+                <img src="/WEB_2/public/assets/img/Sản Phẩm/group buy/groupbuy_1_img_compact.jpg">
                 <h3>chạy bộ</h3>
             </a>
         </div>
         <div class="tier-item">
             <a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">
-                <img src="/WEB_2/public/img/Sản Phẩm/group buy/groupbuy_2_img_compact.jpg" href="">
+                <img src="/WEB_2/public/assets/img/Sản Phẩm/group buy/groupbuy_2_img_compact.jpg" href="">
                 <h3>thời trang</h3>
             </a>
         </div>
         <div class="tier-item">
             <a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">
-                <img src="/WEB_2/public/img/Sản Phẩm/group buy/groupbuy_3_img_compact.jpg" href="">
+                <img src="/WEB_2/public/assets/img/Sản Phẩm/group buy/groupbuy_3_img_compact.jpg" href="">
                 <h3>bóng rổ</h3>
             </a>
         </div>
         <div class="tier-item">
             <a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">
-                <img src="/WEB_2/public/img/Sản Phẩm/group buy/groupbuy_4_img_compact.jpg" href="">
+                <img src="/WEB_2/public/assets/img/Sản Phẩm/group buy/groupbuy_4_img_compact.jpg" href="">
                 <h3>cầu lông</h3>
             </a>
         </div>
@@ -53,7 +53,7 @@
 <!-- banner 2 -->
 <div class="banner-2">
     <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html">
-        <img class="banner-img-2" src="/Git/public/img/Sản Phẩm/Banner/hinh 2.jpg" alt="ảnh pr sản phẩm">
+        <img class="banner-img-2" src="/WEB_2/public/assets/img/Sản Phẩm/Banner/hinh 2.jpg" alt="ảnh pr sản phẩm">
     </a>
 </div>
 <!-- product -->
@@ -65,7 +65,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -80,7 +80,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -95,7 +95,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày Chạy bộ Nam AGLT103-3B/Giày Chạy bộ Nam AGLT103-3B.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày Chạy bộ Nam AGLT103-3B/Giày Chạy bộ Nam AGLT103-3B.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -110,7 +110,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Lie Jun 6th nam ARZS003-13/Giày chạy bộ Lie Jun 6th nam ARZS003-13.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Lie Jun 6th nam ARZS003-13/Giày chạy bộ Lie Jun 6th nam ARZS003-13.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -131,7 +131,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS081-1/Giày bóng rổ nam ABAS081-1.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS081-1/Giày bóng rổ nam ABAS081-1.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -146,7 +146,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS071-5/Giày bóng rổ nam ABAS071-5.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS071-5/Giày bóng rổ nam ABAS071-5.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -161,7 +161,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABPS039-4/Giày bóng rổ nam ABPS039-4.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABPS039-4/Giày bóng rổ nam ABPS039-4.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -176,7 +176,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS073-7/Giày bóng rổ nam ABAS073-7.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS073-7/Giày bóng rổ nam ABAS073-7.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -191,7 +191,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS081-1/Giày bóng rổ nam ABAS081-1.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS081-1/Giày bóng rổ nam ABAS081-1.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -206,7 +206,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS071-5/Giày bóng rổ nam ABAS071-5.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS071-5/Giày bóng rổ nam ABAS071-5.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -221,7 +221,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABPS039-4/Giày bóng rổ nam ABPS039-4.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABPS039-4/Giày bóng rổ nam ABPS039-4.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -236,7 +236,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS073-7/Giày bóng rổ nam ABAS073-7.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS073-7/Giày bóng rổ nam ABAS073-7.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -257,7 +257,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Nữ ARHT020-9V/Giày chạy bộ Nữ ARHT020-9V.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Nữ ARHT020-9V/Giày chạy bộ Nữ ARHT020-9V.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -272,7 +272,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -287,7 +287,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -302,7 +302,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Yue Ying 2 nữ ARHT006-7/Giày chạy bộ Yue Ying 2 nữ ARHT006-7.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Yue Ying 2 nữ ARHT006-7/Giày chạy bộ Yue Ying 2 nữ ARHT006-7.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -317,7 +317,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Nữ ARHT020-9V/Giày chạy bộ Nữ ARHT020-9V.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Nữ ARHT020-9V/Giày chạy bộ Nữ ARHT020-9V.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -332,7 +332,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -347,7 +347,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -362,7 +362,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Yue Ying 2 nữ ARHT006-7/Giày chạy bộ Yue Ying 2 nữ ARHT006-7.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Yue Ying 2 nữ ARHT006-7/Giày chạy bộ Yue Ying 2 nữ ARHT006-7.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -377,7 +377,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Nữ ARHT020-9V/Giày chạy bộ Nữ ARHT020-9V.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Nữ ARHT020-9V/Giày chạy bộ Nữ ARHT020-9V.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -392,7 +392,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -407,7 +407,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>
@@ -422,7 +422,7 @@
                 <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
                     class="product-display">
                     <img class="image"
-                        src="/Git/public/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Yue Ying 2 nữ ARHT006-7/Giày chạy bộ Yue Ying 2 nữ ARHT006-7.jpg"
+                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Yue Ying 2 nữ ARHT006-7/Giày chạy bộ Yue Ying 2 nữ ARHT006-7.jpg"
                         alt="">
                 </a>
                 <a class="product-buy" href="">Mua ngay</a>

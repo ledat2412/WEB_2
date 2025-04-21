@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Li-Ning</title>
-    <link rel="stylesheet" href="/WEB_2/public/css/base.css">
-    <link rel="stylesheet" href="/WEB_2/public/css/header.css">
+    <link rel="stylesheet" href="/WEB_2/public/assets/css/base.css">
+    <link rel="stylesheet" href="/WEB_2/public/assets/css/header.css">
     <link rel="icon" href="/WEB_2/public/img/logo_compact.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <script src="/WEB_2/public/js/header.js"></script>
+    <script src="/WEB_2/public/assets/js/header.js"></script>
 </head>
 
 <div class="all-header-:v">
@@ -61,17 +61,17 @@
                 <button class="dropdown-btn"><i class="fa-regular fa-user"></i></button>
                 <div class="dropdown-content">
                     <?php
-                    if(isset($_SESSION['username'])) {
-                        // Menu cho người dùng đã đăng nhập
-                        echo '<a href="/WEB_2/app/view/user/profile.php" class="icon-user-btn">Thông tin</a>';
-                        echo "\n";
-                        echo '<a href="/WEB_2/app/controller/Auth.php?logout=true" class="icon-user-btn">Đăng xuất</a>';
-                    } else {
-                        // Menu cho khách
-                        echo '<a href="/WEB_2/app/controller/main.php?act=login" class="icon-user-btn">Đăng nhập</a>';
-                        echo "\n";
-                        echo '<a href="/WEB_2/app/controller/main.php?act=register" class="icon-user-btn">Đăng ký</a>';
-                    }
+                        if(isset($_SESSION['username'])) {
+                            // Menu cho người dùng đã đăng nhập
+                            echo '<a href="/WEB_2/app/view/user/profile.php" class="icon-user-btn">Thông tin</a>';
+                            echo "\n";
+                            echo '<a href="/WEB_2/app/controller/Auth.php?logout=true" class="icon-user-btn">Đăng xuất</a>';
+                        } else {
+                            // Menu cho khách
+                            echo '<a href="/WEB_2/app/controller/main.php?act=login" class="icon-user-btn">Đăng nhập</a>';
+                            echo "\n";
+                            echo '<a href="/WEB_2/app/controller/main.php?act=register" class="icon-user-btn">Đăng ký</a>';
+                        }
                     ?>
                 </div>
             </div>
@@ -79,7 +79,7 @@
             <div class="guest-icon-shopping">
                 <?php
                 if(isset($_SESSION['username'])) {
-                    echo '<a href="/WEB_2/app/view/cart/cart.php" class="left-icon-shopping">
+                    echo '<a href="/WEB_2/app/controller/main.php?act=cart" class="left-icon-shopping">
                     <i class="fa-solid fa-cart-shopping" id="icon-shopping"></i>
                     <div class="total-products">3</div>
                 </a>';
@@ -175,8 +175,19 @@
             <!-- Các mục menu khác -->
             <li onclick="toggleSubMenu1()">Tài khoản</li>
             <ul class="sub-menu" id="subMenu1">
-                <li><a href="/WEB_2/app/view/log/signin.php">Login</a></li>
-                <li><a href="/WEB_2/app/view/log/signup.php">Register</a></li>
+                <?php
+                    if(isset($_SESSION['username'])) {
+                        // Menu cho người dùng đã đăng nhập
+                        echo '<li><a href="/WEB_2/app/view/user/profile.php" class="icon-user-btn">Thông tin</a></li>';
+                        echo "\n";
+                        echo '<li><a href="/WEB_2/app/controller/Auth.php?logout=true" class="icon-user-btn">Đăng xuất</a></li>';
+                    } else {
+                        // Menu cho khách
+                        echo '<li><a href="/WEB_2/app/controller/main.php?act=login" class="icon-user-btn">Đăng nhập</a></li>';
+                        echo "\n";
+                        echo '<li><a href="/WEB_2/app/controller/main.php?act=register" class="icon-user-btn">Đăng ký</a></li>';
+                    }
+                ?>
             </ul>
 
             <li onclick="toggleSubMenu2()">Sản phẩm</li>

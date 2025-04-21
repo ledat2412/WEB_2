@@ -48,6 +48,9 @@ if (isset($_GET['act'])) {
         case 'giaychaybo':
             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/product-web/giaychaybo.php";
             break;
+        case 'cart':
+            include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/cart/cart.php";
+            break;
         default:
             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/base/home.php";
             break;

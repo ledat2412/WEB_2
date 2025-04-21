@@ -10,7 +10,6 @@ class Auth {
 
     public function handleRegister() {
         if(isset($_POST['signUp'])) {
-            // Chỉ lấy 3 thông tin cơ bản
             $username = $_POST['username'];
             $email = $_POST['email'];
             $password = $_POST['password'];
