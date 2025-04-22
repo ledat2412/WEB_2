@@ -172,7 +172,7 @@
                 </a>
             </li>   
             <li>
-                <a href="/admin/html/Quanlycauhinh.html">
+                <a href="../../views/html/Quanlycauhinh.php">
                     <i class="fa-solid fa-user"></i>
                     <span class="text">Users</span>
                 </a>
