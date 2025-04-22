@@ -6,10 +6,7 @@ $db = new database();
 
 $table_colors = $db->handle("CREATE TABLE IF NOT EXISTS colors (
     id_color INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL UNIQUE,
-    hex_code VARCHAR(7) NOT NULL,
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    name VARCHAR(50) NOT NULL UNIQUE
 )");
 
 class Colors {

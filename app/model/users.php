@@ -56,7 +56,7 @@ class Users {
         // Tìm kiếm user theo username hoặc email
         $sql = "SELECT * FROM USERS WHERE (username = '$account' OR email = '$account') AND password = '$password'";
         $this->db->handle($sql);
-        $data = $this->db->getData();
+        $data = $this->db->getData($sql);
 
         if($data) {
             // Lưu thông tin vào session

@@ -1,0 +1,27 @@
+INSERT INTO `product` (`id_product`, `size`, `picture_path`, `price`, `stock`, `color_id`, `material_id`, `sex_id`, `id_product_variant`, `description_id`) values 
+(0, '5.5', '\WEB_2\public\assets\img\Sản Phẩm\giày chạy bộ\Giày chạy bộ Boom Infinity 2 nữ ARVS016-3', ' 2346545', 100, 1, 1, 1, 1, 1),
+(1, '6', '\WEB_2\public\assets\img\Sản Phẩm\giày chạy bộ\Giày chạy bộ Boom Infinity 2 nữ ARVS016-3', ' 2346545', 100, 1, 1, 1, 1, 1),
+(2, '6.5', '\WEB_2\public\assets\img\Sản Phẩm\giày chạy bộ\Giày chạy bộ Boom Infinity 2 nữ ARVS016-3', ' 2346545', 100, 1, 1, 1, 1, 1),
+(3, '7', '\WEB_2\public\assets\img\Sản Phẩm\giày chạy bộ\Giày chạy bộ Boom Infinity 2 nữ ARVS016-3', ' 2346545', 100, 1, 1, 1, 1, 1),
+(4, '7.5', '\WEB_2\public\assets\img\Sản Phẩm\giày chạy bộ\Giày chạy bộ Boom Infinity 2 nữ ARVS016-3', ' 2346545', 100, 1, 1, 1, 1, 1),
+(5, '8', '\WEB_2\public\assets\img\Sản Phẩm\giày chạy bộ\Giày chạy bộ Boom Infinity 2 nữ ARVS016-3', ' 2346545', 100, 1, 1, 1, 1, 1),
+(6, '8.5', '\WEB_2\public\assets\img\Sản Phẩm\giày chạy bộ\Giày chạy bộ Boom Infinity 2 nữ ARVS016-3', ' 2346545', 100, 1, 1, 1, 1, 1);
+ALTER TABLE `product` AUTO_INCREMENT = 8;
+
+
+INSERT INTO `descriptions` (`id_description`, `content`) VALUES
+(1, 'Công nghệ
+Công nghệ LI-NING BOOM là vật liệu đế giữa kiểu mới do Li-Ning tự khai thác phát triển, được điều chế bằng quy trình tạo bọt lỏng siêu giới hạn, so với chất liệu truyền thống thì chất liệu này giảm được đáng kể trọng lượng đế giữa, không chỉ giúp tính năng đàn hồi được phát huy rõ rệt, mà còn kéo dài được tuổi thọ sử dụng, tăng cường thêm tính năng của sản phẩm. Thông qua các điều chỉnh sát với mục tiêu tính năng và chi tiết hơn, để phù với tính chất cạnh tranh của các môn thể thao khác nhau như chạy, bóng rổ, cầu lông, bóng bàn, v.v….nâng cao hiệu suất tốt cho các vận động viên với các mục mục đích sử dụng khác nhau.
+TUFF RB là loại vật liệu cao su có khả năng chống mài mòn cao, giúp cải thiện khả năng chống mài mòn của vật liệu cao su gấp 2.5 lần so với vật liệu cao su thông thường. Cải thiện đáng kể khả năng chống mài mòn của đế và kéo dài tuổi thọ của giày
+HEEL LOC là một thiết bị hỗ trợ và ổn định xung quanh gót giày để hỗ trợ người mang không bị mất thăng bằng trong quá trình tập luyện và di chuyển trên mọi địa hình
+Thân giày
+Bề mặt giầy với thiết kế sáng tạo, phối màu đơn giản mà linh hoạt, đặc biệt mix giữa chất liệu vải dệt và da đem đến điểm nhấn cho đôi giày.Tính chất ôm sát nâng đỡ, mỏng nhẹ thoáng khí giúp cho bàn chân cảm giác như được thở theo nhịp chuyển động, mỗi bước chân trở nên linh hoạt chuẩn xác.
+Phần Đế Giữa:
+Sử dụng chất liệu mới BOOM - là một bước đột phá trong khai thác phát triển công nghệ giầy của thương hiệu LiNing
+Công nghệ LI-NING BOOM là vật liệu đế giữa kiểu mới do Li-Ning tự khai thác phát triển, được điều chế bằng quy trình tạo bọt lỏng siêu giới hạn, so với chất liệu truyền thống thì chất liệu này giảm được đáng kể trọng lượng đế giữa, không chỉ giúp tính năng đàn hồi được phát huy rõ rệt, mà còn kéo dài được tuổi thọ sử dụng, tăng cường thêm tính năng của sản phẩm. Tăng cường lực đàn hồi 8.4%
+Phần Đế Ngoài:
+Đế giày với công nghệ TUFF RB là vật liệu cao su có khả năng chống mài mòn cao, tốt hơn các vật liệu cao su thông thường và có thể cải thiện hiệu quả khả năng chống mài mòn của đế, do đó kéo dài tuổi thọ của giày. Tỉ lệ chống nước chống trơn trượt nâng cao. Tăng cường tính ổn định, tăng cường sự tự tin.
+Phần Gót giày:
+Sử dụng công nghệ HEEL LOC là một thiết bị hỗ trợ và ổn định xung quanh gót giày để hỗ trợ người mang không bị mất thăng bằng trong quá trình tập luyện và di chuyển trên mọi địa hình
+');
+ALTER TABLE `description` AUTO_INCREMENT = 2;
