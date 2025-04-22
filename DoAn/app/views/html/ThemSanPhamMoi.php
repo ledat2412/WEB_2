@@ -16,25 +16,25 @@
         </a>
         <ul class="side-menu top">
             <li class="active">
-                <a href="/admin/html/admin.html">
+                <a href="../../views/html/admin.php">
                     <i class="fa-solid fa-chart-line"></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="/admin/html/Quanlycauhinh.html">
+                <a href="../../views/html/Quanlycauhinh.php">
                     <i class="fa-solid fa-user"></i>
                     <span class="text">Users</span>
                 </a>
             </li>
             <li>
-                <a href="/admin/html/DanhSachSanPham.html">
+                <a href="../../views/html/DanhSachSanPham.php">
                     <i class="fa-solid fa-shop"></i>
                     <span class="text">Danh sách</span>
                 </a>
             </li>
             <li>
-                <a href="/admin/html/DonHang.html">
+                <a href="../../views/html/DonHang.php">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="text">Đơn hàng</span>
                 </a>

@@ -37,13 +37,13 @@
         </a>
         <ul class="side-menu top">
             <li class="active">
-                <a href="./admin.html">
+                <a href="../../views/html/admin.php">
                     <i class="fa-solid fa-chart-line"></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="/admin/html/Quanlycauhinh.html">
+                <a href="../../views/html/Quanlycauhinh.php">
                     <i class="fa-solid fa-user"></i>
                     <span class="text">Users</span>
                 </a>
@@ -55,7 +55,7 @@
                 </a>
             </li>
             <li>
-                <a href="/admin/html/DonHang.html">
+                <a href="../../views/html/DonHang.php">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="text">Đơn hàng</span>
                 </a>
@@ -97,7 +97,7 @@
                     <h1>Danh Sách</h1>
                     <ul class="list-position">
                         <li>
-                            <a href="/admin/html/admin.html">Home</a>
+                            <a href="../../views/html/admin.php">Home</a>
                         </li>
                         <li><i class="fa-solid fa-chevron-right"></i></li>
                         <li>
@@ -139,7 +139,7 @@
                     <div class="Product-list-detail">5</div>
                     <div class="Product-list-detail">29/10/2024</div>
                     <div class="Product-list-detail">
-                        <a href="/admin/html/SuaSanPham.html">
+                        <a href="../../views/html/SuaSanPham.php">
                             <i class="fa-solid fa-pen-to-square"></i>&#160;
                         </a>
                         <a href="#warning-notify">
@@ -158,7 +158,7 @@
                     <div class="Product-list-detail">5</div>
                     <div class="Product-list-detail">29/10/2024</div>
                     <div class="Product-list-detail">
-                        <a href="/admin/html/SuaSanPham.html">
+                        <a href="../../views/html/SuaSanPham.php">
                             <i class="fa-solid fa-pen-to-square"></i>&#160;
                         </a>
                         <a href="#warning-notify">
@@ -177,7 +177,7 @@
                     <div class="Product-list-detail">5</div>
                     <div class="Product-list-detail">29/10/2024</div>
                     <div class="Product-list-detail">
-                        <a href="/admin/html/SuaSanPham.html">
+                        <a href="../../views/html/SuaSanPham.php">
                             <i class="fa-solid fa-pen-to-square"></i>&#160;
                         </a>
                         <a href="#warning-notify">
@@ -196,7 +196,7 @@
                     <div class="Product-list-detail">1</div>
                     <div class="Product-list-detail">29/10/2024</div>
                     <div class="Product-list-detail">
-                        <a href="/admin/html/SuaSanPham.html">
+                        <a href="../../views/html/SuaSanPham.php">
                             <i class="fa-solid fa-pen-to-square"></i>&#160;
                         </a>
                         <a href="#warning-notify">
@@ -215,7 +215,7 @@
                     <div class="Product-list-detail">10</div>
                     <div class="Product-list-detail">29/10/2024</div>
                     <div class="Product-list-detail">
-                        <a href="/admin/html/SuaSanPham.html">
+                        <a href="../../views/html/SuaSanPham.php">
                             <i class="fa-solid fa-pen-to-square"></i>&#160;
                         </a>
                         <a href="#warning-notify">

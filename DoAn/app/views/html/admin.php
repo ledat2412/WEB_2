@@ -172,7 +172,7 @@
                 </a>
             </li>   
             <li>
-                <a href="/admin/html/Quanlycauhinh.html">
+                <a href="../../views/html/Quanlycauhinh.php">
                     <i class="fa-solid fa-user"></i>
                     <span class="text">Users</span>
                 </a>
@@ -184,7 +184,7 @@
                 </a>
             </li>
             <li>
-                <a href="/admin/html/DonHang.html">
+                <a href="../../views/html/DonHang.php">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="text">Đơn hàng</span>
                 </a>
@@ -226,11 +226,11 @@
                     <h1>Thống kê</h1>
                     <ul class="list-position">
                         <li>
-                            <a href="/admin/html/admin.html">Thống kê</a>
+                            <a href="../../views/html/admin.php">Thống kê</a>
                         </li>
                         <li><i class="fa-solid fa-chevron-right"></i></li>
                         <li>
-                            <a href="/admin/html/admin.html">Home</a>
+                            <a href="../../views/html/admin.php">Home</a>
                         </li>
                     </ul>
                 </div>
@@ -355,7 +355,7 @@
                 <div class="left">
                     <div class="recent-orders">
                         <h3>Recent-orders</h3>
-                        <a href="/admin/html/DonHang.html">
+                        <a href="../../views/html/DonHang.php">
                             <h3>View all</h3>
                         </a>
                     </div>
@@ -417,7 +417,7 @@
                 <div class="right">
                     <div class="recent-customers">
                         <h3>Recent-customers</h3>
-                        <a href="/admin/html/Quanlycauhinh.html#">
+                        <a href="../../views/html/Quanlycauhinh.php#">
                             <h3>View all</h3>
                         </a>
                     </div>
