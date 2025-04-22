@@ -1,62 +1,88 @@
 <?php
 require_once 'database.php';
+require_once 'colors.php';
+require_once 'materials.php';
+require_once 'sex.php';
+require_once 'product_variant.php';
+require_once 'descriptions.php';
 
 // Khởi tạo kết nối database
-$db = new DB();
+$db = new database();
 
-$table_product = $db->exec("CREATE TABLE IF NOT EXISTS product (
+$table_product = $db->handle("CREATE TABLE IF NOT EXISTS product (
     id_product INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    picture_path VARCHAR(255) DEFAULT NULL,
-    description_id INT UNSIGNED DEFAULT NULL,
-    FOREIGN KEY (description_id) REFERENCES descriptions(id)
+    size VARCHAR(20),
+    picture_path VARCHAR(255),
+    price INT UNSIGNED,
+    stock INT UNSIGNED,
+    color_id INT UNSIGNED,
+    material_id INT UNSIGNED,
+    sex_id INT UNSIGNED,
+    id_product_variant INT UNSIGNED,
+    description_id INT UNSIGNED,
+    FOREIGN KEY (color_id) REFERENCES colors(id_color),
+    FOREIGN KEY (material_id) REFERENCES materials(id_material),
+    FOREIGN KEY (sex_id) REFERENCES sex(id_sex),
+    FOREIGN KEY (id_product_variant) REFERENCES product_variant(id_product_variant),
+    FOREIGN KEY (description_id) REFERENCES descriptions(id_description)
 )");
 
 class Product {
     private $db;
 
     public function __construct() {
-        $this->db = new DB();
+        $this->db = new database();
+    }
+    
+    public function showproduct() {
+        $sql = "SELECT * FROM product";
+        $this->db->handle($sql);
+        return $this->db->getData();
     }
 
-    public function addProduct($name, $picture_path = null, $description_id = null) {
-        $sql = "INSERT INTO product (name, picture_path, description_id) VALUES (?, ?, ?)";
-        return $this->db->exec($sql, [$name, $picture_path, $description_id]);
+    public function addProduct($size, $picture_path, $price, $stock, $color_id, $material_id, $sex_id, $id_product_variant, $description_id) {
+        $sql = "INSERT INTO product (size, picture_path, price, stock, color_id, material_id, sex_id, id_product_variant, description_id) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        return $this->db->handle($sql, [$size, $picture_path, $price, $stock, $color_id, $material_id, $sex_id, $id_product_variant, $description_id]);
     }
 
     public function getProduct($id) {
-        $sql = "SELECT * FROM product WHERE id_product = ?";
-        $this->db->exec($sql, [$id]);
+        $sql = "SELECT p.*, c.name as color_name, m.name as material_name, 
+                s.name as sex_name, pv.name as variant_name, d.content as description 
+                FROM product p 
+                LEFT JOIN colors c ON p.color_id = c.id_color 
+                LEFT JOIN materials m ON p.material_id = m.id_material 
+                LEFT JOIN sex s ON p.sex_id = s.id_sex 
+                LEFT JOIN product_variant pv ON p.id_product_variant = pv.id_product_variant 
+                LEFT JOIN descriptions d ON p.description_id = d.id_description 
+                WHERE p.id_product = ?";
+        $this->db->handle($sql, [$id]);
         return $this->db->getData();
     }
 
     public function getAllProducts() {
-        $sql = "SELECT * FROM product";
-        $this->db->exec($sql);
+        $sql = "SELECT p.*, c.name as color_name, m.name as material_name, 
+                s.name as sex_name, pv.name as variant_name, d.content as description 
+                FROM product p 
+                LEFT JOIN colors c ON p.color_id = c.id_color 
+                LEFT JOIN materials m ON p.material_id = m.id_material 
+                LEFT JOIN sex s ON p.sex_id = s.id_sex 
+                LEFT JOIN product_variant pv ON p.id_product_variant = pv.id_product_variant 
+                LEFT JOIN descriptions d ON p.description_id = d.id_description";
+        $this->db->handle($sql);
         return $this->db->getData();
     }
 
-    public function updateProduct($id, $name, $picture_path = null, $description_id = null) {
-        $sql = "UPDATE product SET name = ?, picture_path = ?, description_id = ? WHERE id_product = ?";
-        return $this->db->exec($sql, [$name, $picture_path, $description_id, $id]);
-    }
-
-    public function updateProductPicture($id, $picture_path) {
-        $sql = "UPDATE product SET picture_path = ? WHERE id_product = ?";
-        return $this->db->exec($sql, [$picture_path, $id]);
+    public function updateProduct($id, $size, $picture_path, $price, $stock, $color_id, $material_id, $sex_id, $id_product_variant, $description_id) {
+        $sql = "UPDATE product SET size = ?, picture_path = ?, price = ?, stock = ?, 
+                color_id = ?, material_id = ?, sex_id = ?, id_product_variant = ?, description_id = ? 
+                WHERE id_product = ?";
+        return $this->db->handle($sql, [$size, $picture_path, $price, $stock, $color_id, $material_id, $sex_id, $id_product_variant, $description_id, $id]);
     }
 
     public function deleteProduct($id) {
         $sql = "DELETE FROM product WHERE id_product = ?";
-        return $this->db->exec($sql, [$id]);
-    }
-
-    public function getProductWithDescription($id) {
-        $sql = "SELECT p.*, d.content as description FROM product p 
-                LEFT JOIN descriptions d ON p.description_id = d.id 
-                WHERE p.id_product = ?";
-        $this->db->exec($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->handle($sql, [$id]);
     }
 }
 ?> 

@@ -1,15 +1,15 @@
 <?php
 require_once '../database.php';
 
-$db = new DB();
+$db = new database();
 
 // Kiểm tra xem bảng roles đã có dữ liệu chưa
-$check_roles = $db->exec("SELECT * FROM roles");
-$roles_data = $db->getData();
+$check_roles = $db->handle("SELECT * FROM roles");
+$roles_data = $db->getData($check_roles);
 
 if(!$roles_data) {
     // Nếu chưa có dữ liệu thì thêm vào
-    $db->exec("INSERT INTO roles (id_role, role_name) VALUES 
+    $db->handle("INSERT INTO roles (id_role, role_name) VALUES 
         (0, 'user'),
         (1, 'admin')
     ");

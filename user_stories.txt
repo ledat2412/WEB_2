@@ -1,0 +1,80 @@
+shoe store all function
+search 
+profile
+cart
+
+
++-----------------+          +-----------------+          +------------------+
+|     Người dùng  | -------> |    Giỏ hàng     | -------> |    Đặt hàng      |
++-----------------+          +-----------------+          +------------------+
+        |                          |                              |
+        v                          v                              v
+  Đăng ký / đăng nhập       Thêm / sửa / xoá SP        Thanh toán / địa chỉ
+        |
+        v
+    Duyệt sản phẩm
+        |
+        v
+     Xem đơn hàng
+ 
+
+https://en.wikipedia.org/wiki/User_story         | User_story
+https://viblo.asia/p/user-story-la-gi-va-tieu-chi-chap-nhan-maGK7W8BKj2
+list at least 20 main actions
+first your position will be user(customer) you entry the site for reason 
+the mission of this task will be expressed from the software user’s perspective
+-As a sporty female, I want to find the most populer at the first roll at homepage, to find for me the most unique shoe style and the most comfort to wear
+-As DATBILL, I want to add to cart which i could change all the typical thing about my shoe, so that i can moddify more about my shoe at last 
+-As DATBILL, I want the type shoe seperate and the shoe can be purchase seperate bill, so that i can change the location from where to ship and easy to manage 
+-As DATBILL, I want to see many variety of the shoe picture and the color to choose in the first homepage, so it can be more algile to more varient to do choose when I go to detail page  
+-As BILL, I want to add/change/delete  product that had been in the cart 
+-As Toan Ragequit, i want to add the 
+
+
+User phải đăng nhập đăng ký để thêm vào giỏ hàng 
+User cần có thể xem những sản phẩm ở landpage- có sản phầm nổi bật- sàn phầm bán chạy
+User cần duyệt xem sản phẩm 
+User cần xem 1 mẫu, có số lượng 
+User cần xem màu, có đi với chất liệu, size giày
+User cần add to cart
+User cần thay đổi màu, số lượng, chất liệu, size giày trong cart
+User cần xoá một sản phầm - sản phầm đó có thể có nhiều số lượng trong cùng một màu, chất, size -> vẫn phải xoá hết (phải có notice)
+User cần đặt hàng 
+User cần thay đổi số lượng hàng lần cuối và có thể tách đơn và món hàng tách đơn quay lại cart chờ lần sau
+User có thể thêm thông tin khách hàng nếu như đã log in và có thể lưu nhiều địa chỉ có thể thay đổi trong order
+User có thể huỷ đơn hàng khi mà đã đặt nếu trạng thái chưa xác nhận
+Admin đăng nhập vào trang landpage user để vào phần dashboard  
+Admin cần thêm đồ vào shop
+Admin cần phải thêm description 
+Admin cần có thể thay đổi sản phầm 
+Admin có thể xoá sàn phầm 
+Admin có thể block sản phầm(ngưng bán-vẫn hiện nhưng mà khong thể nào mua hay thêm vào giỏ hàng)
+Admin cần phải duyệt sàn phảm trong order và phải cập nhật trạng thái của order 
+Admin cần phải xem tổng doanh thu của shop 
+Admin cần phải xem các giày bán chạy và có thể thay đổi giày nào lên top trong phần landpage 
+
+
+
+
+summary about db 
++product should have 
+-names
+-code 
+-size
+-quantity
+-type
+-color 
+-material
+-price 
++description should have
+-forms
+-id_pic
+-id_text
++cart should have
+-product name
+-type
+-color 
+-material
+-quantity
+-total price 
+oder 

@@ -2,45 +2,45 @@
 require_once 'database.php';
 
 // Khởi tạo kết nối database
-$db = new DB();
+$db = new database();
 
-$table_materials = $db->exec("CREATE TABLE IF NOT EXISTS materials (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL
+$table_materials = $db->handle("CREATE TABLE IF NOT EXISTS materials (
+    id_material INT UNSIGNED PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
 )");
 
 class Materials {
     private $db;
 
     public function __construct() {
-        $this->db = new DB();
+        $this->db = new database();
     }
 
     public function addMaterial($name) {
         $sql = "INSERT INTO materials (name) VALUES (?)";
-        return $this->db->exec($sql, [$name]);
+        return $this->db->handle($sql, [$name]);
     }
 
     public function getMaterial($id) {
-        $sql = "SELECT * FROM materials WHERE id = ?";
-        $this->db->exec($sql, [$id]);
+        $sql = "SELECT * FROM materials WHERE id_material = ?";
+        $this->db->handle($sql, [$id]);
         return $this->db->getData();
     }
 
     public function getAllMaterials() {
-        $sql = "SELECT * FROM materials";
-        $this->db->exec($sql);
+        $sql = "SELECT * FROM materials ORDER BY name ASC";
+        $this->db->handle($sql);
         return $this->db->getData();
     }
 
     public function updateMaterial($id, $name) {
-        $sql = "UPDATE materials SET name = ? WHERE id = ?";
-        return $this->db->exec($sql, [$name, $id]);
+        $sql = "UPDATE materials SET name = ? WHERE id_material = ?";
+        return $this->db->handle($sql, [$name, $id]);
     }
 
     public function deleteMaterial($id) {
-        $sql = "DELETE FROM materials WHERE id = ?";
-        return $this->db->exec($sql, [$id]);
+        $sql = "DELETE FROM materials WHERE id_material = ?";
+        return $this->db->handle($sql, [$id]);
     }
 }
 ?> 

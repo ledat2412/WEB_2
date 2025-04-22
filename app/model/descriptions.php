@@ -1,11 +1,12 @@
 <?php
 require_once 'database.php';
+require_once 'product.php';
 
 // Khởi tạo kết nối database
-$db = new DB();
+$db = new database();
 
-$table_descriptions = $db->exec("CREATE TABLE IF NOT EXISTS descriptions (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+$table_descriptions = $db->handle("CREATE TABLE IF NOT EXISTS descriptions (
+    id_description INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     content TEXT NOT NULL
 )");
 
@@ -13,28 +14,38 @@ class Descriptions {
     private $db;
 
     public function __construct() {
-        $this->db = new DB();
+        $this->db = new database();
     }
 
     public function addDescription($content) {
         $sql = "INSERT INTO descriptions (content) VALUES (?)";
-        return $this->db->exec($sql, [$content]);
+        return $this->db->handle($sql, [$content]);
     }
 
     public function getDescription($id) {
-        $sql = "SELECT * FROM descriptions WHERE id = ?";
-        $this->db->exec($sql, [$id]);
+        $sql = "SELECT * FROM descriptions WHERE id_description = ?";
+        $this->db->handle($sql, [$id]);
         return $this->db->getData();
     }
 
-    public function updateDescription($id, $content) {
-        $sql = "UPDATE descriptions SET content = ? WHERE id = ?";
-        return $this->db->exec($sql, [$content, $id]);
+    public function getAllDescriptions() {
+        $sql = "SELECT d.*, p.name as product_name 
+                FROM descriptions d 
+                LEFT JOIN products p ON d.id_product = p.id_product 
+                ORDER BY d.created_at DESC";
+        $this->db->handle($sql);
+        return $this->db->getData();
+    }
+
+    public function updateDescription($id, $id_product, $title, $content) {
+        $sql = "UPDATE descriptions SET id_product = ?, title = ?, content = ? 
+                WHERE id_description = ?";
+        return $this->db->handle($sql, [$id_product, $title, $content, $id]);
     }
 
     public function deleteDescription($id) {
-        $sql = "DELETE FROM descriptions WHERE id = ?";
-        return $this->db->exec($sql, [$id]);
+        $sql = "DELETE FROM descriptions WHERE id_description = ?";
+        return $this->db->handle($sql, [$id]);
     }
 }
 ?> 

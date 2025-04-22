@@ -124,7 +124,7 @@
                 <input type="radio" id="creditCard" name="payment" value="card">
                 <label for="creditCard">Thanh toán bằng thẻ Visa/MasterCard</label><br>
             </div>
-            <button class="confirm-payment" onclick="confirmPayment()">Xác nhận</button>
+            <button class="confirm-payment" onclick="window.location.href='/WEB_2/app/view/cart/cart-payment.php'">Xác nhận</button>
         </div>
 
         <div class="line"></div>
