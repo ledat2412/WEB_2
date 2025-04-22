@@ -78,3 +78,5 @@ summary about db
 -quantity
 -total price 
 oder 
+
+xin chao Bé Đạt
