@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/admin/css/admin.css">
+    <link rel="stylesheet" href="../../../public/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Admin</title>
@@ -16,19 +16,19 @@
         </a>
         <ul class="side-menu top">
             <li class="active">
-                <a href="/admin/html/admin.html">
+                <a href="../../views/html/admin.php">
                     <i class="fa-solid fa-chart-line"></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="/admin/html/Quanlycauhinh.html#">
+                <a href="../../views/html/Quanlycauhinh.php#">
                     <i class="fa-solid fa-user"></i>
                     <span class="text">Users</span>
                 </a>
             </li>
             <li>
-                <a href="/admin/html/DanhSachSanPham.html">
+                <a href="../../views/html/DanhSachSanPham.php">
                     <i class="fa-solid fa-shop"></i>
                     <span class="text">Danh sách</span>
                 </a>
@@ -62,11 +62,11 @@
                     <h1>Dashboard</h1>
                     <ul class="list-position">
                         <li>
-                            <a href="/admin/html/admin.html">Dashboard</a>
+                            <a href="../../views/html/admin.php">Dashboard</a>
                         </li>
                         <li><i class="fa-solid fa-chevron-right"></i></li>
                         <li>
-                            <a href="/admin/html/admin.html">Home</a>
+                            <a href="../../views/html/admin.php">Home</a>
                         </li>
                     </ul>
                 </div>
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <div class="exit-btn">
-                        <a href="/admin/html/DonHang.html">
+                        <a href="../../views/html/DonHang.php">
                             <button>Thoát</button>
                         </a>
                     </div>

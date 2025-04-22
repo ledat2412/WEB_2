@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/admin/css/admin.css">
+    <link rel="stylesheet" href="../../../public/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Admin</title>
@@ -16,13 +16,13 @@
         </a>
         <ul class="side-menu top">
             <li class="active">
-                <a href="/admin/html/admin.html">
+                <a href="../../views/html/admin.php">
                     <i class="fa-solid fa-chart-line"></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="/admin/html/Quanlycauhinh.html#">
+                <a href="../../views/html/Quanlycauhinh.php#">
                     <i class="fa-solid fa-user"></i>
                     <span class="text">Users</span>
                 </a>
@@ -85,12 +85,12 @@
                     </div>
                     <div class="update-users-submit">
                         <li>
-                            <a href="/admin/html/Quanlycauhinh.html" clas="first-child">
+                            <a href="../../views/html/Quanlycauhinh.php" clas="first-child">
                                 <button>Thoát</button>
                             </a>
                         </li>
                         <li>
-                            <a href="/admin/html/Quanlycauhinh.html" class="last-child">
+                            <a href="../../views/html/Quanlycauhinh.php" class="last-child">
                                 <button>Cập nhật</button>
                             </a>
                         </li>
