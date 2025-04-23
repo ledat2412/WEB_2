@@ -1867,8 +1867,8 @@ body {
 
 #content main .add-new .add-product-new {
     background-color: var(--sidebar-color);
-    width: 600px;
-    height: 600px;
+    width: 800px;
+    height: 700px;
     border: 2px solid black;
     border-radius: 20px;
 }
@@ -1918,7 +1918,7 @@ body {
 }
 
 #content main .add-new .add-product-new .add-data-new .add-infor-new {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 #content main .add-new .add-product-new label {
@@ -1955,9 +1955,11 @@ body {
     border: 2px solid red;
 }
 
-#content main .add-new .add-product-new .enter-add-new button {
+#content main .add-new .add-product-new .enter-add-new input {
     border: 2px solid green;
     cursor: pointer;
+    height: 30px;
+    width: 150px;
 }
 
 /* Lọc theo thời gian hóa đơn */
@@ -2110,3 +2112,27 @@ body {
     text-align: center;
     font-size: 16px;
 }
+
+
+/* -----------------Color------------------- */
+.color-picked {
+    display: flex;
+    gap: 20px;
+}
+
+.color-option input[type="radio"] {
+    display: none;
+} 
+
+.color-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    display: inline-block;
+}
+
+input[type="radio"]:checked + .color-circle {
+    border-color: black;
+  }

@@ -42,5 +42,11 @@
             $this->connect();
             return $this->conn->query($sql);
         }
+        
+        public function getInsertId() {
+            return $this->conn->insert_id;
+        }
+
+
     }
 ?>

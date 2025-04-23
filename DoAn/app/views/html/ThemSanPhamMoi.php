@@ -1,3 +1,45 @@
+<?php 
+    include "../../models/tables/database.php";
+    include "../../models/tables/product.php";
+    include "../../models/tables/description.php";
+    include "../../models/tables/sex.php";
+    include "../../models/tables/color.php";
+    include "../../models/tables/material.php";
+    include "../../models/tables/product_variant.php";
+
+    $db = new database();
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if(isset($_POST["btn"])) {
+            $product_name = $_POST["product_name"];
+            $product_price = $_POST["product_price"];
+            $product_description = $_POST["product_description"];
+            $product_image = $_POST["product_img"];
+            $product_color = $_POST["color"];
+            $product_code = $_POST["product_code"];
+            $product_quantity = $_POST["product_quantity"];
+            $product_material = $_POST["product_material"];
+            $product_sex = $_POST["sex"];
+            $product_variant = $_POST["product_variant"];
+
+            $description = $db->handle("INSERT INTO DESCRIPTIONS (description_content) VALUES ('$product_description')");
+            $description_id = $db->getInsertId();
+            $product_color = $db->handle("INSERT INTO COLORS (color_name) VALUES ('$product_color')");
+            $color_id = $db->getInsertId();;
+            $product_material = $db->handle("INSERT INTO MATERIALS (material_name) VALUES ('$product_material')");
+            $material_id = $db->getInsertId();
+            $product_sex = $db->handle("INSERT INTO SEX (sex_name) VALUES ('$product_sex')");
+            $sex_id = $db->getInsertId();
+            $product_variant = $db->handle("INSERT INTO PRODUCT_VARIANT (product_variant_name) VALUES ('$product_variant')");
+            $variant_id = $db->getInsertId();
+            $product = $db->handle("INSERT INTO PRODUCT (product_name, picture_path, stock, price, color_id, material_id, sex_id, product_variant_id, description_id)
+            VALUES ('$product_name', '$product_image', '$product_quantity', '$product_price','$color_id', '$material_id', '$sex_id', '$variant_id', '$description_id')");
+
+        }
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +99,7 @@
             </a>
         </nav>
         <main>
-            <div class="add-new">
+            <form class="add-new" method="post" action="">
                 <div class="add-product-new">
                     <div class="add-heading-new">
                         <span>Thông tin sản Phẩm<span>
@@ -73,45 +115,91 @@
                             <br>
                             <div class="image-new">
                                 <label for="file"><i class="fa-regular fa-image"></i></label>
-                                <input type="file" id="file">
+                                <input type="file" id="file" name="product_img">
                             </div>
                             </div>
                         <div class="add-infor-new">
                             <label for="">Tên sản phẩm: </label>
                             <br>
-                            <input type="text" required>
+                            <input type="text" required name="product_name">
                         </div>
                         <div class="add-infor-new">
                             <label for="">Mã sản phẩm: </label>
                             <br>
-                            <input type="text" required>
+                            <input type="text" required name="product_code">
+                        </div>
+                        <div class="add-infor-new">
+                            <label for="">Loại sản phẩm: </label>
+                            <br>
+                            <input type="text" required name="product_variant">
                         </div>
                         <div class="add-infor-new">
                             <label for="">Giá bán: </label>
                             <br>
-                            <input type="text" required>
+                            <input type="text" required name="product_price">
                         </div>
                         <div class="add-infor-new">
                             <label for="">Số lượng: </label>
                             <br>
-                            <input type="text" required>
+                            <input type="text" required name="product_quantity">
+                        </div>
+                        <div class="add-infor-new">
+                            <label for="">Vật liệu: </label>
+                            <br>
+                            <input type="text" required name="product_material">
+                        </div>
+                        <div class="add-infor-new">
+                            <div class="sex">
+                                <label for="">Sex: </label>
+                                <div class="sex-option" style="display: flex; gap: 20px; align-items: center;">
+                                    <div style="display: flex; align-items: center; gap: 5px;">
+                                        <input type="radio" name="sex" value="Nữ" style="width: 20px;">
+                                        <label for="">Nữ</label>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 5px;">
+                                        <input type="radio" name="sex" value="Nam" style="width: 20px;">
+                                        <label for="">Nam</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-infor-new">
+                            <div class="color-picked">
+                                <label for="">Màu: </label>
+                                <label class="color-option">
+                                    <input type="radio" name="color" value="red">
+                                    <span class="color-circle" style="background-color: red;"></span>
+                                </label>
+                                <label class="color-option">
+                                    <input type="radio" name="color" value="red">
+                                    <span class="color-circle" style="background-color: blue;"></span>
+                                </label>
+                                <label class="color-option">
+                                    <input type="radio" name="color" value="red">
+                                    <span class="color-circle" style="background-color: yellow;"></span>
+                                </label>
+                                <label class="color-option">
+                                    <input type="radio" name="color" value="red">
+                                    <span class="color-circle" style="background-color: pink;"></span>
+                                </label> 
+                            </div>
                         </div>
                         <div class="add-infor-new">
                             <label for="">Mô tả: </label>
                             <br>
-                            <textarea style="width: 575px"></textarea>
+                            <textarea style="width: 770px; resize: none; height: 60px;" name="product_description"></textarea>
                         </div>
                         <div class="add-submit-new">
                             <a href="../html/DanhSachSanPham.php" class="return-new">
                                 <button>Thoát</button>
                             </a>
-                            <a href="../html/DanhSachSanPham.php" class="enter-add-new">
-                                <button>Thêm sản phẩm</button>
-                            </a>
+                            <div class="enter-add-new">
+                                <input type="submit" name="btn" value="Thêm sản phẩm">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </main>
     </section>
     <script src ="/admin/js/admin.js"></script>

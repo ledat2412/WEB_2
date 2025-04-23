@@ -24,4 +24,6 @@
         description_id INT(3) UNSIGNED NOT NULL,
         FOREIGN KEY (description_id) REFERENCES DESCRIPTIONS(description_id)
     )");
+
+    $add_column = $data_product->handle("ALTER TABLE PRODUCT ADD COLUMN IF NOT EXISTS product_name VARCHAR(255) NOT NULL;");
 ?>
