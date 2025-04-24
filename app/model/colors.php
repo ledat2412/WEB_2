@@ -24,13 +24,13 @@ class Colors {
     public function getColor($id) {
         $sql = "SELECT * FROM colors WHERE id_color = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getAllColors() {
         $sql = "SELECT * FROM colors ORDER BY name ASC";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function updateColor($id, $name, $hex_code) {

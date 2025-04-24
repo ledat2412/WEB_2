@@ -37,7 +37,7 @@ class Product {
     public function showproduct() {
         $sql = "SELECT * FROM product";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function addProduct($size, $picture_path, $price, $stock, $color_id, $material_id, $sex_id, $id_product_variant, $description_id) {
@@ -57,7 +57,7 @@ class Product {
                 LEFT JOIN descriptions d ON p.description_id = d.id_description 
                 WHERE p.id_product = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getAllProducts() {
@@ -70,7 +70,7 @@ class Product {
                 LEFT JOIN product_variant pv ON p.id_product_variant = pv.id_product_variant 
                 LEFT JOIN descriptions d ON p.description_id = d.id_description";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function updateProduct($id, $size, $picture_path, $price, $stock, $color_id, $material_id, $sex_id, $id_product_variant, $description_id) {

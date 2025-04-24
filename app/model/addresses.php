@@ -29,19 +29,19 @@ class Addresses {
     public function getAddress($id) {
         $sql = "SELECT * FROM addresses WHERE id_address = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getAddressesByUser($id_user) {
         $sql = "SELECT * FROM addresses WHERE id_user = ?";
         $this->db->handle($sql, [$id_user]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getAllAddresses() {
         $sql = "SELECT * FROM addresses";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function updateAddress($id, $phone, $address) {

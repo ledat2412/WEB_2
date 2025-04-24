@@ -33,7 +33,7 @@ class Cart {
                 LEFT JOIN product p ON c.id_product = p.id_product 
                 WHERE c.id_cart = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getCartByUser($id_user) {
@@ -42,7 +42,7 @@ class Cart {
                 LEFT JOIN product p ON c.id_product = p.id_product 
                 WHERE c.id_user = ?";
         $this->db->handle($sql, [$id_user]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function updateCartItem($id, $quantity) {
