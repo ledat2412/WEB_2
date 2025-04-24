@@ -35,7 +35,7 @@ class Orders {
                 LEFT JOIN addresses a ON o.id_address = a.id_address 
                 WHERE o.id_order = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getOrdersByUser($id_user) {
@@ -44,7 +44,7 @@ class Orders {
                 LEFT JOIN addresses a ON o.id_address = a.id_address 
                 WHERE o.id_user = ?";
         $this->db->handle($sql, [$id_user]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getAllOrders() {
@@ -53,7 +53,7 @@ class Orders {
                 LEFT JOIN users u ON o.id_user = u.id_users 
                 LEFT JOIN addresses a ON o.id_address = a.id_address";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function updateOrder($id, $id_user, $id_address, $status) {

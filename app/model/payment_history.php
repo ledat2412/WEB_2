@@ -32,13 +32,13 @@ class PaymentHistory {
                 LEFT JOIN payments p ON h.id_payment = p.id_payment 
                 WHERE h.id_history = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getHistoryByPayment($id_payment) {
         $sql = "SELECT * FROM payment_history WHERE id_payment = ? ORDER BY id_order DESC";
         $this->db->handle($sql, [$id_payment]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getAllHistory() {
@@ -47,7 +47,7 @@ class PaymentHistory {
                 LEFT JOIN payments p ON h.id_payment = p.id_payment 
                 ORDER BY h.id_order DESC";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function updateHistory($id, $id_payment, $id_order) {

@@ -24,13 +24,13 @@ class Sex {
     public function getSex($id) {
         $sql = "SELECT * FROM sex WHERE id_sex = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getAllSex() {
         $sql = "SELECT * FROM sex ORDER BY name ASC";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function updateSex($id, $name) {

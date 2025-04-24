@@ -436,13 +436,3 @@
 </body>
 <Script src="/web/script.js"></Script>
 </html>
-
-
-<?php
-$dir = "uploads/images/"; // Đường dẫn đến thư mục chứa ảnh
-$images = glob($dir . "*.{jpg,jpeg,png,gif,webp}", GLOB_BRACE);
-
-foreach ($images as $image) {
-    echo "<img src='$image' style='max-width: 200px; margin: 10px;'/>";
-}
-?>z

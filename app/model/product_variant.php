@@ -24,13 +24,13 @@ class ProductVariant {
     public function getVariant($id) {
         $sql = "SELECT * FROM product_variant WHERE id_product_variant = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getAllVariants() {
         $sql = "SELECT * FROM product_variant ORDER BY name";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function updateVariant($id, $name) {

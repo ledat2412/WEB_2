@@ -24,13 +24,13 @@ class Materials {
     public function getMaterial($id) {
         $sql = "SELECT * FROM materials WHERE id_material = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getAllMaterials() {
         $sql = "SELECT * FROM materials ORDER BY name ASC";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function updateMaterial($id, $name) {

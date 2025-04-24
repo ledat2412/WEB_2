@@ -25,7 +25,7 @@ class Descriptions {
     public function getDescription($id) {
         $sql = "SELECT * FROM descriptions WHERE id_description = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getAllDescriptions() {
@@ -34,7 +34,7 @@ class Descriptions {
                 LEFT JOIN products p ON d.id_product = p.id_product 
                 ORDER BY d.created_at DESC";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function updateDescription($id, $id_product, $title, $content) {
