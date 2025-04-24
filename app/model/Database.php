@@ -6,6 +6,8 @@ class database
     private $pass = "";
     private $database = "lining_1";
 
+
+    
     private $conn = null;
     private $result = null;
 
