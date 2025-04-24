@@ -87,7 +87,7 @@ class Users {
         // Kiểm tra mật khẩu cũ
         $sql = "SELECT * FROM USERS WHERE id_users = $id AND password = '$oldPassword'";
         $this->db->handle($sql);
-        $data = $this->db->getData();
+        $data = $this->db->getData($sql);
 
         if($data) {
             // Cập nhật mật khẩu mới
@@ -103,7 +103,7 @@ class Users {
     public function getUserById($id) {
         $sql = "SELECT * FROM USERS WHERE id_users = $id";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     // Phương thức lấy danh sách users (cho admin)
@@ -111,7 +111,7 @@ class Users {
         $sql = "SELECT u.*, r.role_name FROM users u 
                 LEFT JOIN roles r ON u.role = r.id_role";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     // Phương thức xóa user (cho admin)
@@ -141,7 +141,7 @@ class Users {
                 LEFT JOIN roles r ON u.role = r.id_role 
                 WHERE u.id_users = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getUserByUsername($username) {
@@ -149,7 +149,7 @@ class Users {
                 LEFT JOIN roles r ON u.role = r.id_role 
                 WHERE u.username = ?";
         $this->db->handle($sql, [$username]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getUserByEmail($email) {
@@ -157,7 +157,7 @@ class Users {
                 LEFT JOIN roles r ON u.role = r.id_role 
                 WHERE u.email = ?";
         $this->db->handle($sql, [$email]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function updateUser($id, $username, $email, $password, $role) {

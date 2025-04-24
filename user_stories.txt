@@ -82,3 +82,23 @@ oder
 xin chao Bé Đạt 
 
 huy gà.
+
+
+Hoạt động của hệ thống quản lý việc đăng ký học qua mạng của một trường học 
+được mô tả như sau:
+Khi các sinh viên (SV) muốn đăng ký học thì họ phải gửi các phiếu đăng ký 
+trong đó điền đầy đủ thông tin về họ tên, số chứng minh thư và mã số 
+của những lớp học mà SV muốn tham gia. 
+Hệ thống kiểm tra từng lớp học được đăng ký
+có còn tiếp nhận SV không bằng cách tra cứu tiếp Danh sách lớp. Các dữ liệu 
+trong tệp này cho biết lớp học nào còn tiếp nhận SV, lớp học nào đã bị hủy bỏ 
+và lớp học nào đã đủ SV. Từ đó hệ thống có thể xác định được những lựa chọn 
+nào của SV được chấp nhận và những lựa chọn nào bị từ chối.
+Những SV nào được chấp nhận nguyện vọng sẽ được ghi danh vào những lớp mà SV
+đăng ký. Tên và số chứng minh thư của các SV này sẽ được cập nhập vào lớp 
+Danh sách lớp và sĩ số lớp học sẽ được tính lại. Nếu lớp học đó đã đủ SV 
+thì mã lớp học đó sẽ được đánh dấu là đã khóa sổ. Các dữ liệu về SV mới và
+những dữ liệu bổ sung hoặc thay đổi của SV cũ trong quá trình ghi danh 
+này cũng được cập nhập vào tệp Hồ sơ SV chung trong toàn trường.
+Cuối cùng, hệ thống sẽ gửi cho SV những bản thông báo trong đó liệt kê 
+danh sách những lớp học mà họ đã đăng ký.

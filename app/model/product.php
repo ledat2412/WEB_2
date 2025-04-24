@@ -35,12 +35,24 @@ class Product {
     }
     
     public function showproduct() {
-        $sql = "SELECT * FROM product";
+        $sql = "SELECT p.*, c.name as color_name, m.name as material_name, 
+                s.name as sex_name, pv.name as variant_name, d.content as description 
+                FROM product p 
+                LEFT JOIN colors c ON p.color_id = c.id_color 
+                LEFT JOIN materials m ON p.material_id = m.id_material 
+                LEFT JOIN sex s ON p.sex_id = s.id_sex 
+                LEFT JOIN product_variant pv ON p.id_product_variant = pv.id_product_variant 
+                LEFT JOIN descriptions d ON p.description_id = d.id_description";
         $this->db->handle($sql);
-        return $this->db->getData($sql);
+        return $this->db->getData();
     }
 
     public function addProduct($size, $picture_path, $price, $stock, $color_id, $material_id, $sex_id, $id_product_variant, $description_id) {
+        // Đảm bảo đường dẫn ảnh bắt đầu từ thư mục assets
+        if (!empty($picture_path) && strpos($picture_path, 'assets/') !== 0) {
+            $picture_path = 'assets/' . $picture_path;
+        }
+        
         $sql = "INSERT INTO product (size, picture_path, price, stock, color_id, material_id, sex_id, id_product_variant, description_id) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return $this->db->handle($sql, [$size, $picture_path, $price, $stock, $color_id, $material_id, $sex_id, $id_product_variant, $description_id]);
@@ -57,7 +69,7 @@ class Product {
                 LEFT JOIN descriptions d ON p.description_id = d.id_description 
                 WHERE p.id_product = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData($sql);
+        return $this->db->getData();
     }
 
     public function getAllProducts() {
@@ -70,10 +82,15 @@ class Product {
                 LEFT JOIN product_variant pv ON p.id_product_variant = pv.id_product_variant 
                 LEFT JOIN descriptions d ON p.description_id = d.id_description";
         $this->db->handle($sql);
-        return $this->db->getData($sql);
+        return $this->db->getData();
     }
 
     public function updateProduct($id, $size, $picture_path, $price, $stock, $color_id, $material_id, $sex_id, $id_product_variant, $description_id) {
+        // Đảm bảo đường dẫn ảnh bắt đầu từ thư mục assets
+        if (!empty($picture_path) && strpos($picture_path, 'assets/') !== 0) {
+            $picture_path = 'assets/' . $picture_path;
+        }
+
         $sql = "UPDATE product SET size = ?, picture_path = ?, price = ?, stock = ?, 
                 color_id = ?, material_id = ?, sex_id = ?, id_product_variant = ?, description_id = ? 
                 WHERE id_product = ?";
