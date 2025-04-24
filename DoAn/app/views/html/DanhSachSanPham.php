@@ -150,10 +150,9 @@
                     <tbody>
                         <?php
                         if (!empty($DataProduct)) {
-                            $index = 1; // Đếm số thứ tự
                             foreach ($DataProduct as $product) {
                                 echo '<tr>';
-                                echo '<td>' . $index++ . '</td>';
+                                echo '<td>' . $_POST["product_id"]. '</td>';
                                 echo '<td><img src="' . $product["picture_path"] . '" alt="Hình ảnh" style="width: 70px; height: 70px;"></td>';
                                 echo '<td>' . $product["product_name"] . '</td>';
                                 echo '<td>' . number_format($product["price"], 0, ',', '.') . ' VND</td>';
