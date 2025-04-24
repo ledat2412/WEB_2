@@ -190,7 +190,7 @@
                             <textarea style="width: 770px; resize: none; height: 60px;" name="product_description"></textarea>
                         </div>
                         <div class="add-submit-new">
-                            <a href="../html/DanhSachSanPham.php" class="return-new">
+                            <a href="#" class="return-new">
                                 <button>Thoát</button>
                             </a>
                             <div class="enter-add-new">

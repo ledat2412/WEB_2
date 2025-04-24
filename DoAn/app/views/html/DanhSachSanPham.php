@@ -1,3 +1,17 @@
+<?php 
+    include "../../models/tables/database.php";
+    include "../../models/tables/product.php";
+    include "../../models/tables/description.php";
+    include "../../models/tables/sex.php";
+    include "../../models/tables/color.php";
+    include "../../models/tables/material.php";
+    include "../../models/tables/product_variant.php";
+
+    $db = new database();
+
+    $DataProduct = $db->getData("SELECT * FROM PRODUCT");  
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,112 +131,51 @@
                     </a>
                 </div>
             </div>
-            <div class="Product-list-cotainer">
-                <div class="Product-list-header">
-                    <div>STT</div>
-                    <div>Hình ảnh</div>
-                    <div>Tên sản phẩm</div>
-                    <div>Mã sản phẩm</div>
-                    <div>Giá bán</div>
-                    <div>Số lượng</div>
-                    <div>Ngày đăng</div>
-                    <div>Tác vụ</div>
-                </div>
-                <div class="Product-list-body">
-                    <div class="Product-list-detail">1</div>
-                        <div class="Product-list-detail">
-                            <img src="/img/ABAS081-1.jpg">
-                        </div>
-                    <div class="Product-list-detail">Giày bóng rổ nam</div>
-                    <div class="Product-list-detail">ABAS081-1</div>
-                    <div class="Product-list-detail">1,953,000VND</div>
-                    <div class="Product-list-detail">5</div>
-                    <div class="Product-list-detail">29/10/2024</div>
-                    <div class="Product-list-detail">
-                        <a href="../../views/html/SuaSanPham.php">
-                            <i class="fa-solid fa-pen-to-square"></i>&#160;
-                        </a>
-                        <a href="#warning-notify">
-                            <i class="fa-solid fa-xmark"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="Product-list-body">
-                    <div class="Product-list-detail">2</div>
-                        <div class="Product-list-detail">
-                            <img src="/img/ARZS003-13.jpg">
-                        </div>
-                    <div class="Product-list-detail">Giày bóng rổ nam</div>
-                    <div class="Product-list-detail">ARZS003-13</div>
-                    <div class="Product-list-detail">967,000VND</div>
-                    <div class="Product-list-detail">5</div>
-                    <div class="Product-list-detail">29/10/2024</div>
-                    <div class="Product-list-detail">
-                        <a href="../../views/html/SuaSanPham.php">
-                            <i class="fa-solid fa-pen-to-square"></i>&#160;
-                        </a>
-                        <a href="#warning-notify">
-                            <i class="fa-solid fa-xmark"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="Product-list-body">
-                    <div class="Product-list-detail">3</div>
-                        <div class="Product-list-detail">
-                            <img src="/img/ARHT020-9V.jpg">
-                        </div>
-                    <div class="Product-list-detail">Giày chạy bộ nữ</div>
-                    <div class="Product-list-detail">ARHT020-9V</div>
-                    <div class="Product-list-detail">1,340,000VND</div>
-                    <div class="Product-list-detail">5</div>
-                    <div class="Product-list-detail">29/10/2024</div>
-                    <div class="Product-list-detail">
-                        <a href="../../views/html/SuaSanPham.php">
-                            <i class="fa-solid fa-pen-to-square"></i>&#160;
-                        </a>
-                        <a href="#warning-notify">
-                            <i class="fa-solid fa-xmark"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="Product-list-body">
-                    <div class="Product-list-detail">4</div>
-                        <div class="Product-list-detail">
-                            <img src="/img/ABAS073-7.jpg">
-                        </div>
-                    <div class="Product-list-detail">Giày bóng rổ nam</div>
-                    <div class="Product-list-detail">ABAS073-7</div>
-                    <div class="Product-list-detail">2,455,000VND</div>
-                    <div class="Product-list-detail">1</div>
-                    <div class="Product-list-detail">29/10/2024</div>
-                    <div class="Product-list-detail">
-                        <a href="../../views/html/SuaSanPham.php">
-                            <i class="fa-solid fa-pen-to-square"></i>&#160;
-                        </a>
-                        <a href="#warning-notify">
-                            <i class="fa-solid fa-xmark"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="Product-list-body">
-                    <div class="Product-list-detail">5</div>
-                        <div class="Product-list-detail">
-                            <img src="/img/ARPU001-6V.jpg">
-                        </div>
-                    <div class="Product-list-detail">Giày chạy bộ nam</div>
-                    <div class="Product-list-detail">ARPU001-6V</div>
-                    <div class="Product-list-detail">1,980,000VND</div>
-                    <div class="Product-list-detail">10</div>
-                    <div class="Product-list-detail">29/10/2024</div>
-                    <div class="Product-list-detail">
-                        <a href="../../views/html/SuaSanPham.php">
-                            <i class="fa-solid fa-pen-to-square"></i>&#160;
-                        </a>
-                        <a href="#warning-notify">
-                            <i class="fa-solid fa-xmark"></i>
-                        </a>
-                    </div>
-                </div>
+            <div class="Product-list-container">
+                <table class="Product-list-table">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Hình ảnh</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá bán</th>
+                            <th>Số lượng</th>
+                            <th>Màu sắc</th>
+                            <th>Vật liệu</th>
+                            <th>Giới tính</th>
+                            <th>Mô tả</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if (!empty($DataProduct)) {
+                            $index = 1; // Đếm số thứ tự
+                            foreach ($DataProduct as $product) {
+                                echo '<tr>';
+                                echo '<td>' . $index++ . '</td>';
+                                echo '<td><img src="' . $product["picture_path"] . '" alt="Hình ảnh" style="width: 70px; height: 70px;"></td>';
+                                echo '<td>' . $product["product_name"] . '</td>';
+                                echo '<td>' . number_format($product["price"], 0, ',', '.') . ' VND</td>';
+                                echo '<td>' . $product["stock"] . '</td>';
+                                echo '<td>' . $product["color_id"] . '</td>'; // Thay bằng tên màu nếu có
+                                echo '<td>' . $product["material_id"] . '</td>'; // Thay bằng tên vật liệu nếu có
+                                echo '<td>' . $product["sex_id"] . '</td>'; // Thay bằng giới tính nếu có
+                                echo '<td>' . $product["description_id"] . '</td>'; // Thay bằng mô tả nếu có
+                                echo '<td>
+                                        <a href="../../views/html/SuaSanPham.php?product_id=' . $product["product_id"] . '">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <a href="#warning-notify" onclick="deleteProduct(' . $product["product_id"] . ')">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </a>
+                                    </td>';
+                                echo '</tr>';
+                            }
+                        } 
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </main>
     </section>

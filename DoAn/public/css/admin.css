@@ -1550,7 +1550,7 @@ body {
     justify-content: center;
     flex-wrap:wrap;
 }
-
+/* 
 .Product-list-header{
     display: flex;
     justify-content: space-evenly;
@@ -1559,7 +1559,6 @@ body {
 }
 
 .Product-list-header div{
-    /* display: flex; */
     text-align: center;
     width:160px;
 }
@@ -1601,7 +1600,7 @@ body {
 .Product-list-detail img{
     width: 70px;
     height: 70px;
-}
+} */
 
 /* .Product-list-header, .Product-list-body {
     display: grid;
@@ -1630,6 +1629,58 @@ body {
     height: 70px;
     margin: 0 auto; 
 } */
+
+/* Định dạng bảng sản phẩm */
+.Product-list-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.Product-list-table th, .Product-list-table td {
+    padding: 12px 15px;
+    border: none;
+}
+
+.Product-list-table td {
+    text-align: center;
+}
+
+.Product-list-table th {
+    background-color: rgba(255, 255, 255, 0.9);
+    font-weight: bold;
+    text-align: center;
+}
+
+.Product-list-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.Product-list-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.Product-list-table img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+    width: 70px;
+    height: 70px;
+}
+
+.Product-list-table .action-icons a {
+    margin: 0 5px;
+    color: #333;
+    text-decoration: none;
+}
+
+.Product-list-table .action-icons a:hover {
+    color: #007bff;
+}
 /* ==============Sửa-thông-tin=============== */
 #content main .repair {
     height: 100vh;
