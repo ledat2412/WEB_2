@@ -14,6 +14,21 @@ class ProductController {
         return $products;
     }
 
+    public function details(){
+        if(isset($_GET['id_product'])) {
+            $id_product = $_GET['id_product'];
+            $product = $this->productModel->getProduct($id_product);
+            return $product;
+        }
+    }
+    public function handleDeleteProduct() {
+        if(isset($_POST['deleteProduct'])) {
+            $id_product = $_POST['id_product'];
+            $this->productModel->deleteProduct($id_product);
+        }
+        header("Location: ../view/admin/product.php?success=deleteProduct");
+    }
+
     public function handleAddProduct() {
         if(isset($_POST['addProduct'])) {
             $size = $_POST['size'];
