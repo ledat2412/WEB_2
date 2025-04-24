@@ -16,7 +16,7 @@
 <form method="post" action="/WEB_2/app/controller/Auth.php" class="form-login">
         <div class="login-form-frame">
             <div class="back-button">
-                <a href="/WEB_2/app/controller/main.php?act=home"><i class="fa-solid fa-arrow-left"> Go back</i></a>
+                <a href="/WEB_2/Lining"><i class="fa-solid fa-arrow-left"> Go back</i></a>
             </div>
             <div class="form-heading">
                 <h1>Login</h1>
@@ -43,7 +43,7 @@
             <div class="login-submit">
                 <input type="submit" class="sub" value="sign In" name="signIn"> 
             </div>
-            <p class="login-form-support">Don't have an account yet? <a href="/WEB_2/app/view/log/signup.php"> Signup Now</a></p>
+            <p class="login-form-support">Don't have an account yet? <a href="/WEB_2/register"> Signup Now</a></p>
         </div>
     </form>
 </body>

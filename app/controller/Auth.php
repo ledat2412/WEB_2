@@ -53,7 +53,7 @@ class Auth {
                 if(isset($_SESSION['role']) && $_SESSION['role'] == 1) {
                     header("Location: /WEB_2/app/view/admin/dashboard.php");
                 } else {
-                    header("Location: /WEB_2/app/controller/main.php");
+                    header("Location: /WEB_2/Lining");
                 }
             } else {
                 header("Location: ../view/log/signin.php?error=" . urlencode($result));

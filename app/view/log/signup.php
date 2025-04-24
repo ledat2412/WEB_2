@@ -15,7 +15,7 @@
     <form method="post" action="/WEB_2/app/controller/Auth.php" class="form-register">
         <div class="Resister-form-frame">
             <div class="back-button">
-                <a href="/WEB_2/app/controller/main.php?act=home"><i class="fa-solid fa-arrow-left"> Go back</i></a>
+                <a href="/WEB_2/Lining"><i class="fa-solid fa-arrow-left"> Go back</i></a>
             </div>
             <div class="form-heading">
                 <h1>Register</h1>
@@ -43,7 +43,7 @@
             <div class="Resister-submit">
                 <input type="submit" class="sub" name="signUp" value="Đăng Ký">
             </div>
-            <p class="login-form-support">Already have an account? <a href="/WEB_2/app/view/log/signin.php">Login</a></p>
+            <p class="login-form-support">Already have an account? <a href="/WEB_2/login">Login</a></p>
         </div>
     </form>
 </body>

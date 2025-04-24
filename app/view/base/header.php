@@ -40,7 +40,8 @@
         </div>
         <!-- Div Center -->
         <div class="header-center">
-            <a href="/WEB_2/app/controller/main.php?act=home"><img class="logo" src="/WEB_2/public/img/logo_compact.png" alt="logo" /></a>
+            <a href="/WEB_2/Lining"><img class="logo" src="/WEB_2/public/img/logo_compact.png" alt="logo" /></a>
+            <!-- <a href="/WEB_2/app/controller/main.php?act=home"><img class="logo" src="/WEB_2/public/img/logo_compact.png" alt="logo" /></a> -->
         </div>
         <!-- Div Right -->
         <div class="header-right">
@@ -63,14 +64,14 @@
                     <?php
                         if(isset($_SESSION['username'])) {
                             // Menu cho người dùng đã đăng nhập
-                            echo '<a href="/WEB_2/app/view/user/profile.php" class="icon-user-btn">Thông tin</a>';
+                            echo '<a href="/WEB_2/profile" class="icon-user-btn">Thông tin</a>';
                             echo "\n";
-                            echo '<a href="/WEB_2/app/controller/Auth.php?logout=true" class="icon-user-btn">Đăng xuất</a>';
+                            echo '<a href="/WEB_2/logout" class="icon-user-btn">Đăng xuất</a>';
                         } else {
                             // Menu cho khách
-                            echo '<a href="/WEB_2/app/controller/main.php?act=login" class="icon-user-btn">Đăng nhập</a>';
+                            echo '<a href="/WEB_2/login" class="icon-user-btn">Đăng nhập</a>';
                             echo "\n";
-                            echo '<a href="/WEB_2/app/controller/main.php?act=register" class="icon-user-btn">Đăng ký</a>';
+                            echo '<a href="/WEB_2/register" class="icon-user-btn">Đăng ký</a>';
                         }
                     ?>
                 </div>
@@ -147,10 +148,10 @@
     <!-- Product Menu (PC Only) -->
     <nav class="product-menu">
         <ul>
-            <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày bóng rổ</a></li>
-            <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày chạy bộ</a></li>
-            <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày thời trang</a></li>
-            <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày cầu lông</a></li>
+            <li><a href="/WEB_2/products/giaybongro">Giày bóng rổ</a></li>
+            <li><a href="/WEB_2/products/giaychaybo">Giày chạy bộ</a></li>
+            <li><a href="/WEB_2/products/giaythoitrang">Giày thời trang</a></li>
+            <li><a href="/WEB_2/products/giaycaulong">Giày cầu lông</a></li>
         </ul>
     </nav>
     <!-- Overlay for background dimming -->
@@ -178,24 +179,24 @@
                 <?php
                     if(isset($_SESSION['username'])) {
                         // Menu cho người dùng đã đăng nhập
-                        echo '<li><a href="/WEB_2/app/view/user/profile.php" class="icon-user-btn">Thông tin</a></li>';
+                        echo '<li><a href="/WEB_2/profile" class="icon-user-btn">Thông tin</a></li>';
                         echo "\n";
-                        echo '<li><a href="/WEB_2/app/controller/Auth.php?logout=true" class="icon-user-btn">Đăng xuất</a></li>';
+                        echo '<li><a href="/WEB_2/logout" class="icon-user-btn">Đăng xuất</a></li>';
                     } else {
                         // Menu cho khách
-                        echo '<li><a href="/WEB_2/app/controller/main.php?act=login" class="icon-user-btn">Đăng nhập</a></li>';
+                        echo '<li><a href="/WEB_2/login" class="icon-user-btn">Đăng nhập</a></li>';
                         echo "\n";
-                        echo '<li><a href="/WEB_2/app/controller/main.php?act=register" class="icon-user-btn">Đăng ký</a></li>';
+                        echo '<li><a href="/WEB_2/register" class="icon-user-btn">Đăng ký</a></li>';
                     }
                 ?>
             </ul>
 
             <li onclick="toggleSubMenu2()">Sản phẩm</li>
             <ul class="sub-menu" id="subMenu2">
-                <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày bóng rổ</a></li>
-                <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày chạy bộ</a></li>
-                <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày thời trang</a></li>
-                <li><a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">Giày cầu lông</a></li>
+                <li><a href="/WEB_2/products/giaybongro">Giày bóng rổ</a></li>
+                <li><a href="/WEB_2/products/giaychaybo">Giày chạy bộ</a></li>
+                <li><a href="/WEB_2/products/giaythoitrang">Giày thời trang</a></li>
+                <li><a href="/WEB_2/products/giaycaulong">Giày cầu lông</a></li>
             </ul>
 
             <li><a href="/WEB_2/app/view/log/signin.php">Giỏ hàng</a></li>

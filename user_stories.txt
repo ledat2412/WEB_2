@@ -102,3 +102,51 @@ những dữ liệu bổ sung hoặc thay đổi của SV cũ trong quá trình 
 này cũng được cập nhập vào tệp Hồ sơ SV chung trong toàn trường.
 Cuối cùng, hệ thống sẽ gửi cho SV những bản thông báo trong đó liệt kê 
 danh sách những lớp học mà họ đã đăng ký.
+
+Hệ thống mượn sách thư viện cho phép bạn đọc 
+(sinh viên, giảng viên, cán bộ...) 
+đăng nhập bằng tài khoản cá nhân để tìm kiếm và gửi yêu cầu mượn sách. 
+Sau khi người dùng nhập thông tin tìm kiếm (tên sách, tác giả hoặc mã sách), 
+hệ thống sẽ kiểm tra tình trạng sách (còn hay đã mượn hết). 
+Nếu sách còn và bạn đọc đủ điều kiện 
+(chưa quá hạn mượn, không bị khóa quyền mượn, 
+chưa vượt quá số lượng sách được phép mượn), 
+hệ thống sẽ tự động tạo phiếu mượn, ghi nhận ngày mượn và ngày hẹn trả.
+
+[Bạn đọc]
+   |
+   | Đăng nhập bằng tài khoản cá nhân
+   v
+[Hệ thống xác thực tài khoản]
+   |
+   |--> Nếu hợp lệ --> Tiếp tục
+   |--> Nếu không hợp lệ --> Thông báo lỗi đăng nhập
+   v
+[Người dùng nhập thông tin tìm kiếm (tên sách, mã sách, tác giả)]
+   |
+   v
+[Hệ thống kiểm tra sách trong cơ sở dữ liệu]
+   |
+   |--> Nếu sách không có --> Thông báo "Không tìm thấy sách"
+   |--> Nếu có --> Kiểm tra tình trạng sách
+   |
+   |--> Nếu sách đã được mượn hết --> Thông báo "Sách đã hết"
+   |--> Nếu sách còn:
+         |
+         v
+     [Hệ thống kiểm tra điều kiện người mượn]
+         - Có bị khóa quyền mượn?
+         - Có quá hạn mượn chưa trả?
+         - Có vượt quá số lượng sách được phép mượn?
+         |
+         |--> Nếu không đạt điều kiện --> Thông báo từ chối mượn
+         |--> Nếu đạt điều kiện:
+              |
+              v
+          [Tạo phiếu mượn]
+              - Ghi nhận: mã bạn đọc, mã sách
+              - Ngày mượn
+              - Ngày hẹn trả
+              |
+              v
+          [Thông báo mượn thành công cho bạn đọc]

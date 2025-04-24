@@ -61,4 +61,9 @@ class database
         $this->result = mysqli_query($this->conn, $sql);
         return $this->result;
     }
+
+    public function getInsertId()
+    {
+        return $this->conn->insert_id;
+    }
 }

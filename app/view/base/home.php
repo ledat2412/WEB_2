@@ -25,25 +25,25 @@
     </div>
     <div class="tier-list">
         <div class="tier-item">
-            <a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">
+            <a href="/WEB_2/app/controller/main.php?act=products&category=giaychaybo">
                 <img src="/WEB_2/public/assets/img/Sản Phẩm/group buy/groupbuy_1_img_compact.jpg">
                 <h3>chạy bộ</h3>
             </a>
         </div>
         <div class="tier-item">
-            <a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">
+            <a href="/WEB_2/app/controller/main.php?act=products&category=thoitrang">
                 <img src="/WEB_2/public/assets/img/Sản Phẩm/group buy/groupbuy_2_img_compact.jpg" href="">
                 <h3>thời trang</h3>
             </a>
         </div>
         <div class="tier-item">
-            <a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">
+            <a href="/WEB_2/app/controller/main.php?act=products&category=balo">
                 <img src="/WEB_2/public/assets/img/Sản Phẩm/group buy/groupbuy_3_img_compact.jpg" href="">
                 <h3>bóng rổ</h3>
             </a>
         </div>
         <div class="tier-item">
-            <a href="/WEB_2/app/controller/main.php?act=giaychaybo.php">
+            <a href="/WEB_2/app/controller/main.php?act=products&category=cauvong">
                 <img src="/WEB_2/public/assets/img/Sản Phẩm/group buy/groupbuy_4_img_compact.jpg" href="">
                 <h3>cầu lông</h3>
             </a>
