@@ -8,7 +8,41 @@ INSERT INTO `product` (`id_product`, `size`, `picture_path`, `price`, `stock`, `
 (6, '8.5', '\WEB_2\public\assets\img\Sản Phẩm\giày chạy bộ\Giày chạy bộ Boom Infinity 2 nữ ARVS016-3', ' 2346545', 100, 1, 1, 1, 1, 1);
 ALTER TABLE `product` AUTO_INCREMENT = 8;
 
+INSERT INTO `product` (`id_product`, `product_name`, `shoe_code`, `size`, `picture_path`, `price`, `stock`, `color_id`, `material_id`, `sex_id`, `id_product_variant`, `description_id`) values 
+(8, 'Chitu 6 Pro', 'ARMT014-7V', '5.5', '', ' 2346545', 100, 2, 1, 1, 1, 2),
+(9, 'Chitu 6 Pro', 'ARMT014-7V', '6', '', ' 2346545', 100, 2, 1, 1, 1, 2),
+(10, 'Chitu 6 Pro', 'ARMT014-7V', '6.5', '', ' 2346545', 100, 2, 1, 1, 1, 2),
+(11, 'Chitu 6 Pro', 'ARMT014-7V', '7', '', ' 2346545', 100, 2, 1, 1, 1, 2),
+(12, 'Chitu 6 Pro', 'ARMT014-7V', '7.5', '', ' 2346545', 100, 2, 1, 1, 1, 2),
+(13, 'Chitu 6 Pro', 'ARMT014-7V', '8', '', ' 2346545', 100, 2, 1, 1, 1, 2),
+(14, 'Chitu 6 Pro', 'ARMT014-7V', '8.5', '', ' 2346545', 100, 2, 1, 1, 1, 2);
 
+INSERT INTO `product` (`id_product`, `product_name`, `shoe_code`, `size`, `picture_path`, `price`, `stock`, `color_id`, `material_id`, `sex_id`, `id_product_variant`, `description_id`) values 
+(15, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '5.5', '', ' 2346545', 100, 3, 1, 0, 1, 3),
+(16, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '6', '', ' 2346545', 100, 3, 1, 0, 1, 3),
+(17, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '6.5', '', ' 2346545', 100, 3, 1, 0, 1, 3),
+(18, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '7', '', ' 2346545', 100, 3, 1, 0, 1, 3),
+(19, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '7.5', '', ' 2346545', 100, 3, 1, 0, 1, 3),
+(20, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '8', '', ' 2346545', 100, 3, 1, 0, 1, 3),
+(21, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '8.5', '', ' 2346545', 100, 3, 1, 0, 1, 3),
+(22, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '9', '', ' 2346545', 100, 3, 1, 0, 1, 3),
+(23, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '9.5', '', ' 2346545', 100, 3, 1, 0, 1, 3),
+(24, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '10', '', ' 2346545', 100, 3, 1, 0, 1, 3);
+../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/
+
+INSERT INTO `product` (`id_product`, `product_name`, `shoe_code`, `size`, `picture_path`, `price`, `stock`, `color_id`, `material_id`, `sex_id`, `id_product_variant`, `description_id`) values 
+(25, 'Chitu 7 Pro', 'ARPU001-6V', '5.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(26, 'Chitu 7 Pro', 'ARPU001-6V', '6', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(27, 'Chitu 7 Pro', 'ARPU001-6V', '6.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(28, 'Chitu 7 Pro', 'ARPU001-6V', '7', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(29, 'Chitu 7 Pro', 'ARPU001-6V', '7.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(30, 'Chitu 7 Pro', 'ARPU001-6V', '8', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(31, 'Chitu 7 Pro', 'ARPU001-6V', '8.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(32, 'Chitu 7 Pro', 'ARPU001-6V', '9', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(33, 'Chitu 7 Pro', 'ARPU001-6V', '9.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(34, 'Chitu 7 Pro', 'ARPU001-6V', '10', '', ' 2346545', 100, 4, 2, 0, 1, 4);
+
+../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/
 INSERT INTO `descriptions` (`id_description`, `content`) VALUES
 (1, 'Công nghệ
 Công nghệ LI-NING BOOM là vật liệu đế giữa kiểu mới do Li-Ning tự khai thác phát triển, được điều chế bằng quy trình tạo bọt lỏng siêu giới hạn, so với chất liệu truyền thống thì chất liệu này giảm được đáng kể trọng lượng đế giữa, không chỉ giúp tính năng đàn hồi được phát huy rõ rệt, mà còn kéo dài được tuổi thọ sử dụng, tăng cường thêm tính năng của sản phẩm. Thông qua các điều chỉnh sát với mục tiêu tính năng và chi tiết hơn, để phù với tính chất cạnh tranh của các môn thể thao khác nhau như chạy, bóng rổ, cầu lông, bóng bàn, v.v….nâng cao hiệu suất tốt cho các vận động viên với các mục mục đích sử dụng khác nhau.
@@ -24,4 +58,4 @@ Phần Đế Ngoài:
 Phần Gót giày:
 Sử dụng công nghệ HEEL LOC là một thiết bị hỗ trợ và ổn định xung quanh gót giày để hỗ trợ người mang không bị mất thăng bằng trong quá trình tập luyện và di chuyển trên mọi địa hình
 ');
-ALTER TABLE `description` AUTO_INCREMENT = 2;
+ALTER TABLE `descriptions` AUTO_INCREMENT = 2;

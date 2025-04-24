@@ -3,27 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hiển thị ảnh sản phẩm</title>
+    <title>Hiển thị sản phẩm</title>
     <style>
-        .image-container {
+        .debug-info {
+            background: #f5f5f5;
+            padding: 20px;
+            margin: 20px;
+            border: 1px solid #ddd;
+        }
+        .product-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
+            gap: 20px;
+            padding: 20px;
         }
-        .image-item {
-            position: relative;
-            width: 200px;
-            margin: 10px;
-        }
-        .image-item img {
-            width: 100%;
-            height: auto;
-            cursor: pointer;
+        .product-item {
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: transform 0.3s;
         }
-        .image-item img:hover {
-            transform: scale(1.05);
+        .product-item:hover {
+            transform: translateY(-5px);
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .product-info {
+            margin-top: 10px;
+        }
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #333;
+        }
+        .product-code {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .product-price {
+            color: #e44d26;
+            font-size: 20px;
+            font-weight: bold;
         }
         /* Modal styles */
         .modal {
@@ -55,67 +84,95 @@
             font-weight: bold;
             cursor: pointer;
         }
-        .debug-info {
-            margin: 20px;
-            padding: 10px;
-            background-color: #f5f5f5;
-            border: 1px solid #ddd;
-        }
     </style>
 </head>
 <body>
+    <!-- Debug Information -->
     <div class="debug-info">
         <?php
-        // Hiển thị thông tin debug
-        $dir = "../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3/";
-        $absolute_dir = realpath($dir);
-        echo "Đường dẫn tương đối: " . $dir . "<br>";
-        echo "Đường dẫn tuyệt đối: " . $absolute_dir . "<br>";
+        require_once '../../model/product.php';
         
-        if (is_dir($absolute_dir)) {
-            echo "Thư mục tồn tại<br>";
-            // Liệt kê tất cả các file trong thư mục
-            echo "Danh sách tất cả các file trong thư mục:<br>";
-            $all_files = scandir($absolute_dir);
-            echo "<pre>";
-            print_r($all_files);
-            echo "</pre>";
+        $product = new Product();
+        $products = $product->getAllProducts();
+        
+        echo "<h3>Debug Information:</h3>";
+        echo "Số lượng sản phẩm: " . count($products) . "<br>";
+        echo "Document Root: " . $_SERVER['DOCUMENT_ROOT'] . "<br>";
+        
+        if (empty($products)) {
+            echo "Không có sản phẩm nào được tìm thấy.<br>";
         } else {
-            echo "Thư mục không tồn tại<br>";
+            echo "<h4>Thông tin sản phẩm đầu tiên:</h4>";
+            echo "<pre>";
+            print_r($products[0]);
+            echo "</pre>";
         }
         ?>
     </div>
 
-    <div class="image-container">
+    <div class="product-container">
         <?php
-        if ($absolute_dir) {
-            // Lấy danh sách ảnh với đuôi .webp
-            $images = glob($absolute_dir . "/*.webp");
-            
-            if (!empty($images)) {
-                foreach ($images as $image) {
-                    // Chuyển đổi đường dẫn Windows thành URL path
-                    $url_path = str_replace('\\', '/', $image);
-                    $url_path = str_replace($_SERVER['DOCUMENT_ROOT'], '', $url_path);
+        // Mảng để lưu trữ các sản phẩm đã hiển thị (dựa trên shoe_code)
+        $displayed_products = array();
+        
+        if (!empty($products)) {
+            foreach ($products as $item) {
+                // Kiểm tra nếu sản phẩm chưa được hiển thị
+                if (!in_array($item['shoe_code'], $displayed_products)) {
+                    // Thêm shoe_code vào mảng đã hiển thị
+                    $displayed_products[] = $item['shoe_code'];
                     
-                    echo "<div class='image-item'>";
-                    echo "<img src='" . $url_path . "' alt='Product Image' onclick='openModal(this.src)'>";
-                    // echo "<br>Image path: " . $url_path . "<br>"; o
-                    echo "</div>";
-                }
-            } else {
-                echo "<p>Không tìm thấy file .webp trong thư mục.</p>";
-                echo "<p>Đường dẫn tìm kiếm: " . $absolute_dir . "/*.webp</p>";
-                
-                // Kiểm tra tất cả các file trong thư mục
-                $all_files = glob($absolute_dir . "/*.*");
-                if (!empty($all_files)) {
-                    echo "<p>Các file có trong thư mục:</p>";
-                    foreach ($all_files as $file) {
-                        echo basename($file) . "<br>";
+                    // Debug đường dẫn ảnh
+                    echo "<!-- Debug: Checking image path for product " . $item['product_name'] . " -->\n";
+                    
+                    // Lấy đường dẫn ảnh
+                    $image_dir = $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/public/assets/img/Sản Phẩm/" . str_replace("../../../public/assets/img/Sản Phẩm/", "", $item['picture_path']);
+                    $absolute_dir = realpath($image_dir);
+                    
+                    echo "<!-- Debug: Image directory: " . $image_dir . " -->\n";
+                    echo "<!-- Debug: Absolute directory: " . $absolute_dir . " -->\n";
+                    
+                    if ($absolute_dir) {
+                        // Tìm tất cả các ảnh của sản phẩm
+                        $webp_images = glob($absolute_dir . "/*.webp") ?: [];
+                        $jpg_images = glob($absolute_dir . "/*.jpg") ?: [];
+                        $jpeg_images = glob($absolute_dir . "/*.jpeg") ?: [];
+                        $png_images = glob($absolute_dir . "/*.png") ?: [];
+                        $images = array_merge($webp_images, $jpg_images, $jpeg_images, $png_images);
+                        
+                        echo "<!-- Debug: Found " . count($images) . " images -->\n";
+                        
+                        // Lấy ảnh đầu tiên nếu có
+                        $main_image = !empty($images) ? $images[0] : '';
+                        if ($main_image) {
+                            $url_path = str_replace('\\', '/', $main_image);
+                            $url_path = str_replace($_SERVER['DOCUMENT_ROOT'], '', $url_path);
+                            
+                            echo "<div class='product-item'>";
+                            echo "<a href='product_detail.php?id=" . $item['id_product'] . "' style='text-decoration: none; color: inherit;'>";
+                            echo "<img src='" . $url_path . "' alt='" . $item['product_name'] . "' class='product-image' onclick='openModal(this.src)'>";
+                            echo "<div class='product-info'>";
+                            echo "<div class='product-name'>" . $item['product_name'] . "</div>";
+                            echo "<div class='product-code'>Mã: " . $item['shoe_code'] . "</div>";
+                            echo "<div class='product-price'>" . number_format($item['price'], 0, ',', '.') . " ₫</div>";
+                            echo "</div>";
+                            echo "</a>";
+                            echo "</div>";
+                        } else {
+                            echo "<!-- Debug: No images found in directory: " . $absolute_dir . " -->\n";
+                            echo "<!-- Debug: Available files: -->\n";
+                            $all_files = scandir($absolute_dir);
+                            foreach ($all_files as $file) {
+                                echo "<!-- File: " . $file . " -->\n";
+                            }
+                        }
+                    } else {
+                        echo "<!-- Debug: Directory not found: " . $image_dir . " -->\n";
                     }
                 }
             }
+        } else {
+            echo "<p>Không có sản phẩm nào.</p>";
         }
         ?>
     </div>
@@ -127,7 +184,6 @@
     </div>
 
     <script>
-        // Mở modal khi click vào ảnh
         function openModal(imgSrc) {
             var modal = document.getElementById("imageModal");
             var modalImg = document.getElementById("modalImage");
@@ -135,12 +191,10 @@
             modalImg.src = imgSrc;
         }
 
-        // Đóng modal khi click vào nút đóng
         function closeModal() {
             document.getElementById("imageModal").style.display = "none";
         }
 
-        // Đóng modal khi click bên ngoài ảnh
         window.onclick = function(event) {
             var modal = document.getElementById("imageModal");
             if (event.target == modal) {
