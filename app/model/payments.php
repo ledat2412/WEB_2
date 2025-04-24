@@ -27,19 +27,19 @@ class Payments {
     public function getPayment($id) {
         $sql = "SELECT * FROM payments WHERE id_payment = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getPaymentsByUser($id_user) {
         $sql = "SELECT * FROM payments WHERE id_user = ?";
         $this->db->handle($sql, [$id_user]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getAllPayments() {
         $sql = "SELECT * FROM payments";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function updatePayment($id, $id_user, $payment_method) {

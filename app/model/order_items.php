@@ -34,7 +34,7 @@ class OrderItems {
                 LEFT JOIN products p ON oi.id_product = p.id_product 
                 WHERE oi.id_order_item = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getOrderItemsByOrder($id_order) {
@@ -43,7 +43,7 @@ class OrderItems {
                 LEFT JOIN products p ON oi.id_product = p.id_product 
                 WHERE oi.id_order = ?";
         $this->db->handle($sql, [$id_order]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getAllOrderItems() {
@@ -52,7 +52,7 @@ class OrderItems {
                 LEFT JOIN products p ON oi.id_product = p.id_product 
                 LEFT JOIN orders o ON oi.id_order = o.id_order";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function updateOrderItem($id, $id_order, $id_product, $quantity, $price) {

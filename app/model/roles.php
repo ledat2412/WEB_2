@@ -24,13 +24,13 @@ class Roles {
     public function getRole($id) {
         $sql = "SELECT * FROM roles WHERE id_role = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function getAllRoles() {
         $sql = "SELECT * FROM roles";
         $this->db->handle($sql);
-        return $this->db->getData();
+        return $this->db->getData($sql);
     }
 
     public function updateRole($id, $role_name) {
