@@ -44,6 +44,47 @@ class ProductController {
         }
         header("Location: ../view/admin/product.php?success=addProduct");
     }
+
+// ------------------------------------------------------------------------------
+    public function handlescanproduct() {
+        $product = new Product();
+        $products = $product->getAllProducts();
+        
+        echo "<h3>Debug Information:</h3>";
+        echo "Số lượng sản phẩm: " . count($products) . "<br>";
+        echo "Document Root: " . $_SERVER['DOCUMENT_ROOT'] . "<br>";
+        
+        if (empty($products)) {
+            echo "Không có sản phẩm nào được tìm thấy.<br>";
+        } else {
+            echo "<h4>Thông tin sản phẩm đầu tiên:</h4>";
+            echo "<pre>";
+            print_r($products[0]);
+            echo "</pre>";
+        }
+    }
+
+    public function productContainer() {
+        $products = $this->productModel->getAllProducts();
+        $uniqueProducts = [];
+        $displayedShoeCodes = [];
+        foreach ($products as $item) {
+            if (!in_array($item['shoe_code'], $displayedShoeCodes)) {
+                $displayedShoeCodes[] = $item['shoe_code'];
+                $uniqueProducts[] = $item;
+            }
+        }
+        return $uniqueProducts;
+    }
+
+    public function apiGetAllProducts() {
+        header('Content-Type: application/json');
+        echo json_encode([
+            ['product_name' => 'Test Product', 'price' => 123000],
+            ['product_name' => 'Another Product', 'price' => 456000]
+        ]);
+        exit;
+    }
 }
 
 

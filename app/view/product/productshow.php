@@ -91,12 +91,38 @@
     <div class="debug-info">
         <?php
         require_once '../../model/product.php';
+        require_once '../../model/product_variant.php';
+        require_once '../../model/colors.php';
+        require_once '../../model/sex.php';
         
         $product = new Product();
         $products = $product->getAllProducts();
         
+        $variantModel = new ProductVariant();
+        $variants = $variantModel->getAllVariants();
+
+        $colorModel = new Colors();
+        $colors = $colorModel->getAllColors();
+
+        $sexModel = new Sex();
+        $sexes = $sexModel->getAllSex();
+
+        // Xử lý filter từ form
+        $filter_variant = $_GET['variant'] ?? '';
+        $filter_color = $_GET['color'] ?? '';
+        $filter_price = $_GET['price'] ?? '';
+        $filter_sex = $_GET['sex'] ?? '';
+        
         echo "<h3>Debug Information:</h3>";
         echo "Số lượng sản phẩm: " . count($products) . "<br>";
+        // Đếm số sản phẩm không trùng nhau theo shoe_code
+        $unique_shoe_codes = array();
+        foreach ($products as $item) {
+            if (!in_array($item['shoe_code'], $unique_shoe_codes)) {
+                $unique_shoe_codes[] = $item['shoe_code'];
+            }
+        }
+        echo "Số lượng sản phẩm không trùng nhau: " . count($unique_shoe_codes) . "<br>";
         echo "Document Root: " . $_SERVER['DOCUMENT_ROOT'] . "<br>";
         
         if (empty($products)) {
@@ -110,6 +136,48 @@
         ?>
     </div>
 
+    <form method="GET" style="margin: 20px;">
+        <label>Loại giày:
+            <select name="variant">
+                <option value="">Tất cả</option>
+                <?php foreach ($variants as $v): ?>
+                    <option value="<?= $v['id_product_variant'] ?>" <?= $filter_variant == $v['id_product_variant'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($v['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </label>
+        <label>Màu sắc:
+            <select name="color">
+                <option value="">Tất cả</option>
+                <?php foreach ($colors as $c): ?>
+                    <option value="<?= $c['id_color'] ?>" <?= $filter_color == $c['id_color'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($c['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </label>
+        <label>Giới tính:
+            <select name="sex">
+                <option value="">Tất cả</option>
+                <?php foreach ($sexes as $s): ?>
+                    <option value="<?= $s['id_sex'] ?>" <?= $filter_sex == $s['id_sex'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($s['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </label>
+        <label>Giá:
+            <select name="price">
+                <option value="">Tất cả</option>
+                <option value="1" <?= $filter_price == '1' ? 'selected' : '' ?>>Dưới 1 triệu</option>
+                <option value="2" <?= $filter_price == '2' ? 'selected' : '' ?>>1 - 2 triệu</option>
+                <option value="3" <?= $filter_price == '3' ? 'selected' : '' ?>>Trên 2 triệu</option>
+            </select>
+        </label>
+        <button type="submit">Lọc</button>
+    </form>
+
     <div class="product-container">
         <?php
         // Mảng để lưu trữ các sản phẩm đã hiển thị (dựa trên shoe_code)
@@ -117,6 +185,18 @@
         
         if (!empty($products)) {
             foreach ($products as $item) {
+                // Lọc theo loại giày
+                if ($filter_variant && $item['id_product_variant'] != $filter_variant) continue;
+                // Lọc theo màu sắc
+                if ($filter_color && $item['color_id'] != $filter_color) continue;
+                // Lọc theo giới tính
+                if ($filter_sex && $item['sex_id'] != $filter_sex) continue;
+                // Lọc theo giá
+                if ($filter_price) {
+                    if ($filter_price == '1' && $item['price'] >= 1000000) continue;
+                    if ($filter_price == '2' && ($item['price'] < 1000000 || $item['price'] > 2000000)) continue;
+                    if ($filter_price == '3' && $item['price'] <= 2000000) continue;
+                }
                 // Kiểm tra nếu sản phẩm chưa được hiển thị
                 if (!in_array($item['shoe_code'], $displayed_products)) {
                     // Thêm shoe_code vào mảng đã hiển thị
