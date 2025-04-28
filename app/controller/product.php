@@ -1,6 +1,9 @@
 <?php
 session_start();   
-require_once '../model/product.php';
+require_once __DIR__ . '/../model/product.php';
+require_once __DIR__ . '/../model/product_variant.php';
+require_once __DIR__ . '/../model/colors.php';
+require_once __DIR__ . '/../model/sex.php';
 
 class ProductController {
     private $productModel;
@@ -44,46 +47,34 @@ class ProductController {
         }
         header("Location: ../view/admin/product.php?success=addProduct");
     }
-
-// ------------------------------------------------------------------------------
-    public function handlescanproduct() {
+    public function product_detail(){
+        $product_id = $_GET['id'] ?? null;
         $product = new Product();
-        $products = $product->getAllProducts();
-        
-        echo "<h3>Debug Information:</h3>";
-        echo "Số lượng sản phẩm: " . count($products) . "<br>";
-        echo "Document Root: " . $_SERVER['DOCUMENT_ROOT'] . "<br>";
-        
-        if (empty($products)) {
-            echo "Không có sản phẩm nào được tìm thấy.<br>";
-        } else {
-            echo "<h4>Thông tin sản phẩm đầu tiên:</h4>";
-            echo "<pre>";
-            print_r($products[0]);
-            echo "</pre>";
-        }
-    }
+        $product_detail = $product_id ? $product->getProduct($product_id) : null;
 
-    public function productContainer() {
-        $products = $this->productModel->getAllProducts();
-        $uniqueProducts = [];
-        $displayedShoeCodes = [];
-        foreach ($products as $item) {
-            if (!in_array($item['shoe_code'], $displayedShoeCodes)) {
-                $displayedShoeCodes[] = $item['shoe_code'];
-                $uniqueProducts[] = $item;
+        $image_urls = [];
+        if ($product_detail) {
+            $item = $product_detail[0];
+            $image_dir = $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/public/assets/img/Sản Phẩm/" . 
+                        str_replace("../../../public/assets/img/Sản Phẩm/", "", $item['picture_path']);
+            $absolute_dir = realpath($image_dir);
+
+            $images = [];
+            if ($absolute_dir) {
+                $webp_images = glob($absolute_dir . "/*.webp") ?: [];
+                $jpg_images = glob($absolute_dir . "/*.jpg") ?: [];
+                $jpeg_images = glob($absolute_dir . "/*.jpeg") ?: [];
+                $png_images = glob($absolute_dir . "/*.png") ?: [];
+                $images = array_merge($webp_images, $jpg_images, $jpeg_images, $png_images);
+            }
+            foreach ($images as $image) {
+                $url_path = str_replace('\\', '/', $image);
+                $url_path = str_replace($_SERVER['DOCUMENT_ROOT'], '', $url_path);
+                $image_urls[] = $url_path;
             }
         }
-        return $uniqueProducts;
-    }
 
-    public function apiGetAllProducts() {
-        header('Content-Type: application/json');
-        echo json_encode([
-            ['product_name' => 'Test Product', 'price' => 123000],
-            ['product_name' => 'Another Product', 'price' => 456000]
-        ]);
-        exit;
+        require '../../view/product/product_detail.php';
     }
 }
 

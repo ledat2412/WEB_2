@@ -4,87 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hiển thị sản phẩm</title>
-    <style>
-        .debug-info {
-            background: #f5f5f5;
-            padding: 20px;
-            margin: 20px;
-            border: 1px solid #ddd;
-        }
-        .product-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px;
-        }
-        .product-item {
-            width: 300px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        .product-item:hover {
-            transform: translateY(-5px);
-        }
-        .product-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .product-info {
-            margin-top: 10px;
-        }
-        .product-name {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 10px 0;
-            color: #333;
-        }
-        .product-code {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-        .product-price {
-            color: #e44d26;
-            font-size: 20px;
-            font-weight: bold;
-        }
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-        }
-        .modal-content {
-            margin: auto;
-            display: block;
-            max-width: 90%;
-            max-height: 90%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="/WEB_2/app/view/product/product.css"> 
 </head>
 <body>
     <!-- Debug Information -->
@@ -229,8 +149,9 @@
                             $url_path = str_replace($_SERVER['DOCUMENT_ROOT'], '', $url_path);
                             
                             echo "<div class='product-item'>";
-                            echo "<a href='product_detail.php?id=" . $item['id_product'] . "' style='text-decoration: none; color: inherit;'>";
-                            echo "<img src='" . $url_path . "' alt='" . $item['product_name'] . "' class='product-image' onclick='openModal(this.src)'>";
+                            echo "<a href='product_detail0.php?id=" . $item['id_product'] . "' style='text-decoration: none; color: inherit;'>";
+                            // echo "<img src='" . $url_path . "' alt='" . $item['product_name'] . "' class='product-image' onclick='openModal(this.src)'>";
+                            echo "<img src='" . $url_path . "' alt='" . $item['product_name'] . "' class='product-image'>";
                             echo "<div class='product-info'>";
                             echo "<div class='product-name'>" . $item['product_name'] . "</div>";
                             echo "<div class='product-code'>Mã: " . $item['shoe_code'] . "</div>";
@@ -258,7 +179,7 @@
     </div>
 
     <!-- Modal -->
-    <div id="imageModal" class="modal">
+    <!-- <div id="imageModal" class="modal">
         <span class="close" onclick="closeModal()">&times;</span>
         <img class="modal-content" id="modalImage">
     </div>
@@ -281,7 +202,7 @@
                 modal.style.display = "none";
             }
         }
-    </script>
+    </script> -->
 </body>
 </html>
 
