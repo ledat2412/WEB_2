@@ -21,8 +21,45 @@
     </div>
 
     <form method="GET" style="margin: 20px;">
-        <!-- ... giữ nguyên phần filter ... -->
-        <!-- Copy phần filter từ file cũ sang -->
+    <label>Loại giày:
+            <select name="variant">
+                <option value="">Tất cả</option>
+                <?php foreach ($variants as $v): ?>
+                    <option value="<?= $v['id_product_variant'] ?>" <?= $filter_variant == $v['id_product_variant'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($v['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </label>
+        <label>Màu sắc:
+            <select name="color">
+                <option value="">Tất cả</option>
+                <?php foreach ($colors as $c): ?>
+                    <option value="<?= $c['id_color'] ?>" <?= $filter_color == $c['id_color'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($c['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </label>
+        <label>Giới tính:
+            <select name="gender">
+                <option value="">Tất cả</option>
+                <?php foreach ($sexes as $s): ?>
+                    <option value="<?= $s['id_sex'] ?>" <?= $filter_sex == $s['id_sex'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($s['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </label>
+        <label>Giá:
+            <select name="price">
+                <option value="">Tất cả</option>
+                <option value="1" <?= $filter_price == '1' ? 'selected' : '' ?>>Dưới 1 triệu</option>
+                <option value="2" <?= $filter_price == '2' ? 'selected' : '' ?>>1 - 2 triệu</option>
+                <option value="3" <?= $filter_price == '3' ? 'selected' : '' ?>>Trên 2 triệu</option>
+            </select>
+        </label>
+        <button type="submit">Lọc</button>
     </form>
 
     <div class="product-container">

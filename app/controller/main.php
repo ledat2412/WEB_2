@@ -67,9 +67,9 @@
 session_start();
 ob_start();
 
-// if (!isset($_GET['act']) || ($_GET['act'] !== 'login' && $_GET['act'] !== 'register')) {
-//     include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/base/header.php";
-// }
+if (!isset($_GET['act']) || ($_GET['act'] !== 'login' && $_GET['act'] !== 'register')) {
+    include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/base/header.php";
+}
 
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
@@ -100,7 +100,7 @@ if (isset($_GET['act'])) {
                         break;
                     default:
                         // Trang hiển thị tất cả sản phẩm
-                        include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/product/all-products.php";
+                        include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/controller/CartController.php";
                         break;
                 }
             } else {
