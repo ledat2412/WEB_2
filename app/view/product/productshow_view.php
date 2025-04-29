@@ -5,9 +5,82 @@
     <meta charset="UTF-8">
     <title>Hiển thị sản phẩm</title>
     <link rel="stylesheet" href="/WEB_2/app/view/product/product.css">
+    <link rel="stylesheet" href="/WEB_2/public/assets/css/product.css">
 </head>
 <body>
-    <div class="debug-info">
+    <!-- Main content -->
+    <div class="main-container">
+<!-- sorting bar -->
+<div class="sorting-bar">
+            <div class="sorting-options">
+                <label for="sorting">Default sorting</label>
+                <select id="sorting">
+                    <option value="default">Default sorting</option>
+                    <option value="price-low-high">Price: Low to High</option>
+                    <option value="price-high-low">Price: High to Low</option>
+                    <option value="popularity">Popularity</option>
+                    <option value="rating">Rating</option>
+                </select>
+            </div>
+            <div class="view-options">
+                <button class="view-btn list-view active">
+                    <span class="icon">☰</span> 
+                </button>
+                <button class="view-btn grid-view">
+                    <span class="icon">▦</span> 
+                </button>
+                <button class="view-btn compact-view">
+                    <span class="icon" style="color: orange;">▤</span> 
+                </button>
+            </div>
+            <div class="results-info">Showing all 5 results</div>
+        </div>
+        <!-- sản phẩm và filter -->
+        <div class="container">
+            <!-- Filter Section on the Left -->
+            <aside class="filter-section">
+                <div class="filter-header">Bộ lọc tìm kiếm</div>
+                <h3>Theo Danh Mục</h3>
+                <div class="filter-options">
+                    <div class="filter-option">Giày Chạy Bộ</div>
+                    <div class="filter-option">Giày Bóng Rổ </div>
+                    <div class="filter-option">Giày Thời Trang</div>
+                    <div class="filter-option">Thời Cầu Lông </div>
+                </div>
+                <h3>Màu Sắc</h3>
+                <div class="filter-options">
+                    <div class="filter-option">TP. Hồ Chí Minh</div>
+                    <div class="filter-option">Hà Nội</div>
+                    <div class="filter-option">Đà Nẵng</div>
+                    <div class="filter-option">Quận 1</div>
+                    <div class="filter-option">Quận 3</div>
+                </div>
+                <h3>Gender</h3>
+                <div class="filter-options">
+                    <div class="filter-option">Hỏa Tốc</div>
+                    <div class="filter-option">Nhanh</div>
+                    <div class="filter-option">Tiết Kiệm</div>
+                </div>
+                <h3>Khoảng giá</h3>
+                <div class="filter-options">
+                    <div class="filter-option">Dưới 1 triệu</div>
+                    <div class="filter-option">Trên 1 triệu</div>
+                </div>
+                <!-- <h3>Màu giày</h3>
+                <div class="color-group">
+                    <span class="color black"></span>
+                    <span class="color red"></span>
+                    <span class="color blue"></span>
+                    <span class="color green"></span>
+                    <span class="color yellow"></span>
+                </div> -->
+                <div class="button-container">
+                    <button class="button reset-button">Thiết lập lại</button>
+                    <button class="button apply-button">Áp dụng</button>
+                </div>     
+            </aside>
+
+    <!-- <div class="debug-info">
         <h3>Debug Information:</h3>
         Số lượng sản phẩm: <?= count($products) ?><br>
         Số lượng sản phẩm không trùng nhau: <?= count($unique_shoe_codes) ?><br>
@@ -18,7 +91,7 @@
             <h4>Thông tin sản phẩm đầu tiên:</h4>
             <pre><?php print_r($products[0]); ?></pre>
         <?php endif; ?>
-    </div>
+    </div> -->
 
     <form method="GET" style="margin: 20px;">
     <label>Loại giày:
@@ -80,8 +153,10 @@
                 $url_path = $main_image ? str_replace(['\\', $_SERVER['DOCUMENT_ROOT']], ['/', ''], $main_image) : '';
                 ?>
                 <div class='product-item'>
-                    <a href='product_detail.php?id=<?= $item['id_product'] ?>' style='text-decoration: none; color: inherit;'>
-                        <?php if ($url_path): ?>
+                    <a href='/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?= $item['id_product'] ?>' style='text-decoration: none; color: inherit;'>
+                    <!-- <a href='/WEB_2/app/controller/main.php?act=product_detail&id=<?= $item['id_product'] ?>' style='text-decoration: none; color: inherit;'> -->
+                    <!-- <a href='product_detail.php?id=<?= $item['id_product'] ?>' style='text-decoration: none; color: inherit;'> -->
+                    <?php if ($url_path): ?>
                             <img src='<?= $url_path ?>' alt='<?= $item['product_name'] ?>' class='product-image'>
                         <?php endif; ?>
                         <div class='product-info'>
@@ -95,6 +170,7 @@
         <?php else: ?>
             <p>Không có sản phẩm nào.</p>
         <?php endif; ?>
+    </div>
     </div>
 </body>
 </html>

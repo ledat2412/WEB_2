@@ -27,4 +27,4 @@ if ($product_detail) {
     }
 }
 
-require __DIR__ . '/../view/product/product_detail_view.php';
+require __DIR__ . '/../view/product/productdetail_view.php';
