@@ -14,7 +14,8 @@ RewriteRule ^products/([^/]+)/?$ app/controller/main.php?act=products&category=$
 RewriteRule ^login/?$ app/controller/main.php?act=login [L,QSA]
 RewriteRule ^register/?$ app/controller/main.php?act=register [L,QSA]
 RewriteRule ^logout/?$ app/controller/Auth.php?logout=true [L,QSA]
-RewriteRule ^profile/?$ app/view/user/profile.php [L,QSA]
+
+RewriteRule ^profile/?$ app/controller/main.php?act=inforamtion&skibidiyetyet=user_tier [L,QSA]
 
 # Rewrite for other pages
 RewriteCond %{REQUEST_FILENAME} !-f

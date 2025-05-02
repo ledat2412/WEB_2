@@ -8,7 +8,7 @@ $db = new database();
 $table_addresses = $db->handle("CREATE TABLE IF NOT EXISTS addresses (
     id_address INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_user INT UNSIGNED NOT NULL,
-
+    recive_nane VARCHAR(255),
     phone VARCHAR(20),
     address VARCHAR(255),
     FOREIGN KEY (id_user) REFERENCES users(id_users)
@@ -34,8 +34,8 @@ class Addresses {
 
     public function getAddressesByUser($id_user) {
         $sql = "SELECT * FROM addresses WHERE id_user = ?";
-        $this->db->handle($sql, [$id_user]);
-        return $this->db->getData($sql);
+        $stmt = $this->db->handle($sql, [$id_user]);
+        return $this->db->getData($stmt);
     }
 
     public function getAllAddresses() {
