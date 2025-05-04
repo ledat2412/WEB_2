@@ -71,12 +71,12 @@
             </div>
 
             <?php
-            if(isset($_GET['error'])) {
-                echo "<div class='error-message'>" . $_GET['error'] . "</div>";
-            }
-            if(isset($_GET['success'])) {
-                echo "<div class='success-message'>" . $_GET['success'] . "</div>";
-            }
+            // if(isset($_GET['error'])) {
+            //     echo "<div class='error-message'>" . $_GET['error'] . "</div>";
+            // }
+            // if(isset($_GET['success'])) {
+            //     echo "<div class='success-message'>" . $_GET['success'] . "</div>";
+            // }
             ?>
 
             <p class="login-form-support">Don't have an account? <a href="/WEB_2/app/view/log/signup.php">Register</a></p>
