@@ -1,45 +1,5 @@
 <?php
 require_once '../model/database.php';
-
-$user_id = $_SESSION['user_id'] ?? 0;
-$username = $_SESSION['username'] ?? 'Khách';
-
-$conn = new mysqli("localhost", "root", "", "lining_1");
-if ($conn->connect_error) {
-    die("Kết nối thất bại: " . $conn->connect_error);
-}
-
-$sql = "
-    SELECT 
-        SUM(oi.price * oi.quantity) AS total_spent
-    FROM orders o
-    JOIN order_items oi ON o.id_order = oi.id_order
-    WHERE o.status = 'finish' AND o.id_user = ?
-";
-
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$stmt->bind_result($total_spent);
-$stmt->fetch();
-$stmt->close();
-
-$total_spent = $total_spent ?? 0;
-
-if ($total_spent < 1000000) {
-    $rank = 'Chưa là thành viên';
-} elseif ($total_spent < 5000000) {
-    $rank = 'Đồng';
-} elseif ($total_spent < 9000000) {
-    $rank = 'Silver';
-} elseif ($total_spent < 15000000) {
-    $rank = 'Platinum';
-} elseif ($total_spent >= 20000000) {
-    $rank = 'Diamond';
-} else {
-    $rank = 'Platinum'; // 15-20 triệu vẫn là Platinum
-}
-
 // Định nghĩa các mức hạng để render bảng
 $tiers = [
     [

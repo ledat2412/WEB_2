@@ -15,7 +15,6 @@ RewriteRule ^login/?$ app/controller/main.php?act=login [L,QSA]
 RewriteRule ^register/?$ app/controller/main.php?act=register [L,QSA]
 RewriteRule ^logout/?$ app/controller/Auth.php?logout=true [L,QSA]
 RewriteRule ^profile/?$ app/controller/main.php?act=inforamtion&skibidiyetyet=user_tier [L,QSA]
-RewriteRule ^user_tier/?$ app/controller/main.php?act=inforamtion&skibidiyetyet=user_tier [L,QSA]
 RewriteRule ^address/?$ app/controller/main.php?act=inforamtion&skibidiyetyet=addresses [L,QSA]
 
 # Rewrite for other pages

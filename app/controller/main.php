@@ -139,8 +139,8 @@
 // }
 
 
-session_start();
-ob_start();
+// session_start();
+// ob_start();
 
 // if (isset($_GET['action'])) {
 //     $action = $_GET['action'];
@@ -301,6 +301,10 @@ ob_start();
 //     include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/base/footer.php";
 // }
 
+
+session_start();
+ob_start();
+
 // Nếu không có action, xử lý các act khác (home, login, register, ...)
 if (!isset($_GET['act']) || ($_GET['act'] !== 'login' && $_GET['act'] !== 'register')) {
     include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/base/header.php";
@@ -336,7 +340,7 @@ if (isset($_GET['act'])) {
                         switch ($_GET['skibidiyetyet']){
                             case 'user_tier':
                                 require_once __DIR__ . '/../model/usertier.php';
-
+                                $tiers = $tiers ?? []; // Lấy mảng $tiers từ model nếu chưa có
                                 if (!isset($_SESSION['user_id'])) {
                                     header('Location: /login.php');
                                     exit();
@@ -344,25 +348,35 @@ if (isset($_GET['act'])) {
 
                                 $user_id = $_SESSION['user_id'] ?? 0;
                                 $username = $_SESSION['username'] ?? 'Khách';
+                                
                                 $userTierModel = new UserTier();
-                                $tierInfo = $userTierModel->getUserTierInfo($user_id);
-                                $total_spent = $tierInfo['total_spent'];
-                                $rank = $tierInfo['rank'];
+                                
+                                // GIÁ TRỊ THỤC TẾ
+                                // $tierInfo = $userTierModel->getUserTierInfo($user_id);
+                                // $total_spent = $tierInfo['total_spent'];
+                                // $rank = $tierInfo['rank'];
                                             // GIÁ TRỊ GIẢ LẬP
-                                            // $total_spent = 7000000; 
-                                            // if ($total_spent < 1000000) {
-                                            //     $rank = 'Chưa là thành viên';
-                                            // } elseif ($total_spent < 5000000) {
-                                            //     $rank = 'Đồng';
-                                            // } elseif ($total_spent < 9000000) {
-                                            //     $rank = 'Silver';
-                                            // } elseif ($total_spent < 15000000) {
-                                            //     $rank = 'Platinum';
-                                            // } elseif ($total_spent >= 20000000) {
-                                            //     $rank = 'Diamond';
-                                            // } else {
-                                            //     $rank = 'Platinum';
-                                            // }
+                                            $total_spent = 7000000; 
+                                            if ($total_spent < 1000000) {
+                                                $rank = 'Chưa là thành viên';
+                                            } elseif ($total_spent < 5000000) {
+                                                $rank = 'Đồng';
+                                            } elseif ($total_spent < 9000000) {
+                                                $rank = 'Silver';
+                                            } elseif ($total_spent < 15000000) {
+                                                $rank = 'Platinum';
+                                            } elseif ($total_spent >= 20000000) {
+                                                $rank = 'Diamond';
+                                            } else {
+                                                $rank = 'Platinum';
+                                            }
+                                // $rankColor = '#555';
+                                foreach ($tiers as $tier) {
+                                    if ($tier['name'] === $rank) {
+                                        $rankColor = $tier['color'];
+                                        break;
+                                    }
+                                }
                                 include __DIR__ . '/../view/infor/user_tier.php';
                                 break;
                             case 'addresses':
@@ -375,8 +389,8 @@ if (isset($_GET['act'])) {
                                     exit();
                                 }
 
-                                $user_id = $_SESSION['user_id'];
-                                $username = $_SESSION['username'];
+                                $user_id = $_SESSION['user_id'] ?? 0;
+                                $username = $_SESSION['username'] ?? 'Khách';
 
                                 // Lấy danh sách địa chỉ
                                 $addressModel = new Addresses();

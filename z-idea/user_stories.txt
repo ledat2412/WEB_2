@@ -150,3 +150,13 @@ hệ thống sẽ tự động tạo phiếu mượn, ghi nhận ngày mượn v
               |
               v
           [Thông báo mượn thành công cho bạn đọc]
+
+
+some feature could do till end 
+
+request to change password by send email for verification
+
+2 key verify when sign up 
+
+delete account by request admin in that amount day (in admin that nofication should pop up on first or second)
+
