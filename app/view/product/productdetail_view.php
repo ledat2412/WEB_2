@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chi tiết sản phẩm</title>
-    <link rel="stylesheet" href="/WEB_2/public/assets/css/base.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="/WEB_2/app/view/product/product_detail.css">
 </head>

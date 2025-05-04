@@ -7,12 +7,11 @@
 .tier-table tr.active {background: #ffe066; font-weight: bold;}
 .tier-table tr.active td {color: #222;}
 .tier-icon {font-size: 1.3em; margin-right: 8px;}
-.rank-glow-shine {
+/* .rank-glow-shine {
     position: relative;
     display: inline-block;
     font-weight: bold;
     font-size: 2.5rem;
-    color: #b0b0b0; /* hoặc màu rank */
     overflow: hidden;
 }
 
@@ -35,4 +34,4 @@
     100% {
         left: 120%;
     }
-}
+} */

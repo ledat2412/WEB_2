@@ -13,7 +13,7 @@
 
         <h2>Hạng thành viên hiện tại:</h2>
         <?php if ($rank === 'Chưa là thành viên'): ?>
-            <b style="color:<?php echo $rankColor; ?>"><?php echo $rank; ?></b>
+            <b style="color:<?php echo $rankColor; ?>;font-size: 2.5rem;font-weight: bold;position: relative;display: inline-block;overflow: hidden;"><?php echo $rank; ?></b>
         <?php else: ?>
             <b class="rank-glow-shine" style="
             background: linear-gradient(120deg, <?php echo $rankColor; ?>, <?php echo $rankColor; ?>, #fff 100%);

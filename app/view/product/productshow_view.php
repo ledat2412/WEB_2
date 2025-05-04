@@ -3,7 +3,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hiển thị sản phẩm</title>
     <link rel="stylesheet" href="/WEB_2/app/view/product/product.css">
     <link rel="stylesheet" href="/WEB_2/public/assets/css/product.css">
 </head>

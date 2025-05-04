@@ -352,25 +352,24 @@ if (isset($_GET['act'])) {
                                 $userTierModel = new UserTier();
                                 
                                 // GIÁ TRỊ THỤC TẾ
-                                // $tierInfo = $userTierModel->getUserTierInfo($user_id);
-                                // $total_spent = $tierInfo['total_spent'];
-                                // $rank = $tierInfo['rank'];
+                                $tierInfo = $userTierModel->getUserTierInfo($user_id);
+                                $total_spent = $tierInfo['total_spent'];
+                                $rank = $tierInfo['rank'];
                                             // GIÁ TRỊ GIẢ LẬP
-                                            $total_spent = 7000000; 
-                                            if ($total_spent < 1000000) {
-                                                $rank = 'Chưa là thành viên';
-                                            } elseif ($total_spent < 5000000) {
-                                                $rank = 'Đồng';
-                                            } elseif ($total_spent < 9000000) {
-                                                $rank = 'Silver';
-                                            } elseif ($total_spent < 15000000) {
-                                                $rank = 'Platinum';
-                                            } elseif ($total_spent >= 20000000) {
-                                                $rank = 'Diamond';
-                                            } else {
-                                                $rank = 'Platinum';
-                                            }
-                                // $rankColor = '#555';
+                                            // $total_spent = 7000000; 
+                                            // if ($total_spent < 1000000) {
+                                            //     $rank = 'Chưa là thành viên';
+                                            // } elseif ($total_spent < 5000000) {
+                                            //     $rank = 'Đồng';
+                                            // } elseif ($total_spent < 9000000) {
+                                            //     $rank = 'Silver';
+                                            // } elseif ($total_spent < 15000000) {
+                                            //     $rank = 'Platinum';
+                                            // } elseif ($total_spent >= 20000000) {
+                                            //     $rank = 'Diamond';
+                                            // } else {
+                                            //     $rank = 'Platinum';
+                                            // }
                                 foreach ($tiers as $tier) {
                                     if ($tier['name'] === $rank) {
                                         $rankColor = $tier['color'];
@@ -397,9 +396,10 @@ if (isset($_GET['act'])) {
                                 $addresses = $addressModel->getAddressesByUser($user_id);
                                 include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/infor/addresses.php";
                                 break;
-                            // case 'user_tier':
-                            //     include $_SERVER['DOCUMENT_ROOT'] . "";
-                            //     break;
+                            case 'orders':
+                                require_once '../model/orders.php';
+                                include $_SERVER['DOCUMENT_ROOT'] . "";
+                                break;
                             // case 'user_tier':
                             //     include $_SERVER['DOCUMENT_ROOT'] . "";
                             //     break;

@@ -32,11 +32,9 @@ $total_with_shipping = $total + $shipping_cost;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giỏ hàng</title>
     <link rel="stylesheet" href="/WEB_2/public/assets/css/Web.css">
     <link rel="stylesheet" href="/WEB_2/public/assets/css/cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="/WEB_2/public/img/logo_compact.png" type="image/x-icon">
 </head>
 
 <body>
