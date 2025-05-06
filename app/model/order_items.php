@@ -1,7 +1,8 @@
 <?php
 // app/models/OrderItems.php
 
-require_once 'app/core/Database.php';
+require_once 'database.php';
+
 
 class OrderItems {
     private $db;
