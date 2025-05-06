@@ -64,7 +64,7 @@ class Auth {
     public function handleLogout() {
         session_start();
         session_destroy();
-        header("Location: ../view/log/signin.php");
+        header("Location: /WEB_2/");
         exit();
     }
 }

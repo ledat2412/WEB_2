@@ -7,7 +7,7 @@
     <title>Li-Ning</title>
     <link rel="stylesheet" href="/WEB_2/public/assets/css/base.css">
     <link rel="stylesheet" href="/WEB_2/public/assets/css/header.css">
-    <link rel="icon" href="/WEB_2/public/img/logo_compact.png" type="image/x-icon">
+    <link rel="icon" href="/WEB_2/public/assets/img/logo_compact.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="/WEB_2/public/assets/js/header.js"></script>
 </head>
@@ -40,7 +40,7 @@
         </div>
         <!-- Div Center -->
         <div class="header-center">
-            <a href="/WEB_2/Lining"><img class="logo" src="/WEB_2/public/img/logo_compact.png" alt="logo" /></a>
+            <a href="/WEB_2/Lining"><img class="logo" src="/WEB_2/public/assets/img/logo_compact.png" alt="logo" /></a>
             <!-- <a href="/WEB_2/app/controller/main.php?act=home"><img class="logo" src="/WEB_2/public/img/logo_compact.png" alt="logo" /></a> -->
         </div>
         <!-- Div Right -->

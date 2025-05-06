@@ -1,5 +1,8 @@
 <?php
 ob_start();
+include "app/model/database.php";
+include "app/controller/main.php";
+
 if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
     $uri = 'https://';
 } else {

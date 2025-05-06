@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 24, 2025 lúc 06:36 PM
+-- Thời gian đã tạo: Th5 04, 2025 lúc 04:04 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -30,9 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `addresses` (
   `id_address` int(10) UNSIGNED NOT NULL,
   `id_user` int(10) UNSIGNED NOT NULL,
+  `recive_name` varchar(255) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `addresses`
+--
+
+INSERT INTO `addresses` (`id_address`, `id_user`, `recive_name`, `phone`, `address`) VALUES
+(2, 1, 'Lê Nguyễn Đức Đạt', '0335205100', '02 Bến Vân Đồn, Phường 13, Quận 4, Thành phố Hồ Chí Minh');
 
 -- --------------------------------------------------------
 
@@ -200,26 +208,26 @@ INSERT INTO `product` (`id_product`, `product_name`, `shoe_code`, `size`, `pictu
 (12, 'Chitu 6 Pro', 'ARMT014-7V', '7.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V/', 2346545, 100, 2, 1, 1, 1, 2),
 (13, 'Chitu 6 Pro', 'ARMT014-7V', '8', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V/', 2346545, 100, 2, 1, 1, 1, 2),
 (14, 'Chitu 6 Pro', 'ARMT014-7V', '8.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V/', 2346545, 100, 2, 1, 1, 1, 2),
-(15, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '5.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 0, 1, 3),
-(16, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '6', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 0, 1, 3),
-(17, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '6.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 0, 1, 3),
-(18, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '7', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 0, 1, 3),
-(19, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '7.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 0, 1, 3),
-(20, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '8', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 0, 1, 3),
-(21, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '8.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 0, 1, 3),
-(22, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '9', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 0, 1, 3),
-(23, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '9.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 0, 1, 3),
-(24, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '10', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 0, 1, 3),
-(25, 'Chitu 7 Pro', 'ARPU001-6V', '5.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 0, 1, 4),
-(26, 'Chitu 7 Pro', 'ARPU001-6V', '6', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 0, 1, 4),
-(27, 'Chitu 7 Pro', 'ARPU001-6V', '6.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 0, 1, 4),
-(28, 'Chitu 7 Pro', 'ARPU001-6V', '7', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 0, 1, 4),
-(29, 'Chitu 7 Pro', 'ARPU001-6V', '7.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 0, 1, 4),
-(30, 'Chitu 7 Pro', 'ARPU001-6V', '8', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 0, 1, 4),
-(31, 'Chitu 7 Pro', 'ARPU001-6V', '8.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 0, 1, 4),
-(32, 'Chitu 7 Pro', 'ARPU001-6V', '9', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 0, 1, 4),
-(33, 'Chitu 7 Pro', 'ARPU001-6V', '9.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 0, 1, 4),
-(34, 'Chitu 7 Pro', 'ARPU001-6V', '10', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 0, 1, 4);
+(15, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '5.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 2, 1, 3),
+(16, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '6', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 2, 1, 3),
+(17, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '6.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 2, 1, 3),
+(18, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '7', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 2, 1, 3),
+(19, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '7.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 2, 1, 3),
+(20, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '8', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 2, 1, 3),
+(21, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '8.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 2, 1, 3),
+(22, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '9', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 2, 1, 3),
+(23, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '9.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 2, 1, 3),
+(24, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '10', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/', 2346545, 100, 3, 1, 2, 1, 3),
+(25, 'Chitu 7 Pro', 'ARPU001-6V', '5.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 2, 1, 4),
+(26, 'Chitu 7 Pro', 'ARPU001-6V', '6', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 2, 1, 4),
+(27, 'Chitu 7 Pro', 'ARPU001-6V', '6.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 2, 1, 4),
+(28, 'Chitu 7 Pro', 'ARPU001-6V', '7', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 2, 1, 4),
+(29, 'Chitu 7 Pro', 'ARPU001-6V', '7.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 2, 1, 4),
+(30, 'Chitu 7 Pro', 'ARPU001-6V', '8', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 2, 1, 4),
+(31, 'Chitu 7 Pro', 'ARPU001-6V', '8.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 2, 1, 4),
+(32, 'Chitu 7 Pro', 'ARPU001-6V', '9', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 2, 1, 4),
+(33, 'Chitu 7 Pro', 'ARPU001-6V', '9.5', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 2, 1, 4),
+(34, 'Chitu 7 Pro', 'ARPU001-6V', '10', '../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/', 2346545, 100, 4, 2, 2, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -275,7 +283,7 @@ CREATE TABLE `sex` (
 
 INSERT INTO `sex` (`id_sex`, `name`) VALUES
 (1, 'female'),
-(0, 'male');
+(2, 'male\r\n');
 
 -- --------------------------------------------------------
 
@@ -296,7 +304,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_users`, `username`, `email`, `password`, `role`) VALUES
-(1, 'fsd', 'fsf@fasd.com', '1', 0);
+(1, 'fsd', 'fsf@fasd.com', '1', 0),
+(2, 'admin', 'ledat241205@gmail.com', '1', 0);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -415,7 +424,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id_address` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_address` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `cart`
@@ -481,7 +490,7 @@ ALTER TABLE `product_variant`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_users` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_users` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

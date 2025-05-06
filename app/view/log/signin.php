@@ -4,10 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập</title>
     <link rel="stylesheet" href="/WEB_2/public/assets/css/signin.css">
     <link rel="stylesheet" href="/WEB_2/public/assets/css/base.css">
-    <link rel="icon" href="/WEB_2/public/img/logo_compact.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
@@ -71,12 +69,12 @@
             </div>
 
             <?php
-            if(isset($_GET['error'])) {
-                echo "<div class='error-message'>" . $_GET['error'] . "</div>";
-            }
-            if(isset($_GET['success'])) {
-                echo "<div class='success-message'>" . $_GET['success'] . "</div>";
-            }
+            // if(isset($_GET['error'])) {
+            //     echo "<div class='error-message'>" . $_GET['error'] . "</div>";
+            // }
+            // if(isset($_GET['success'])) {
+            //     echo "<div class='success-message'>" . $_GET['success'] . "</div>";
+            // }
             ?>
 
             <p class="login-form-support">Don't have an account? <a href="/WEB_2/app/view/log/signup.php">Register</a></p>

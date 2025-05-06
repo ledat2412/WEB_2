@@ -28,21 +28,21 @@ class Cart {
     }
 
     public function getCartItem($id) {
-        $sql = "SELECT c.*, p.name as product_name, p.price, p.picture_path 
+        $sql = "SELECT c.*, p.product_name, p.price, p.picture_path 
                 FROM cart c 
                 LEFT JOIN product p ON c.id_product = p.id_product 
                 WHERE c.id_cart = ?";
-        $this->db->handle($sql, [$id]);
-        return $this->db->getData($sql);
+        $stmt = $this->db->handle($sql, [$id]);
+        return $this->db->getData($stmt);
     }
 
     public function getCartByUser($id_user) {
-        $sql = "SELECT c.*, p.name as product_name, p.price, p.picture_path 
+        $sql = "SELECT c.*, p.product_name, p.price, p.picture_path 
                 FROM cart c 
                 LEFT JOIN product p ON c.id_product = p.id_product 
                 WHERE c.id_user = ?";
-        $this->db->handle($sql, [$id_user]);
-        return $this->db->getData($sql);
+        $stmt = $this->db->handle($sql, [$id_user]);
+        return $this->db->getData($stmt);
     }
 
     public function updateCartItem($id, $quantity) {
@@ -59,5 +59,11 @@ class Cart {
         $sql = "DELETE FROM cart WHERE id_user = ?";
         return $this->db->handle($sql, [$id_user]);
     }
+
+    public function checkCartItem($id_user, $id_product) {
+        $sql = "SELECT * FROM cart WHERE id_user = ? AND id_product = ?";
+        $stmt = $this->db->handle($sql, [$id_user, $id_product]);
+        return $this->db->getData($stmt);
+    }
 }
-?> 
+?>

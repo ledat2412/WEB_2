@@ -23,11 +23,11 @@ class Users {
     private $db;
 
     // Constructor chỉ nhận username, email, password đi khởi tạo
-    public function __construct($username, $email, $password) {
-        $this->username = $username;
-        $this->email = $email;
-        $this->password = $password;
-        $this->db = new database();  // Kết nối sẽ tự động được tạo qua constructor
+    public function __construct($username = null, $email = null, $password = null) {
+        $this->db = new database();
+        if ($username !== null) $this->username = $username;
+        if ($email !== null) $this->email = $email;
+        if ($password !== null) $this->password = $password;
     }
 
     // Phương thức đăng ký
@@ -144,14 +144,6 @@ class Users {
         return $this->db->getData($sql);
     }
 
-    public function getUserByUsername($username) {
-        $sql = "SELECT u.*, r.role_name FROM users u 
-                LEFT JOIN roles r ON u.role = r.id_role 
-                WHERE u.username = ?";
-        $this->db->handle($sql, [$username]);
-        return $this->db->getData($sql);
-    }
-
     public function getUserByEmail($email) {
         $sql = "SELECT u.*, r.role_name FROM users u 
                 LEFT JOIN roles r ON u.role = r.id_role 
@@ -163,6 +155,13 @@ class Users {
     public function updateUser($id, $username, $email, $password, $role) {
         $sql = "UPDATE users SET username = ?, email = ?, password = ?, role = ? WHERE id_users = ?";
         return $this->db->handle($sql, [$username, $email, $password, $role, $id]);
+    }
+
+    public function getUserByUsername($username) {
+        $sql = "SELECT * FROM users WHERE username = ?";
+        $stmt = $this->db->handle($sql, [$username]);
+        $data = $this->db->getData($stmt);
+        return $data ? $data[0] : null;
     }
 }
 ?>
