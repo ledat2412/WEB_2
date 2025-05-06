@@ -20,3 +20,6 @@ RewriteRule ^profile/?$ app/view/user/profile.php [L,QSA]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/]+)/?$ app/controller/main.php?act=$1 [L,QSA] 
+# Rewrite for other order
+RewriteEngine On
+RewriteRule ^(.*)$ public/index.php?order_id=$1 [QSA,L]

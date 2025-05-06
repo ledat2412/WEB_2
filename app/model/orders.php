@@ -35,7 +35,7 @@ class Orders {
                 LEFT JOIN addresses a ON o.id_address = a.id_address 
                 WHERE o.id_order = ?";
         $this->db->handle($sql, [$id]);
-        return $this->db->getData($sql);
+        return $this->db->getData($sql);  // Trả về dữ liệu chi tiết đơn hàng
     }
 
     public function getOrdersByUser($id_user) {
@@ -44,26 +44,22 @@ class Orders {
                 LEFT JOIN addresses a ON o.id_address = a.id_address 
                 WHERE o.id_user = ?";
         $this->db->handle($sql, [$id_user]);
+        return $this->db->getData($sql);  // Trả về danh sách đơn hàng
+    }
+
+    public function addOrderItem($order_id, $product_id, $quantity, $price) {
+        $sql = "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
+        return $this->db->handle($sql, [$order_id, $product_id, $quantity, $price]);
+    }
+
+    // Lấy chi tiết sản phẩm của đơn hàng
+    public function getOrderItems($order_id) {
+        $sql = "SELECT oi.*, p.product_name 
+                FROM order_items oi
+                LEFT JOIN products p ON oi.product_id = p.id_product
+                WHERE oi.order_id = ?";
+        $this->db->handle($sql, [$order_id]);
         return $this->db->getData($sql);
-    }
-
-    public function getAllOrders() {
-        $sql = "SELECT o.*, u.username, a.address as shipping_address 
-                FROM orders o 
-                LEFT JOIN users u ON o.id_user = u.id_users 
-                LEFT JOIN addresses a ON o.id_address = a.id_address";
-        $this->db->handle($sql);
-        return $this->db->getData($sql);
-    }
-
-    public function updateOrder($id, $id_user, $id_address, $status) {
-        $sql = "UPDATE orders SET id_user = ?, id_address = ?, status = ? WHERE id_order = ?";
-        return $this->db->handle($sql, [$id_user, $id_address, $status, $id]);
-    }
-
-    public function deleteOrder($id) {
-        $sql = "DELETE FROM orders WHERE id_order = ?";
-        return $this->db->handle($sql, [$id]);
     }
 }
 ?> 
