@@ -161,3 +161,5 @@ request to change password by send email for verification
 delete account by request admin in that amount day (in admin that nofication should pop up on first or second)
 
 when typing username i want it immediately check username first and then typing email it will check eventually
+
+thêm phần ẩn sản phẩm vào bên admin 

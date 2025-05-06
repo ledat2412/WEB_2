@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="main-content-infor">
-        <h2>Đơn hàng của bạn</h2>
+        <h2>Thông báo</h2>
         <?php if (isset($orders) && $orders && count($orders) > 0): ?>
             <table class="order-table">
                 <tr>
@@ -35,14 +35,5 @@
     </div>
 
     <script src="/WEB_2/public/assets/js/script.js"></script>
-    <script>
-        function showEditForm(id) {
-            document.getElementById('edit-form-' + id).style.display = 'table-row';
-        }
-
-        function hideEditForm(id) {
-            document.getElementById('edit-form-' + id).style.display = 'none';
-        }
-    </script>
 </body>
 </html>

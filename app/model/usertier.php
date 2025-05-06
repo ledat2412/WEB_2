@@ -3,14 +3,14 @@ require_once '../model/database.php';
 // Định nghĩa các mức hạng để render bảng
 $tiers = [
     [
-        'name' => 'Chưa là thành viên',
+        'name' => 'Not a member',
         'min' => 0,
         'max' => 999999,
         'color' => '#aaa',
         'icon' => 'fa-user-slash',
     ],
     [
-        'name' => 'Đồng',
+        'name' => 'Bronze',
         'min' => 1000000,
         'max' => 4999999,
         'color' => '#b87333',
@@ -58,9 +58,9 @@ class UserTier {
         $total_spent = $result[0]['total_spent'] ?? 0;
 
         if ($total_spent < 1000000) {
-            $rank = 'Chưa là thành viên';
+            $rank = 'Not a member';
         } elseif ($total_spent < 5000000) {
-            $rank = 'Đồng';
+            $rank = 'Bronze';
         } elseif ($total_spent < 9000000) {
             $rank = 'Silver';
         } elseif ($total_spent < 15000000) {

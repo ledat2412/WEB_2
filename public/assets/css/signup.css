@@ -31,6 +31,16 @@
     width: calc(100% - 40px);
 }
 
+.back-button{
+    cursor: pointer;
+    border-bottom: #000 solid 1px;
+    border-radius: 5px;
+    font-size: small;
+    padding-right: 20vw;
+    color: black;
+    text-decoration: none;
+}
+
 .Resister-submit input{
     height: 7vh;
     margin-top: 2vh;

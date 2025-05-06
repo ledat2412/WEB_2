@@ -14,10 +14,12 @@ RewriteRule ^products/([^/]+)/?$ app/controller/main.php?act=products&category=$
 RewriteRule ^login/?$ app/controller/main.php?act=login [L,QSA]
 RewriteRule ^register/?$ app/controller/main.php?act=register [L,QSA]
 RewriteRule ^logout/?$ app/controller/Auth.php?logout=true [L,QSA]
-RewriteRule ^profile/?$ app/controller/main.php?act=inforamtion&skibidiyetyet=user_tier [L,QSA]
-RewriteRule ^address/?$ app/controller/main.php?act=inforamtion&skibidiyetyet=addresses [L,QSA]
+RewriteRule ^profile/?$ app/controller/main.php?act=information&skibidiyetyet=user_tier [L,QSA]
+RewriteRule ^address/?$ app/controller/main.php?act=information&skibidiyetyet=addresses [L,QSA]
+RewriteRule ^order/?$ app/controller/main.php?act=information&skibidiyetyet=order [L,QSA]
+RewriteRule ^notification/?$ app/controller/main.php?act=information&skibidiyetyet=notification [L,QSA]
 
 # Rewrite for other pages
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([^/]+)/?$ app/controller/main.php?act=$1 [L,QSA] 
+RewriteRule ^([^/]+)/?$ app/controller/main.php?act=$1 [L,QSA]

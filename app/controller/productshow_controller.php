@@ -48,4 +48,12 @@ foreach ($products as $item) {
     }
 }
 
+// Đếm số sản phẩm không trùng nhau sau khi filter
+$filtered_unique_shoe_codes = [];
+foreach ($filtered_products as $item) {
+    if (!in_array($item['shoe_code'], $filtered_unique_shoe_codes)) {
+        $filtered_unique_shoe_codes[] = $item['shoe_code'];
+    }
+}
+
 require '../view/product/productshow_view.php';
