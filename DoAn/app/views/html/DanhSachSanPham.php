@@ -8,8 +8,27 @@
     include "../../models/tables/product_variant.php";
 
     $db = new database();
+    $sql = "SELECT 
+            P.product_id, P.product_name, P.picture_path, P.stock, P.price,
+            C.color_name, M.material_name, S.sex_name, V.product_variant_name, D.description_content
+            FROM PRODUCT P
+            JOIN COLORS C ON P.color_id = C.color_id
+            JOIN MATERIALS M ON P.material_id = M.material_id
+            JOIN SEX S ON P.sex_id = S.sex_id
+            JOIN PRODUCT_VARIANT V ON P.product_variant_id = V.product_variant_id
+            JOIN DESCRIPTIONS D ON P.description_id = D.description_id";
 
-    $DataProduct = $db->getData("SELECT * FROM PRODUCT");  
+    $DataProduct = $db->getData($sql);
+
+    if(isset($_POST["button_delete"])) {
+        $id = $_POST["product_id_delete"];
+        $delete_data = $db->handle("DELETE FROM PRODUCT WHERE product_id = '$id'");
+        if ($delete_data) {
+            echo "<script>alert('Xóa sản phẩm thành công!'); window.location.href = 'DanhSachSanPham.php';</script>";
+        } else {
+            echo "<script>alert('Xóa sản phẩm thất bại!');</script>";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +43,7 @@
 </head>
 <body>
     <section id="sidebar">
-        <div id="warning-notify" class="warning-notify-container notify-container">
+        <div id="warning-notify" class="warning-notify-container notify-container" style="display: none">
             <div class="warning-content">
                 <div class="warning-header">
                     <span>
@@ -36,18 +55,17 @@
                     <span>
                         <h3 style="font-weight: 400; font-size: 20px;">Bạn chắc chắn muốn xóa sản phẩm này?</h3>
                     </span>
-                    <a href="#">
-                        <button class="warning-btn">Có</button>
-                    </a>
-                    <a href="#">
-                        <button class="warning-btn">Không</button>
-                    </a>
+                    <form action="" method="POST">
+                        <input type="hidden" name="product_id_delete" id="product_id_delete">
+                        <button class="warning-btn" type="submit" name="button_delete">Có</button>
+                    </form>
+                    <button type="button" class="warning-btn" onclick="closeDeletePopup()">Không</button>
                 </div>
             </div>
         </div>
         <a href="#" class="logo">
             <i class="fa-solid fa-cloud"></i>
-            <span class="text">Lining</span>
+           <span class="text">Lining</span>
         </a>
         <ul class="side-menu top">
             <li class="active">
@@ -138,6 +156,7 @@
                             <th>STT</th>
                             <th>Hình ảnh</th>
                             <th>Tên sản phẩm</th>
+                            <th>Loại sản phẩm</th>
                             <th>Giá bán</th>
                             <th>Số lượng</th>
                             <th>Màu sắc</th>
@@ -152,20 +171,21 @@
                         if (!empty($DataProduct)) {
                             foreach ($DataProduct as $product) {
                                 echo '<tr>';
-                                echo '<td>' . $_POST["product_id"]. '</td>';
+                                echo '<td>' . $product["product_id"]. '</td>';
                                 echo '<td><img src="' . $product["picture_path"] . '" alt="Hình ảnh" style="width: 70px; height: 70px;"></td>';
                                 echo '<td>' . $product["product_name"] . '</td>';
-                                echo '<td>' . number_format($product["price"], 0, ',', '.') . ' VND</td>';
+                                echo '<td>' . $product["product_variant_name"] . '</td>';
+                                echo '<td>' . $product["price"] . '</td>';
                                 echo '<td>' . $product["stock"] . '</td>';
-                                echo '<td>' . $product["color_id"] . '</td>'; // Thay bằng tên màu nếu có
-                                echo '<td>' . $product["material_id"] . '</td>'; // Thay bằng tên vật liệu nếu có
-                                echo '<td>' . $product["sex_id"] . '</td>'; // Thay bằng giới tính nếu có
-                                echo '<td>' . $product["description_id"] . '</td>'; // Thay bằng mô tả nếu có
+                                echo '<td>' . $product["color_name"] . '</td>'; 
+                                echo '<td>' . $product["material_name"] . '</td>'; 
+                                echo '<td>' . $product["sex_name"] . '</td>'; 
+                                echo '<td> <textarea style="height: 7vh; width: 12vw; resize: none">' . $product["description_content"] . '</textarea></td>'; 
                                 echo '<td>
-                                        <a href="../../views/html/SuaSanPham.php?product_id=' . $product["product_id"] . '">
+                                        <a href="../../views/html/SuaSanPham.php?product_id=' . urlencode($product["product_id"]) . '">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
-                                        <a href="#warning-notify" onclick="deleteProduct(' . $product["product_id"] . ')">
+                                        <a href="#warning-notify" onclick="deleteProduct(' . json_encode($product["product_id"]) . ')">
                                             <i class="fa-solid fa-xmark"></i>
                                         </a>
                                     </td>';
@@ -181,5 +201,14 @@
     <script src ="../../../public/js/admin.js"></script>
     <script src ="../../../public/js/chart-bar.js"></script>
     <script src="../../../public/js/Click.js"></script>
+    <script>
+        function deleteProduct(id) {
+            document.getElementById('product_id_delete').value = id;
+            document.getElementById('warning-notify').style.display = 'block';
+        }
+        function closeDeletePopup() {
+            document.getElementById('warning-notify').style.display = 'none';
+        }
+    </script>
 </body>
 </html>

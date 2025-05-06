@@ -171,15 +171,15 @@
                                     <span class="color-circle" style="background-color: red;"></span>
                                 </label>
                                 <label class="color-option">
-                                    <input type="radio" name="color" value="red">
+                                    <input type="radio" name="color" value="blue">
                                     <span class="color-circle" style="background-color: blue;"></span>
                                 </label>
                                 <label class="color-option">
-                                    <input type="radio" name="color" value="red">
+                                    <input type="radio" name="color" value="yellow">
                                     <span class="color-circle" style="background-color: yellow;"></span>
                                 </label>
                                 <label class="color-option">
-                                    <input type="radio" name="color" value="red">
+                                    <input type="radio" name="color" value="pink">
                                     <span class="color-circle" style="background-color: pink;"></span>
                                 </label> 
                             </div>

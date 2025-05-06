@@ -933,18 +933,20 @@ body {
 }
 
 /* ============Xoa============= */
+/* #warning-notify {
+    display: none;
+} */
 .warning-notify-container{
-    position: fixed;
-    display: none;    
+    position: fixed;   
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 999;
     background-color: rgba(0,0,0,0.5);
 }
 
-.warning-notify-container:target{
+/* .warning-notify-container:target{
     display: block;
-}
+} */
 
 #warning-notify .warning-content {
     display: flex;
@@ -1697,8 +1699,8 @@ body {
 
 #content main .repair .repair-content {
     background-color: var(--sidebar-color);
-    width: 400px;
-    height: 460px;
+    width: 50vw;
+    height: 86vh;
     border: 2px solid black;
     border-radius: 20px;
 }
@@ -1739,11 +1741,13 @@ body {
     font-weight: 600;
 }
 
+#content main .repair .repair-content .repair-infor > input {
+    border-bottom: 1px solid black;
+}
 #content main .repair .repair-content input {
     width: 100%;
     height: 25px;
     border: none;
-    border-bottom: 1px solid black;
     outline: none;
 }
 
@@ -1767,9 +1771,12 @@ body {
     border: 2px solid red;
 }
 
-#content main .repair .repair-content .enter-repair button {
+#content main .repair .repair-content .repair-submit > input {
     border: 2px solid green;
     cursor: pointer;
+    width: 100px;
+    height: 30px;
+    background-color: var(--sidebar-color);
 }
 
 
