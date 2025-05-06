@@ -163,11 +163,11 @@
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  padding: 0;
+  padding-top: 14.5px;
   box-sizing: border-box;
   display: flex;
   align-items: flex-start; /* căn trên */
-  margin-top: 29px;
+  /* margin-top: 9px; */
 }
 
 /* Tùy chỉnh scrollbar cho trình duyệt WebKit (Chrome, Edge, Safari) */

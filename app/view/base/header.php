@@ -91,56 +91,6 @@
                 }
                 ?>
             </div>
-
-            <!-- <div class="filter-icon" id="non-filter">
-                    <button class="dropdown-filter"><i class="fa-solid fa-filter"></i></button>
-                    <div class="filter-container">
-                        <div class="filter-header">Bộ lọc tìm kiếm</div>
-
-                        <div class="filter-section">
-                            <h3>Theo Danh Mục</h3>
-                            <div class="filter-options">
-                                <div class="filter-option">Giày Chạy Bộ</div>
-                                <div class="filter-option">Giày Bóng Rổ </div>
-                                <div class="filter-option">Giày Thời Trang</div>
-                                <div class="filter-option">Thời Cầu Lông </div>
-                            </div>
-                        </div>
-
-                        <div class="filter-section">
-                            <h3>Nơi Bán</h3>
-                            <div class="filter-options">
-                                <div class="filter-option">TP. Hồ Chí Minh</div>
-                                <div class="filter-option">Hà Nội</div>
-                                <div class="filter-option">Đà Nẵng</div>
-                                <div class="filter-option">Quận 1</div>
-                                <div class="filter-option">Quận 3</div>
-                            </div>
-                        </div>
-
-                        <div class="filter-section">
-                            <h3>Đơn Vị Vận Chuyển</h3>
-                            <div class="filter-options">
-                                <div class="filter-option">Hỏa Tốc</div>
-                                <div class="filter-option">Nhanh</div>
-                                <div class="filter-option">Tiết Kiệm</div>
-                            </div>
-                        </div>
-
-                        <div class="filter-section">
-                            <h3>Khoảng giá</h3>
-                            <div class="filter-options">
-                                <div class="filter-option">Dưới 1 triệu</div>
-                                <div class="filter-option">Trên 1 triệu</div>
-                            </div>
-                        </div>
-
-                        <div class="button-container">
-                            <button class="button reset-button">Thiết lập lại</button>
-                            <button class="button apply-button">Áp dụng</button>
-                        </div>
-                    </div>
-                </div> -->
         </div>
         <!-- Icon Menu for responsive -->
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -148,8 +98,8 @@
     <!-- Product Menu (PC Only) -->
     <nav class="product-menu">
         <ul>
-            <li><a href="/WEB_2/products/giaybongro">Giày bóng rổ</a></li>
             <li><a href="/WEB_2/products/giaychaybo">Giày chạy bộ</a></li>
+            <li><a href="/WEB_2/products/giaybongro">Giày bóng rổ</a></li>
             <li><a href="/WEB_2/products/giaythoitrang">Giày thời trang</a></li>
             <li><a href="/WEB_2/products/giaycaulong">Giày cầu lông</a></li>
         </ul>

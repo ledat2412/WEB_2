@@ -121,7 +121,7 @@
     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
         <h1 class="product-extend">see more <i class="fa-solid fa-chevron-right"></i></h1>
     </a>
-    <h1 class="product-heading" id="product-heading-2">Sản Phẩm giảm giá</h1>
+    <!-- <h1 class="product-heading" id="product-heading-2">Sản Phẩm giảm giá</h1>
     <ul class="product-list">
         <li>
             <div class="product-img">
@@ -246,7 +246,7 @@
     </ul>
     <a href="">
         <h1 class="product-extend">see more <i class="fa-solid fa-chevron-right"></i></h1>
-    </a>
+    </a> -->
     <h1 class="product-heading" id="product-heading-3">Sản Phẩm Phổ Thông</h1>
     <ul class="product-list">
         <li>

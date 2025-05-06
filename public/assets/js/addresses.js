@@ -1,30 +1,51 @@
 let editingId = null;
 
 function editRow(id) {
-    // Nếu đang chỉnh sửa dòng khác thì bỏ chỉnh sửa dòng đó
     if (editingId !== null) {
         cancelEdit(editingId);
     }
     editingId = id;
     const row = document.getElementById('row-' + id);
-    // Lấy dữ liệu hiện tại
+    if (!row) return;
+
     const cells = row.querySelectorAll('.display-cell');
+    if (cells.length < 3) return;
+
     const name = cells[0].innerText.trim();
     const address = cells[1].innerText.trim();
     const phone = cells[2].innerText.trim();
-    // Tạo form inline
+
+    // Thay từng cell bằng input, giữ layout bảng
     row.innerHTML = `
-        <form action="/WEB_2/app/controller/addresses.php" method="post" style="display:contents;">
-            <input type="hidden" name="id_address" value="${id}">
-            <td><input type="text" name="recive_name" value="${name}" required style="width:100%;height:79px;"></td>
-            <td><input type="text" name="address" value="${address}" required style="width:100%;height:79px;"></td>
-            <td><input type="text" name="phone" value="${phone}" required style="width:100%;height:79px;"></td>
-            <td>
-                <button class="edit-address-btn" type="submit" name="update_Address" value="update_Address">Cập nhật</button>
+        <td>
+            <input type="text" name="recive_name" value="${name}" required style="width: 100%; height:50px; box-sizing: border-box;">
+        </td>
+        <td>
+            <input type="text" name="address" value="${address}" required style="width: 100%; height:50px; box-sizing: border-box;">
+        </td>
+        <td>
+            <input type="text" name="phone" value="${phone}" required style="width: 100%; height:50px; box-sizing: border-box;">
+        </td>
+        <td>
+            <form action="/WEB_2/app/controller/addresses.php" method="post" class="address-form" style="display:inline;">
+                <input type="hidden" name="id_address" value="${id}">
+                <input type="hidden" name="recive_name" value="${name}">
+                <input type="hidden" name="address" value="${address}">
+                <input type="hidden" name="phone" value="${phone}">
+                <button class="edit-address-btn" type="submit" name="update_Address" value="update_Address" style="margin-right:5px;">Cập nhật</button>
                 <button class="delete-address-btn" type="button" onclick="cancelEdit(${id})">Hủy</button>
-            </td>
-        </form>
+            </form>
+        </td>
     `;
+
+    // Lấy input thực tế để đồng bộ value khi submit
+    const inputs = row.querySelectorAll('input[type="text"]');
+    const hiddenInputs = row.querySelectorAll('input[type="hidden"]:not([name="id_address"])');
+    inputs.forEach((input, idx) => {
+        input.addEventListener('input', function () {
+            hiddenInputs[idx].value = input.value;
+        });
+    });
 }
 
 function cancelEdit(id) {

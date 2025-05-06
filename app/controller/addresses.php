@@ -47,9 +47,6 @@ class AddressesController {
     }
 
     public function handleUpdateAddress() {
-        if (!isset($addresses)) {
-            $addresses = [];
-        }
         if (isset($_POST['update_Address'])) {
             $username = $_SESSION['username'] ?? null;
             if (!$username) {
@@ -70,10 +67,13 @@ class AddressesController {
             $address = $_POST['address'] ?? '';
             $phone = $_POST['phone'] ?? '';
 
+            // Kiểm tra dữ liệu đầu vào
             if (!$id_address || !$recive_name || !$address || !$phone) {
                 die('Lỗi: Thiếu dữ liệu cập nhật');
             }
 
+            // Gọi đúng thứ tự tham số cho updateAddress
+            // Đảm bảo phương thức updateAddress($id_address, $id_user, $recive_name, $phone, $address)
             $result = $this->addressesModel->updateAddress($id_address, $id_user, $recive_name, $phone, $address);
             if ($result) {
                 header('Location: /WEB_2/address');

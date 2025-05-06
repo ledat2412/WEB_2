@@ -5,10 +5,10 @@ RewriteBase /WEB_2/
 RewriteRule ^/?$ app/controller/main.php?act=home [L,QSA]
 RewriteRule ^Lining/?$ app/controller/main.php?act=home [L,QSA]
 
-# Rewrite for products
+# Rewrite for products (truyền variant)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^products/([^/]+)/?$ app/controller/main.php?act=products&category=$1 [L,QSA]
+RewriteRule ^products/([^/]+)/?$ app/controller/main.php?act=products&variant=$1 [L,QSA]
 
 # Rewrite for authentication
 RewriteRule ^login/?$ app/controller/main.php?act=login [L,QSA]
@@ -23,3 +23,4 @@ RewriteRule ^notification/?$ app/controller/main.php?act=information&skibidiyety
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/]+)/?$ app/controller/main.php?act=$1 [L,QSA]
+
