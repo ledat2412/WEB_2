@@ -45,19 +45,157 @@
         </div>
         <!-- Div Right -->
         <div class="header-right">
-            <form action="/web/product-web/giaychaybouser.html" class="search-box">
-                <input type="text" placeholder="Tìm kiếm" class="search-text" list="suggestions">
-                <datalist id="suggestions">
-                    <option value="Giày thể thao Li-Ning" data-url="/web/product-web/giaychaybouser.html">Giày thể thao Li-Ning</option>
-                    <option value="Áo thun thể thao" data-url="/web/product-web/giaychaybouser.html">áo</option>
-                    <option value="Quần shorts tập gym" data-url="/web/product-web/giaychaybouser.html">quần</option>
-                    <option value="Áo khoác gió" data-url="/web/product-web/giaychaybouser.html">áo</option>
-                    <option value="Balo thể thao" data-url="/web/product-web/giaychaybouser.html">balo</option>
-                    <option value="Tất thể thao Li-Ning" data-url="/web/product-web/giaychaybouser.html">tất</option>
-                </datalist>
-                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </form>
-
+            <!-- Tìm kiếm nâng cao sản phẩm -->
+            <?php
+            require_once $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/model/product.php";
+            $productModel = new Product();
+            $allProducts = $productModel->getAllProducts();
+            // Lọc sản phẩm không trùng nhau theo product_name và shoe_code
+            $uniqueProducts = [];
+            $seen = [];
+            foreach ($allProducts as $product) {
+                $key = $product['product_name'] . '|' . $product['shoe_code'];
+                if (!isset($seen[$key])) {
+                    $uniqueProducts[] = $product;
+                    $seen[$key] = true;
+                }
+            }
+            $products = $uniqueProducts;
+            ?>
+            <div class="search-box" style="position:relative;">
+                <input 
+                    type="text" 
+                    id="product-search-input" 
+                    class="search-text"
+                    placeholder="Tìm kiếm......" 
+                    autocomplete="off"
+                    oninput="showProductSuggestions(this.value)"
+                >
+                <button class="search-btn" type="button" onclick="searchProductByInput()">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <ul id="product-suggestions" class="suggestion-list" style="display:none;"></ul>
+            </div>
+            <style>
+            .suggestion-list {
+                display: none;
+                position: absolute;
+                z-index: 1000;
+                background: #fff;
+                width: 100%;
+                border: 1px solid #ccc;
+                max-height: 220px;
+                overflow-y: auto;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                top: 100%;
+                left: 0;
+            }
+            .suggestion-list li {
+                padding: 8px 12px;
+                border-bottom: 1px solid #eee;
+                cursor: pointer;
+                background: #fff;
+            }
+            .suggestion-list li:last-child {
+                border-bottom: none;
+            }
+            .suggestion-list li:hover {
+                background: #f5f5f5;
+                color: #ec2a2a;
+            }
+            .suggestion-list strong {
+                color: #333;
+            }
+            .suggestion-list .code {
+                color: #888;
+                font-size: 90%;
+                margin-left: 8px;
+            }
+            /* Hiệu ứng ẩn/hiện input */
+            .search-box .search-text {
+                width: 0;
+                padding: 0;
+                opacity: 0;
+                pointer-events: none;
+                border: none;
+                background: var(--header-color);
+                transition: all 0.25s;
+            }
+            .search-box:hover .search-text,
+            .search-box:focus-within .search-text,
+            .search-text:focus {
+                width: 240px;
+                padding: 10px 20px;
+                opacity: 1;
+                pointer-events: auto;
+                border-radius: 30px;
+                background: var(--search-color);
+                border: none;
+            }
+            .search-box .search-btn {
+                z-index: 2;
+                background: var(--header-color);
+                border-radius: 30px;
+                transition: background 0.25s;
+            }
+            .search-box:hover .search-btn,
+            .search-box:focus-within .search-btn {
+                background: var(--search-color);
+            }
+            </style>
+            <script>
+                const products = [
+                    <?php
+                    $arr = [];
+                    foreach($products as $product) {
+                        $arr[] = '{id: "' . addslashes($product['id_product']) . '", name: "' . addslashes(htmlspecialchars($product['product_name'], ENT_QUOTES)) . '", code: "' . addslashes(htmlspecialchars($product['shoe_code'], ENT_QUOTES)) . '"}';
+                    }
+                    echo implode(',', $arr);
+                    ?>
+                ];
+                function showProductSuggestions(query) {
+                    const suggestionBox = document.getElementById('product-suggestions');
+                    suggestionBox.innerHTML = '';
+                    if (!query.trim()) {
+                        suggestionBox.style.display = 'none';
+                        return;
+                    }
+                    const q = query.toLowerCase();
+                    const matches = products.filter(p => 
+                        (p.name + ' ' + p.code).toLowerCase().includes(q)
+                    );
+                    if (matches.length === 0) {
+                        suggestionBox.style.display = 'none';
+                        return;
+                    }
+                    matches.forEach(p => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<strong>${p.name}</strong> <span class="code">(${p.code})</span>`;
+                        li.onclick = () => {
+                            window.location.href = `/WEB_2/app/controller/main.php?act=products&action=product_detail&id=${encodeURIComponent(p.id)}`;
+                        };
+                        suggestionBox.appendChild(li);
+                    });
+                    suggestionBox.style.display = 'block';
+                }
+                function searchProductByInput() {
+                    const val = document.getElementById('product-search-input').value.trim().toLowerCase();
+                    if (!val) return;
+                    const found = products.find(p => (p.name + ' ' + p.code).toLowerCase() === val);
+                    if (found) {
+                        window.location.href = `/WEB_2/app/controller/main.php?act=products&action=product_detail&id=${encodeURIComponent(found.id)}`;
+                    } else {
+                        showProductSuggestions(val);
+                    }
+                }
+                document.addEventListener('click', function(e) {
+                    if (!document.getElementById('product-search-input').contains(e.target)) {
+                        document.getElementById('product-suggestions').style.display = 'none';
+                    }
+                });
+            </script>
             <div class="user-icon" id="non-log">
                 <button class="dropdown-btn"><i class="fa-regular fa-user"></i></button>
                 <div class="dropdown-content">
@@ -110,7 +248,7 @@
     <div class="responsive-menu" id="responsiveMenu">
         <ul>
             <!-- Mục tìm kiếm -->
-            <li>
+            <!-- <li>
                 <div class="search-wrapper">
                     <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm..." onkeyup="searchMenu()" onkeydown="handleEnter(event)" list="suggestions">
                     <datalist id="suggestions">
@@ -122,7 +260,7 @@
                         <option value="Tất thể thao Li-Ning" data-url="/web/product-web/giaychaybouser.html">Tất thể thao Li-Ning</option>
                     </datalist>
                 </div>
-            </li>
+            </li> -->
             <!-- Các mục menu khác -->
             <li onclick="toggleSubMenu1()">Tài khoản</li>
             <ul class="sub-menu" id="subMenu1">
@@ -143,8 +281,8 @@
 
             <li onclick="toggleSubMenu2()">Sản phẩm</li>
             <ul class="sub-menu" id="subMenu2">
-                <li><a href="/WEB_2/products/giaybongro">Giày bóng rổ</a></li>
                 <li><a href="/WEB_2/products/giaychaybo">Giày chạy bộ</a></li>
+                <li><a href="/WEB_2/products/giaybongro">Giày bóng rổ</a></li>
                 <li><a href="/WEB_2/products/giaythoitrang">Giày thời trang</a></li>
                 <li><a href="/WEB_2/products/giaycaulong">Giày cầu lông</a></li>
             </ul>

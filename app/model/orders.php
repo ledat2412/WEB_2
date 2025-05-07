@@ -9,11 +9,10 @@ $db = new database();
 $table_orders = $db->handle("CREATE TABLE IF NOT EXISTS orders (
     id_order INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_user INT(11) UNSIGNED NOT NULL,
-    id_address INT UNSIGNED NOT NULL,
+    id_address INT(11) UNSIGNED NOT NULL,
     status ENUM('pending', 'processing', 'completed', 'cancelled') NOT NULL DEFAULT 'pending',
-    address INT(11) UNSIGNED NOT NULL,
     FOREIGN KEY (id_user) REFERENCES users(id_users),
-    FOREIGN KEY (address) REFERENCES addresses(id_address)
+    FOREIGN KEY (id_address) REFERENCES addresses(id_address)
 )");
 
 class Orders {
