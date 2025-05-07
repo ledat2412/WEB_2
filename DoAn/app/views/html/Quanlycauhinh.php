@@ -132,71 +132,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="tr-row">
-                        <td data-label="STT">1</td>
-                        <td data-label="Họ và tên">Tôn Quyền</td>
-                        <td data-label="Số điện thoại">0787554657</td>
-                        <td data-label="Địa chỉ">27C, Phạm Vấn, P.Phú Thọ Hòa, Q.Tân Phú</td>
-                        <td data-label="Trạng thái">
-                            <i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>
-                        </td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i></td>
-                            </a>
-                    </tr>
-                    <tr class="tr-row">
-                        <td data-label="STT">2</td>
-                        <td data-label="Họ và tên">Lý Minh Huy</td>
-                        <td data-label="Số điện thoại">0787554657</td>
-                        <td data-label="Địa chỉ">27C, Phạm Vấn, P.Phú Thọ Hòa, Q.Tân Phú</td>
-                        <td data-label="Trạng thái">
-                            <i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>
-                        </td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i></td>
-                            </a>
-                    </tr>
-                    <tr class="tr-row">
-                        <td data-label="STT">3</td>
-                        <td data-label="Họ và tên">Võ Thị Thương</td>
-                        <td data-label="Số điện thoại">0787554657</td>
-                        <td data-label="Địa chỉ">793/49/3 Trịnh Xuân Soạn, Q.7</td>
-                        <td data-label="Trạng thái">
-                            <i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>
-                        </td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i></td>
-                            </a>
-                    </tr>
-                    <tr class="tr-row">
-                        <td data-label="STT">4</td>
-                        <td data-label="Họ và tên">Trần Ngọc Phương Nhi</td>
-                        <td data-label="Số điện thoại">0787554657</td>
-                        <td data-label="Địa chỉ">27C, Phạm Vấn, P.Phú Thọ Hòa, Q.Tân Phú</td>
-                        <td data-label="Trạng thái">
-                            <i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>
-                        </td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i></td>
-                            </a>
-                    </tr>
-                    <tr class="tr-row">
-                        <td data-label="STT">5</td>
-                        <td data-label="Họ và tên">Lê Nguyễn Đức Đạt</td>
-                        <td data-label="Số điện thoại">0787554657</td>
-                        <td data-label="Địa chỉ">27C, Phạm Vấn, P.Phú Thọ Hòa, Q.Tân Phú</td>
-                        <td data-label="Trạng thái">
-                            <i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>
-                        </td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i></td>
-                            </a>
-                    </tr>
+                <?php
+                        include_once "../../models/tables/database.php";
+
+                        $db = new database();
+
+                        $result = $db ->getData("SELECT * FROM user u JOIN roles r ON u.role = r.id_role");
+                        if(!empty($result)){
+                            foreach($result as $data){
+                        
+                    ?>
+                        <tr class="tr-row">
+                            <td data-label="STT"><?php echo $data['id_users'] ?></td>
+                            <td data-label="Tên đăng nhập"><?php echo $data['username'] ?></td>
+                            <td data-label="Email"><?php echo $data['email'] ?></td>
+                            <td data-label="Mật khẩu"><?php echo $data['password'] ?></td>
+                            <td data-label="Vai trò"><?php echo $data['role_name'] ?></td>
+                            <td data-label="Trạng thái">
+                                <i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>
+                            </td>
+                            <td data-label="Tác vụ">
+                                <a href = "XoaUser.php?get_id = <?php echo $data['id_users'] ?>" onclick="openPopup()">
+                                    <i class="fa-regular fa-x"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php  }} 
+                            ?>
                 </tbody>
             </table>
         </main>
