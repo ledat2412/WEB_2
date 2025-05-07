@@ -28,7 +28,7 @@ INSERT INTO `product` (`id_product`, `product_name`, `shoe_code`, `size`, `pictu
 (22, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '9', '', ' 2346545', 100, 3, 1, 0, 1, 3),
 (23, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '9.5', '', ' 2346545', 100, 3, 1, 0, 1, 3),
 (24, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '10', '', ' 2346545', 100, 3, 1, 0, 1, 3);
-../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/
+../../../public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS073-7/
 
 INSERT INTO `product` (`id_product`, `product_name`, `shoe_code`, `size`, `picture_path`, `price`, `stock`, `color_id`, `material_id`, `sex_id`, `id_product_variant`, `description_id`) values 
 (25, 'Chitu 7 Pro', 'ARPU001-6V', '5.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
@@ -42,7 +42,7 @@ INSERT INTO `product` (`id_product`, `product_name`, `shoe_code`, `size`, `pictu
 (33, 'Chitu 7 Pro', 'ARPU001-6V', '9.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
 (34, 'Chitu 7 Pro', 'ARPU001-6V', '10', '', ' 2346545', 100, 4, 2, 0, 1, 4);
 
-../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/
+../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Lie Jun 6th nam ARZS003-13/
 INSERT INTO `descriptions` (`id_description`, `content`) VALUES
 (1, 'Công nghệ
 Công nghệ LI-NING BOOM là vật liệu đế giữa kiểu mới do Li-Ning tự khai thác phát triển, được điều chế bằng quy trình tạo bọt lỏng siêu giới hạn, so với chất liệu truyền thống thì chất liệu này giảm được đáng kể trọng lượng đế giữa, không chỉ giúp tính năng đàn hồi được phát huy rõ rệt, mà còn kéo dài được tuổi thọ sử dụng, tăng cường thêm tính năng của sản phẩm. Thông qua các điều chỉnh sát với mục tiêu tính năng và chi tiết hơn, để phù với tính chất cạnh tranh của các môn thể thao khác nhau như chạy, bóng rổ, cầu lông, bóng bàn, v.v….nâng cao hiệu suất tốt cho các vận động viên với các mục mục đích sử dụng khác nhau.

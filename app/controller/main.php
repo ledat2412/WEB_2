@@ -119,7 +119,7 @@ if (isset($_GET['act'])) {
         case 'products':
             // Xử lý variant dạng chuỗi (giaychaybo, giaybongro, ...)
             $variant = isset($_GET['variant']) ? $_GET['variant'] : null;
-            if ($variant) {
+            if ($variant !== null) {
                 // Map tên variant sang id nếu cần, ví dụ:
                 $variant_map = [
                     'giaychaybo' => 1,
@@ -127,9 +127,11 @@ if (isset($_GET['act'])) {
                     'giaythoitrang' => 3,
                     'giaycaulong' => 4
                 ];
-                $variant_id = isset($variant_map[$variant]) ? $variant_map[$variant] : null;
-                if ($variant_id) {
-                    $_GET['variant'] = $variant_id;
+                // Nếu là đường dẫn "tatcasanpham" thì xóa biến variant để show tất cả
+                if ($variant === 'tatcasanpham') {
+                    unset($_GET['variant']);
+                } elseif (isset($variant_map[$variant])) {
+                    $_GET['variant'] = $variant_map[$variant];
                 }
             }
             if (isset($_GET['action'])) {
@@ -138,35 +140,35 @@ if (isset($_GET['act'])) {
                     // case 'product_list':
                     case 'product_list':
                         require_once __DIR__ . '/productlist_controller.php';
-                        if (isset($_GET['category'])) {
-                            switch ($_GET['category']) {
-                                case 'giaychaybo':
-                                    include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/controller/productshow_controller.php?variant=1";
-                                    break;
-                                case 'giaybongro':
-                                    include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/product/giaybongro.php";
-                                    break;
-                                case 'giaythoitrang':
-                                    include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/product/giaythoitrang.php";
-                                    break;
-                                case 'giaycaulong':
-                                    include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/product/giaycaulong.php";
-                                    break;
-                                default:
-                                    // Trang hiển thị tất cả sản phẩm
-                                    include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/controller/CartController.php";
-                                    break;
-                            }
-                        } else {
-                            // Nếu không có category, hiển thị tất cả sản phẩm
-                            include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/product/all-products.php";
-                        }
+                        // if (isset($_GET['category'])) {
+                        //     switch ($_GET['category'])) {
+                        //         case 'giaychaybo':
+                        //             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/controller/productshow_controller.php?variant=1";
+                        //             break;
+                        //         case 'giaybongro':
+                        //             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/product/giaybongro.php";
+                        //             break;
+                        //         case 'giaythoitrang':
+                        //             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/product/giaythoitrang.php";
+                        //             break;
+                        //         case 'giaycaulong':
+                        //             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/product/giaycaulong.php";
+                        //             break;
+                        //         default:
+                        //             // Trang hiển thị tất cả sản phẩm
+                        //             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/controller/CartController.php";
+                        //             break;
+                        //     }
+                        // } else {
+                        //     // Nếu không có category, hiển thị tất cả sản phẩm
+                        //     include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/product/all-products.php";
+                        // }
+                        // break;
+                    case 'product_detail':
+                        require_once __DIR__ . '/productdetail_controller.php';
                         break;
                     default:
                         require_once __DIR__ . '/productshow_controller.php';
-                        break;
-                    case 'product_detail':
-                        require_once __DIR__ . '/productdetail_controller.php';
                         break;
                 }
             } else {
