@@ -204,8 +204,8 @@
                             <textarea style="width: 770px; resize: none; height: 60px;" name="product_description"></textarea>
                         </div>
                         <div class="add-submit-new">
-                            <a href="#" class="return-new">
-                                <button>Thoát</button>
+                            <a href="DanhSachSanPham.php" class="return-new">
+                                Thoát
                             </a>
                             <div class="enter-add-new">
                                 <input type="submit" name="btn" value="Thêm sản phẩm">

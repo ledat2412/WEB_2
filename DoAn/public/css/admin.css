@@ -1720,7 +1720,7 @@ body {
 }
 
 #content main .repair .repair-content .repair-data .repair-infor {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
 
 #content main .repair .repair-content .image {
@@ -1758,15 +1758,20 @@ body {
     height: 50px;
 }
 
-#content main .repair .repair-content button {
+#content main .repair .repair-content a {
     width: 100px;
-    height: 30px;
+    height: 27px;
     background-color: var(--sidebar-color);
     outline: none;
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    color: black
 }
 
-#content main .repair .repair-content .return button {
+#content main .repair .repair-content .return  {
     border: 2px solid red;
 }
 
@@ -2008,8 +2013,15 @@ body {
     border: none;
 }
 
-#content main .add-new .add-product-new .return-new button {
+#content main .add-new .add-product-new .return-new  {
     border: 2px solid red;
+    cursor: pointer;
+    height: 27px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
 }
 
 #content main .add-new .add-product-new .enter-add-new input {

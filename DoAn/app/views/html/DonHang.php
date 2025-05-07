@@ -18,7 +18,12 @@
             JOIN addresses A ON A.id_address = O.address";
     $order_product = $db->getData($sql);
 
-
+    if (isset($_POST['update_status'])) {
+        $id_order = $_POST['order_id'];
+        $status_name = $_POST['status'];
+        $updateStatus = "UPDATE orders SET status = '$status_name' WHERE id_order = '$id_order'";
+        $db->handle ($updateStatus);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -224,9 +229,22 @@
                                 echo '<td data-label="Địa chỉ">' .  $order['address'] .'</td>';
                                 echo '<td class="delivery" data-label="Trạng thái"><span>' . $order['status']. '</span></td>';
                                 echo '<td data-label="Tác vụ">
-                                        <a href="#warning-notify">
-                                            <i class="fa-regular fa-x"></i>
-                                        </a>
+                                        <div class="dropdown" style="position: relative; display: inline-block;">
+                                            <i class="fa-solid fa-pen-to-square" onclick="toggleDropdown(this)" style="cursor: pointer;" title="Cập nhật trạng thái"></i>
+                                            <div class="dropdown-menu" style="display: none; position: absolute; top: 25px; left: -130px; background: white; border: 1px solid #ccc; padding: 5px; z-index: 1000; border-radius: 4px;">
+                                                <form action="" method="post">
+                                                    <input type="hidden" name="order_id" value="' . $order['id_order'] . '">
+                                                    <select name="status" style="padding: 5px; width: 150px;">
+                                                        <option disabled selected>-- Chọn trạng thái --</option>
+                                                        <option value="ordered">ordered</option>
+                                                        <option value="packed">packed</option>
+                                                        <option value="shipping">shipping</option>
+                                                        <option value="finish">finish</option>
+                                                    </select>
+                                                    <button type="submit" name="update_status">Cập nhật</button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </td>';
                                 echo '</tr>';
                             }
@@ -235,6 +253,24 @@
                 </tbody>
         </main>
     </section>
+    <script>
+        function toggleDropdown(icon) {
+            const menu = icon.nextElementSibling;
+            const allMenus = document.querySelectorAll('.dropdown-menu');
+            allMenus.forEach(m => {
+            if (m !== menu) m.style.display = 'none';
+            });
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        }
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+            }
+        });
+</script>
+
     <script src ="/admin/js/admin.js"></script>
     <script src ="/admin/js/chart-bar.js"></script>
     <script src ="../../../public/js/LocDonHang.js"></script>

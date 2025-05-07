@@ -11,7 +11,7 @@
 
     if (isset($_GET['product_id']) && !empty($_GET['product_id'])) {
         $id = $_GET['product_id'];
-        $sql = ("SELECT P.product_id, P.product_name, P.stock, P.price, P.picture_path, C.color_name, M.material_name, S.sex_name, V.product_variant_name, D.description_content
+        $sql = ("SELECT P.product_id, P.product_name, P.stock, P.price, P.picture_path, C.color_name, M.material_name, S.sex_name, V.product_variant_name, D.description_content, P.color_id, P.material_id, P.sex_id, P.description_id, P.product_variant_id
             FROM PRODUCT P
             JOIN COLORS C ON P.color_id = C.color_id
             JOIN MATERIALS M ON P.material_id = M.material_id
@@ -33,6 +33,11 @@
                     $colorNew = $_POST["colorNew"];
                     $descriptionNew = $_POST["descriptionNew"];
                     $materialNew = trim($_POST["materialNew"]);
+                    $description_id = $product['description_id'];
+                    $material_id = $product['material_id'];
+                    $color_id = $product['color_id'];
+                    $variant_id = $product['product_variant_id'];
+                    $sex_id = $product['sex_id'];
                      // Xử lý ảnh
                     if (!empty($_FILES["pictureNew"]["name"])) {
                         $pictureNew = $_FILES["pictureNew"]["name"];
@@ -44,17 +49,22 @@
                     }
 
                     if ($nameNew != $product['product_name'] || $variantNew != $product['product_variant_name'] || $stockNew != $product['stock'] || $priceNew != $product['price'] || $pictureNew != $product['picture_path'] || $materialNew != $product['material_name'] || $descriptionNew != $product['description_content'] || $sexNew != $product['sex_name'] || $colorNew != $product['color_name']) {
-                        $updateData = $db->handle("UPDATE PRODUCT SET
+                        // Cập nhật các bảng con
+                        $db->handle("UPDATE DESCRIPTIONS SET description_content = '$descriptionNew' WHERE description_id = '$description_id'");
+                        $db->handle("UPDATE MATERIALS SET material_name = '$materialNew' WHERE material_id = '$material_id'");
+                        $db->handle("UPDATE SEX SET sex_name = '$sexNew' WHERE sex_id = '$sex_id'");
+                        $db->handle("UPDATE COLORS SET color_name = '$colorNew' WHERE color_id = '$color_id'");
+                        $db->handle("UPDATE PRODUCT_VARIANT SET product_variant_name = '$variantNew' WHERE product_variant_id = '$variant_id'");
+
+                        // Cập nhật bảng chính PRODUCT
+                        $db->handle("UPDATE PRODUCT SET
                             product_name = '$nameNew',
                             stock = '$stockNew',
                             price = '$priceNew',
-                            picture_path = '$pictureNew',
-                            material_id = (SELECT material_id FROM MATERIALS LIMIT 1),                     
-                            sex_id = (SELECT sex_id FROM SEX LIMIT 1),
-                            color_id = (SELECT color_id FROM COLORS LIMIT 1),
-                            product_variant_id = (SELECT product_variant_id FROM PRODUCT_VARIANT LIMIT 1),
-                            description_id = (SELECT description_id FROM DESCRIPTIONS LIMIT 1)
+                            picture_path = '$pictureNew'
                             WHERE product_id = '$id'");
+
+                        header("location: DanhSachSanPham.php");
                     }
                 }
             } 
@@ -206,9 +216,7 @@
                             <textarea name="descriptionNew" style="width: 100%; resize: none; margin-top: 5px;"><?php echo $product['description_content'] ?></textarea>
                         </div>
                         <div class="repair-submit">
-                            <a href="../../views/html/DanhSachSanPham.php" class="return">
-                                <button>Thoát</button>
-                            </a>
+                            <a href="DanhSachSanPham.php" class="return">Thoát</a>
                             <input type="submit" name="btn_repair" value="Sửa Thông Tin">
                         </div>
                     </div>
