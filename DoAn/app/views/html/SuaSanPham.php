@@ -43,7 +43,6 @@
                         $pictureNew = $product['picture_path']; // giữ ảnh cũ nếu không upload mới
                     }
 
-
                     if ($nameNew != $product['product_name'] || $variantNew != $product['product_variant_name'] || $stockNew != $product['stock'] || $priceNew != $product['price'] || $pictureNew != $product['picture_path'] || $materialNew != $product['material_name'] || $descriptionNew != $product['description_content'] || $sexNew != $product['sex_name'] || $colorNew != $product['color_name']) {
                         $updateData = $db->handle("UPDATE PRODUCT SET
                             product_name = '$nameNew',
@@ -140,7 +139,14 @@
                             <label for="">Hình ảnh:</label>
                             <br>
                             <div class="image">
-                                <input type="file" name="pictureNew" value="<?php echo $product['picture_path']; ?>" style="width: 150px;" alt="Hình sản phẩm">
+                                <?php if (!empty($product['picture_path'])): ?>
+                                    <img src="../../../public/img/<?php echo htmlspecialchars($product['picture_path']); ?>" alt="Hình ảnh sản phẩm" style="width: 140px; height: 70px;">
+                                <?php else: ?>
+                                    <p>Không có hình ảnh</p>
+                                <?php endif; ?>
+                            </div>
+                            <div class="image">
+                            <input type="file" name="pictureNew" value="<?php echo $product['picture_path']; ?>" style="width: 200px;" alt="Hình sản phẩm">
                             </div>
                         </div>
                         <div class="repair-infor">

@@ -1,3 +1,26 @@
+<?php 
+    include "../../models/tables/database.php";
+    include "../../models/tables/product.php";
+    include "../../models/tables/description.php";
+    include "../../models/tables/sex.php";
+    include "../../models/tables/color.php";
+    include "../../models/tables/material.php";
+    include "../../models/tables/product_variant.php";
+    include "../../models/tables/order_items.php";
+    include "../../models/tables/orders.php";
+    include "../../models/tables/users.php";
+
+    $db = new database();
+
+    $sql = "SELECT O.id_order, O.id_users, O.status, A.address, U.username
+            FROM orders O
+            JOIN `user` U ON O.id_users = U.id_users
+            JOIN addresses A ON A.id_address = O.address";
+    $order_product = $db->getData($sql);
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -133,7 +156,7 @@
                     <i class="fa-solid fa-box"></i>
                     <span class="text">
                         <h3>Hủy đơn</h3>
-                        <p>300</p>
+                        <p>300</p> 
                     </span>
                 </li>
             </ul>
@@ -141,11 +164,10 @@
             <div class="content-filter">
                 <select id="typeOfcondition">
                     <option value="">Tất cả đơn hàng</option>
-                    <option value="Đang giao">Đang giao</option>
-                    <option value="Đã giao">Đã giao</option>
-                    <option value="Đã hủy">Đã hủy</option>
-                    <option value="Đã xác nhận">Đã xác nhận</option>
-                    <option value="Chưa xác nhận">Chưa xác nhận</option>
+                    <option value="ordered">ordered</option>
+                    <option value="packed">packed</option>
+                    <option value="shipping">shipping</option>
+                    <option value="finish">finish</option>
                 </select>
                 <select id="">
                     <option value="">Tất cả đơn hàng</option>
@@ -184,82 +206,38 @@
                 <thead>
                     <tr>
                         <td>STT</td>
-                        <td>Tên sản phẩm</td>
-                        <td>Mã sản phẩm</td>
-                        <td>Giá bán</td>
-                        <td>Thời gian</td>
+                        <td>Tên khách hàng</td>
+                        <td>Mã khách hàng</td>
+                        <td>Địa chỉ</td>
                         <td>Trạng thái</td>
                         <td>Tác vụ</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td data-label="STT">1</td>
-                        <td data-label="Tên sản phẩm">Giày chạy bộ nam</td>
-                        <td data-label="Mã sản phẩm">ARPU001-6V</td>
-                        <td data-label="Giá bán">1,980,000đ</td>
-                        <td data-label="Thời gian 16-11-2024">16-11-2024</td>
-                        <td class="delivery" data-label="Trạng thái"><span>Đang giao</span></td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-label="STT">2</td>
-                        <td data-label="Tên sản phẩm">Giày bóng rổ nam</td>
-                        <td data-label="Mã sản phẩm">ABAS081-1</td>
-                        <td data-label="Giá bán">1,953,000đ</td>
-                        <td data-label="Thời gian 16-11-2024">16-11-2024</td>
-                        <td class="canceled" data-label="Trạng thái"><span>Đã hủy</span></td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i></td>
-                            </a>
-                    </tr>
-                    <tr>
-                        <td data-label="STT">3</td>
-                        <td data-label="Tên sản phẩm">Giày chạy bộ nam</td>
-                        <td data-label="Mã sản phẩm">ARZS003-13</td>
-                        <td data-label="Giá bán">967,000đ</td>
-                        <td data-label="Thời gian 16-11-2024">16-11-2024</td>
-                        <td class="delivery" data-label="Trạng thái"><span>Đang giao</span></td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i></td>
-                            </a>
-                    </tr>
-                    <tr>
-                        <td data-label="STT">4</td>
-                        <td data-label="Tên sản phẩm">Giày chạy bộ nữ</td>
-                        <td data-label="Mã sản phẩm">ARHT020-9V</td>
-                        <td data-label="Giá bán">1,340,000đ</td>
-                        <td data-label="Thời gian 16-11-2024">16-11-2024</td>
-                        <td class="deliveried" data-label="Trạng thái"><span>Đã giao</span></td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i></td>
-                            </a>
-                    </tr>
-                    <tr>
-                        <td data-label="STT">5</td>
-                        <td data-label="Tên sản phẩm">Giày bóng rổ nam</td>
-                        <td data-label="Mã sản phẩm">ABAS073-7</td>
-                        <td data-label="Giá bán">2,455,000</td>
-                        <td data-label="Thời gian 16-11-2024">16-11-2024</td>
-                        <td class="delivery" data-label="Trạng thái"><span>Đang giao</span></td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i></td>
-                            </a>
-                    </tr>
+                    <?php
+                        if(!empty($order_product)) {
+                            forEach($order_product as $order) {
+                                echo '<tr>';
+                                echo '<td data-label="STT">' . $order['id_order'] . '</td>';
+                                echo '<td data-label="Tên khách hàng">' . $order['username'] . '</td>';
+                                echo '<td data-label="Mã khách hàng">' . $order['id_users'] . '</td>';
+                                echo '<td data-label="Địa chỉ">' .  $order['address'] .'</td>';
+                                echo '<td class="delivery" data-label="Trạng thái"><span>' . $order['status']. '</span></td>';
+                                echo '<td data-label="Tác vụ">
+                                        <a href="#warning-notify">
+                                            <i class="fa-regular fa-x"></i>
+                                        </a>
+                                    </td>';
+                                echo '</tr>';
+                            }
+                        }
+                    ?>
                 </tbody>
         </main>
     </section>
     <script src ="/admin/js/admin.js"></script>
     <script src ="/admin/js/chart-bar.js"></script>
-    <script src ="/admin/js/LocDonHang.js"></script>
+    <script src ="../../../public/js/LocDonHang.js"></script>
     <script src = "/admin/js/Click.js"></script>
 </body>
 </html>

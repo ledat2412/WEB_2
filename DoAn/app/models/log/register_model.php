@@ -6,9 +6,9 @@
     $nameError = "";
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $name_customer = $_POST['user'];
-        $data_customer = $register->getData("SELECT * FROM THONGTINKHACHHANG WHERE username LIKE '$name_customer'");
+        $data_customer = $register->getData("SELECT * FROM user WHERE username LIKE '$name_customer'");
     
-        if (empty($_POST['user']) || empty($_POST['pass']) || empty($_POST['confirm_pass']) || empty($_POST['phone']) || empty($_POST['gmail'])) {
+        if (empty($_POST['user']) || empty($_POST['pass']) || empty($_POST['confirm_pass']) || empty($_POST['email'])) {
             $nameError = "Vui lòng nhập đầy đủ";
         }
         else if ($_POST['pass'] != $_POST['confirm_pass']) {
@@ -24,10 +24,9 @@
             if (isset($_POST['btn'])) {
                 $username = $_POST['user'];
                 $password = $_POST['pass']; 
-                $gmail = $_POST['gmail'];
-                $phone = $_POST['phone'];
+                $email = $_POST['email'];
         
-                $data_register = $register->handle("INSERT INTO THONGTINKHACHHANG(username, password, gmail, phone, id_role) VALUES ('$username','$password', '$gmail', '$phone', 0)");
+                $data_register = $register->handle("INSERT INTO user(username, password, email, id_role) VALUES ('$username','$password', '$email', 1)");
             }
         }
     }

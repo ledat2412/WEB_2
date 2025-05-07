@@ -23,11 +23,7 @@
     if(isset($_POST["button_delete"])) {
         $id = $_POST["product_id_delete"];
         $delete_data = $db->handle("DELETE FROM PRODUCT WHERE product_id = '$id'");
-        if ($delete_data) {
-            echo "<script>alert('Xóa sản phẩm thành công!'); window.location.href = 'DanhSachSanPham.php';</script>";
-        } else {
-            echo "<script>alert('Xóa sản phẩm thất bại!');</script>";
-        }
+        header("location: DanhSachSanPham.php");
     }
 ?>
 
@@ -43,7 +39,7 @@
 </head>
 <body>
     <section id="sidebar">
-        <div id="warning-notify" class="warning-notify-container notify-container" style="display: none">
+        <div id="warning-notify" class="warning-notify-container notify-container">
             <div class="warning-content">
                 <div class="warning-header">
                     <span>
@@ -59,7 +55,7 @@
                         <input type="hidden" name="product_id_delete" id="product_id_delete">
                         <button class="warning-btn" type="submit" name="button_delete">Có</button>
                     </form>
-                    <button type="button" class="warning-btn" onclick="closeDeletePopup()">Không</button>
+                    <button type="button" class="warning-btn"  onclick="closeDeletePopup()">Không</button>
                 </div>
             </div>
         </div>
@@ -172,7 +168,7 @@
                             foreach ($DataProduct as $product) {
                                 echo '<tr>';
                                 echo '<td>' . $product["product_id"]. '</td>';
-                                echo '<td><img src="' . $product["picture_path"] . '" alt="Hình ảnh" style="width: 70px; height: 70px;"></td>';
+                                echo '<td><img src="../../../public/img/' . $product["picture_path"] . '" alt="Hình ảnh" style="width: 70px; height: 70px;"></td>';
                                 echo '<td>' . $product["product_name"] . '</td>';
                                 echo '<td>' . $product["product_variant_name"] . '</td>';
                                 echo '<td>' . $product["price"] . '</td>';
@@ -185,7 +181,7 @@
                                         <a href="../../views/html/SuaSanPham.php?product_id=' . urlencode($product["product_id"]) . '">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
-                                        <a href="#warning-notify" onclick="deleteProduct(' . json_encode($product["product_id"]) . ')">
+                                        <a href="javascript:void(0);" onclick="deleteProduct(' . $product["product_id"] . ')">
                                             <i class="fa-solid fa-xmark"></i>
                                         </a>
                                     </td>';
@@ -198,17 +194,17 @@
             </div>
         </main>
     </section>
-    <script src ="../../../public/js/admin.js"></script>
-    <script src ="../../../public/js/chart-bar.js"></script>
-    <script src="../../../public/js/Click.js"></script>
     <script>
         function deleteProduct(id) {
             document.getElementById('product_id_delete').value = id;
-            document.getElementById('warning-notify').style.display = 'block';
+            document.getElementById('warning-notify').classList.add('active');
         }
         function closeDeletePopup() {
-            document.getElementById('warning-notify').style.display = 'none';
+            document.getElementById('warning-notify').classList.remove('active');
         }
     </script>
+    <script src ="../../../public/js/admin.js"></script>
+    <script src ="../../../public/js/chart-bar.js"></script>
+    <script src="../../../public/js/Click.js"></script>
 </body>
 </html>

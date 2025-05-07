@@ -14,7 +14,18 @@
             $product_name = $_POST["product_name"];
             $product_price = $_POST["product_price"];
             $product_description = $_POST["product_description"];
-            $product_image = $_POST["product_img"];
+            if (!empty($_FILES["product_img"]["name"])) {
+                $product_image = $_FILES["product_img"]["name"];
+                $target_dir = "../../../public/img/";
+                $target_file = $target_dir . basename($product_image);
+                move_uploaded_file($_FILES["product_img"]["tmp_name"], $target_file);      
+                if (!empty($_FILES["product_img"]["name"])) {
+                    echo '<img src="../../../public/img/' . htmlspecialchars($_FILES['product_img']['name']) . '" alt="Hình ảnh" style="width: 70px; height: 70px;">';
+                }
+            } else {
+                $product_image = ""; // hoặc xử lý ảnh mặc định
+            }
+
             $product_color = $_POST["color"];
             $product_code = $_POST["product_code"];
             $product_quantity = $_POST["product_quantity"];
@@ -34,6 +45,8 @@
             $variant_id = $db->getInsertId();
             $product = $db->handle("INSERT INTO PRODUCT (product_name, picture_path, stock, price, color_id, material_id, sex_id, product_variant_id, description_id)
             VALUES ('$product_name', '$product_image', '$product_quantity', '$product_price','$color_id', '$material_id', '$sex_id', '$variant_id', '$description_id')");
+
+            header("location: DanhSachSanPham.php");
 
         }
     }
@@ -99,7 +112,7 @@
             </a>
         </nav>
         <main>
-            <form class="add-new" method="post" action="">
+            <form class="add-new" method="post" action="" enctype="multipart/form-data">
                 <div class="add-product-new">
                     <div class="add-heading-new">
                         <span>Thông tin sản Phẩm<span>
@@ -113,11 +126,12 @@
                         <div class="add-img-new">
                             <label for="">Hình ảnh:</label>
                             <br>
-                            <div class="image-new">
-                                <label for="file"><i class="fa-regular fa-image"></i></label>
-                                <input type="file" id="file" name="product_img">
+                            <div class="image-upload">
+                                <input type="file" id="file" name="product_img" accept="image/*" onchange="previewImage(event)">
+                                <img id="preview" src="" alt="Preview" style="display: none;">
+                                <div class="preview-text" id="preview-text">Preview</div>
                             </div>
-                            </div>
+                        </div>
                         <div class="add-infor-new">
                             <label for="">Tên sản phẩm: </label>
                             <br>
@@ -202,6 +216,17 @@
             </form>
         </main>
     </section>
+    <script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const output = document.getElementById('preview');
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
     <script src ="/admin/js/admin.js"></script>
     <script src ="/admin/js/chart-bar.js"></script>
 </body>
