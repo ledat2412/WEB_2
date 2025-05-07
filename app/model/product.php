@@ -93,4 +93,4 @@ class Product {
         return $this->db->handle($sql, [$id]);
     }
 }
-?> 
+?>

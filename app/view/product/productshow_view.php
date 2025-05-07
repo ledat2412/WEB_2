@@ -44,6 +44,9 @@
         <!-- sản phẩm và filter -->
         <div class="container">
             <!-- Filter Section on the Left -->
+            <?php if (empty($_GET) || isset($_GET['showall'])): ?>
+                <!-- Không hiển thị filter nếu không có filter hoặc có ?showall=1 -->
+            <?php else: ?>
             <aside class="filter-section">
                 <div class="filter-header">Bộ lọc tìm kiếm</div>
                 <form method="GET" class="filter-form">
@@ -51,6 +54,11 @@
                     <div class="filter-group">
                         <div>Theo Danh Mục</div>
                         <div class="filter-options">
+                            <!-- Nút "Tất cả sản phẩm" -->
+                            <label class="filter-btns">
+                                <input type="radio" name="variant" value="" <?= empty($filter_variant) ? 'checked' : '' ?> onclick="toggleRadio(this)">
+                                <span class="filter-label-text">Tất cả sản phẩm</span>
+                            </label>
                             <?php foreach ($variants as $v): ?>
                                 <label class="filter-btns">
                                     <input type="radio" name="variant" value="<?= $v['id_product_variant'] ?>" <?= $filter_variant == $v['id_product_variant'] ? 'checked' : '' ?> onclick="toggleRadio(this)">
@@ -83,18 +91,45 @@
                             <?php endforeach; ?>
                         </div>
                     </div>
+                    <!-- Material -->
+                    <div class="filter-group">
+                        <div>Chất liệu</div>
+                        <div class="filter-options">
+                            <?php foreach ($materials as $m): ?>
+                                <label class="filter-btns">
+                                    <input type="radio" name="material" value="<?= $m['id_material'] ?>" <?= $filter_material == $m['id_material'] ? 'checked' : '' ?> onclick="toggleRadio(this)">
+                                    <span class="filter-label-text"><?= htmlspecialchars($m['name']) ?></span>
+                                </label>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
                     <!-- Khoảng giá -->
                     <div class="filter-group">
                         <div>Khoảng giá</div>
                         <div class="filter-options">
-                            <label class="filter-btns">
-                                <input type="radio" name="price" value="1" <?= $filter_price == '1' ? 'checked' : '' ?> onclick="toggleRadio(this)">
-                                <span class="filter-label-text">Dưới 1 triệu</span>
-                            </label>
-                            <label class="filter-btns">
-                                <input type="radio" name="price" value="2" <?= $filter_price == '2' ? 'checked' : '' ?> onclick="toggleRadio(this)">
-                                <span class="filter-label-text">Trên 1 triệu</span>
-                            </label>
+                            <div class="price-range-row" style="flex-direction:column;align-items:flex-start;gap:8px;">
+                                <div>
+                                    <label class="price-range-label" for="price_min">Từ</label>
+                                    <span class="price-range-wrapper">
+                                        <input type="text" min="0" name="price_min" id="price_min"
+                                            class="price-range-input"
+                                            value="<?= isset($_GET['price_min']) ? htmlspecialchars($_GET['price_min']) : '' ?>"
+                                            placeholder="0">
+                                        <span class="price-range-suffix">vn₫</span>
+                                    </span>
+                                </div>
+                                <div style="margin-top:4px;">
+                                    <label class="price-range-label" for="price_max">Đến</label>
+                                    <span class="price-range-wrapper">
+                                        <input type="text" min="0" name="price_max" id="price_max"
+                                            class="price-range-input"
+                                            value="<?= isset($_GET['price_max']) ? htmlspecialchars($_GET['price_max']) : '' ?>"
+                                            placeholder="999.999.999">
+                                        <span class="price-range-suffix">vn₫</span>
+                                    </span>
+                                </div>
+                                <div id="price-range-error" style="color:#ec2a2a;font-size:14px;display:none;margin-top:4px;"></div>
+                            </div>
                         </div>
                     </div>
                     <!-- Thêm filter sản phẩm bán chạy/phổ thông -->
@@ -117,6 +152,7 @@
                     </div>
                 </form>
             </aside>
+            <?php endif; ?>
             <script>
                 function resetFilter() {
                     const form = document.querySelector('.filter-form');
@@ -124,6 +160,8 @@
                     form.querySelectorAll('input[type="radio"]').forEach(input => input.checked = false);
                     // Reset all select (if any)
                     form.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
+                    // Reset price range inputs
+                    form.querySelectorAll('.price-range-input').forEach(input => input.value = '');
                     // Submit form to reset filter on server side
                     form.submit();
                 }
@@ -148,6 +186,55 @@
                         radio.dataset.waschecked = radio.checked ? "true" : "false";
                     });
                 });
+
+                function formatVNDInput(input) {
+                    let value = input.value.replace(/\D/g, '');
+                    if (value) {
+                        value = value.replace(/^0+/, '');
+                        value = value ? value.replace(/\B(?=(\d{3})+(?!\d))/g, ".") : '';
+                    }
+                    input.value = value;
+                }
+
+                function getIntValue(str) {
+                    return parseInt(str.replace(/\./g, ''), 10) || 0;
+                }
+
+                function validatePriceRange() {
+                    const minInput = document.getElementById('price_min');
+                    const maxInput = document.getElementById('price_max');
+                    const errorDiv = document.getElementById('price-range-error');
+                    const minVal = getIntValue(minInput.value);
+                    const maxVal = getIntValue(maxInput.value);
+                    if (minInput.value && maxInput.value && maxVal < minVal) {
+                        errorDiv.style.display = 'block';
+                        errorDiv.textContent = 'Khoảng giá không hợp lệ, đã được đặt lại.';
+                        // Reset luôn cả hai input về rỗng
+                        minInput.value = '';
+                        maxInput.value = '';
+                        setTimeout(() => { errorDiv.style.display = 'none'; }, 2000);
+                        return false;
+                    }
+                    errorDiv.style.display = 'none';
+                    return true;
+                }
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.querySelectorAll('.price-range-input').forEach(function(input) {
+                        input.addEventListener('input', function() {
+                            formatVNDInput(this);
+                            // Không gọi validatePriceRange ở đây nữa
+                        });
+                        if (input.value) formatVNDInput(input);
+                    });
+                    // Chỉ validate khi submit filter
+                    document.querySelector('.filter-form').addEventListener('submit', function(e) {
+                        if (!validatePriceRange()) {
+                            e.preventDefault();
+                        }
+                    });
+                });
+
             </script>
 
             <div class="product-container">
@@ -201,9 +288,19 @@
                         }, $phothong);
                     }
                 }
+
+                // Pagination logic (chỉ hiển thị 3 sản phẩm mỗi trang)
+                $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+                $per_page = 12;
+                $total_products = count($filtered);
+                $total_pages = ceil($total_products / $per_page);
+                $current_page = $page;
+                $start = ($page - 1) * $per_page;
+                $paged_products = array_slice($filtered, $start, $per_page);
+
                 ?>
-                <?php if (!empty($filtered)): ?>
-                    <?php foreach ($filtered as $item): ?>
+                <?php if (!empty($paged_products)): ?>
+                    <?php foreach ($paged_products as $item): ?>
                         <?php
                         $image_dir = $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/public/assets/img/Sản Phẩm/" . str_replace("../../../public/assets/img/Sản Phẩm/", "", $item['picture_path']);
                         $absolute_dir = realpath($image_dir);
@@ -236,6 +333,57 @@
                 <?php endif; ?>
             </div>
         </div>
+        <!-- Pagination đặt ngoài .container để luôn nằm dưới sản phẩm -->
+        <?php if ($total_pages > 1): ?>
+            <div class="pagination" style="display:flex;justify-content:center;gap:8px;margin:30px 0;flex-wrap:wrap;">
+                <?php
+                    $query = $_GET;
+                    unset($query['page']);
+                    $query_string = http_build_query($query);
+
+                    // Helper for link
+                    function page_link($i, $query_string) {
+                        return '?' . $query_string . ($query_string ? '&' : '') . 'page=' . $i;
+                    }
+
+                    // Arrow prev
+                    if ($current_page > 1) {
+                        echo '<a href="' . page_link($current_page - 1, $query_string) . '" style="padding:6px 14px;">&laquo;</a>';
+                    } else {
+                        echo '<span style="padding:6px 14px;color:#bbb;">&laquo;</span>';
+                    }
+
+                    // Pagination logic with ellipsis if > 10 pages
+                    if ($total_pages <= 10) {
+                        for ($i = 1; $i <= $total_pages; $i++) {
+                            $active = ($i == $current_page) ? 'style="background:#ec2a2a;color:#fff;border-radius:4px;"' : '';
+                            echo '<a href="' . page_link($i, $query_string) . "\" $active>$i</a>";
+                        }
+                    } else {
+                        // Always show first, last, current, current-1, current+1, and ellipsis
+                        if ($current_page > 3) {
+                            echo '<a href="' . page_link(1, $query_string) . '">1</a>';
+                            if ($current_page > 4) echo '<span style="padding:6px 10px;">...</span>';
+                        }
+                        for ($i = max(1, $current_page - 1); $i <= min($total_pages, $current_page + 1); $i++) {
+                            $active = ($i == $current_page) ? 'style="background:#ec2a2a;color:#fff;border-radius:4px;"' : '';
+                            echo '<a href="' . page_link($i, $query_string) . "\" $active>$i</a>";
+                        }
+                        if ($current_page < $total_pages - 2) {
+                            if ($current_page < $total_pages - 3) echo '<span style="padding:6px 10px;">...</span>';
+                            echo '<a href="' . page_link($total_pages, $query_string) . "\">$total_pages</a>";
+                        }
+                    }
+
+                    // Arrow next
+                    if ($current_page < $total_pages) {
+                        echo '<a href="' . page_link($current_page + 1, $query_string) . '" style="padding:6px 14px;">&raquo;</a>';
+                    } else {
+                        echo '<span style="padding:6px 14px;color:#bbb;">&raquo;</span>';
+                    }
+                ?>
+            </div>
+        <?php endif; ?>
     </div>
 </body>
 
