@@ -63,14 +63,15 @@
 
             $db = new database();
             $id = $_GET['get_id'];
+            $role_id = $_GET['get_id_role'];
             if ($_SERVER['REQUEST_METHOD'] === "POST"){
                 if (isset($_POST['update'])){
                     $up_username = $_POST['old_username'];
                     $up_email = $_POST['old_email'];
                     $up_pass = $_POST['old_pass'];
                     $up_role = $_POST['old_role'];
-
-                    $update_role = $db ->handle("UPDATE roles SET role_name = '$up_role'");
+                    
+                    $update_role = $db ->handle("UPDATE roles SET role_name = '$up_role' WHERE id_role ='$role_id'");
                     $update = $db -> handle("UPDATE user SET username = '$up_username', 
                                                     email = '$up_email', password = '$up_pass' WHERE id_users = '$id'");
                 }

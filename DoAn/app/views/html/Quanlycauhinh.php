@@ -148,7 +148,7 @@
                                 echo '<i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>';
                             echo '</td>';
                             echo '<td data-label="Tác vụ">';
-                                echo '<a href = "../../views/html/CapNhatThongTin.php?get_id='.$data['id_users'].'">';
+                                echo '<a href = "../../views/html/CapNhatThongTin.php?get_id='.$data['id_users'].'&get_id_role='.$data['role'].'">';
                                     echo '<i class="fa-solid fa-pen-to-square"></i>';
                                 echo '</a>';
                             echo '</td>';
