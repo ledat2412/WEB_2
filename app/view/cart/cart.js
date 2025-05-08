@@ -1,5 +1,4 @@
-//--------------- shopcart
-// Danh sách sản phẩm trong giỏ
+// Danh sách sản phẩm trong giỏ 
 let cart = [
   {
     name: "Sản phẩm 1",
@@ -29,29 +28,15 @@ function renderCart() {
     `;
   });
   updateCart();
-}
-
-// Thêm sản phẩm vào giỏ
-function addProductToCart() {
-  const dropdown = document.getElementById('product-dropdown');
-  const selected = dropdown.options[dropdown.selectedIndex];
-  const name = selected.getAttribute('data-name');
-  const price = parseInt(selected.value);
-  const img = selected.getAttribute('data-img');
-  // Nếu sản phẩm đã có trong giỏ thì tăng số lượng
-  const found = cart.find(item => item.name === name && item.price === price);
-  if (found) {
-    found.quantity += 1;
-  } else {
-    cart.push({ name, price, quantity: 1, img, selected: true });
-  }
-  renderCart();
-}
-
-// Cập nhật số lượng sản phẩm
+}// Cập nhật số lượng sản phẩm
 function updateQuantity(idx, value) {
-  cart[idx].quantity = parseInt(value);
-  renderCart();
+  const newQuantity = parseInt(value);
+  if (newQuantity > 0) {
+    cart[idx].quantity = newQuantity;
+    renderCart();
+  } else {
+    showToast('Số lượng phải lớn hơn 0!');
+  }
 }
 
 // Chọn hoặc bỏ chọn tất cả sản phẩm

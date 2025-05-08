@@ -1,16 +1,15 @@
-<?php
+<<?php
 require_once '../controller/CartController.php';
+session_start();
 
 // Kiểm tra người dùng đã đăng nhập chưa
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['user_id'])) {
     header('Location: /web/login.html');
     exit();
 }
 
 $cartController = new CartController();
-$id_user = $_SESSION['username']; // Lấy id_user từ session
-
-// Lấy giỏ hàng của người dùng
+$id_user = $_SESSION['user_id'];
 $cart_items = $cartController->viewCart($id_user);
 
 // Tính tổng giá trị giỏ hàng
@@ -19,14 +18,11 @@ foreach ($cart_items as $item) {
     $total += $item['price'] * $item['quantity'];
 }
 
-// Tính phí vận chuyển mặc định
-$shipping_cost = 40000;
-
-// Tổng cộng (bao gồm phí ship)
+$shipping_cost = 40000; // Phí vận chuyển mặc định
 $total_with_shipping = $total + $shipping_cost;
 ?>
 
-<!DOCTYPE html>
+?> <!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -39,40 +35,40 @@ $total_with_shipping = $total + $shipping_cost;
 
 <body>
     <div class="cart-container">
-        <div class="cart-left">
-            <div class="form-price">
-                <h1 class="product-title">Sản phẩm</h1>
-                <div class="item-price">
-                    <p class="price-title">Giá</p>
-                    <p class="quantity-title">Số lượng</p>
-                    <p class="subtotal-title">Tạm tính</p>
-                </div>
-            </div>
-
-            <div class="line"></div>
-
-            <!-- Hiển thị từng sản phẩm -->
-            <form action="/web/update-cart.php" method="POST">
-                <?php foreach ($cart_items as $item): ?>
-                    <div class="cart-item">
+    <div class="cart-left">
+    <h1 class="cart-title">Giỏ hàng của bạn</h1>
+    <form action="/web/update-cart.php" method="POST">
+        <div class="cart-items">
+            <?php foreach ($cart_items as $item): ?>
+                <div class="cart-item">
+                    <div class="item-image">
                         <img src="<?php echo $item['picture_path']; ?>" alt="product image">
-                        <a href="/web/SanPham/<?php echo str_replace(' ', '-', $item['product_name']); ?>.html">
-                            <?php echo $item['product_name']; ?>
-                        </a>
-                        <div class="item-price">
-                            <p class="price-title"><?php echo number_format($item['price'], 0, ',', '.'); ?> ₫</p>
-                            <input class="quantity-title" type="number" name="quantity[<?php echo $item['id_product']; ?>]" value="<?php echo $item['quantity']; ?>" min="1">
-                            <p class="subtotal-title"><?php echo number_format($item['price'] * $item['quantity'], 0, ',', '.'); ?> ₫</p>
-                        </div>
                     </div>
-                <?php endforeach; ?>
-
-                <div class="line"></div>
-                <button type="submit" class="update-cart">Cập nhật giỏ hàng</button>
-            </form>
-
-            <a href="/web/Web-user.html"><button class="continue-shopping">← Tiếp tục xem sản phẩm</button></a>
+                    <div class="item-details">
+                        <a href="/web/SanPham/<?php echo str_replace(' ', '-', $item['product_name']); ?>.html">
+                            <h2 class="item-name"><?php echo $item['product_name']; ?></h2>
+                        </a>
+                        <p class="item-price"><?php echo number_format($item['price'], 0, ',', '.'); ?> ₫</p>
+                        <div class="item-quantity">
+                            <label for="quantity-<?php echo $item['id_product']; ?>">Số lượng:</label>
+                            <input type="number" id="quantity-<?php echo $item['id_product']; ?>" name="quantity[<?php echo $item['id_product']; ?>]" value="<?php echo $item['quantity']; ?>" min="1">
+                        </div>
+                        <p class="item-subtotal">
+                            Tạm tính: <?php echo number_format($item['price'] * $item['quantity'], 0, ',', '.'); ?> ₫
+                        </p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
+        <div class="cart-actions">
+            <button type="submit" class="update-cart">Cập nhật giỏ hàng</button>
+            <a href="/web/Web-user.html" class="continue-shopping">← Tiếp tục xem sản phẩm</a>
+        </div>
+    </form>
+</div>
+
+
+
 
         <div class="cart-right">
             <h2>Cộng giỏ hàng</h2>
