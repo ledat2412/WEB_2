@@ -109,11 +109,6 @@
 
             <ul class="box-tool">
                 <li>
-                    <a href="../../views/html/CapNhatThongTin.php">
-                        <h3><i class="fa-light fa-plus"></i>Cập nhật dữ liệu</h3>
-                    </a>
-                </li>
-                <li>
                     <a href="../../views/html/ThemNguoiDung.php#">
                         <h3><i class="fa-light fa-plus"></i>Thêm thông tin</h3>
                     </a>
@@ -128,12 +123,14 @@
                         <td>Số điện thoại</td>
                         <td>Địa chỉ</td>
                         <td>Tình trạng</td>
+                        <td>Vai trò</td>
                         <td>Tác vụ</td>
                     </tr>
                 </thead>
                 <tbody>
-                <?php
-                        include_once "../../models/tables/database.php";
+                    <?php
+                        include_once "../../models/tables/users.php";
+                        include_once "../../models/tables/roles.php";
 
                         $db = new database();
 
@@ -141,24 +138,23 @@
                         if(!empty($result)){
                             foreach($result as $data){
                         
+                        echo '<tr class="tr-row">';
+                            echo '<td data-label="STT">'. $data['id_users']. '</td>';
+                            echo '<td data-label="Tên đăng nhập">'. $data['username'].'</td>';
+                            echo '<td data-label="Email"> '.$data['email'].' </td>';
+                            echo '<td data-label="Mật khẩu"> '.$data['password'].' </td>';
+                            echo '<td data-label="Vai trò"> '.$data['role_name'].' </td>';
+                            echo '<td data-label="Trạng thái">';
+                                echo '<i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>';
+                            echo '</td>';
+                            echo '<td data-label="Tác vụ">';
+                                echo '<a href = "../../views/html/CapNhatThongTin.php?get_id='.$data['id_users'].'">';
+                                    echo '<i class="fa-solid fa-pen-to-square"></i>';
+                                echo '</a>';
+                            echo '</td>';
+                        echo '</tr>';
+                        }} 
                     ?>
-                        <tr class="tr-row">
-                            <td data-label="STT"><?php echo $data['id_users'] ?></td>
-                            <td data-label="Tên đăng nhập"><?php echo $data['username'] ?></td>
-                            <td data-label="Email"><?php echo $data['email'] ?></td>
-                            <td data-label="Mật khẩu"><?php echo $data['password'] ?></td>
-                            <td data-label="Vai trò"><?php echo $data['role_name'] ?></td>
-                            <td data-label="Trạng thái">
-                                <i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>
-                            </td>
-                            <td data-label="Tác vụ">
-                                <a href = "XoaUser.php?get_id = <?php echo $data['id_users'] ?>" onclick="openPopup()">
-                                    <i class="fa-regular fa-x"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    <?php  }} 
-                            ?>
                 </tbody>
             </table>
         </main>

@@ -57,46 +57,62 @@
             </a>
         </nav>
         <main>
-            <div id="updateUsers" class="update-users">
-                <div class="update-users-content">
-                    <div class="update-users-heading">
-                        <h3>Cập nhật thông tin</h3>
-                    </div>
-                    <div class="update-users-data">
-                        <div class="update-data">
-                            <input type="text" required placeholder="Nhập mã khách hàng">
-                        </div>
-                        <div class="update-data">
-                            <input type="email" required placeholder="Nhập họ và tên">
-                        </div>
-                        <div class="update-data">
-                            <input type="text" required placeholder="Xác nhận lại tên">
-                        </div>
-                        <div class="update-data">
-                            <input type="text" placeholder="Số điện thoại" >
-                        </div>
-                        <div class="update-data">
-                            <input type="password" placeholder="Địa chỉ">
-                        </div>
+            <?php
+            include_once "../../models/tables/users.php";
+            include_once "../../models/tables/roles.php";
 
-                        <h4>*Mã khách hàng phải đúng mới sửa được</h4>
-                        <h4>*Mã khách hàng là STT</h4>
+            $db = new database();
+            $id = $_GET['get_id'];
+            if ($_SERVER['REQUEST_METHOD'] === "POST"){
+                if (isset($_POST['update'])){
+                    $up_username = $_POST['old_username'];
+                    $up_email = $_POST['old_email'];
+                    $up_pass = $_POST['old_pass'];
+                    $up_role = $_POST['old_role'];
 
-                    </div>
-                    <div class="update-users-submit">
-                        <li>
-                            <a href="../../views/html/Quanlycauhinh.php" clas="first-child">
-                                <button>Thoát</button>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="../../views/html/Quanlycauhinh.php" class="last-child">
-                                <button>Cập nhật</button>
-                            </a>
-                        </li>
-                    </div>
-                </div>
-            </div>
+                    $update_role = $db ->handle("UPDATE roles SET role_name = '$up_role'");
+                    $update = $db -> handle("UPDATE user SET username = '$up_username', 
+                                                    email = '$up_email', password = '$up_pass' WHERE id_users = '$id'");
+                }
+            }
+            $result = $db ->getData("SELECT * FROM user u JOIN roles r ON u.role = r.id_role WHERE id_users = '$id'");
+            if(!empty($result)){
+            $data = $result[0];
+            echo '<div id="updateUsers" class="update-users">';
+                echo '<div class="update-users-content">';
+                    echo '<div class="update-users-heading">';
+                        echo '<h3>Cập nhật thông tin</h3>';
+                    echo '</div>';
+                    
+                    echo '<form method="POST" class="update-users-data">';
+                            echo '<div class="update-data">
+                            <input type="text" placeholder="'.$data['id_users'].'"></div>';
+                            echo '<div class="update-data">
+                            <input type="text" name="old_username" placeholder="'.$data['username'].'"></div>';
+                            echo '<div class="update-data">
+                            <input type="email" name="old_email" placeholder="'.$data['email'].'"></div>';
+                            echo '<div class="update-data">
+                            <input type="password" name="old_pass" placeholder="'.$data['password'].'"></div>';
+                            echo '<div class="update-data">';
+                                echo '<input type="radio" name="old_role" class="update-checkbox" value="Admin">';
+                                echo '<label>Admin</label>';
+                                echo '<input type="radio" name="old_role" class="update-checkbox" value="User">';
+                                echo '<label>User</label>';
+                            echo '</div>';
+                            echo '<div class="update-users-submit">';
+                                echo '<li>';
+                                    echo '<a href="../../views/html/Quanlycauhinh.php" class="first-child">Thoát</a>';
+                                echo '</li>';
+                                echo '<li>';
+                                    echo '<input type="submit" name="update" class="last-child" value ="Cập nhật"></input>';
+                                echo '</li>';
+                            echo '</div>';
+                    echo '</form>';
+                echo '</div>';
+            echo '</div>';
+            }
+            ?>
+        
         </main>
     </section>
     <script src ="/admin/js/admin.js"></script>

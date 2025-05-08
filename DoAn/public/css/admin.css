@@ -1213,7 +1213,7 @@ body {
 
 #content main #updateUsers .update-users-content .update-users-data {
     text-align: center;
-    height: 250px;
+    height: auto;
 }
 
 #content main #updateUsers .update-users-content .update-users-data h4 {
@@ -1224,8 +1224,8 @@ body {
 }
 
 #content main #updateUsers .update-users-content .update-users-data .update-data {
-    margin-top: 10px;
-    height: 40px
+    /* margin-top: 10px; */
+    height: 60px;
 }
 
 #content main #updateUsers .update-users-content .update-users-data .update-data input {
@@ -1240,10 +1240,11 @@ body {
 }
 
 #content main #updateUsers .update-users-content .update-users-submit {
-    height: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
     gap: 10px;
 }
 

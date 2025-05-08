@@ -47,6 +47,5 @@
             return $this->conn->insert_id;
         }
 
-
     }
 ?>
