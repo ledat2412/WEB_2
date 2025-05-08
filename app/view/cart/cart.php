@@ -42,13 +42,36 @@ $total_with_shipping = $total + $shipping_cost;
             <?php foreach ($cart_items as $item): ?>
                 <div class="cart-item">
                     <div class="item-image">
-                        <img src="<?php echo $item['picture_path']; ?>" alt="product image">
+                        <?php
+                        // Xử lý đường dẫn ảnh giống productshow_view.php
+                        $base_path = $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/public/assets/img/Sản Phẩm/";
+                        $relative_path = str_replace("../../../public/assets/img/Sản Phẩm/", "", $item['picture_path']);
+                        $image_dir = $base_path . $relative_path;
+                        $absolute_dir = realpath($image_dir);
+
+                        // Tìm file ảnh thực tế
+                        $main_image = '';
+                        if ($absolute_dir && is_dir($absolute_dir)) {
+                            $webp_images = glob($absolute_dir . '/*.webp') ?: [];
+                            $jpg_images = glob($absolute_dir . '/*.jpg') ?: [];
+                            $jpeg_images = glob($absolute_dir . '/*.jpeg') ?: [];
+                            $png_images = glob($absolute_dir . '/*.png') ?: [];
+                            $images = array_merge($webp_images, $jpg_images, $jpeg_images, $png_images);
+                            $main_image = !empty($images) ? $images[0] : '';
+                        }
+                        $url_path = $main_image ? str_replace(['\\', $_SERVER['DOCUMENT_ROOT']], ['/', ''], $main_image) : '';
+                        ?>
+                        <img src="<?php echo htmlspecialchars($url_path); ?>" alt="product image">
                     </div>
                     <div class="item-details">
                         <a href="/web/SanPham/<?php echo str_replace(' ', '-', $item['product_name']); ?>.html">
                             <h2 class="item-name"><?php echo $item['product_name']; ?></h2>
                         </a>
                         <p class="item-price"><?php echo number_format($item['price'], 0, ',', '.'); ?> ₫</p>
+                        <div class="item-size">
+                            <label>Size: </label>
+                            <span><?php echo $item['size']; ?></span>
+                        </div>
                         <div class="item-quantity">
                             <label for="quantity-<?php echo $item['id_product']; ?>">Số lượng:</label>
                             <input type="number" id="quantity-<?php echo $item['id_product']; ?>" name="quantity[<?php echo $item['id_product']; ?>]" value="<?php echo $item['quantity']; ?>" min="1">

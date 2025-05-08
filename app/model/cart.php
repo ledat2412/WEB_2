@@ -13,16 +13,19 @@ $table_cart = $db->handle("CREATE TABLE IF NOT EXISTS cart (
     quantity INT UNSIGNED,
     FOREIGN KEY (id_user) REFERENCES users(id_users),
     FOREIGN KEY (id_product) REFERENCES product(id_product)
-)");class Cart {
+)");
+
+class Cart {
     private $db;
 
     public function __construct()
     {
         $this->db = new database();
     }
+
     public function addToCart($id_user, $id_product, $quantity)
-     {
-    $existItem = $this->checkCartItem($id_user, $id_product);
+    {
+        $existItem = $this->checkCartItem($id_user, $id_product);
         if (!empty($existItem)) 
         {
             $id_cart = $existItem[0]['id_cart'];
@@ -34,8 +37,9 @@ $table_cart = $db->handle("CREATE TABLE IF NOT EXISTS cart (
             $this->db->handle($sql, [$id_user, $id_product, $quantity]);
         }
     }
-public function getCartByUser($id_user) {
-        $sql = "SELECT c.*, p.product_name, p.price, p.picture_path 
+
+    public function getCartByUser($id_user) {
+        $sql = "SELECT c.*, p.product_name, p.price, p.picture_path, p.size 
                 FROM cart c 
                 LEFT JOIN product p ON c.id_product = p.id_product 
                 WHERE c.id_user = ?";
