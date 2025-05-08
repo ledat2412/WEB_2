@@ -1,61 +1,84 @@
 <?php
-// OrderController.php
-require_once __DIR__ . '/../model/orders.php';
-require_once __DIR__ . '/../model/cart.php';
+require_once 'database.php';
+require_once 'users.php';
+require_once 'addresses.php';
+require_once 'payments.php';
 
+// Khởi tạo kết nối database
+$db = new database();
 
+$table_orders = $db->handle("CREATE TABLE IF NOT EXISTS orders (
+    id_order INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_user INT(11) UNSIGNED NOT NULL,
+    id_address INT UNSIGNED NOT NULL,
+    id_payment INT UNSIGNED DEFAULT NULL,
+    status ENUM('pending', 'processing', 'completed', 'cancelled') NOT NULL DEFAULT 'pending',
+    FOREIGN KEY (id_user) REFERENCES users(id_users),
+    FOREIGN KEY (id_address) REFERENCES addresses(id_address),
+    FOREIGN KEY (id_payment) REFERENCES payments(id_payment)
+)");
 
-class OrderController {
-    private $orderModel;
-    private $cartModel;
+class Orders {
+    private $db;
 
     public function __construct() {
-        $this->orderModel = new Orders();
-        $this->cartModel = new Cart();  // Giả sử bạn đã có model Cart
+        $this->db = new database();
     }
 
-    // Tạo đơn hàng từ giỏ hàng
-    public function createOrder($id_user, $id_address) {
-        // Kiểm tra xem giỏ hàng có sản phẩm hay không
-        $cartItems = $this->cartModel->getCartByUser($id_user);
-        if (empty($cartItems)) {
-            throw new Exception("Giỏ hàng không có sản phẩm.");
+    // Thêm đơn hàng mới
+    public function addOrder($id_user, $id_address, $id_payment = null, $status = 'pending') {
+       
+        $sql = "INSERT INTO orders (id_user, id_address, id_payment, status) VALUES (?, ?, ?, ?)";
+        
+        $this->db->handle($sql, [$id_user, $id_address, $id_payment, $status]);
+        
+        return $this->db->lastInsertId();  // Lấy ID của đơn hàng vừa thêm
+    }
+
+    // Lấy thông tin đơn hàng theo ID
+    public function getOrder($id) {
+        $sql = "SELECT o.*, u.username, a.address as shipping_address 
+                FROM orders o 
+                LEFT JOIN users u ON o.id_user = u.id_users 
+                LEFT JOIN addresses a ON o.id_address = a.id_address 
+                WHERE o.id_order = ?";
+        $this->db->handle($sql, [$id]);
+        $order = $this->db->getData($sql);
+        if ($order) {
+            return $order;
+        } else {
+            throw new Exception("Không tìm thấy đơn hàng với ID: $id");
+        }}
+
+    // Lấy tất cả đơn hàng của người dùng
+    public function getOrdersByUser($id_user) {
+        $sql = "SELECT o.*, a.address as shipping_address 
+                FROM orders o 
+                LEFT JOIN addresses a ON o.id_address = a.id_address 
+                WHERE o.id_user = ?";
+        $this->db->handle($sql, [$id_user]);
+        $orders = $this->db->getData($sql);
+        if ($orders) {
+            return $orders;
+        } else {
+            throw new Exception("Không có đơn hàng cho người dùng với ID: $id_user");
         }
-
-        // Tạo đơn hàng
-        $order_id = $this->orderModel->addOrder($id_user, $id_address);
-
-        // Thêm các sản phẩm trong giỏ vào đơn hàng
-        foreach ($cartItems as $item) {
-            $this->orderModel->addOrderItem($order_id, $item['id_product'], $item['quantity'], $item['price']);
-        }
-
-        // Xóa giỏ hàng sau khi tạo đơn hàng
-        $this->cartModel->clearCart($id_user);
-
-        return $order_id;  // Trả về ID đơn hàng mới tạo
     }
 
-    // Lấy thông tin đơn hàng của người dùng
-    public function getOrderHistory($id_user) {
-        return $this->orderModel->getOrdersByUser($id_user);
+    // Thêm sản phẩm vào đơn hàng
+    public function addOrderItem($order_id, $product_id, $quantity, $price) {
+        $sql = "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
+        return $this->db->handle($sql, [$order_id, $product_id, $quantity, $price]);
     }
 
-    // Hiển thị chi tiết đơn hàng
-    public function viewOrder($id_order) {
-        return $this->orderModel->getOrder($id_order);
-    }
-
-    // Hiển thị lịch sử đơn hàng
-    public function showOrderHistory($id_user) {
-        $orders = $this->getOrderHistory($id_user);
-        require_once 'view/order/history.php';  // Truyền dữ liệu vào view
-    }
-    
-    // Hiển thị chi tiết đơn hàng
-    public function showOrderDetail($id_order) {
-        $order = $this->viewOrder($id_order);
-        require_once 'view/order/detail.php';  // Truyền dữ liệu vào view
+    // Lấy các sản phẩm của đơn hàng
+    public function getOrderItems($order_id) {
+        $sql = "SELECT oi.*, p.product_name 
+                FROM order_items oi
+                LEFT JOIN products p ON oi.product_id = p.id_product
+                WHERE oi.order_id = ?";
+        $this->db->handle($sql, [$order_id]);
+        return $this->db->getData($sql);
     }
 }
 ?>
