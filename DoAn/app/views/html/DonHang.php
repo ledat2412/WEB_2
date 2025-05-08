@@ -24,6 +24,26 @@
         $updateStatus = "UPDATE orders SET status = '$status_name' WHERE id_order = '$id_order'";
         $db->handle ($updateStatus);
     }
+
+    if (isset($_POST["btn_filter"])) {
+        $district_filter = $_POST["district"];
+        $status_filter = $_POST["status"];
+
+        $filter = "SELECT O.id_order, O.id_users, O.status, A.address, U.username
+            FROM orders O
+            JOIN `user` U ON O.id_users = U.id_users
+            JOIN addresses A ON A.id_address = O.address
+            WHERE 1=1";
+
+            if (!empty($district_filter)) {
+                $filter .= " AND A.address LIKE '%$district_filter%'";
+            }
+
+            if (!empty($status_filter)) {
+                $filter .= " AND O.status = '$status_filter'";
+            }
+        $order_product = $db->getData($filter);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -167,14 +187,15 @@
             </ul>
 
             <div class="content-filter">
-                <select id="typeOfcondition">
+                <form action="" method="post">
+                <select id="typeOfcondition" name="status">
                     <option value="">Tất cả đơn hàng</option>
                     <option value="ordered">ordered</option>
                     <option value="packed">packed</option>
                     <option value="shipping">shipping</option>
                     <option value="finish">finish</option>
                 </select>
-                <select id="">
+                <select id="" name="district">
                     <option value="">Tất cả đơn hàng</option>
                     <option value="Quận 1">Quận 1</option>
                     <option value="Quận 2">Quận 2</option>
@@ -193,7 +214,8 @@
                     <option value="Quận Tân Bình">Quận Tân Bình</option>
                     <option value="Quận Bình Thạnh">Quận Bình Thạnh</option>
                 </select>
-                <button id="filter">Lọc</button>
+                <button id="filter" type="submit" name="btn_filter">Lọc</button>
+                </form>
             </div>
 
             <div class="time-filter">
@@ -273,7 +295,7 @@
 
     <script src ="/admin/js/admin.js"></script>
     <script src ="/admin/js/chart-bar.js"></script>
-    <script src ="../../../public/js/LocDonHang.js"></script>
+    <!-- <script src ="../../../public/js/LocDonHang.js"></script> -->
     <script src = "/admin/js/Click.js"></script>
 </body>
 </html>

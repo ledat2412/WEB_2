@@ -25,6 +25,7 @@
         $delete_data = $db->handle("DELETE FROM PRODUCT WHERE product_id = '$id'");
         header("location: DanhSachSanPham.php");
     }
+
 ?>
 
 <!DOCTYPE html>
