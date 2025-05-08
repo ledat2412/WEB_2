@@ -190,3 +190,7 @@ if (isset($_GET['act'])) {
 if (!isset($_GET['act']) || ($_GET['act'] !== 'login' && $_GET['act'] !== 'register')) {
     include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/base/footer.php";
 }
+
+// thêm vào giỏ hàng
+require_once __DIR__ . '/CartController.php';
+CartController::handleAddToCartRequest();

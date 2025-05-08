@@ -22,9 +22,25 @@ class Cart {
         $this->db = new database();
     }
 
+    // public function addToCart($id_user, $id_product, $quantity) {
+    //     $sql = "INSERT INTO cart (id_user, id_product, quantity) VALUES (?, ?, ?)";
+    //     return $this->db->handle($sql, [$id_user, $id_product, $quantity]);
+    // }
+
     public function addToCart($id_user, $id_product, $quantity) {
-        $sql = "INSERT INTO cart (id_user, id_product, quantity) VALUES (?, ?, ?)";
-        return $this->db->handle($sql, [$id_user, $id_product, $quantity]);
+        // Kiểm tra sản phẩm đã có trong giỏ chưa
+        $existItem = $this->checkCartItem($id_user, $id_product);
+
+        if (!empty($existItem)) {
+            // Nếu đã có thì cập nhật số lượng mới
+            $id_cart = $existItem[0]['id_cart'];
+            $newQuantity = $existItem[0]['quantity'] + $quantity;
+            $this->updateCartItem($id_cart, $newQuantity);
+        } else {
+            // Nếu chưa có thì thêm mới
+            $sql = "INSERT INTO cart (id_user, id_product, quantity) VALUES (?, ?, ?)";
+            $this->db->handle($sql, [$id_user, $id_product, $quantity]);
+        }
     }
 
     public function getCartItem($id) {

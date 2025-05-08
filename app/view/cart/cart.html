@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cart.css"> 
+    <title>Document</title>
+</head>
+<body>
+    <!-- Phần chọn sản phẩm -->
+    <div class="product-select" style="margin-bottom:20px;">
+        <label for="product-dropdown">Chọn sản phẩm:</label>
+        <select id="product-dropdown">
+            <option value="1900000" data-name="Sản phẩm 1" data-img="/img/logo_compact.png">Sản phẩm 1 - 1.900.000 ₫</option>
+            <option value="2500000" data-name="Sản phẩm 2" data-img="/img/logo_compact.png">Sản phẩm 2 - 2.500.000 ₫</option>
+            <option value="1200000" data-name="Sản phẩm 3" data-img="/img/logo_compact.png">Sản phẩm 3 - 1.200.000 ₫</option>
+        </select>
+        <button onclick="addProductToCart()">Thêm vào giỏ</button>
+    </div>
+    <div class="cart-container">
+        <div class="cart-left">
+            <div class="form-price">
+                <div class="header-row">
+                    <div class="choose-title">chọn</div>
+                    <div class="product-title">sản phẩm</div>
+                    <div class="price-title">giá</div>
+                    <div class="quantity-title">số lượng</div>
+                    <div class="subtotal-title">tạm tính</div>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div id="cart-items">
+                <!-- Sản phẩm trong giỏ sẽ được render ở đây -->
+            </div>
+            <!-- Thêm nút chọn sản phẩm để thanh toán -->
+            <div style="margin: 16px 0; display: flex; gap: 10px;">
+                <button class="select-btn select-all-btn" onclick="selectAllCartItems(true)">Chọn tất cả</button>
+                <button class="select-btn deselect-all-btn" onclick="selectAllCartItems(false)">Bỏ chọn tất cả</button>
+            </div>
+            <button class="continue-shopping">← Tiếp tục xem sản phẩm</button>
+        </div>
+        
+        <div class="cart-right">
+            <h2>CỘNG GIỎ HÀNG</h2>
+            <div class="line"></div>
+            <div class="cart-summary">
+                <p>Tạm tính</p>
+                <p id="cart-subtotal">1.900.000 ₫</p>
+            </div>
+            <h3>Giao hàng</h3>
+            <div class="shipping-options">
+                <input type="radio" id="standard" name="shipping" value="40000" checked onclick="updateCart()">
+                <label for="standard">Chuyển phát thường mại điện tử (GHN, Viettel Post, GHTK,...): 40.000 ₫</label><br>
+                <input type="radio" id="express" name="shipping" value="65000" onclick="updateCart()">
+                <label for="express">Hỏa tốc: 65.000 ₫</label><br>
+            </div>
+            <p>Vận chuyển đến Hồ Chí Minh </p>
+            <button class="change-address">Đổi địa chỉ</button>
+            <div class="line"></div>
+            <div class="total">
+                <p>Tổng</p>
+                <p id="cart-total">1.940.000 ₫</p>
+            </div>
+            <div class="discount-code">
+                <h4>Mã ưu đãi</h4>
+                <input type="text" placeholder="Nhập mã ưu đãi">
+                <button>Áp dụng</button>
+            </div>
+            <div class="line"></div>
+            <button class="checkout">đặt hàng</button>
+        </div>
+    </div>
+    <!-- Thông báo toast -->
+    <div id="toast-notify" class="toast-notify" style="display:none;">
+        <span id="toast-message"></span>
+        <div id="toast-progress" class="toast-progress"></div>
+    </div>
+<script src="cart.js"></script>
+</body>
+</html>
