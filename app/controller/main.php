@@ -2,14 +2,31 @@
 session_start();
 ob_start();
 
+// if (!isset($_SESSION['user_id'])) {
+//     header("Location: /WEB_2/app/view/log/signin-admin.php");
+//     exit();
+// } else {
+//     if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
+//         // header("Location: /WEB_2/app/view/admin/dashboard.php");
+//         header("Location: /WEB_2/admin/home");
+//         exit();
+//     } else {
+//         header("Location: /WEB_2/error");
+//         exit();
+//     }
+// }
+
 // Nếu không có action, xử lý các act khác (home, login, register, ...)
-if (!isset($_GET['act']) || ($_GET['act'] !== 'login' && $_GET['act'] !== 'register')) {
+if (!isset($_GET['act']) || ($_GET['act'] !== 'login' && $_GET['act'] !== 'register' && $_GET['act'] !== 'admin' && $_GET['act'] !== 'error')) {
     include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/base/header.php";
 }
 
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
+        case 'error':
+            include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/404notfound/404.php";
+            exit();
         case 'home':
             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/base/home.php";
             break;
@@ -178,6 +195,42 @@ if (isset($_GET['act'])) {
         case 'cart':
             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/cart/cart.php";
             break;
+        case 'admin':
+            if (!isset($_SESSION['user_id'])) {
+                header("Location: /WEB_2/app/view/log/signin-admin.php");
+                exit();
+            } else {
+                if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
+                    // Nếu không có action, chuyển hướng sang dashboard
+                    if (!isset($_GET['action'])) {
+                        header("Location: /WEB_2/app/controller/main.php?act=admin&action=dashboard");
+                        exit();
+                    }
+                    include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/admin/sidebar.php";
+                    $action = $_GET['action'];
+                    switch ($action) {
+                        case 'dashboard':
+                            include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/admin/dashboard.php";
+                            break;
+                        case 'product_list':
+                            include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/admin/product_list.php";
+                            break;
+                        case 'order_list':
+                            include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/admin/order_list.php";
+                            break;
+                        case 'user_list':
+                            include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/admin/user_list.php";
+                            break;
+                        default:
+                            include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/admin/dashboard.php";
+                            break;
+                    }
+                } else {
+                    header("Location: /WEB_2/error");
+                    exit();
+                }
+            }
+            break;
         default:
             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/base/home.php";
             break;
@@ -187,7 +240,7 @@ if (isset($_GET['act'])) {
 }
 
 // Đảm bảo footer nằm ngoài main-container
-if (!isset($_GET['act']) || ($_GET['act'] !== 'login' && $_GET['act'] !== 'register')) {
+if (!isset($_GET['act']) || ($_GET['act'] !== 'login' && $_GET['act'] !== 'register' && $_GET['act'] !== 'admin' && $_GET['act'] !== 'error')) {
     include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/base/footer.php";
 }
 

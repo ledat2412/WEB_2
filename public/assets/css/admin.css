@@ -934,15 +934,15 @@ body {
 
 /* ============Xoa============= */
 .warning-notify-container{
-    position: fixed;
-    display: none;    
+    display: none;
+    position: fixed;   
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 100;
     background-color: rgba(0,0,0,0.5);
 }
 
-.warning-notify-container:target{
+.warning-notify-container.active {
     display: block;
 }
 
@@ -1514,6 +1514,7 @@ body {
     border: 1px solid black;
     outline: none;
     background-color: #fff;
+    cursor: pointer;
 }
 
 
@@ -1550,7 +1551,7 @@ body {
     justify-content: center;
     flex-wrap:wrap;
 }
-
+/* 
 .Product-list-header{
     display: flex;
     justify-content: space-evenly;
@@ -1559,7 +1560,6 @@ body {
 }
 
 .Product-list-header div{
-    /* display: flex; */
     text-align: center;
     width:160px;
 }
@@ -1601,7 +1601,7 @@ body {
 .Product-list-detail img{
     width: 70px;
     height: 70px;
-}
+} */
 
 /* .Product-list-header, .Product-list-body {
     display: grid;
@@ -1630,6 +1630,58 @@ body {
     height: 70px;
     margin: 0 auto; 
 } */
+
+/* Định dạng bảng sản phẩm */
+.Product-list-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.Product-list-table th, .Product-list-table td {
+    padding: 12px 15px;
+    border: none;
+}
+
+.Product-list-table td {
+    text-align: center;
+}
+
+.Product-list-table th {
+    background-color: rgba(255, 255, 255, 0.9);
+    font-weight: bold;
+    text-align: center;
+}
+
+.Product-list-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.Product-list-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.Product-list-table img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+    width: 70px;
+    height: 70px;
+}
+
+.Product-list-table .action-icons a {
+    margin: 0 5px;
+    color: #333;
+    text-decoration: none;
+}
+
+.Product-list-table .action-icons a:hover {
+    color: #007bff;
+}
 /* ==============Sửa-thông-tin=============== */
 #content main .repair {
     height: 100vh;
@@ -1646,8 +1698,8 @@ body {
 
 #content main .repair .repair-content {
     background-color: var(--sidebar-color);
-    width: 400px;
-    height: 460px;
+    width: 70vw;
+    height: 95vh;
     border: 2px solid black;
     border-radius: 20px;
 }
@@ -1663,12 +1715,12 @@ body {
 }
 
 #content main .repair .repair-content .repair-data {
-    padding: 0 12px;
-    margin-top: 15px;
+    padding: 0 24px;
+    margin-top: 10px;
 }
 
 #content main .repair .repair-content .repair-data .repair-infor {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 #content main .repair .repair-content .image {
@@ -1688,11 +1740,13 @@ body {
     font-weight: 600;
 }
 
+#content main .repair .repair-content .repair-infor > input {
+    border-bottom: 1px solid black;
+}
 #content main .repair .repair-content input {
     width: 100%;
     height: 25px;
     border: none;
-    border-bottom: 1px solid black;
     outline: none;
 }
 
@@ -1704,21 +1758,29 @@ body {
     height: 50px;
 }
 
-#content main .repair .repair-content button {
+#content main .repair .repair-content a {
     width: 100px;
-    height: 30px;
+    height: 27px;
     background-color: var(--sidebar-color);
     outline: none;
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    color: black
 }
 
-#content main .repair .repair-content .return button {
+#content main .repair .repair-content .return  {
     border: 2px solid red;
 }
 
-#content main .repair .repair-content .enter-repair button {
+#content main .repair .repair-content .repair-submit > input {
     border: 2px solid green;
     cursor: pointer;
+    width: 100px;
+    height: 30px;
+    background-color: var(--sidebar-color);
 }
 
 
@@ -1867,8 +1929,8 @@ body {
 
 #content main .add-new .add-product-new {
     background-color: var(--sidebar-color);
-    width: 600px;
-    height: 600px;
+    width: 800px;
+    height: 700px;
     border: 2px solid black;
     border-radius: 20px;
 }
@@ -1918,7 +1980,7 @@ body {
 }
 
 #content main .add-new .add-product-new .add-data-new .add-infor-new {
-    margin-bottom: 15px;
+    margin-bottom: 7px;
 }
 
 #content main .add-new .add-product-new label {
@@ -1932,7 +1994,7 @@ body {
     border: none;
     border-bottom: 1px solid black;
     outline: none;
-    margin-top: 5px;
+    margin-top: 1px;
 }
 
 #content main .add-new .add-product-new .add-submit-new {
@@ -1951,13 +2013,22 @@ body {
     border: none;
 }
 
-#content main .add-new .add-product-new .return-new button {
+#content main .add-new .add-product-new .return-new  {
     border: 2px solid red;
+    cursor: pointer;
+    height: 27px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
 }
 
-#content main .add-new .add-product-new .enter-add-new button {
+#content main .add-new .add-product-new .enter-add-new input {
     border: 2px solid green;
     cursor: pointer;
+    height: 30px;
+    width: 150px;
 }
 
 /* Lọc theo thời gian hóa đơn */
@@ -2110,3 +2181,65 @@ body {
     text-align: center;
     font-size: 16px;
 }
+
+
+/* -----------------Color------------------- */
+.color-picked {
+    display: flex;
+    gap: 20px;
+}
+
+.color-option input[type="radio"] {
+    display: none;
+} 
+
+.color-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    display: inline-block;
+}
+
+input[type="radio"]:checked + .color-circle {
+    border-color: black;
+  }
+
+
+  .image-upload {
+    position: relative;
+    width: 200px;
+    height: 60px;
+    border: 1px dashed #aaa;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-upload input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.image-upload img#preview {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.preview-text {
+    position: absolute;
+    color: #999;
+    font-weight: bold;
+    pointer-events: none; /* để không chặn click */
+}
+
+

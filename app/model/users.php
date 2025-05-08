@@ -54,6 +54,38 @@ class Users {
     // Phương thức đăng nhập
     public function login($account, $password) {
         // Tìm kiếm user theo username hoặc email
+        $sql = "SELECT * FROM USERS WHERE (username = '$account' OR email = '$account') AND password = '$password' AND role = 0";
+        $this->db->handle($sql);
+        $data = $this->db->getData($sql);
+
+        if($data) {
+            // Lưu thông tin vào session
+            $_SESSION['user_id'] = $data[0]['id_users'];
+            $_SESSION['username'] = $data[0]['username'];
+            $_SESSION['email'] = $data[0]['email'];
+            $_SESSION['role'] = $data[0]['role'];
+            return "Đăng nhập thành công";
+        }
+        return "Thông tin đăng nhập không đúng";
+    }
+    // public function loginforadmin($account, $password) {
+    //     // Tìm kiếm user theo username hoặc email
+    //     $sql = "SELECT * FROM USERS WHERE (username = '$account' OR email = '$account') AND password = '$password' AND role = 1";
+    //     $this->db->handle($sql);
+    //     $data = $this->db->getData($sql);
+
+    //     if($data) {
+    //         // Lưu thông tin vào session
+    //         $_SESSION['user_id'] = $data[0]['id_users'];
+    //         $_SESSION['username'] = $data[0]['username'];
+    //         $_SESSION['email'] = $data[0]['email'];
+    //         $_SESSION['role'] = $data[0]['role'];
+    //         return "Đăng nhập thành công";
+    //     }
+    //     return "Thông tin đăng nhập không đúng";
+    // }
+    public function loginforadmin($account, $password) {
+        // Tìm kiếm user theo username hoặc email
         $sql = "SELECT * FROM USERS WHERE (username = '$account' OR email = '$account') AND password = '$password'";
         $this->db->handle($sql);
         $data = $this->db->getData($sql);

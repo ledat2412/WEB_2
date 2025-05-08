@@ -24,3 +24,8 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/]+)/?$ app/controller/main.php?act=$1 [L,QSA]
 
+# Rewrite 404 error page
+RewriteRule ^error/?$ app/controller/main.php?act=error [L,QSA]
+# Admin panel rewrite rules
+RewriteRule ^admin/home/?$ app/controller/admin.php?act=login&action=dashboard [L,QSA]
+

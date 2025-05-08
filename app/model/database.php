@@ -65,14 +65,13 @@ class database
     {
         $data = [];
         if ($sqlOrStmt instanceof \mysqli_stmt) {
-            // Nếu là prepared statement
             $result = $sqlOrStmt->get_result();
             if ($result && $result->num_rows > 0) {
                 while ($rows = $result->fetch_array()) {
                     $data[] = $rows;
                 }
             }
-            $sqlOrStmt->close(); // Đóng statement sau khi dùng xong
+            $sqlOrStmt->close();
         } else {
             $this->connect();
             $this->result = mysqli_query($this->conn, $sqlOrStmt);

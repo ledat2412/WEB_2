@@ -6,7 +6,7 @@ document.getElementById('filter').addEventListener('click', function() {
     const tableRows = document.querySelectorAll('#content main .table-order tbody tr');
 
     tableRows.forEach(row => {
-        const statusCell = row.cells[5].textContent; // ô Trạng thái
+        const statusCell = row.cells[4].textContent; // ô Trạng thái
 
         // Kiểm tra nếu có trạng thái được chọn và so sánh với trạng thái của hàng
         const Matches = selecteCondition ? statusCell.includes(selecteCondition) : true;
