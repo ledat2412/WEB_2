@@ -6,7 +6,6 @@ class database
     private $pass = "";
     private $database = "lining_1";
 
-
     
     private $conn = null;
     private $result = null;
@@ -21,11 +20,11 @@ class database
     {
         $this->conn = new mysqli($this->server, $this->user, $this->pass, $this->database);
         if ($this->conn->connect_error) {
-            die("Kết nối thất bại");
+            die("Kết nối thất bại: " . $this->conn->connect_error);
         }
     }
 
-    // Hàm thực thi 
+    // Hàm thực thi câu lệnh SQL mà không có tham số
     public function execute($sql)
     {
         $this->connect();
@@ -33,16 +32,16 @@ class database
             die("Hàm chưa được thực thi");
         }
     }
-    
-    // Hàm xử lý các lệnh 
+
+    // Hàm xử lý các câu lệnh SQL có tham số
     public function handle($sql, $params = [])
     {
         $this->connect();
         if (empty($params)) {
-            // Không có tham số, chạy query bình thường
+            // Nếu không có tham số, dùng query bình thường
             return $this->conn->query($sql);
         } else {
-            // Có tham số, dùng prepared statement
+            // Nếu có tham số, sử dụng prepared statement
             $stmt = $this->conn->prepare($sql);
             if ($stmt === false) {
                 die('Prepare failed: ' . $this->conn->error);
@@ -84,15 +83,10 @@ class database
         return $data;
     }
 
-    public function getAllData($sql)
-    {
-        $this->connect();
-        $this->result = mysqli_query($this->conn, $sql);
-        return $this->result;
-    }
-
+    // Lấy ID của bản ghi vừa chèn vào
     public function getInsertId()
     {
         return $this->conn->insert_id;
     }
 }
+?>

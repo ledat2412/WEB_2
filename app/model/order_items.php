@@ -2,6 +2,16 @@
 // app/models/OrderItems.php
 
 require_once 'database.php';
+$table_order_items = $db->handle("CREATE TABLE IF NOT EXISTS order_items (
+    id_order_item INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    order_id INT UNSIGNED NOT NULL,
+    product_id INT UNSIGNED NOT NULL,
+    quantity INT UNSIGNED NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id_order),
+    FOREIGN KEY (product_id) REFERENCES products(id_product)
+)");
+
 
 
 class OrderItems {
