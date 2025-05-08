@@ -28,19 +28,18 @@ INSERT INTO `product` (`id_product`, `product_name`, `shoe_code`, `size`, `pictu
 (22, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '9', '', ' 2346545', 100, 3, 1, 0, 1, 3),
 (23, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '9.5', '', ' 2346545', 100, 3, 1, 0, 1, 3),
 (24, 'FEIDIAN 3 CHALLENGER', 'ARMT037-1', '10', '', ' 2346545', 100, 3, 1, 0, 1, 3);
-../../../public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS073-7/
-
+../../../public/assets/img/Sản Phẩm/giaythoitrang/6
 INSERT INTO `product` (`id_product`, `product_name`, `shoe_code`, `size`, `picture_path`, `price`, `stock`, `color_id`, `material_id`, `sex_id`, `id_product_variant`, `description_id`) values 
-(25, 'Chitu 7 Pro', 'ARPU001-6V', '5.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
-(26, 'Chitu 7 Pro', 'ARPU001-6V', '6', '', ' 2346545', 100, 4, 2, 0, 1, 4),
-(27, 'Chitu 7 Pro', 'ARPU001-6V', '6.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
-(28, 'Chitu 7 Pro', 'ARPU001-6V', '7', '', ' 2346545', 100, 4, 2, 0, 1, 4),
-(29, 'Chitu 7 Pro', 'ARPU001-6V', '7.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
-(30, 'Chitu 7 Pro', 'ARPU001-6V', '8', '', ' 2346545', 100, 4, 2, 0, 1, 4),
-(31, 'Chitu 7 Pro', 'ARPU001-6V', '8.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
-(32, 'Chitu 7 Pro', 'ARPU001-6V', '9', '', ' 2346545', 100, 4, 2, 0, 1, 4),
-(33, 'Chitu 7 Pro', 'ARPU001-6V', '9.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
-(34, 'Chitu 7 Pro', 'ARPU001-6V', '10', '', ' 2346545', 100, 4, 2, 0, 1, 4);
+(125, 'Chitu 7 Pro', 'ARPU001-6V', '5.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(126, 'Chitu 7 Pro', 'ARPU001-6V', '6', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(127, 'Chitu 7 Pro', 'ARPU001-6V', '6.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(128, 'Chitu 7 Pro', 'ARPU001-6V', '7', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(129, 'Chitu 7 Pro', 'ARPU001-6V', '7.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(130, 'Chitu 7 Pro', 'ARPU001-6V', '8', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(131, 'Chitu 7 Pro', 'ARPU001-6V', '8.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(132, 'Chitu 7 Pro', 'ARPU001-6V', '9', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(133, 'Chitu 7 Pro', 'ARPU001-6V', '9.5', '', ' 2346545', 100, 4, 2, 0, 1, 4),
+(134, 'Chitu 7 Pro', 'ARPU001-6V', '10', '', ' 2346545', 100, 4, 2, 0, 1, 4);
 
 ../../../public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Lie Jun 6th nam ARZS003-13/
 INSERT INTO `descriptions` (`id_description`, `content`) VALUES
@@ -59,3 +58,15 @@ Phần Gót giày:
 Sử dụng công nghệ HEEL LOC là một thiết bị hỗ trợ và ổn định xung quanh gót giày để hỗ trợ người mang không bị mất thăng bằng trong quá trình tập luyện và di chuyển trên mọi địa hình
 ');
 ALTER TABLE `descriptions` AUTO_INCREMENT = 2;
+
+INSERT INTO `product` (`id_product`, `product_name`, `shoe_code`, `size`, `picture_path`, `price`, `stock`, `color_id`, `material_id`, `sex_id`, `id_product_variant`, `description_id`) values 
+(255, 'Feiying', 'AYTS020-5', '5.5', '../../../public/assets/img/Sản Phẩm/giaycaulong/3', ' 2346545', 100, 2, 1, 3, 4, 4),
+(256, 'Feiying', 'AYTS020-5', '6', '../../../public/assets/img/Sản Phẩm/giaycaulong/3', ' 2346545', 100, 2, 1, 3, 4, 4),
+(257, 'Feiying', 'AYTS020-5', '6.5', '../../../public/assets/img/Sản Phẩm/giaycaulong/3', ' 2346545', 100, 2, 1, 3, 4, 4),
+(258, 'Feiying', 'AYTS020-5', '7', '../../../public/assets/img/Sản Phẩm/giaycaulong/3', ' 2346545', 100, 2, 1, 3, 4, 4),
+(259, 'Feiying', 'AYTS020-5', '7.5', '../../../public/assets/img/Sản Phẩm/giaycaulong/3', ' 2346545', 100, 2, 1, 3, 4, 4),
+(260, 'Feiying', 'AYTS020-5', '8', '../../../public/assets/img/Sản Phẩm/giaycaulong/3', ' 2346545', 100, 2, 1, 3, 4, 4),
+(261, 'Feiying', 'AYTS020-5', '8.5', '../../../public/assets/img/Sản Phẩm/giaycaulong/3', ' 2346545', 100, 2, 1, 3, 4, 4),
+(262, 'Feiying', 'AYTS020-5', '9', '../../../public/assets/img/Sản Phẩm/giaycaulong/3', ' 2346545', 100, 2, 1, 3, 4, 4),
+(263, 'Feiying', 'AYTS020-5', '9.5', '../../../public/assets/img/Sản Phẩm/giaycaulong/3', ' 2346545', 100, 2, 1, 3, 4, 4),
+(264, 'Feiying', 'AYTS020-5', '10', '../../../public/assets/img/Sản Phẩm/giaycaulong/3', ' 2346545', 100, 2, 1, 3, 4, 4);
