@@ -934,6 +934,7 @@ body {
 
 /* ============Xoa============= */
 .warning-notify-container{
+<<<<<<< HEAD:z-old/Git-main/admin/css/admin.css
     position: fixed;
     display: none;    
     width: 100%;
@@ -943,6 +944,17 @@ body {
 }
 
 .warning-notify-container:target{
+=======
+    display: none;
+    position: fixed;   
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.warning-notify-container.active {
+>>>>>>> Quyen:DoAn/public/css/admin.css
     display: block;
 }
 
@@ -1514,6 +1526,7 @@ body {
     border: 1px solid black;
     outline: none;
     background-color: #fff;
+    cursor: pointer;
 }
 
 
@@ -1646,8 +1659,13 @@ body {
 
 #content main .repair .repair-content {
     background-color: var(--sidebar-color);
+<<<<<<< HEAD:z-old/Git-main/admin/css/admin.css
     width: 400px;
     height: 460px;
+=======
+    width: 70vw;
+    height: 95vh;
+>>>>>>> Quyen:DoAn/public/css/admin.css
     border: 2px solid black;
     border-radius: 20px;
 }
@@ -1663,12 +1681,12 @@ body {
 }
 
 #content main .repair .repair-content .repair-data {
-    padding: 0 12px;
-    margin-top: 15px;
+    padding: 0 24px;
+    margin-top: 10px;
 }
 
 #content main .repair .repair-content .repair-data .repair-infor {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 #content main .repair .repair-content .image {
@@ -1704,15 +1722,20 @@ body {
     height: 50px;
 }
 
-#content main .repair .repair-content button {
+#content main .repair .repair-content a {
     width: 100px;
-    height: 30px;
+    height: 27px;
     background-color: var(--sidebar-color);
     outline: none;
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    color: black
 }
 
-#content main .repair .repair-content .return button {
+#content main .repair .repair-content .return  {
     border: 2px solid red;
 }
 
@@ -1918,7 +1941,11 @@ body {
 }
 
 #content main .add-new .add-product-new .add-data-new .add-infor-new {
+<<<<<<< HEAD:z-old/Git-main/admin/css/admin.css
     margin-bottom: 15px;
+=======
+    margin-bottom: 7px;
+>>>>>>> Quyen:DoAn/public/css/admin.css
 }
 
 #content main .add-new .add-product-new label {
@@ -1932,7 +1959,7 @@ body {
     border: none;
     border-bottom: 1px solid black;
     outline: none;
-    margin-top: 5px;
+    margin-top: 1px;
 }
 
 #content main .add-new .add-product-new .add-submit-new {
@@ -1951,8 +1978,15 @@ body {
     border: none;
 }
 
-#content main .add-new .add-product-new .return-new button {
+#content main .add-new .add-product-new .return-new  {
     border: 2px solid red;
+    cursor: pointer;
+    height: 27px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
 }
 
 #content main .add-new .add-product-new .enter-add-new button {
@@ -2109,4 +2143,70 @@ body {
     height: 25px;
     text-align: center;
     font-size: 16px;
+<<<<<<< HEAD:z-old/Git-main/admin/css/admin.css
 }
+=======
+}
+
+
+/* -----------------Color------------------- */
+.color-picked {
+    display: flex;
+    gap: 20px;
+}
+
+.color-option input[type="radio"] {
+    display: none;
+} 
+
+.color-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    display: inline-block;
+}
+
+input[type="radio"]:checked + .color-circle {
+    border-color: black;
+  }
+
+
+  .image-upload {
+    position: relative;
+    width: 200px;
+    height: 60px;
+    border: 1px dashed #aaa;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-upload input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.image-upload img#preview {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.preview-text {
+    position: absolute;
+    color: #999;
+    font-weight: bold;
+    pointer-events: none; /* để không chặn click */
+}
+
+
+>>>>>>> Quyen:DoAn/public/css/admin.css

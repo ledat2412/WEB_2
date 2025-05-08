@@ -55,10 +55,7 @@
                     <input type="password" name="confirm_pass" class="pass" placeholder="Checking you password" required>
                 </div>
                 <div class="Resister-form-group">
-                    <input type="text" name="phone" class="phone" placeholder="Phone" required>
-                </div>
-                <div class="Resister-form-group">
-                    <input type="email" name="gmail" class="gmail" placeholder="Email" required>
+                    <input type="email" name="email" class="gmail" placeholder="Email" required>
                 </div>
                 <div class="Resister-form-group">
                     <span class="error" >
