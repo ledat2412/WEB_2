@@ -266,7 +266,7 @@
                 </li>
             </ul>
 
-            <div class="chart-datetime">
+            <!-- <div class="chart-datetime">
                 <div class="datetime">
                     <input type="date">
                     <input type="date">
@@ -277,7 +277,7 @@
             <div class="chart">
                 <canvas id="chart-bar">
                 </canvas>
-            </div>
+            </div> -->
 
             <div class="chart-datetime">
                 <div class="datetime">
@@ -288,182 +288,14 @@
 
 
             <div class="customer-chart-container">
-
-                <div class="char-title">
-                    <h3>Doanh thu</h3>
-                </div>
-
-                <div class="customer-chart">
-                    <a class="customer-chart-col" style="--percent: 88%; --color: #99FFFF" href="#top-customer">
-                        <div class="data-container">
-                            <ul class="data">
-                                <li class="data-item">Doanh thu: 26 triệu</li>
-                            </ul>
-                        </div>
-                    </a>
-                    <a class="customer-chart-col" style="--percent: 17%; --color: #CCFF66" href="#top-customer">
-                        <div class="data-container">
-                            <ul class="data">
-                                <li class="data-item">Doanh thu: 5 triệu</li>
-                            </ul>
-                        </div>
-                    </a>
-                    <a class="customer-chart-col" style="--percent: 40%; --color: #FFCC33" href="#top-customer">
-                        <div class="data-container">
-                            <ul class="data">
-                                <li class="data-item">Doanh thu: 10 triệu</li>
-                            </ul>
-                        </div>
-                    </a>
-                    <a class="customer-chart-col" style="--percent: 60%; --color: #FF9933" href="#top-customer">
-                        <div class="data-container">
-                            <ul class="data">
-                                <li class="data-item">Doanh thu: 15 triệu</li>
-                            </ul>
-                        </div>
-                    </a>
-                    <a class="customer-chart-col" style="--percent: 100%; --color: #DDDDDD" href="#top-customer">
-                        <div class="data-container">
-                            <ul class="data">
-                                <li class="data-item">Doanh thu: 30 triệu</li>
-                            </ul>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="time-container">
-                    <div>Tôn Quyền</div>
-                    <div>Đức Đạt</div>
-                    <div>Phương Nhi</div>
-                    <div>Võ Thị Thương</div>
-                    <div>Minh Huy</div>
-                </div>
-                <div class="stat-container">
-                    <ul class="stat">
-                        <li>0</li>
-                        <li>5</li>
-                        <li>10</li>
-                        <li>15</li>
-                        <li>20</li>
-                        <li>25</li>
-                        <li>30</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="detail">
-                <div class="left">
-                    <div class="recent-orders">
-                        <h3>Recent-orders</h3>
-                        <a href="../../views/html/DonHang.php">
-                            <h3>View all</h3>
-                        </a>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Model</td>
-                                <td>Price</td>
-                                <td>Payment</td>
-                                <td>Status</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>ARMT037-1</td>
-                                <td>1,850,000₫</td>
-                                <td>Cash</td>
-                                <td>Delivered</td>
-                            </tr>
-                            <tr>
-                                <td>ARPU001-6V</td>
-                                <td>2,556,000₫</td>
-                                <td>Transfer</td>
-                                <td>In progress</td>
-                            </tr>
-                            <tr>
-                                <td>ABAS081-1</td>
-                                <td>1,953,000₫</td>
-                                <td>Cash</td>
-                                <td>Return</td>
-                            </tr>
-                            <tr>
-                                <td>ABAS071-5</td>
-                                <td>2,435,000₫</td>
-                                <td>Cash</td>
-                                <td>Pending</td>
-                            </tr>
-                            <tr>
-                                <td>ABPS039-4</td>
-                                <td>1,561,000₫</td>
-                                <td>Transfer</td>
-                                <td>Delivered</td>
-                            </tr>
-                            <tr>
-                                <td>AGLT179-3V</td>
-                                <td>663,709₫</td>
-                                <td>Transfer</td>
-                                <td>Return</td>
-                            </tr>
-                            <tr>
-                                <td>AGLU009-1V</td>
-                                <td>1,367,673₫</td>
-                                <td>Transfer</td>
-                                <td>In progress</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="right">
-                    <div class="recent-customers">
-                        <h3>Recent-customers</h3>
-                        <a href="../../views/html/Quanlycauhinh.php#">
-                            <h3>View all</h3>
-                        </a>
-                    </div>
-                    <table>
+                <table class="statis_table">
+                    <thead>
                         <tr>
-                            <td>
-                                <div class="image">
-                                    <img src="/img/siunhancam.jpg" alt="">
-                                </div>
-                            </td>
-                            <td><h3>Tôn Quyền<br><span>VietNam</span></h3></td>
+                            <td></td>
+                            <td></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="image">
-                                    <img src="/img/siunhanden.jpg" alt="">
-                                </div>
-                            </td>
-                            <td><h3>Võ Thị Thương<br><span>VietNam</span></h3></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="image">
-                                    <img src="/img/siunhando.jpg" alt="">
-                                </div>
-                            </td>
-                            <td><h3>Lý Minh Huy<br><span>VietNam</span></h3></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="image">
-                                    <img src="/img/siunhanvang.jpg" alt="">
-                                </div>
-                            </td>
-                            <td><h3>Đức Đạt<br><span>VietNam</span></h3></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="image">
-                                    <img src="/img/siunhanxanh.jpg" alt="">
-                                </div>
-                            </td>
-                            <td><h3>Phương Nhi<br><span>VietNam</span></h3></td>
-                        </tr>
-                    </table>
-                </div>
+                    </thead>
+                </table>
             </div>
         </main>
     </section>

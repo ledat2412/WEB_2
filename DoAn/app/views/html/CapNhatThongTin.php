@@ -69,9 +69,9 @@
                     $up_username = $_POST['old_username'];
                     $up_email = $_POST['old_email'];
                     $up_pass = $_POST['old_pass'];
-                    $up_role = $_POST['old_role'];
+                    // $up_role = $_POST['old_role'];
                     
-                    $update_role = $db ->handle("UPDATE roles SET role_name = '$up_role' WHERE id_role ='$role_id'");
+                    // $update_role = $db ->handle("UPDATE roles SET role_name = '$up_role' WHERE id_role ='$role_id'");
                     $update = $db -> handle("UPDATE user SET username = '$up_username', 
                                                     email = '$up_email', password = '$up_pass' WHERE id_users = '$id'");
                 }

@@ -13,7 +13,8 @@
 
             $user_role = $db -> handle("INSERT INTO roles(role_name) VALUES('User')");
             $role_id = $db -> getInsertId();
-            $users = $db -> handle("INSERT INTO user(email, username, password, role) VALUES('$email', '$username', '$pass', '$role_id')");
+            $user_status = $db ->handle("INSERT INTO status(id_status, status) VALUES ('0', 'Open')");
+            $users = $db -> handle("INSERT INTO user(email, username, password, role, status) VALUES('$email', '$username', '$pass', '$role_id', '0')");
         }
     }
 ?>

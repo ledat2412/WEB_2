@@ -142,7 +142,14 @@
                             echo '<td data-label="Mật khẩu"> '.$data['password'].' </td>';
                             echo '<td data-label="Vai trò"> '.$data['role_name'].' </td>';
                             echo '<td data-label="Trạng thái">';
-                                echo '<i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>';
+                                echo '<form method="post" action="KhoaUser.php">
+                                        <input type = "hidden" name = "id_user" value = "'.$data['id_users'].'">
+                                        <select name="status" onchange="this.form.submit()">
+                                            <option value="">Trạng thái</option>
+                                            <option value="0"'.($data['status'] === '0' ? 'selected' : '').'>Mở</option>
+                                            <option value="1"'.($data['status'] === '1' ? 'selected' : '').'>Khóa</option>
+                                        </select>
+                                    </form>';
                             echo '</td>';
                             echo '<td data-label="Tác vụ">';
                                 echo '<a href = "../../views/html/CapNhatThongTin.php?get_id='.$data['id_users'].'&get_id_role='.$data['role'].'">';
