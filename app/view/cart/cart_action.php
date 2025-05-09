@@ -3,7 +3,7 @@ session_start();
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $input = $_POST;  // Sử dụng $_POST thay vì json_decode() vì AJAX gửi data dưới dạng URL encoded
+    $input = json_decode(file_get_contents('php://input'), true);
 
     // Xử lý khi cập nhật số lượng
     if ($input['action'] === 'update') {
@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 return $item['price'] * $item['quantity'];
             }, $_SESSION['cart']));
 
-            // Thêm phí vận chuyển
             $shipping_cost = 40000;
             $total_with_shipping = $total + $shipping_cost;
 
