@@ -1,33 +1,3 @@
-<?php 
-    include "../../models/tables/database.php";
-    include "../../models/tables/product.php";
-    include "../../models/tables/description.php";
-    include "../../models/tables/sex.php";
-    include "../../models/tables/color.php";
-    include "../../models/tables/material.php";
-    include "../../models/tables/product_variant.php";
-
-    $db = new database();
-    $sql = "SELECT 
-            P.product_id, P.product_name, P.picture_path, P.stock, P.price,
-            C.color_name, M.material_name, S.sex_name, V.product_variant_name, D.description_content
-            FROM PRODUCT P
-            JOIN COLORS C ON P.color_id = C.color_id
-            JOIN MATERIALS M ON P.material_id = M.material_id
-            JOIN SEX S ON P.sex_id = S.sex_id
-            JOIN PRODUCT_VARIANT V ON P.product_variant_id = V.product_variant_id
-            JOIN DESCRIPTIONS D ON P.description_id = D.description_id";
-
-    $DataProduct = $db->getData($sql);
-
-    if(isset($_POST["button_delete"])) {
-        $id = $_POST["product_id_delete"];
-        $delete_data = $db->handle("DELETE FROM PRODUCT WHERE product_id = '$id'");
-        header("location: DanhSachSanPham.php");
-    }
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -137,7 +107,7 @@
             </div>
             <div class="Add-product-container">
                 <div class="Add-product">
-                    <a href="../html/ThemSanPhamMoi.php">
+                    <a href="../../contronllers/handle/addProduct_contronller.php">
                         <button class="Add-product-content">
                             <span>
                                 &#43; Thêm sản phẩm mới
@@ -179,7 +149,7 @@
                                 echo '<td>' . $product["sex_name"] . '</td>'; 
                                 echo '<td> <textarea style="height: 7vh; width: 12vw; resize: none">' . $product["description_content"] . '</textarea></td>'; 
                                 echo '<td>
-                                        <a href="../../views/html/SuaSanPham.php?product_id=' . urlencode($product["product_id"]) . '">
+                                        <a href="../../contronllers/handle/editProduct_contronller.php?product_id=' . urlencode($product["product_id"]) . '">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                         <a href="javascript:void(0);" onclick="deleteProduct(' . $product["product_id"] . ')">
