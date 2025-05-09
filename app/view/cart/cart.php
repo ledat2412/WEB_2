@@ -89,6 +89,9 @@ $total_with_shipping = $total + $shipping_cost;
 // Biến thông báo lỗi
 $error_checkout = '';
 
+// Lấy lựa chọn ship_method từ session hoặc mặc định
+$selected_ship = $_SESSION['selected_ship_method'] ?? 'standard';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'checkout') {
     require_once '../model/orders.php';
     require_once '../model/order_items.php';
@@ -96,6 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $id_user = $_SESSION['user_id'];
     $id_address = $default_address['id_address'];
     $payment_method = $_POST['payment_method'] ?? 'cash';
+    $ship_method = $_POST['ship_method'] ?? 'standard';
+    $_SESSION['selected_ship_method'] = $ship_method; // Lưu vào session
     $ordersModel = new Orders();
     $orderItemsModel = new OrderItems();
 
@@ -104,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     if (count($cart_items) === 0) {
         $error_checkout = 'Giỏ hàng của bạn đang trống, không thể đặt hàng!';
     } else {
-        $id_order = $ordersModel->addOrder($id_user, $id_address, $payment_method, 'pending');
+        $id_order = $ordersModel->addOrder($id_user, $id_address, $payment_method, $ship_method, 'pending');
         foreach ($cart_items as $item) {
             $orderItemsModel->addOrderItem($id_order, $item['id_product'], $item['quantity'], $item['price']);
         }
@@ -114,6 +119,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         header('Location: /WEB_2/app/controller/main.php?act=order_success&id_order=' . $id_order);
         exit();
     }
+}
+
+// Xử lý AJAX lưu ship_method vào session
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ship_method']) && !isset($_POST['action'])) {
+    $_SESSION['selected_ship_method'] = $_POST['ship_method'];
+    echo 'ok';
+    exit();
 }
 ?>
 <!-- <?php var_dump($_SESSION['card_info'] ?? null); ?> -->
@@ -214,9 +226,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
         <h3>Giao hàng</h3>
         <div class="shipping-options">
-            <input type="radio" id="standard" name="shipping" value="40000" checked>
+            <input type="radio" id="standard" name="shipping" value="40000" <?php if ($selected_ship === 'standard') echo 'checked'; ?>>
             <label for="standard">Chuyển phát thường: 40.000 ₫</label><br>
-            <input type="radio" id="express" name="shipping" value="65000">
+            <input type="radio" id="express" name="shipping" value="65000" <?php if ($selected_ship === 'express') echo 'checked'; ?>>
             <label for="express">Hỏa tốc: 65.000 ₫</label><br>
         </div>
 
@@ -278,6 +290,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         <form method="POST" action="">
             <input type="hidden" name="action" value="checkout">
             <input type="hidden" id="payment_method_input" name="payment_method" value="<?php echo !empty($_SESSION['card_payment']) ? 'card' : 'cash'; ?>">
+            <input type="hidden" id="ship_method_input" name="ship_method" value="<?php echo $selected_ship; ?>">
             <button class="checkout" type="submit">Đặt hàng</button>
         </form>
     </div>
@@ -384,6 +397,21 @@ document.addEventListener('DOMContentLoaded', function() {
     paymentRadios.forEach(function(radio) {
         radio.addEventListener('change', function() {
             paymentInput.value = this.value;
+        });
+    });
+
+    var shipRadios = document.querySelectorAll('input[name="shipping"]');
+    var shipInput = document.getElementById('ship_method_input');
+    shipRadios.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            var method = (this.value == "65000") ? "express" : "standard";
+            shipInput.value = method;
+            // Gửi AJAX lưu vào session
+            fetch(window.location.pathname, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'ship_method=' + method
+            });
         });
     });
 });

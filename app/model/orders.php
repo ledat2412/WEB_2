@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 require_once 'database.php';
 require_once 'users.php';
 require_once 'addresses.php';
-require_once 'payments.php';
+// require_once 'payments.php';
 
 // Khởi tạo kết nối database
 $db = new database();
@@ -15,6 +15,7 @@ $table_orders = $db->handle("CREATE TABLE IF NOT EXISTS orders (
     id_order INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_user INT(11) UNSIGNED NOT NULL,
     id_address INT(11) UNSIGNED NOT NULL,
+    ship_method ENUM('standard', 'express') NOT NULL DEFAULT 'standard',
     payment_method ENUM('cash', 'card') NOT NULL DEFAULT 'cash',
     status ENUM('pending', 'processing', 'completed', 'cancelled') NOT NULL DEFAULT 'pending',
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -29,9 +30,9 @@ class Orders {
     }
 
     // Thêm đơn hàng mới
-    public function addOrder($id_user, $id_address, $payment_method = 'cash', $status = 'pending') {
-        $sql = "INSERT INTO orders (id_user, id_address, payment_method, status) VALUES (?, ?, ?, ?)";
-        $this->db->handle($sql, [$id_user, $id_address, $payment_method, $status]);
+    public function addOrder($id_user, $id_address, $payment_method = 'cash', $ship_method = 'standard', $status = 'pending') {
+        $sql = "INSERT INTO orders (id_user, id_address, payment_method, ship_method, status) VALUES (?, ?, ?, ?, ?)";
+        $this->db->handle($sql, [$id_user, $id_address, $payment_method, $ship_method, $status]);
         return $this->getLastInsertId();
     }
 
