@@ -10,7 +10,7 @@
             $id_user = $_POST['id_user'];
             
             if(isset($id_user)){
-                $db->handle("UPDATE user SET status = '$status'");
+                $db->handle("UPDATE user SET status = '$status' WHERE id_users ='$id_user'");
             }
         }
     }
