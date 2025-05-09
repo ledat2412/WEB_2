@@ -10,7 +10,7 @@
 </head>
 <body>
     <section id="sidebar">
-        <div id="warning-notify" class="warning-notify-container notify-container">
+        <form method="post" action="XoaUser.php" id="warning-notify" class="warning-notify-container notify-container">
             <div class="warning-content">
                 <div class="warning-header">
                     <span>
@@ -22,15 +22,12 @@
                     <span>
                         <h3 style="font-weight: 400; font-size: 20px;">Bạn chắc chắn muốn xóa?</h3>
                     </span>
-                    <a href="#">
-                        <button class="warning-btn">Có</button>
-                    </a>
-                    <a href="#">
-                        <button class="warning-btn">Không</button>
-                    </a>
+                        <input type="hidden" id="del_id" name="del_id">
+                        <input type="submit" name="del" class="warning-btn" value = "Có">
+                        <button type="button" onclick="closePopup()" class="warning-btn">Không</button>
                 </div>
             </div>
-        </div>
+        </form>
         <a href="#" class="logo">
             <i class="fa-solid fa-cloud"></i>
             <span class="text">Lining</span>
@@ -109,11 +106,6 @@
 
             <ul class="box-tool">
                 <li>
-                    <a href="../../views/html/CapNhatThongTin.php">
-                        <h3><i class="fa-light fa-plus"></i>Cập nhật dữ liệu</h3>
-                    </a>
-                </li>
-                <li>
                     <a href="../../views/html/ThemNguoiDung.php#">
                         <h3><i class="fa-light fa-plus"></i>Thêm thông tin</h3>
                     </a>
@@ -124,79 +116,52 @@
                 <thead>
                     <tr>
                         <td>STT</td>
-                        <td>Họ và tên</td>
-                        <td>Số điện thoại</td>
-                        <td>Địa chỉ</td>
+                        <td>Tên đăng nhập</td>
+                        <td>Email</td>
+                        <td>Mật khẩu</td>
+                        <td>Vai trò</td>
                         <td>Tình trạng</td>
                         <td>Tác vụ</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="tr-row">
-                        <td data-label="STT">1</td>
-                        <td data-label="Họ và tên">Tôn Quyền</td>
-                        <td data-label="Số điện thoại">0787554657</td>
-                        <td data-label="Địa chỉ">27C, Phạm Vấn, P.Phú Thọ Hòa, Q.Tân Phú</td>
-                        <td data-label="Trạng thái">
-                            <i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>
-                        </td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i></td>
-                            </a>
-                    </tr>
-                    <tr class="tr-row">
-                        <td data-label="STT">2</td>
-                        <td data-label="Họ và tên">Lý Minh Huy</td>
-                        <td data-label="Số điện thoại">0787554657</td>
-                        <td data-label="Địa chỉ">27C, Phạm Vấn, P.Phú Thọ Hòa, Q.Tân Phú</td>
-                        <td data-label="Trạng thái">
-                            <i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>
-                        </td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i></td>
-                            </a>
-                    </tr>
-                    <tr class="tr-row">
-                        <td data-label="STT">3</td>
-                        <td data-label="Họ và tên">Võ Thị Thương</td>
-                        <td data-label="Số điện thoại">0787554657</td>
-                        <td data-label="Địa chỉ">793/49/3 Trịnh Xuân Soạn, Q.7</td>
-                        <td data-label="Trạng thái">
-                            <i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>
-                        </td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i></td>
-                            </a>
-                    </tr>
-                    <tr class="tr-row">
-                        <td data-label="STT">4</td>
-                        <td data-label="Họ và tên">Trần Ngọc Phương Nhi</td>
-                        <td data-label="Số điện thoại">0787554657</td>
-                        <td data-label="Địa chỉ">27C, Phạm Vấn, P.Phú Thọ Hòa, Q.Tân Phú</td>
-                        <td data-label="Trạng thái">
-                            <i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>
-                        </td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i></td>
-                            </a>
-                    </tr>
-                    <tr class="tr-row">
-                        <td data-label="STT">5</td>
-                        <td data-label="Họ và tên">Lê Nguyễn Đức Đạt</td>
-                        <td data-label="Số điện thoại">0787554657</td>
-                        <td data-label="Địa chỉ">27C, Phạm Vấn, P.Phú Thọ Hòa, Q.Tân Phú</td>
-                        <td data-label="Trạng thái">
-                            <i id="icon" class="fa-solid fa-lock" onclick="toggleIcon(this)"></i>
-                        </td>
-                        <td data-label="Tác vụ">
-                            <a href="#warning-notify">
-                                <i class="fa-regular fa-x"></i></td>
-                            </a>
-                    </tr>
+                    <?php
+                        include_once "../../models/tables/users.php";
+                        include_once "../../models/tables/roles.php";
+
+                        $db = new database();
+
+                        $result = $db ->getData("SELECT * FROM user u JOIN roles r ON u.role = r.id_role");
+                        if(!empty($result)){
+                            foreach($result as $data){
+                        
+                        echo '<tr class="tr-row">';
+                            echo '<td data-label="STT">'. $data['id_users']. '</td>';
+                            echo '<td data-label="Tên đăng nhập">'. $data['username'].'</td>';
+                            echo '<td data-label="Email"> '.$data['email'].' </td>';
+                            echo '<td data-label="Mật khẩu"> '.$data['password'].' </td>';
+                            echo '<td data-label="Vai trò"> '.$data['role_name'].' </td>';
+                            echo '<td data-label="Trạng thái">';
+                                echo '<form method="post" action="KhoaUser.php">
+                                        <input type = "hidden" name = "id_user" value = "'.$data['id_users'].'">
+                                        <select name="status" onchange="this.form.submit()">
+                                            <option value="">Trạng thái</option>
+                                            <option value="0"'.($data['status'] === '0' ? 'selected' : '').'>Mở</option>
+                                            <option value="1"'.($data['status'] === '1' ? 'selected' : '').'>Khóa</option>
+                                        </select>
+                                    </form>';
+                            echo '</td>';
+                            echo '<td data-label="Tác vụ">';
+                                echo '<a href = "../../views/html/CapNhatThongTin.php?get_id='.$data['id_users'].'&get_id_role='.$data['role'].'">';
+                                    echo '<i class="fa-solid fa-pen-to-square"></i>';
+                                echo '</a>';
+                                echo '<a onclick="openPopup('.$data['id_users'].',);return false;">';
+                                        echo '<i class="fa-regular fa-x"></i>
+                                    </a>';
+                            echo '</td>';
+                        echo '</tr>';
+                        }} 
+                    ?>
                 </tbody>
             </table>
         </main>
@@ -205,5 +170,14 @@
     <script src ="/admin/js/chart-bar.js"></script>
     <script src ="/admin/js/Quanlycauhinh.js"></script>
     <script src = "/admin/js/Click.js"></script>
+    <script>
+        function openPopup(get_id){
+            document.getElementById("del_id").value = get_id;
+            document.getElementById("warning-notify").style.display="block";
+        }
+        function closePopup(){
+            document.getElementById("warning-notify").style.display="none";
+        }
+    </script>
 </body>
 </html>

@@ -1072,7 +1072,7 @@ body {
     outline: none;
 }
 
-#content main #addUsers .add-users-content .add-users-submit li:first-child {
+#content main #addUsers .add-users-content .add-users-submit .first-child {
     height: 35px;
     width: 100px;
     border-radius: 5px;
@@ -1085,7 +1085,7 @@ body {
     cursor: pointer;
 }
 
-#content main #addUsers .add-users-content .add-users-submit li:last-child {
+#content main #addUsers .add-users-content .add-users-submit .last-child {
     height: 35px;
     width: 150px;
     border-radius: 5px;
@@ -1213,7 +1213,7 @@ body {
 
 #content main #updateUsers .update-users-content .update-users-data {
     text-align: center;
-    height: 250px;
+    height: auto;
 }
 
 #content main #updateUsers .update-users-content .update-users-data h4 {
@@ -1224,8 +1224,8 @@ body {
 }
 
 #content main #updateUsers .update-users-content .update-users-data .update-data {
-    margin-top: 10px;
-    height: 40px
+    /* margin-top: 10px; */
+    height: 60px;
 }
 
 #content main #updateUsers .update-users-content .update-users-data .update-data input {
@@ -1240,10 +1240,11 @@ body {
 }
 
 #content main #updateUsers .update-users-content .update-users-submit {
-    height: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
     gap: 10px;
 }
 
