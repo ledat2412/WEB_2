@@ -136,7 +136,7 @@
                             <textarea name="descriptionNew" style="width: 100%; resize: none; margin-top: 5px;"><?php echo $product['description_content'] ?></textarea>
                         </div>
                         <div class="repair-submit">
-                            <a href="DanhSachSanPham.php" class="return">Thoát</a>
+                            <a href="../../contronllers/handle/listProduct_contronller.php" class="return">Thoát</a>
                             <input type="submit" name="btn_repair" value="Sửa Thông Tin">
                         </div>
                     </div>

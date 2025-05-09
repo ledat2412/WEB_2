@@ -149,7 +149,7 @@
                                 echo '<td>' . $product["sex_name"] . '</td>'; 
                                 echo '<td> <textarea style="height: 7vh; width: 12vw; resize: none">' . $product["description_content"] . '</textarea></td>'; 
                                 echo '<td>
-                                        <a href="../../views/html/SuaSanPham.php?product_id=' . urlencode($product["product_id"]) . '">
+                                        <a href="../../contronllers/handle/editProduct_contronller.php?product_id=' . urlencode($product["product_id"]) . '">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                         <a href="javascript:void(0);" onclick="deleteProduct(' . $product["product_id"] . ')">

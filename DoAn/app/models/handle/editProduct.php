@@ -23,7 +23,7 @@
             JOIN PRODUCT_VARIANT V ON P.product_variant_id = V.product_variant_id
             JOIN DESCRIPTIONS D ON P.description_id = D.description_id
             WHERE P.product_id = '$id'");
-            $this->db->getData($sql);
+            return $this->db->getData($sql);
         }
 
         public function updateProduct($descriptionNew, $description_id, $materialNew, $material_id, $sexNew, $sex_id, $colorNew, $color_id, $variantNew, $variant_id, $nameNew, $stockNew, $priceNew, $pictureNew, $id) {

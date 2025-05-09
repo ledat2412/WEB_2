@@ -6,7 +6,7 @@
 
     if (isset($_GET['product_id']) && !empty($_GET['product_id'])) {
         $id = $_GET['product_id'];
-        $editProductModel->getProduct($id);
+        $DataProduct = $editProductModel->getProduct($id);
         if (is_array($DataProduct) && count($DataProduct) > 0) {
             $product = $DataProduct[0];
             if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -33,7 +33,6 @@
                     } else {
                         $pictureNew = $product['picture_path']; // giữ ảnh cũ nếu không upload mới
                     }
-
                     if ($nameNew != $product['product_name'] || $variantNew != $product['product_variant_name'] || $stockNew != $product['stock'] || $priceNew != $product['price'] || $pictureNew != $product['picture_path'] || $materialNew != $product['material_name'] || $descriptionNew != $product['description_content'] || $sexNew != $product['sex_name'] || $colorNew != $product['color_name']) {
                         $editProductModel->updateProduct($descriptionNew, $description_id, $materialNew, $material_id, $sexNew, $sex_id, $colorNew, $color_id, $variantNew, $variant_id, $nameNew, $stockNew, $priceNew, $pictureNew, $id);
                         header("location: listProduct_contronller.php");
@@ -41,6 +40,7 @@
                     }
                 }
             } 
+            include "../../views/html/SuaSanPham.php";
         }
         else {
             die("Không tìm thấy sản phẩm hoặc lỗi truy vấn.");
