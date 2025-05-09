@@ -40,7 +40,7 @@ if (isset($_GET['act'])) {
             if (isset($_GET['skibidiyetyet'])) {
 
                 if (!isset($_SESSION['user_id'])) {
-                    header('Location: /WEB_2/login');
+                    header('Location: /login.php');
                     exit();
                 }
 
@@ -56,7 +56,7 @@ if (isset($_GET['act'])) {
                         require_once __DIR__ . '/../model/usertier.php';
                         $tiers = $tiers ?? []; // Lấy mảng $tiers từ model nếu chưa có
                         if (!isset($_SESSION['user_id'])) {
-                            header('Location: /WEB_2/login');
+                            header('Location: /login.php');
                             exit();
                         }
 
@@ -104,7 +104,7 @@ if (isset($_GET['act'])) {
 
                         // Kiểm tra đăng nhập
                         if (!isset($_SESSION['user_id'])) {
-                            header('Location: /WEB_2/login');
+                            header('Location: /login.php');
                             exit();
                         }
 
@@ -157,7 +157,30 @@ if (isset($_GET['act'])) {
                     // case 'product_list':
                     case 'product_list':
                         require_once __DIR__ . '/productlist_controller.php';
-                        break;
+                        // if (isset($_GET['category'])) {
+                        //     switch ($_GET['category'])) {
+                        //         case 'giaychaybo':
+                        //             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/controller/productshow_controller.php?variant=1";
+                        //             break;
+                        //         case 'giaybongro':
+                        //             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/product/giaybongro.php";
+                        //             break;
+                        //         case 'giaythoitrang':
+                        //             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/product/giaythoitrang.php";
+                        //             break;
+                        //         case 'giaycaulong':
+                        //             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/product/giaycaulong.php";
+                        //             break;
+                        //         default:
+                        //             // Trang hiển thị tất cả sản phẩm
+                        //             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/controller/CartController.php";
+                        //             break;
+                        //     }
+                        // } else {
+                        //     // Nếu không có category, hiển thị tất cả sản phẩm
+                        //     include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/product/all-products.php";
+                        // }
+                        // break;
                     case 'product_detail':
                         require_once __DIR__ . '/productdetail_controller.php';
                         break;
@@ -221,6 +244,6 @@ if (!isset($_GET['act']) || ($_GET['act'] !== 'login' && $_GET['act'] !== 'regis
     include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/base/footer.php";
 }
 
-// thêm vào giỏ hàng
+// // thêm vào giỏ hàng
 require_once __DIR__ . '/CartController.php';
 CartController::handleAddToCartRequest();
