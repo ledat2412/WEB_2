@@ -1072,7 +1072,7 @@ body {
     outline: none;
 }
 
-#content main #addUsers .add-users-content .add-users-submit li:first-child {
+#content main #addUsers .add-users-content .add-users-submit .first-child {
     height: 35px;
     width: 100px;
     border-radius: 5px;
@@ -1085,7 +1085,7 @@ body {
     cursor: pointer;
 }
 
-#content main #addUsers .add-users-content .add-users-submit li:last-child {
+#content main #addUsers .add-users-content .add-users-submit .last-child {
     height: 35px;
     width: 150px;
     border-radius: 5px;

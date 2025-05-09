@@ -9,9 +9,9 @@
             $email = $_POST['email'];
             $username = $_POST['username'];
             $pass = $_POST['pass'];
-            $role= $_POST['role_cbx'];
+            // $role= $_POST['role_cbx'];
 
-            $user_role = $db -> handle("INSERT INTO roles(role_name) VALUES('$role')");
+            $user_role = $db -> handle("INSERT INTO roles(role_name) VALUES('User')");
             $role_id = $db -> getInsertId();
             $users = $db -> handle("INSERT INTO user(email, username, password, role) VALUES('$email', '$username', '$pass', '$role_id')");
         }
@@ -91,16 +91,15 @@
                         <div class="add-data">
                             <input type="password" name="pass"  minlength="5" maxlength="15" placeholder="Tạo mật khẩu">
                         </div>
-                        <div class="add-data">
+                        <!-- <div class="add-data">
                             <label>Vai trò</label>
                             <input type="radio" name="role_cbx" value="Admin" >Admin
                             <input type="radio" name="role_cbx" value="User" >User
-                        </div>
+                        </div> -->
                     </div>
                     <div class="add-users-submit">
                         <li>
-                            <a href="../../views/html/Quanlycauhinh.php" class="first-child">
-                                <button>Thoát</button>
+                            <a href="../../views/html/Quanlycauhinh.php" class="first-child">Thoát
                             </a>
                         </li>
                         <li>

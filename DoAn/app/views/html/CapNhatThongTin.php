@@ -95,10 +95,10 @@
                             echo '<div class="update-data">
                             <input type="password" name="old_pass" placeholder="'.$data['password'].'"></div>';
                             echo '<div class="update-data">';
-                                echo '<input type="radio" name="old_role" class="update-checkbox" value="Admin">';
-                                echo '<label>Admin</label>';
-                                echo '<input type="radio" name="old_role" class="update-checkbox" value="User">';
-                                echo '<label>User</label>';
+                                // echo '<input type="radio" name="old_role" class="update-checkbox" value="Admin">';
+                                // echo '<label>Admin</label>';
+                                // echo '<input type="radio" name="old_role" class="update-checkbox" value="User">';
+                                // echo '<label>User</label>';
                             echo '</div>';
                             echo '<div class="update-users-submit">';
                                 echo '<li>';

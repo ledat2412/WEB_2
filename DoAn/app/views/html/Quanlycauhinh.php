@@ -10,7 +10,7 @@
 </head>
 <body>
     <section id="sidebar">
-        <div id="warning-notify" class="warning-notify-container notify-container">
+        <form method="post" action="XoaUser.php" id="warning-notify" class="warning-notify-container notify-container">
             <div class="warning-content">
                 <div class="warning-header">
                     <span>
@@ -22,15 +22,12 @@
                     <span>
                         <h3 style="font-weight: 400; font-size: 20px;">Bạn chắc chắn muốn xóa?</h3>
                     </span>
-                    <a href="#">
-                        <button class="warning-btn">Có</button>
-                    </a>
-                    <a href="#">
-                        <button class="warning-btn">Không</button>
-                    </a>
+                        <input type="hidden" id="del_id" name="del_id">
+                        <input type="submit" name="del" class="warning-btn" value = "Có">
+                        <button type="button" onclick="closePopup()" class="warning-btn">Không</button>
                 </div>
             </div>
-        </div>
+        </form>
         <a href="#" class="logo">
             <i class="fa-solid fa-cloud"></i>
             <span class="text">Lining</span>
@@ -119,11 +116,11 @@
                 <thead>
                     <tr>
                         <td>STT</td>
-                        <td>Họ và tên</td>
-                        <td>Số điện thoại</td>
-                        <td>Địa chỉ</td>
-                        <td>Tình trạng</td>
+                        <td>Tên đăng nhập</td>
+                        <td>Email</td>
+                        <td>Mật khẩu</td>
                         <td>Vai trò</td>
+                        <td>Tình trạng</td>
                         <td>Tác vụ</td>
                     </tr>
                 </thead>
@@ -151,6 +148,9 @@
                                 echo '<a href = "../../views/html/CapNhatThongTin.php?get_id='.$data['id_users'].'&get_id_role='.$data['role'].'">';
                                     echo '<i class="fa-solid fa-pen-to-square"></i>';
                                 echo '</a>';
+                                echo '<a onclick="openPopup('.$data['id_users'].',);return false;">';
+                                        echo '<i class="fa-regular fa-x"></i>
+                                    </a>';
                             echo '</td>';
                         echo '</tr>';
                         }} 
@@ -163,5 +163,14 @@
     <script src ="/admin/js/chart-bar.js"></script>
     <script src ="/admin/js/Quanlycauhinh.js"></script>
     <script src = "/admin/js/Click.js"></script>
+    <script>
+        function openPopup(get_id){
+            document.getElementById("del_id").value = get_id;
+            document.getElementById("warning-notify").style.display="block";
+        }
+        function closePopup(){
+            document.getElementById("warning-notify").style.display="none";
+        }
+    </script>
 </body>
 </html>
