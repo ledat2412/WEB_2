@@ -53,5 +53,12 @@ class Addresses {
         $sql = "DELETE FROM addresses WHERE id_address = ? AND id_user = ?";
         return $this->db->handle($sql, [$id_address, $id_user]);
     }
+
+    public function getDefaultAddress($id_user) {
+        $sql = "SELECT * FROM addresses WHERE id_user = ? ORDER BY id_address ASC LIMIT 1";
+        $stmt = $this->db->handle($sql, [$id_user]);
+        $result = $this->db->getData($stmt);
+        return $result ? $result[0] : null;
+    }
 }
 ?>
