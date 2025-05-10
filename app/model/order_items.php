@@ -37,14 +37,28 @@ class OrderItems {
         return $this->db->getData($sql);
     }
 
-    // Lấy danh sách sản phẩm trong một đơn hàng
-    public function getOrderItemsByOrder($id_order) {
-        $sql = "SELECT oi.*, p.name as product_name, p.picture_path 
-                FROM order_items oi 
-                LEFT JOIN products p ON oi.id_product = p.id_product 
-                WHERE oi.id_order = ?";
-        $this->db->handle($sql, [$id_order]);
-        return $this->db->getData($sql); // Trả về tất cả sản phẩm trong đơn hàng
+    // // Lấy danh sách sản phẩm trong một đơn hàng
+    // public function getOrderItemsByOrder($id_order) {
+    //     $sql = "SELECT oi.*, p.name as product_name, p.picture_path 
+    //             FROM order_items oi 
+    //             LEFT JOIN products p ON oi.id_product = p.id_product 
+    //             WHERE oi.id_order = ?";
+    //     $this->db->handle($sql, [$id_order]);
+    //     return $this->db->getData($sql); // Trả về tất cả sản phẩm trong đơn hàng
+    // }
+
+    //của nhi
+     public function getOrderItemsByOrder($orderId) {
+        require 'db_connect.php';
+        $stmt = $conn->prepare("SELECT * FROM order_items WHERE order_id = ?");
+        $stmt->bind_param("i", $orderId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $items = [];
+        while ($row = $result->fetch_assoc()) {
+            $items[] = $row;
+        }
+        return $items;
     }
 
     // Cập nhật thông tin sản phẩm trong đơn hàng

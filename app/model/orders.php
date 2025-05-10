@@ -22,22 +22,26 @@ $table_orders = $db->handle("CREATE TABLE IF NOT EXISTS orders (
     FOREIGN KEY (id_user) REFERENCES users(id_users),
     FOREIGN KEY (id_address) REFERENCES addresses(id_address)
 )");
-class Orders {
+class Orders
+{
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new database();
     }
 
     // Thêm đơn hàng mới
-    public function addOrder($id_user, $id_address, $payment_method = 'cash', $ship_method = 'standard', $status = 'pending') {
+    public function addOrder($id_user, $id_address, $payment_method = 'cash', $ship_method = 'standard', $status = 'pending')
+    {
         $sql = "INSERT INTO orders (id_user, id_address, payment_method, ship_method, status) VALUES (?, ?, ?, ?, ?)";
         $this->db->handle($sql, [$id_user, $id_address, $payment_method, $ship_method, $status]);
         return $this->getLastInsertId();
     }
 
     // Lấy đơn hàng theo ID
-    public function getOrder($id) {
+    public function getOrder($id)
+    {
         $sql = "SELECT o.*, u.username, a.address AS shipping_address 
                 FROM orders o 
                 LEFT JOIN users u ON o.id_user = u.id_users 
@@ -53,7 +57,8 @@ class Orders {
     }
 
     // Lấy danh sách đơn hàng của người dùng
-    public function getOrdersByUser($id_user) {
+    public function getOrdersByUser($id_user)
+    {
         $sql = "SELECT o.*, a.address AS shipping_address 
                 FROM orders o 
                 LEFT JOIN addresses a ON o.id_address = a.id_address 
@@ -68,7 +73,8 @@ class Orders {
     }
 
     // Lấy danh sách các sản phẩm trong một đơn hàng
-    public function getOrderItems($order_id) {
+    public function getOrderItems($order_id)
+    {
         $sql = "SELECT oi.*, p.product_name 
                 FROM order_items oi
                 LEFT JOIN products p ON oi.product_id = p.id_product
@@ -78,26 +84,39 @@ class Orders {
     }
 
     // Thêm sản phẩm vào đơn hàng
-    public function addOrderItem($id_order, $id_product, $quantity, $price) {
+    public function addOrderItem($id_order, $id_product, $quantity, $price)
+    {
         $sql = "INSERT INTO order_items (id_order, id_product, quantity, price) VALUES (?, ?, ?, ?)";
         return $this->db->handle($sql, [$id_order, $id_product, $quantity, $price]);
     }
 
     // Cập nhật trạng thái đơn hàng
-    public function updateOrderStatus($order_id, $status) {
+    public function updateOrderStatus($order_id, $status)
+    {
         $sql = "UPDATE orders SET status = ? WHERE id_order = ?";
         return $this->db->handle($sql, [$status, $order_id]);
     }
 
     // Lấy ID của đơn hàng vừa được thêm
-    public function getLastInsertId() {
+    public function getLastInsertId()
+    {
         return $this->db->lastInsertId();  // Lấy ID của đơn hàng vừa thêm
     }
 
     // Xóa đơn hàng
-    public function deleteOrder($id_order) {
+    public function deleteOrder($id_order)
+    {
         $sql = "DELETE FROM orders WHERE id_order = ?";
         return $this->db->handle($sql, [$id_order]);
     }
+
+    public function getOrderById($orderId)
+    {
+        require 'db_connect.php';
+        $stmt = $conn->prepare("SELECT * FROM orders WHERE id = ?");
+        $stmt->bind_param("i", $orderId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
 }
-?>

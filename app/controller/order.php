@@ -77,6 +77,7 @@ class Orders {
         return $this->db->getData($sql);  // Trả về danh sách sản phẩm trong đơn hàng
     }
 
+
     // Thêm sản phẩm vào đơn hàng
     public function addOrderItem($id_order, $id_product, $quantity, $price) {
         $sql = "INSERT INTO order_items (id_order, id_product, quantity, price) VALUES (?, ?, ?, ?)";
