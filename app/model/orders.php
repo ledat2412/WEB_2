@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 require_once 'database.php';
 require_once 'users.php';
 require_once 'addresses.php';
-require_once 'payments.php';
+// require_once 'payments.php';
 
 // Khởi tạo kết nối database
 $db = new database();
@@ -15,6 +15,7 @@ $table_orders = $db->handle("CREATE TABLE IF NOT EXISTS orders (
     id_order INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_user INT(11) UNSIGNED NOT NULL,
     id_address INT(11) UNSIGNED NOT NULL,
+    ship_method ENUM('standard', 'express') NOT NULL DEFAULT 'standard',
     payment_method ENUM('cash', 'card') NOT NULL DEFAULT 'cash',
     status ENUM('pending', 'processing', 'completed', 'cancelled') NOT NULL DEFAULT 'pending',
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -29,12 +30,10 @@ class Orders {
     }
 
     // Thêm đơn hàng mới
-
-    public function addOrder($id_user, $id_address, $payment_method = 'cash', $status = 'pending') {
-        $sql = "INSERT INTO orders (id_user, id_address, payment_method, status) VALUES (?, ?, ?, ?)";
-        $this->db->handle($sql, [$id_user, $id_address, $payment_method, $status]);
+    public function addOrder($id_user, $id_address, $payment_method = 'cash', $ship_method = 'standard', $status = 'pending') {
+        $sql = "INSERT INTO orders (id_user, id_address, payment_method, ship_method, status) VALUES (?, ?, ?, ?, ?)";
+        $this->db->handle($sql, [$id_user, $id_address, $payment_method, $ship_method, $status]);
         return $this->getLastInsertId();
-
     }
 
     // Lấy đơn hàng theo ID
@@ -90,20 +89,15 @@ class Orders {
         return $this->db->handle($sql, [$status, $order_id]);
     }
 
-
+    // Lấy ID của đơn hàng vừa được thêm
+    public function getLastInsertId() {
+        return $this->db->lastInsertId();  // Lấy ID của đơn hàng vừa thêm
+    }
 
     // Xóa đơn hàng
     public function deleteOrder($id_order) {
         $sql = "DELETE FROM orders WHERE id_order = ?";
         return $this->db->handle($sql, [$id_order]);
-    }
-    public function getOrderById($orderId) {
-        require 'db_connect.php';
-        $stmt = $conn->prepare("SELECT * FROM orders WHERE id = ?");
-        $stmt->bind_param("i", $orderId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_assoc();
     }
 }
 ?>

@@ -4,14 +4,15 @@ require_once 'roles.php';
 
 $db = new database();
 
-$table_users = $db->handle("CREATE TABLE IF NOT EXISTS users (
-    id_users INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(100) NOT NULL,
-    role TINYINT(4) UNSIGNED NOT NULL,
-    FOREIGN KEY (role) REFERENCES roles(id_role)
-)");
+    $tabel_user = $db->handle("CREATE TABLE IF NOT EXISTS users (
+        id_users INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50) NOT NULL,
+        email VARCHAR(50) NOT NULL,
+        password VARCHAR(100) NOT NULL,
+        role TINYINT(4) UNSIGNED NOT NULL,
+        status TINYINT(4) UNSIGNED NOT NULL DEFAULT 0,
+        FOREIGN KEY (role) REFERENCES roles(id_role)
+    )");
 
 class Users {
     // Properties
@@ -53,8 +54,8 @@ class Users {
 
     // Phương thức đăng nhập
     public function login($account, $password) {
-        // Tìm kiếm user theo username hoặc email
-        $sql = "SELECT * FROM USERS WHERE (username = '$account' OR email = '$account') AND password = '$password' AND role = 0";
+        // Tìm kiếm user theo username hoặc email và chỉ cho phép đăng nhập nếu status = 0
+        $sql = "SELECT * FROM USERS WHERE (username = '$account' OR email = '$account') AND password = '$password' AND role = 0 AND status = 0";
         $this->db->handle($sql);
         $data = $this->db->getData($sql);
 
@@ -66,27 +67,18 @@ class Users {
             $_SESSION['role'] = $data[0]['role'];
             return "Đăng nhập thành công";
         }
+        // Kiểm tra nếu tài khoản tồn tại nhưng bị khóa
+        $checkStatus = "SELECT * FROM USERS WHERE (username = '$account' OR email = '$account') AND password = '$password' AND role = 0 AND status = 1";
+        $locked = $this->db->getData($checkStatus);
+        if ($locked) {
+            return "Tài khoản của bạn đã bị khóa";
+        }
         return "Thông tin đăng nhập không đúng";
     }
-    // public function loginforadmin($account, $password) {
-    //     // Tìm kiếm user theo username hoặc email
-    //     $sql = "SELECT * FROM USERS WHERE (username = '$account' OR email = '$account') AND password = '$password' AND role = 1";
-    //     $this->db->handle($sql);
-    //     $data = $this->db->getData($sql);
 
-    //     if($data) {
-    //         // Lưu thông tin vào session
-    //         $_SESSION['user_id'] = $data[0]['id_users'];
-    //         $_SESSION['username'] = $data[0]['username'];
-    //         $_SESSION['email'] = $data[0]['email'];
-    //         $_SESSION['role'] = $data[0]['role'];
-    //         return "Đăng nhập thành công";
-    //     }
-    //     return "Thông tin đăng nhập không đúng";
-    // }
     public function loginforadmin($account, $password) {
-        // Tìm kiếm user theo username hoặc email
-        $sql = "SELECT * FROM USERS WHERE (username = '$account' OR email = '$account') AND password = '$password'";
+        // Tìm kiếm user theo username hoặc email, cho phép admin đăng nhập nếu status = 0
+        $sql = "SELECT * FROM USERS WHERE (username = '$account' OR email = '$account') AND password = '$password' AND status = 0";
         $this->db->handle($sql);
         $data = $this->db->getData($sql);
 
@@ -97,6 +89,12 @@ class Users {
             $_SESSION['email'] = $data[0]['email'];
             $_SESSION['role'] = $data[0]['role'];
             return "Đăng nhập thành công";
+        }
+        // Kiểm tra nếu tài khoản tồn tại nhưng bị khóa
+        $checkStatus = "SELECT * FROM USERS WHERE (username = '$account' OR email = '$account') AND password = '$password' AND status = 1";
+        $locked = $this->db->getData($checkStatus);
+        if ($locked) {
+            return "Tài khoản của bạn đã bị khóa";
         }
         return "Thông tin đăng nhập không đúng";
     }
@@ -131,6 +129,12 @@ class Users {
         return "Mật khẩu cũ không đúng";
     }
 
+    // Phương thức lấy thông tin user
+    public function getUserById($id) {
+        $sql = "SELECT * FROM USERS WHERE id_users = $id";
+        $this->db->handle($sql);
+        return $this->db->getData($sql);
+    }
 
     // Phương thức lấy danh sách users (cho admin)
     public function getAllUsers() {
@@ -188,14 +192,6 @@ class Users {
         $stmt = $this->db->handle($sql, [$username]);
         $data = $this->db->getData($stmt);
         return $data ? $data[0] : null;
-    }
-    public function getUserById($userId) {
-        require 'db_connect.php';
-        $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
-        $stmt->bind_param("i", $userId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_assoc();
     }
 }
 ?>

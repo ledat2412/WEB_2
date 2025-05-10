@@ -59,7 +59,6 @@ class Addresses {
         $stmt = $this->db->handle($sql, [$id_user]);
         $result = $this->db->getData($stmt);
         return $result ? $result[0] : null;
-
     }
 }
 ?>
