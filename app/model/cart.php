@@ -117,5 +117,17 @@ class Cart {
         $result = $this->db->getData($stmt);
         return $result[0]['total'];
     }
+
+    /**
+     * Cập nhật số lượng sản phẩm trong giỏ theo id_cart (MVC form)
+     */
+    public function updateQuantityByIdCart($id_cart, $quantity) {
+        if ($quantity <= 0) {
+            $sql = "DELETE FROM cart WHERE id_cart = ?";
+            return $this->db->handle($sql, [$id_cart]);
+        }
+        $sql = "UPDATE cart SET quantity = ? WHERE id_cart = ?";
+        return $this->db->handle($sql, [$quantity, $id_cart]);
+    }
 }
 ?>

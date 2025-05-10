@@ -53,13 +53,13 @@ class Addresses {
         $sql = "DELETE FROM addresses WHERE id_address = ? AND id_user = ?";
         return $this->db->handle($sql, [$id_address, $id_user]);
     }
-    public function getAddressById($addressId) {
-        require 'db_connect.php';
-        $stmt = $conn->prepare("SELECT * FROM addresses WHERE id = ?");
-        $stmt->bind_param("i", $addressId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_assoc();
+
+    public function getDefaultAddress($id_user) {
+        $sql = "SELECT * FROM addresses WHERE id_user = ? ORDER BY id_address ASC LIMIT 1";
+        $stmt = $this->db->handle($sql, [$id_user]);
+        $result = $this->db->getData($stmt);
+        return $result ? $result[0] : null;
+
     }
 }
 ?>

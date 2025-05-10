@@ -1,10 +1,24 @@
+<?php
+session_start();
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['card_payment'])) {
+    $_SESSION['card_payment'] = true;
+    $_SESSION['card_info'] = [
+        'name' => $_POST['name'] ?? '',
+        'number' => $_POST['number'] ?? '',
+        'date' => $_POST['date'] ?? '',
+        'cvv' => $_POST['cvv'] ?? ''
+    ];
+    header('Location: /WEB_2/app/controller/main.php?act=cart');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thanh Toán Bằng Thẻ</title>
-  <link rel="stylesheet" href="/WEB_2/public/assets/css/cart.css">
+  <link rel="stylesheet" href="/WEB_2/public/assets/css/card-payment.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="icon" href="/WEB_2/public/img/logo_compact.png" type="image/x-icon">
 </head>
@@ -37,14 +51,14 @@
 
         </div>
           
-        <form class="form">
+        <form class="form" method="POST" action="">
 
             <h2>Payment Details</h2>
           
             <div class="form__name form__detail">
                 <label for="name">Cardholder Name</label>
                 <ion-icon><i class="fa-regular fa-user"></i></ion-icon>
-                <input type="text" placeholder="Your name" id="name" maxlength="24">
+                <input type="text" placeholder="Your name" id="name" name="name" maxlength="24" value="<?php echo isset($_SESSION['card_info']['name']) ? htmlspecialchars($_SESSION['card_info']['name']) : ''; ?>">
                 <div class="alert" id="alert-1">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 </svg>
@@ -54,7 +68,7 @@
             <div class="form__number form__detail">
                 <label for="number">Card Number</label>
                 <ion-icon><i class="fa-regular fa-credit-card"></i></ion-icon>
-                <input type="text" placeholder="0000 0000 0000 0000" id="number" onkeypress="return isNumeric(event)">
+                <input type="text" placeholder="0000 0000 0000 0000" id="number" name="number" value="<?php echo isset($_SESSION['card_info']['number']) ? htmlspecialchars($_SESSION['card_info']['number']) : ''; ?>">
                 <div class="alert" id="alert-2">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 </svg>
@@ -64,7 +78,7 @@
             <div class="form__expiry form__detail">
                 <label for="date">Exp Date</label>
                 <ion-icon><i class="fa-regular fa-calendar-days"></i></ion-icon>
-                <input type="text" placeholder="MM/YY" id="date" onkeypress="return isNumeric(event)" >
+                <input type="text" placeholder="MM/YY" id="date" name="date" value="<?php echo isset($_SESSION['card_info']['date']) ? htmlspecialchars($_SESSION['card_info']['date']) : ''; ?>">
                 <div class="alert" id="alert-3">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 </svg>
@@ -74,18 +88,17 @@
             <div class="form__cvv form__detail">
                 <label for="cvv">CVV</label>
                 <ion-icon><i class="fa-solid fa-lock"></i></ion-icon>
-                <input type="password" placeholder="0000" id="cvv" maxlength="4" onkeypress="return isNumeric(event)" >
+                <input type="password" placeholder="0000" id="cvv" name="cvv" maxlength="4" value="<?php echo isset($_SESSION['card_info']['cvv']) ? htmlspecialchars($_SESSION['card_info']['cvv']) : ''; ?>">
                 <div class="alert" id="alert-4">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 </svg>
                 Invalid CVV</div>
             </div>
 
-
-            <a href="/web/shopcart/shopcart-withcreditcard.html" class="form__btn" type ="submit">Confirm</a>  
+            <button class="form__btn" type="submit" name="card_payment" value="1">Confirm</button>
 
         </form> 
-        <a href="/web/shopcart/shopcart.html" class="top-right-box">x</a>       
+        <a href="/WEB_2/app/controller/main.php?act=cart" class="top-right-box">x</a>       
     </div>
     <script src="/WEB_2/public/assets/js/card_payment.js"></script>
 </body>

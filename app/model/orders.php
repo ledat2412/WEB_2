@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once 'database.php';
 require_once 'users.php';
 require_once 'addresses.php';
@@ -11,7 +15,9 @@ $table_orders = $db->handle("CREATE TABLE IF NOT EXISTS orders (
     id_order INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_user INT(11) UNSIGNED NOT NULL,
     id_address INT(11) UNSIGNED NOT NULL,
+    payment_method ENUM('cash', 'card') NOT NULL DEFAULT 'cash',
     status ENUM('pending', 'processing', 'completed', 'cancelled') NOT NULL DEFAULT 'pending',
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_user) REFERENCES users(id_users),
     FOREIGN KEY (id_address) REFERENCES addresses(id_address)
 )");
@@ -23,10 +29,12 @@ class Orders {
     }
 
     // Thêm đơn hàng mới
-    public function addOrder($id_user, $id_address, $id_payment = null, $status = 'pending') {
-        $sql = "INSERT INTO orders (id_user, id_address, id_payment, status) VALUES (?, ?, ?, ?)";
-        $this->db->handle($sql, [$id_user, $id_address, $id_payment, $status]);
-       //reurn $this->getLastInsertId();  // Lấy ID của đơn hàng vừa tạo
+
+    public function addOrder($id_user, $id_address, $payment_method = 'cash', $status = 'pending') {
+        $sql = "INSERT INTO orders (id_user, id_address, payment_method, status) VALUES (?, ?, ?, ?)";
+        $this->db->handle($sql, [$id_user, $id_address, $payment_method, $status]);
+        return $this->getLastInsertId();
+
     }
 
     // Lấy đơn hàng theo ID
@@ -71,9 +79,9 @@ class Orders {
     }
 
     // Thêm sản phẩm vào đơn hàng
-    public function addOrderItem($order_id, $product_id, $quantity, $price) {
-        $sql = "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
-        return $this->db->handle($sql, [$order_id, $product_id, $quantity, $price]);
+    public function addOrderItem($id_order, $id_product, $quantity, $price) {
+        $sql = "INSERT INTO order_items (id_order, id_product, quantity, price) VALUES (?, ?, ?, ?)";
+        return $this->db->handle($sql, [$id_order, $id_product, $quantity, $price]);
     }
 
     // Cập nhật trạng thái đơn hàng

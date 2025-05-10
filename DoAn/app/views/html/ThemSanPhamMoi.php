@@ -1,58 +1,3 @@
-<?php 
-    include "../../models/tables/database.php";
-    include "../../models/tables/product.php";
-    include "../../models/tables/description.php";
-    include "../../models/tables/sex.php";
-    include "../../models/tables/color.php";
-    include "../../models/tables/material.php";
-    include "../../models/tables/product_variant.php";
-
-    $db = new database();
-
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        if(isset($_POST["btn"])) {
-            $product_name = $_POST["product_name"];
-            $product_price = $_POST["product_price"];
-            $product_description = $_POST["product_description"];
-            if (!empty($_FILES["product_img"]["name"])) {
-                $product_image = $_FILES["product_img"]["name"];
-                $target_dir = "../../../public/img/";
-                $target_file = $target_dir . basename($product_image);
-                move_uploaded_file($_FILES["product_img"]["tmp_name"], $target_file);      
-                if (!empty($_FILES["product_img"]["name"])) {
-                    echo '<img src="../../../public/img/' . htmlspecialchars($_FILES['product_img']['name']) . '" alt="Hình ảnh" style="width: 70px; height: 70px;">';
-                }
-            } else {
-                $product_image = ""; // hoặc xử lý ảnh mặc định
-            }
-
-            $product_color = $_POST["color"];
-            $product_code = $_POST["product_code"];
-            $product_quantity = $_POST["product_quantity"];
-            $product_material = $_POST["product_material"];
-            $product_sex = $_POST["sex"];
-            $product_variant = $_POST["product_variant"];
-
-            $description = $db->handle("INSERT INTO DESCRIPTIONS (description_content) VALUES ('$product_description')");
-            $description_id = $db->getInsertId();
-            $product_color = $db->handle("INSERT INTO COLORS (color_name) VALUES ('$product_color')");
-            $color_id = $db->getInsertId();;
-            $product_material = $db->handle("INSERT INTO MATERIALS (material_name) VALUES ('$product_material')");
-            $material_id = $db->getInsertId();
-            $product_sex = $db->handle("INSERT INTO SEX (sex_name) VALUES ('$product_sex')");
-            $sex_id = $db->getInsertId();
-            $product_variant = $db->handle("INSERT INTO PRODUCT_VARIANT (product_variant_name) VALUES ('$product_variant')");
-            $variant_id = $db->getInsertId();
-            $product = $db->handle("INSERT INTO PRODUCT (product_name, picture_path, stock, price, color_id, material_id, sex_id, product_variant_id, description_id)
-            VALUES ('$product_name', '$product_image', '$product_quantity', '$product_price','$color_id', '$material_id', '$sex_id', '$variant_id', '$description_id')");
-
-            header("location: DanhSachSanPham.php");
-
-        }
-    }
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -204,7 +149,7 @@
                             <textarea style="width: 770px; resize: none; height: 60px;" name="product_description"></textarea>
                         </div>
                         <div class="add-submit-new">
-                            <a href="DanhSachSanPham.php" class="return-new">
+                            <a href="../../contronllers/handle/listProduct_contronller.php" class="return-new">
                                 Thoát
                             </a>
                             <div class="enter-add-new">

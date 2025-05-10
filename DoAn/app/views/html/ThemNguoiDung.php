@@ -1,3 +1,23 @@
+<?php
+    include_once "../../models/tables/users.php";
+    include_once "../../models/tables/roles.php";
+
+    $db = new database();
+
+    if($_SERVER['REQUEST_METHOD'] === "POST"){
+        if(isset($_POST['adduser'])){
+            $email = $_POST['email'];
+            $username = $_POST['username'];
+            $pass = $_POST['pass'];
+            // $role= $_POST['role_cbx'];
+
+            $user_role = $db -> handle("INSERT INTO roles(role_name) VALUES('User')");
+            $role_id = $db -> getInsertId();
+            $user_status = $db ->handle("INSERT INTO status(id_status, status) VALUES ('0', 'Open')");
+            $users = $db -> handle("INSERT INTO user(email, username, password, role, status) VALUES('$email', '$username', '$pass', '$role_id', '0')");
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,42 +77,38 @@
             </a>
         </nav>
         <main>
-            <div id="addUsers" class="add-users">
+            <form id="addUsers" method="post" class="add-users">
                 <div class="add-users-content">
                     <div class="add-users-heading">
                         <h3>Thêm người dùng</h3>
                     </div>
                     <div class="add-users-data">
                         <div class="add-data">
-                            <input type="text" required placeholder="Nhập họ và tên">
+                            <input type="email" name="email"  placeholder="Nhập email">
                         </div>
                         <div class="add-data">
-                            <input type="email" required placeholder="Nhập email">
+                            <input type="text" name="username"  minlength="7" placeholder="Tạo tên đăng nhập" >
                         </div>
                         <div class="add-data">
-                            <input type="text" required placeholder="Nhập số điện thoại">
+                            <input type="password" name="pass"  minlength="5" maxlength="15" placeholder="Tạo mật khẩu">
                         </div>
-                        <div class="add-data">
-                            <input type="text" required minlength="7" placeholder="Tạo tên đăng nhập" >
-                        </div>
-                        <div class="add-data">
-                            <input type="password" required minlength="5" maxlength="15" placeholder="Tạo mật khẩu">
-                        </div>
+                        <!-- <div class="add-data">
+                            <label>Vai trò</label>
+                            <input type="radio" name="role_cbx" value="Admin" >Admin
+                            <input type="radio" name="role_cbx" value="User" >User
+                        </div> -->
                     </div>
                     <div class="add-users-submit">
                         <li>
-                            <a href="../../views/html/Quanlycauhinh.php" clas="first-child">
-                                <button>Thoát</button>
+                            <a href="../../views/html/Quanlycauhinh.php" class="first-child">Thoát
                             </a>
                         </li>
                         <li>
-                            <a href="../../views/html/Quanlycauhinh.php" class="last-child">
-                                <button>Tạo tài khoản</button>
-                            </a>
+                            <input type="submit" name="adduser" value="Tạo tài khoản" class="last-child">
                         </li>
                     </div>
                 </div>
-            </div>
+            </form>
         </main>
     </section>
     <script src ="/admin/js/admin.js"></script>

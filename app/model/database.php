@@ -88,5 +88,9 @@ class database
     {
         return $this->conn->insert_id;
     }
+
+    public function lastInsertId() {
+        return $this->conn->insert_id;
+    }
 }
 ?>

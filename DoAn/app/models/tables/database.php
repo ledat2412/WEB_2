@@ -3,7 +3,7 @@
         private $server = "localhost";
         private $user = "root";
         private $pass = "";
-        private $database = "quanlybangiay";
+        private $database = "quanlybanhang";
 
         private $conn = null;
         private $result = null;
@@ -46,7 +46,6 @@
         public function getInsertId() {
             return $this->conn->insert_id;
         }
-
 
     }
 ?>

@@ -1,15 +1,80 @@
 <?php
+// session_start();
 require_once '../controller/CartController.php';
-session_start();
+require_once '../model/addresses.php';
 
 // Kiểm tra người dùng đã đăng nhập chưa
 if (!isset($_SESSION['user_id'])) {
-    header('Location: /web/login.html');
+    header('Location: /WEB_2/login');
     exit();
 }
 
 $cartController = new CartController();
 $id_user = $_SESSION['user_id'];
+
+$addressModel = new Addresses();
+$all_addresses = $addressModel->getAddressesByUser($id_user);
+
+// Xử lý cập nhật số lượng (MVC, không dùng AJAX)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update') {
+    $id_cart = $_POST['id_cart'] ?? 0;
+    $quantity = $_POST['quantity'] ?? 1;
+    if ($id_cart > 0 && $quantity > 0) {
+        // Gọi qua phương thức public của controller
+        $cartController->updateQuantityByIdCart($id_cart, $quantity);
+    }
+    // Redirect để tránh lỗi F5 gửi lại form
+    header('Location: /WEB_2/app/controller/main.php?act=cart');
+    exit();
+}
+
+// Xử lý xóa sản phẩm (MVC, không dùng AJAX)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
+    $id_cart = $_POST['id_cart'] ?? 0;
+    if ($id_cart > 0) {
+        $cartController->removeFromCart($id_cart);
+    }
+    header('Location: /WEB_2/app/controller/main.php?act=cart');
+    exit();
+}
+
+// Xử lý xóa toàn bộ giỏ hàng (submit form, reload trang)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'clear') {
+    $cartController->clearCart($id_user);
+    header('Location: /WEB_2/app/controller/main.php?act=cart');
+    exit();
+}
+
+// Xử lý đổi địa chỉ (lưu id vào session, không dùng is_default)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'change_address') {
+    $new_id = $_POST['address_id'] ?? 0;
+    if ($new_id > 0) {
+        $_SESSION['selected_address_id'] = $new_id;
+        header('Location: /WEB_2/app/controller/main.php?act=cart');
+        exit();
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['clear_card_info'])) {
+    unset($_SESSION['card_info']);
+    unset($_SESSION['card_payment']);
+    header('Location: ' . $_SERVER['REQUEST_URI']);
+    exit;
+}
+
+// Lấy địa chỉ mặc định: ưu tiên địa chỉ đã chọn, nếu chưa có thì lấy địa chỉ đầu tiên
+$selected_address = null;
+if (isset($_SESSION['selected_address_id'])) {
+    foreach ($all_addresses as $addr) {
+        if ($addr['id_address'] == $_SESSION['selected_address_id']) {
+            $selected_address = $addr;
+            break;
+        }
+    }
+}
+$default_address = $selected_address ?: (count($all_addresses) ? $all_addresses[0] : null);
+
+// Lấy dữ liệu giỏ hàng để hiển thị
 $cart_items = $cartController->viewCart($id_user);
 
 // Tính tổng giá trị giỏ hàng
@@ -20,8 +85,38 @@ foreach ($cart_items as $item) {
 
 $shipping_cost = 40000;
 $total_with_shipping = $total + $shipping_cost;
-?>
 
+// Biến thông báo lỗi
+$error_checkout = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'checkout') {
+    require_once '../model/orders.php';
+    require_once '../model/order_items.php';
+
+    $id_user = $_SESSION['user_id'];
+    $id_address = $default_address['id_address'];
+    $payment_method = $_POST['payment_method'] ?? 'cash';
+    $ordersModel = new Orders();
+    $orderItemsModel = new OrderItems();
+
+    $cart_items = $cartController->viewCart($id_user);
+
+    if (count($cart_items) === 0) {
+        $error_checkout = 'Giỏ hàng của bạn đang trống, không thể đặt hàng!';
+    } else {
+        $id_order = $ordersModel->addOrder($id_user, $id_address, $payment_method, 'pending');
+        foreach ($cart_items as $item) {
+            $orderItemsModel->addOrderItem($id_order, $item['id_product'], $item['quantity'], $item['price']);
+        }
+        $cartController->clearCart($id_user);
+        unset($_SESSION['card_info']);
+        unset($_SESSION['card_payment']);
+        header('Location: /WEB_2/app/controller/main.php?act=order_success&id_order=' . $id_order);
+        exit();
+    }
+}
+?>
+<!-- <?php var_dump($_SESSION['card_info'] ?? null); ?> -->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -30,127 +125,83 @@ $total_with_shipping = $total + $shipping_cost;
     <link rel="stylesheet" href="/WEB_2/public/assets/css/Web.css">
     <link rel="stylesheet" href="/WEB_2/public/assets/css/cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Xử lý thay đổi số lượng
-            document.querySelectorAll('.quantity-input').forEach(input => {
-                input.addEventListener('change', function () {
-                    const id_cart = this.dataset.idCart;
-                    const id_product = this.dataset.idProduct;
-                    const newQuantity = parseInt(this.value);
-                    if (newQuantity < 1) {
-                        alert('Số lượng phải lớn hơn 0');
-                        this.value = 1;
-                        return;
-                    }
-                    fetch('/web/update-cart.php', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ id_product: id_product, quantity: newQuantity })
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
-                            document.querySelector(`.item-subtotal[data-id="${id_product}"]`).innerText =
-                                `Tạm tính: ${new Intl.NumberFormat('vi-VN').format(data.subtotal)} ₫`;
-                            document.getElementById('cart-subtotal-display').innerText =
-                                `${new Intl.NumberFormat('vi-VN').format(data.total)} ₫`;
-                            document.getElementById('cart-total-display').innerText =
-                                `${new Intl.NumberFormat('vi-VN').format(data.total_with_shipping)} ₫`;
-                        } else {
-                            alert('Cập nhật thất bại!');
-                        }
-                    });
-                });
-            });
-
-            // Xử lý nút XÓA
-            document.querySelectorAll('.remove-item').forEach(button => {
-                button.addEventListener('click', function () {
-                    const id_cart = this.dataset.id;
-                    if (!confirm('Bạn có chắc muốn xóa sản phẩm này không?')) return;
-                    fetch('/WEB_2/app/view/cart_action.php', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ action: 'delete', id_cart })
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
-                            this.closest('.cart-item').remove();
-                            document.getElementById('cart-subtotal-display').innerText =
-                                data.total.toLocaleString('vi-VN') + ' ₫';
-                            document.getElementById('cart-total-display').innerText =
-                                data.total_with_shipping.toLocaleString('vi-VN') + ' ₫';
-                        } else {
-                            alert('Xóa thất bại');
-                        }
-                    })
-                    .catch(() => alert('Lỗi kết nối máy chủ'));
-                });
-            });
-        });
-    </script>
 </head>
 
 <body>
 <div class="cart-container">
     <div class="cart-left">
         <h1 class="cart-title">Giỏ hàng của bạn</h1>
-        <form action="/web/update-cart.php" method="POST">
-            <div class="cart-items" id="cart-items">
-                <?php foreach ($cart_items as $item): ?>
-                    <div class="cart-item" data-id-cart="<?php echo $item['id_cart']; ?>" data-id-product="<?php echo $item['id_product']; ?>">
-                        <div class="item-image">
-                            <?php
-                            $base_path = $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/public/assets/img/Sản Phẩm/";
-                            $relative_path = str_replace("../../../public/assets/img/Sản Phẩm/", "", $item['picture_path']);
-                            $image_dir = $base_path . $relative_path;
-                            $absolute_dir = realpath($image_dir);
-                            $main_image = '';
-                            if ($absolute_dir && is_dir($absolute_dir)) {
-                                $images = array_merge(
-                                    glob($absolute_dir . '/*.webp') ?: [],
-                                    glob($absolute_dir . '/*.jpg') ?: [],
-                                    glob($absolute_dir . '/*.jpeg') ?: [],
-                                    glob($absolute_dir . '/*.png') ?: []
-                                );
-                                $main_image = !empty($images) ? $images[0] : '';
-                            }
-                            $url_path = $main_image ? str_replace(['\\', $_SERVER['DOCUMENT_ROOT']], ['/', ''], $main_image) : '';
-                            ?>
-                            <img src="<?php echo htmlspecialchars($url_path); ?>" alt="product image">
+        <?php if (!empty($error_checkout)): ?>
+            <div style="color: red; font-weight: bold; margin: 10px 0; text-align: center;">
+                <?php echo $error_checkout; ?>
+            </div>
+        <?php endif; ?>
+        <div class="cart-items" id="cart-items">
+            <?php foreach ($cart_items as $item): ?>
+                <div class="cart-item" data-id-cart="<?php echo $item['id_cart']; ?>" data-id-product="<?php echo $item['id_product']; ?>">
+                    <div class="item-image">
+                        <?php
+                        $base_path = $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/public/assets/img/Sản Phẩm/";
+                        $relative_path = str_replace("../../../public/assets/img/Sản Phẩm/", "", $item['picture_path']);
+                        $image_dir = $base_path . $relative_path;
+                        $absolute_dir = realpath($image_dir);
+                        $main_image = '';
+                        if ($absolute_dir && is_dir($absolute_dir)) {
+                            $images = array_merge(
+                                glob($absolute_dir . '/*.webp') ?: [],
+                                glob($absolute_dir . '/*.jpg') ?: [],
+                                glob($absolute_dir . '/*.jpeg') ?: [],
+                                glob($absolute_dir . '/*.png') ?: []
+                            );
+                            $main_image = !empty($images) ? $images[0] : '';
+                        }
+                        $url_path = $main_image ? str_replace(['\\', $_SERVER['DOCUMENT_ROOT']], ['/', ''], $main_image) : '';
+                        ?>
+                        <img src="<?php echo htmlspecialchars($url_path); ?>" alt="product image">
+                    </div>
+                    <div class="item-details">
+                        <a href="/web/SanPham/<?php echo str_replace(' ', '-', $item['product_name']); ?>.html">
+                            <h2 class="item-name"><?php echo $item['product_name']; ?></h2>
+                        </a>
+                        <p class="item-price"><?php echo number_format($item['price'], 0, ',', '.'); ?> ₫</p>
+                        <div class="item-size">
+                            <label>Size: </label>
+                            <span><?php echo $item['size']; ?></span>
                         </div>
-                        <div class="item-details">
-                            <a href="/web/SanPham/<?php echo str_replace(' ', '-', $item['product_name']); ?>.html">
-                                <h2 class="item-name"><?php echo $item['product_name']; ?></h2>
-                            </a>
-                            <p class="item-price"><?php echo number_format($item['price'], 0, ',', '.'); ?> ₫</p>
-                            <div class="item-size">
-                                <label>Size: </label>
-                                <span><?php echo $item['size']; ?></span>
-                            </div>
+                        <form method="POST" action="">
+                            <input type="hidden" name="action" value="update">
+                            <input type="hidden" name="id_cart" value="<?php echo $item['id_cart']; ?>">
                             <div class="item-quantity">
                                 <label for="quantity-<?php echo $item['id_product']; ?>">Số lượng:</label>
-                                <input type="number" id="quantity-<?php echo $item['id_product']; ?>" class="quantity-input" name="quantity[<?php echo $item['id_product']; ?>]" value="<?php echo $item['quantity']; ?>" min="1" data-id-product="<?php echo $item['id_product']; ?>" data-id-cart="<?php echo $item['id_cart']; ?>">
+                                <button type="button" class="decrease-btn">-</button>
+                                <input type="number" id="quantity-<?php echo $item['id_product']; ?>" name="quantity" value="<?php echo $item['quantity']; ?>" min="1">
+                                <button type="button" class="increase-btn">+</button>
                             </div>
-                            <p class="item-subtotal" data-id="<?php echo $item['id_product']; ?>">
-                                Tạm tính: <?php echo number_format($item['price'] * $item['quantity'], 0, ',', '.'); ?> ₫
-                            </p>
-                            <div class="item-actions">
-                                <button type="button" class="remove-item" data-id="<?php echo $item['id_cart']; ?>">
-                                    <i class="fa fa-trash"></i> Xóa
-                            </div>
+                        </form>
+                        <p class="item-subtotal" data-id="<?php echo $item['id_product']; ?>">
+                            Tạm tính: <?php echo number_format($item['price'] * $item['quantity'], 0, ',', '.'); ?> ₫
+                        </p>
+                        <div class="item-actions">
+                            <form method="POST" action="">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="id_cart" value="<?php echo $item['id_cart']; ?>">
+                                <button type="submit" class="remove-item"><i class="fa fa-trash"></i> Xóa</button>
+                            </form>
                         </div>
                     </div>
-                <?php endforeach; ?>
-            </div>
-            <div class="cart-actions">
-                <a href="/web/Web-user.html" class="continue-shopping">← Tiếp tục xem sản phẩm</a>
-            </div>
-            <div class="line"></div>
-            <button type="button" class="clear-cart">Xóa tất cả</button>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="cart-actions">
+            <a href="/WEB_2/products/tatcasanpham" class="continue-shopping">← Tiếp tục xem sản phẩm</a>
+        </div>
+        <div class="line"></div>
+        <?php if (count($cart_items) > 0): ?>
+        <form method="POST" action="">
+            <input type="hidden" name="action" value="clear">
+            <button type="submit" class="clear-cart">Xóa tất cả</button>
         </form>
+        <?php endif; ?>
     </div>
 
     <div class="cart-right">
@@ -163,25 +214,49 @@ $total_with_shipping = $total + $shipping_cost;
 
         <h3>Giao hàng</h3>
         <div class="shipping-options">
-            <input type="radio" id="standard" name="shipping" checked>
+            <input type="radio" id="standard" name="shipping" value="40000" checked>
             <label for="standard">Chuyển phát thường: 40.000 ₫</label><br>
-            <input type="radio" id="express" name="shipping">
+            <input type="radio" id="express" name="shipping" value="65000">
             <label for="express">Hỏa tốc: 65.000 ₫</label><br>
         </div>
 
-        <div class="change">
-            <button class="change-address">Đổi địa chỉ</button>
+        <div class="shipping-address">
+            <strong>Địa chỉ giao hàng:</strong>
+            <span>
+                <?php if ($default_address): ?>
+                    <?php echo htmlspecialchars($default_address['recive_name']); ?><br>
+                    <?php echo htmlspecialchars($default_address['phone']); ?><br>
+                    <?php echo htmlspecialchars($default_address['address']); ?>
+                <?php else: ?>
+                    Chưa có địa chỉ
+                <?php endif; ?>
+            </span>
+            <button type="button" id="change-address-btn">Đổi địa chỉ</button>
         </div>
 
         <div class="payment-method">
             <h4>Chọn hình thức thanh toán</h4>
             <div class="payment-options">
-                <input type="radio" id="cashOnDelivery" name="payment" value="cash">
+                <input type="radio" id="cashOnDelivery" name="payment" value="cash" <?php if (empty($_SESSION['card_payment'])) echo 'checked'; ?>>
                 <label for="cashOnDelivery">Thanh toán khi nhận hàng</label><br>
-                <input type="radio" id="creditCard" name="payment" value="card">
+                <input type="radio" id="creditCard" name="payment" value="card" <?php if (!empty($_SESSION['card_payment'])) echo 'checked'; ?>>
                 <label for="creditCard">Thanh toán bằng thẻ Visa/MasterCard</label><br>
+                <?php if (!empty($_SESSION['card_info'])): ?>
+                    <div id="card-info-box" class="card-info-box" style="margin:10px 0; padding:10px; border:1px solid #ccc; border-radius:6px;">
+                        <strong>Thông tin thẻ đã nhập:</strong><br>
+                        Tên chủ thẻ: <?php echo htmlspecialchars($_SESSION['card_info']['name']); ?><br>
+                        Số thẻ: **** **** **** <?php echo substr($_SESSION['card_info']['number'], -4); ?><br>
+                        Hết hạn: <?php echo htmlspecialchars($_SESSION['card_info']['date']); ?>
+                    </div>
+                <?php endif; ?>
             </div>
-            <button class="confirm-payment" onclick="window.location.href='/WEB_2/app/view/cart/cart-payment.php'">Xác nhận</button>
+            <button id="confirm-card-btn" style="display:none;" onclick="window.location.href='/WEB_2/app/view/cart/cart-payment.php'">
+                <?php echo !empty($_SESSION['card_info']) ? 'Chỉnh thông tin thẻ' : 'Xác nhận thanh toán thẻ'; ?>
+            </button>
+            <form method="POST" style="display:inline;">
+                <input type="hidden" name="clear_card_info" value="1">
+                <button type="submit" id="clear-card-info-btn" style="margin-left:10px;">Xóa thông tin thẻ</button>
+            </form>
         </div>
 
         <div class="line"></div>
@@ -200,10 +275,125 @@ $total_with_shipping = $total + $shipping_cost;
         </div>
 
         <div class="line"></div>
-        <a href="/web/shopcart/chitietdonhang.html"><button class="checkout">Đặt hàng</button></a>
+        <form method="POST" action="">
+            <input type="hidden" name="action" value="checkout">
+            <input type="hidden" id="payment_method_input" name="payment_method" value="<?php echo !empty($_SESSION['card_payment']) ? 'card' : 'cash'; ?>">
+            <button class="checkout" type="submit">Đặt hàng</button>
+        </form>
     </div>
 </div>
 
-<script src="/js/cart.js"></script>
+<!-- Modal chọn địa chỉ -->
+<div id="address-list-modal" style="display:none; background:rgba(0,0,0,0.2); position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:1000;">
+    <div style="background:#fff; margin:100px auto; padding:20px; max-width:400px; border-radius:8px;">
+        <form method="POST" action="">
+            <input type="hidden" name="action" value="change_address">
+            <ul style="list-style:none; padding:0;">
+                <?php foreach ($all_addresses as $addr): ?>
+                    <li style="margin-bottom:10px;">
+                        <label>
+                            <input type="radio" name="address_id" value="<?php echo $addr['id_address']; ?>"
+                                <?php if ($default_address && $addr['id_address'] == $default_address['id_address']) echo 'checked'; ?>>
+                            <strong><?php echo htmlspecialchars($addr['recive_name']); ?></strong><br>
+                            <?php echo htmlspecialchars($addr['phone']); ?><br>
+                            <?php echo htmlspecialchars($addr['address']); ?>
+                        </label>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            <button type="submit">Xác nhận</button>
+            <button type="button" id="close-address-list">Hủy</button>
+            <button type="button" id="add-new-address-btn" style="margin-top:10px; float:right;">Thêm địa chỉ mới</button>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.decrease-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var input = this.nextElementSibling;
+            if (input.value > 1) {
+                input.value = parseInt(input.value) - 1;
+                input.form.submit();
+            }
+        });
+    });
+    document.querySelectorAll('.increase-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var input = this.previousElementSibling;
+            input.value = parseInt(input.value) + 1;
+            input.form.submit();
+        });
+    });
+
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('vi-VN').format(amount) + ' ₫';
+    }
+    var subtotal = <?php echo $total; ?>;
+    var shippingRadios = document.querySelectorAll('input[name="shipping"]');
+    shippingRadios.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            var shipping = parseInt(document.querySelector('input[name="shipping"]:checked').value);
+            var totalWithShipping = subtotal + shipping;
+            document.getElementById('cart-total-display').textContent = formatCurrency(totalWithShipping);
+        });
+    });
+
+    var btn = document.getElementById('change-address-btn');
+    var modal = document.getElementById('address-list-modal');
+    var closeBtn = document.getElementById('close-address-list');
+    if (btn && modal) {
+        btn.onclick = function() { modal.style.display = 'block'; }
+    }
+    if (closeBtn && modal) {
+        closeBtn.onclick = function() { modal.style.display = 'none'; }
+    }
+
+    var cardRadio = document.getElementById('creditCard');
+    var cashRadio = document.getElementById('cashOnDelivery');
+    var cardInfoBox = document.getElementById('card-info-box');
+    var confirmBtn = document.getElementById('confirm-card-btn');
+    var clearCardBtn = document.getElementById('clear-card-info-btn');
+
+    function toggleConfirmBtnAndCardInfo() {
+        if (cardRadio.checked) {
+            confirmBtn.style.display = 'block';
+            if (cardInfoBox) cardInfoBox.style.display = 'block';
+            if (clearCardBtn) clearCardBtn.style.display = 'inline-block';
+        } else {
+            confirmBtn.style.display = 'none';
+            if (cardInfoBox) cardInfoBox.style.display = 'none';
+            if (clearCardBtn) clearCardBtn.style.display = 'none';
+        }
+    }
+
+    cardRadio.addEventListener('change', toggleConfirmBtnAndCardInfo);
+    cashRadio.addEventListener('change', toggleConfirmBtnAndCardInfo);
+    toggleConfirmBtnAndCardInfo();
+
+    var addNewAddressBtn = document.getElementById('add-new-address-btn');
+    if (addNewAddressBtn) {
+        addNewAddressBtn.onclick = function() {
+            window.location.href = '/WEB_2/app/controller/main.php?act=information&skibidiyetyet=addresses';
+        };
+    }
+
+    var paymentRadios = document.querySelectorAll('input[name="payment"]');
+    var paymentInput = document.getElementById('payment_method_input');
+    paymentRadios.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            paymentInput.value = this.value;
+        });
+    });
+});
+</script>
+
+<!-- Hiển thị thông báo lỗi nếu có -->
+<?php if (!empty($error_checkout)): ?>
+    <div style="color: red; font-weight: bold; margin: 10px 0; text-align: center;">
+        <?php echo $error_checkout; ?>
+    </div>
+<?php endif; ?>
 </body>
 </html>

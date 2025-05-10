@@ -9,6 +9,7 @@
         email VARCHAR(50) NOT NULL,
         password VARCHAR(100) NOT NULL,
         role TINYINT(4) UNSIGNED NOT NULL,
+        status TINYINT(4) UNSIGNED NOT NULL,
         FOREIGN KEY (role) REFERENCES roles(id_role)
     )");
 ?>
