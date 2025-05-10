@@ -53,5 +53,13 @@ class Addresses {
         $sql = "DELETE FROM addresses WHERE id_address = ? AND id_user = ?";
         return $this->db->handle($sql, [$id_address, $id_user]);
     }
+    public function getAddressById($addressId) {
+        require 'db_connect.php';
+        $stmt = $conn->prepare("SELECT * FROM addresses WHERE id = ?");
+        $stmt->bind_param("i", $addressId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
 }
 ?>

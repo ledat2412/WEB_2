@@ -26,7 +26,7 @@ class Orders {
     public function addOrder($id_user, $id_address, $id_payment = null, $status = 'pending') {
         $sql = "INSERT INTO orders (id_user, id_address, id_payment, status) VALUES (?, ?, ?, ?)";
         $this->db->handle($sql, [$id_user, $id_address, $id_payment, $status]);
-        return $this->getLastInsertId();  // Lấy ID của đơn hàng vừa tạo
+       //reurn $this->getLastInsertId();  // Lấy ID của đơn hàng vừa tạo
     }
 
     // Lấy đơn hàng theo ID
@@ -82,15 +82,20 @@ class Orders {
         return $this->db->handle($sql, [$status, $order_id]);
     }
 
-    // Lấy ID của đơn hàng vừa được thêm
-    public function getLastInsertId() {
-        return $this->db->lastInsertId();  // Lấy ID của đơn hàng vừa thêm
-    }
+
 
     // Xóa đơn hàng
     public function deleteOrder($id_order) {
         $sql = "DELETE FROM orders WHERE id_order = ?";
         return $this->db->handle($sql, [$id_order]);
+    }
+    public function getOrderById($orderId) {
+        require 'db_connect.php';
+        $stmt = $conn->prepare("SELECT * FROM orders WHERE id = ?");
+        $stmt->bind_param("i", $orderId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
 }
 ?>

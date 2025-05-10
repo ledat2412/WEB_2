@@ -1,44 +1,88 @@
 <?php
-// order_detail.php
+// bill.php
+require_once 'order.php';
+require_once 'order_items.php';
+require_once 'users.php';
+require_once 'addresses.php';
 
-// Kiểm tra xem dữ liệu đơn hàng có tồn tại không
-if ($orderData) {
+$orderId = $_GET['order_id'] ?? null;
+
+if (!$orderId) {
+    echo "Không tìm thấy đơn hàng.";
+    exit;
+}
+
+// Lấy thông tin đơn hàng
+$orderModel = new Orders();
+$orderData = $orderModel->getOrderById($orderId);
+
+if (!$orderData) {
+    echo "Đơn hàng không tồn tại.";
+    exit;
+}
+
+// Lấy thông tin người dùng
+$userModel = new Users();
+$user = $userModel->getUserById($orderData['id_user']);
+
+// Lấy địa chỉ giao hàng
+$addressModel = new Addresses();
+$address = $addressModel->getAddressById($orderData['id_address']);
+
+// Lấy các sản phẩm trong đơn hàng
+$orderItemsModel = new OrderItems();
+$items = $orderItemsModel->getOrderItemsByOrder($orderId);
 ?>
-    <h2>Thông tin đơn hàng của <?= htmlspecialchars($orderData['username']) ?></h2>
-    <div>
-        <p><strong>Địa chỉ giao hàng:</strong> <?= htmlspecialchars($orderData['shipping_address']) ?></p>
-        <p><strong>Số điện thoại:</strong> <?= htmlspecialchars($orderData['phone']) ?></p>
-        <!-- Thêm các thông tin khác nếu cần -->
+
+<h2 class="product-page-title">Thông tin giao hàng</h2>
+<div class="product-main-content">
+    <div class="product-shipping-info">
+        <h3><?= htmlspecialchars($user['username']) ?></h3>
+        <form action="#" method="post">
+            <div class="product-form-group">
+                <label for="address-shop">Địa chỉ shop</label>
+                <input type="text" id="address-shop" name="address-shop" value="TP.Hồ Chí Minh" disabled>
+            </div>
+            <div class="product-form-group">
+                <label for="name">Họ và Tên</label>
+                <input type="text" id="name" name="name" value="<?= htmlspecialchars($user['username']) ?>" disabled>
+            </div>
+            <div class="product-form-group">
+                <label for="phone">Số điện thoại</label>
+                <input type="text" id="phone" name="phone" value="<?= htmlspecialchars($user['phone']) ?>" disabled>
+            </div>
+            <div class="product-form-group">
+                <label>Giao hàng</label>
+                <div>
+                    <input type="radio" id="giao-hang-tan-noi" name="giao-hang" value="Giao hàng tận nơi" checked>
+                    <label for="giao-hang-tan-noi">Giao hàng tận nơi</label>
+                </div>
+                <div>
+                    <input type="radio" id="nhan-tai-cua-hang" name="giao-hang" value="Nhận tại cửa hàng">
+                    <label for="nhan-tai-cua-hang">Nhận tại cửa hàng</label>
+                </div>
+            </div>
+            <div class="product-form-group">
+                <label for="address">Địa chỉ</label>
+                <input type="text" id="address" name="address" value="<?= htmlspecialchars($address['address']) ?>" disabled>
+            </div>
+            <div class="product-form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" disabled>
+            </div>
+            <div class="product-form-group">
+                <label for="district">Quận / Huyện</label>
+                <input type="text" id="district" name="district" value="<?= htmlspecialchars($address['district']) ?>" disabled>
+            </div>
+        </form>
     </div>
 
-    <h3>Danh sách sản phẩm</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Tên sản phẩm</th>
-                <th>Số lượng</th>
-                <th>Giá</th>
-                <th>Tổng</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="product-order-items">
+        <h3>Sản phẩm trong đơn hàng</h3>
+        <ul>
             <?php foreach ($items as $item): ?>
-            <tr>
-                <td><?= htmlspecialchars($item['product_name']) ?></td>
-                <td><?= $item['quantity'] ?></td>
-                <td><?= number_format($item['price']) ?> đ</td>
-                <td><?= number_format($item['price'] * $item['quantity']) ?> đ</td>
-            </tr>
+                <li><?= htmlspecialchars($item['product_name']) ?> - SL: <?= $item['quantity'] ?> - Giá: <?= number_format($item['price']) ?>đ</li>
             <?php endforeach; ?>
-        </tbody>
-    </table>
-
-    <h4><strong>Tổng tiền:</strong> <?= number_format(array_sum(array_map(function($item) {
-        return $item['price'] * $item['quantity'];
-    }, $items))) ?> đ</h4>
-
-<?php
-} else {
-    echo "Không tìm thấy đơn hàng.";
-}
-?>
+        </ul>
+    </div>
+</div>

@@ -246,4 +246,5 @@ if (!isset($_GET['act']) || ($_GET['act'] !== 'login' && $_GET['act'] !== 'regis
 
 // thêm vào giỏ hàng
 require_once __DIR__ . '/CartController.php';
-CartController::handleAddToCartRequest();
+
+

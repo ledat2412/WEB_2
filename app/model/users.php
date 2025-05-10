@@ -131,12 +131,6 @@ class Users {
         return "Mật khẩu cũ không đúng";
     }
 
-    // Phương thức lấy thông tin user
-    public function getUserById($id) {
-        $sql = "SELECT * FROM USERS WHERE id_users = $id";
-        $this->db->handle($sql);
-        return $this->db->getData($sql);
-    }
 
     // Phương thức lấy danh sách users (cho admin)
     public function getAllUsers() {
@@ -194,6 +188,14 @@ class Users {
         $stmt = $this->db->handle($sql, [$username]);
         $data = $this->db->getData($stmt);
         return $data ? $data[0] : null;
+    }
+    public function getUserById($userId) {
+        require 'db_connect.php';
+        $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
 }
 ?>
