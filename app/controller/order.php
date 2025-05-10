@@ -1,8 +1,12 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once 'database.php';
 require_once 'users.php';
 require_once 'addresses.php';
-require_once 'payments.php';
+// require_once 'payments.php';
 
 // Khởi tạo kết nối database
 $db = new database();
@@ -10,14 +14,14 @@ $db = new database();
 $table_orders = $db->handle("CREATE TABLE IF NOT EXISTS orders (
     id_order INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     id_user INT(11) UNSIGNED NOT NULL,
-    id_address INT UNSIGNED NOT NULL,
-    id_payment INT UNSIGNED DEFAULT NULL,
+    id_address INT(11) UNSIGNED NOT NULL,
+    ship_method ENUM('standard', 'express') NOT NULL DEFAULT 'standard',
+    payment_method ENUM('cash', 'card') NOT NULL DEFAULT 'cash',
     status ENUM('pending', 'processing', 'completed', 'cancelled') NOT NULL DEFAULT 'pending',
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_user) REFERENCES users(id_users),
-    FOREIGN KEY (id_address) REFERENCES addresses(id_address),
-    FOREIGN KEY (id_payment) REFERENCES payments(id_payment)
+    FOREIGN KEY (id_address) REFERENCES addresses(id_address)
 )");
-
 class Orders {
     private $db;
 
@@ -26,38 +30,36 @@ class Orders {
     }
 
     // Thêm đơn hàng mới
-    public function addOrder($id_user, $id_address, $id_payment = null, $status = 'pending') {
-       
-        $sql = "INSERT INTO orders (id_user, id_address, id_payment, status) VALUES (?, ?, ?, ?)";
-        
-        $this->db->handle($sql, [$id_user, $id_address, $id_payment, $status]);
-        
-        return $this->db->lastInsertId();  // Lấy ID của đơn hàng vừa thêm
+    public function addOrder($id_user, $id_address, $payment_method = 'cash', $ship_method = 'standard', $status = 'pending') {
+        $sql = "INSERT INTO orders (id_user, id_address, payment_method, ship_method, status) VALUES (?, ?, ?, ?, ?)";
+        $this->db->handle($sql, [$id_user, $id_address, $payment_method, $ship_method, $status]);
+        return $this->getLastInsertId();
     }
 
-    // Lấy thông tin đơn hàng theo ID
+    // Lấy đơn hàng theo ID
     public function getOrder($id) {
-        $sql = "SELECT o.*, u.username, a.address as shipping_address 
+        $sql = "SELECT o.*, u.username, a.address AS shipping_address 
                 FROM orders o 
                 LEFT JOIN users u ON o.id_user = u.id_users 
                 LEFT JOIN addresses a ON o.id_address = a.id_address 
                 WHERE o.id_order = ?";
         $this->db->handle($sql, [$id]);
-        $order = $this->db->getData($sql);
+        $order = $this->db->getData($sql);  // Trả về dữ liệu chi tiết đơn hàng
         if ($order) {
             return $order;
         } else {
             throw new Exception("Không tìm thấy đơn hàng với ID: $id");
-        }}
+        }
+    }
 
-    // Lấy tất cả đơn hàng của người dùng
+    // Lấy danh sách đơn hàng của người dùng
     public function getOrdersByUser($id_user) {
-        $sql = "SELECT o.*, a.address as shipping_address 
+        $sql = "SELECT o.*, a.address AS shipping_address 
                 FROM orders o 
                 LEFT JOIN addresses a ON o.id_address = a.id_address 
                 WHERE o.id_user = ?";
         $this->db->handle($sql, [$id_user]);
-        $orders = $this->db->getData($sql);
+        $orders = $this->db->getData($sql);  // Trả về danh sách đơn hàng
         if ($orders) {
             return $orders;
         } else {
@@ -65,20 +67,37 @@ class Orders {
         }
     }
 
-    // Thêm sản phẩm vào đơn hàng
-    public function addOrderItem($order_id, $product_id, $quantity, $price) {
-        $sql = "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
-        return $this->db->handle($sql, [$order_id, $product_id, $quantity, $price]);
-    }
-
-    // Lấy các sản phẩm của đơn hàng
+    // Lấy danh sách các sản phẩm trong một đơn hàng
     public function getOrderItems($order_id) {
         $sql = "SELECT oi.*, p.product_name 
                 FROM order_items oi
                 LEFT JOIN products p ON oi.product_id = p.id_product
                 WHERE oi.order_id = ?";
         $this->db->handle($sql, [$order_id]);
-        return $this->db->getData($sql);
+        return $this->db->getData($sql);  // Trả về danh sách sản phẩm trong đơn hàng
+    }
+
+    // Thêm sản phẩm vào đơn hàng
+    public function addOrderItem($id_order, $id_product, $quantity, $price) {
+        $sql = "INSERT INTO order_items (id_order, id_product, quantity, price) VALUES (?, ?, ?, ?)";
+        return $this->db->handle($sql, [$id_order, $id_product, $quantity, $price]);
+    }
+
+    // Cập nhật trạng thái đơn hàng
+    public function updateOrderStatus($order_id, $status) {
+        $sql = "UPDATE orders SET status = ? WHERE id_order = ?";
+        return $this->db->handle($sql, [$status, $order_id]);
+    }
+
+    // Lấy ID của đơn hàng vừa được thêm
+    public function getLastInsertId() {
+        return $this->db->lastInsertId();  // Lấy ID của đơn hàng vừa thêm
+    }
+
+    // Xóa đơn hàng
+    public function deleteOrder($id_order) {
+        $sql = "DELETE FROM orders WHERE id_order = ?";
+        return $this->db->handle($sql, [$id_order]);
     }
 }
 ?>
