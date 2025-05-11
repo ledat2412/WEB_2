@@ -54,11 +54,12 @@ class Orders {
 
     // Lấy danh sách đơn hàng của người dùng
     public function getOrdersByUser($id_user) {
+        $id_user = intval($id_user); // đảm bảo là số nguyên
         $sql = "SELECT o.*, a.address AS shipping_address 
                 FROM orders o 
                 LEFT JOIN addresses a ON o.id_address = a.id_address 
-                WHERE o.id_user = ?";
-        $this->db->handle($sql, [$id_user]);
+                WHERE o.id_user = $id_user";
+        $this->db->handle($sql);
         $orders = $this->db->getData($sql);  // Trả về danh sách đơn hàng
         if ($orders) {
             return $orders;

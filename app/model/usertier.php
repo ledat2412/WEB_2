@@ -51,7 +51,7 @@ class UserTier {
                 SUM(oi.price * oi.quantity) AS total_spent
             FROM orders o
             JOIN order_items oi ON o.id_order = oi.id_order
-            WHERE o.status = 'finish' AND o.id_user = ?
+            WHERE o.status = 'completed' AND o.id_user = ?
         ";
         $stmt = $this->db->handle($sql, [$user_id]);
         $result = $this->db->getData($stmt);

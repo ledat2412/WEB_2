@@ -57,380 +57,108 @@
 <div class="product">
     <h1 class="product-heading" id="product-heading-1">Sản phẩm bán chạy</h1>
     <ul class="product-list">
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1/Giày chạy bộ FEIDIAN 3 CHALLENGER nam ARMT037-1.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy bộ Nam ARMT037-1</a>
-            </div>
-            <div class="product-price">1,850,000</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V/Giày chạy bộ Chitu 7 Pro Nam ARPU001-6V.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy Nam ARPU001-6V</a>
-            </div>
-            <div class="product-price">2,556,000</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày Chạy bộ Nam AGLT103-3B/Giày Chạy bộ Nam AGLT103-3B.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày Chạy bộ Nam AGLT103-3B</a>
-            </div>
-            <div class="product-price">1,200,000</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Lie Jun 6th nam ARZS003-13/Giày chạy bộ Lie Jun 6th nam ARZS003-13.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy bộ Nam ARZS003-13</a>
-            </div>
-            <div class="product-price">967,000</div>
-        </li>
+        <?php
+        // Lọc trùng tên sản phẩm và chỉ lấy tối đa 8 sản phẩm bán chạy
+        $uniqueNames = [];
+        $uniqueBestSellers = [];
+        if (isset($bestSellers) && is_array($bestSellers)) {
+            foreach ($bestSellers as $product) {
+                if (!in_array($product['product_name'], $uniqueNames)) {
+                    $uniqueNames[] = $product['product_name'];
+                    $uniqueBestSellers[] = $product;
+                }
+                if (count($uniqueBestSellers) >= 8) break;
+            }
+        }
+        ?>
+        <?php foreach ($uniqueBestSellers as $product): ?>
+            <?php
+            // Lấy hình ảnh chính như bên productshow_view.php
+            $image_dir = $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/public/assets/img/Sản Phẩm/" . str_replace("../../../public/assets/img/Sản Phẩm/", "", $product['picture_path']);
+            $absolute_dir = realpath($image_dir);
+            $main_image = '';
+            if ($absolute_dir) {
+                $webp_images = glob($absolute_dir . '/*.webp') ?: [];
+                $jpg_images = glob($absolute_dir . '/*.jpg') ?: [];
+                $jpeg_images = glob($absolute_dir . '/*.jpeg') ?: [];
+                $png_images = glob($absolute_dir . '/*.png') ?: [];
+                $images = array_merge($webp_images, $jpg_images, $jpeg_images, $png_images);
+                $main_image = !empty($images) ? $images[0] : '';
+            }
+            $url_path = $main_image ? str_replace(['\\', $_SERVER['DOCUMENT_ROOT']], ['/', ''], $main_image) : '';
+            ?>
+            <li>
+                <div class="product-img">
+                    <a href="/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?php echo $product['id_product']; ?>" class="product-display">
+                        <?php if ($url_path): ?>
+                            <img class="image" src="<?php echo $url_path; ?>" alt="">
+                        <?php endif; ?>
+                    </a>
+                    <a class="product-buy" href="/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?php echo $product['id_product']; ?>">Mua ngay</a>
+                </div>
+                <div class="product-name">
+                    <a class="name" href="/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?php echo $product['id_product']; ?>"><?php echo htmlspecialchars($product['product_name']); ?></a>
+                </div>
+                <div class="product-price">
+                    <?php echo isset($product['price']) ? number_format($product['price']) . ' đ' : ''; ?>
+                </div>
+            </li>
+        <?php endforeach; ?>
     </ul>
-    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+    <a href="/WEB_2/app/controller/main.php?act=products&product_type=banchay">
         <h1 class="product-extend">see more <i class="fa-solid fa-chevron-right"></i></h1>
     </a>
-    <!-- <h1 class="product-heading" id="product-heading-2">Sản Phẩm giảm giá</h1>
-    <ul class="product-list">
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS081-1/Giày bóng rổ nam ABAS081-1.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày bóng rổ nam ABAS081-1</a>
-            </div>
-            <div class="product-price">1,953,000</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS071-5/Giày bóng rổ nam ABAS071-5.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày bóng rổ nam ABAS071-5</a>
-            </div>
-            <div class="product-price">2,435,000</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABPS039-4/Giày bóng rổ nam ABPS039-4.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày bóng rổ nam ABPS039-4</a>
-            </div>
-            <div class="product-price">1,561,000</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS073-7/Giày bóng rổ nam ABAS073-7.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày bóng rổ nam ABAS073-7</a>
-            </div>
-            <div class="product-price">2,455,000</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS081-1/Giày bóng rổ nam ABAS081-1.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày bóng rổ nam ABAS081-1</a>
-            </div>
-            <div class="product-price">1,953,000</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS071-5/Giày bóng rổ nam ABAS071-5.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày bóng rổ nam ABAS071-5</a>
-            </div>
-            <div class="product-price">2,435,000</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABPS039-4/Giày bóng rổ nam ABPS039-4.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày bóng rổ nam ABPS039-4</a>
-            </div>
-            <div class="product-price">1,561,000</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày bóng rổ/Giày bóng rổ nam ABAS073-7/Giày bóng rổ nam ABAS073-7.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày bóng rổ nam ABAS073-7</a>
-            </div>
-            <div class="product-price">2,455,000</div>
-        </li>
-    </ul>
-    <a href="">
-        <h1 class="product-extend">see more <i class="fa-solid fa-chevron-right"></i></h1>
-    </a> -->
     <h1 class="product-heading" id="product-heading-3">Sản Phẩm Phổ Thông</h1>
     <ul class="product-list">
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Nữ ARHT020-9V/Giày chạy bộ Nữ ARHT020-9V.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy bộ Nữ ARHT020-9V</a>
-            </div>
-            <div class="product-price">1,340,000</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy bộ Nữ ARMT014-7V</a>
-            </div>
-            <div class="product-price">2,111,981</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy bộ Nữ ARVS016-3</a>
-            </div>
-            <div class="product-price">2,317,600</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Yue Ying 2 nữ ARHT006-7/Giày chạy bộ Yue Ying 2 nữ ARHT006-7.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy bộ Nữ ARHT006-7</a>
-            </div>
-            <div class="product-price">1,858,679</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Nữ ARHT020-9V/Giày chạy bộ Nữ ARHT020-9V.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy bộ Nữ ARHT020-9V</a>
-            </div>
-            <div class="product-price">1,340,000</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy bộ Nữ ARMT014-7V</a>
-            </div>
-            <div class="product-price">2,111,981</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy bộ Nữ ARVS016-3</a>
-            </div>
-            <div class="product-price">2,317,600</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Yue Ying 2 nữ ARHT006-7/Giày chạy bộ Yue Ying 2 nữ ARHT006-7.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy bộ Nữ ARHT006-7</a>
-            </div>
-            <div class="product-price">1,858,679</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Nữ ARHT020-9V/Giày chạy bộ Nữ ARHT020-9V.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy bộ Nữ ARHT020-9V</a>
-            </div>
-            <div class="product-price">1,340,000</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V/Giày chạy bộ Chitu 6 Pro nữ ARMT014-7V.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy bộ Nữ ARMT014-7V</a>
-            </div>
-            <div class="product-price">2,111,981</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3/Giày chạy bộ Boom Infinity 2 nữ ARVS016-3.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy bộ Nữ ARVS016-3</a>
-            </div>
-            <div class="product-price">2,317,600</div>
-        </li>
-        <li>
-            <div class="product-img">
-                <a href="/web/SanPham/Gi%C3%A0y%20ch%E1%BA%A1y%20b%E1%BB%99%20n%E1%BB%AF%20ARHT020-9V.html"
-                    class="product-display">
-                    <img class="image"
-                        src="/WEB_2/public/assets/img/Sản Phẩm/giày chạy bộ/Giày chạy bộ Yue Ying 2 nữ ARHT006-7/Giày chạy bộ Yue Ying 2 nữ ARHT006-7.jpg"
-                        alt="">
-                </a>
-                <a class="product-buy" href="">Mua ngay</a>
-            </div>
-            <div class="product-name">
-                <a class="name" href="">Giày chạy bộ Nữ ARHT006-7</a>
-            </div>
-            <div class="product-price">1,858,679</div>
-        </li>
+        <?php
+        // Lọc trùng tên sản phẩm và chỉ lấy tối đa 16 sản phẩm phổ thông
+        $uniqueNames = [];
+        $uniqueNormalProducts = [];
+        if (isset($normalProducts) && is_array($normalProducts)) {
+            foreach ($normalProducts as $product) {
+                if (!in_array($product['product_name'], $uniqueNames)) {
+                    $uniqueNames[] = $product['product_name'];
+                    $uniqueNormalProducts[] = $product;
+                }
+                if (count($uniqueNormalProducts) >= 16) break;
+            }
+        }
+        ?>
+        <?php foreach ($uniqueNormalProducts as $product): ?>
+            <?php
+            // Lấy hình ảnh chính như bên productshow_view.php
+            $image_dir = $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/public/assets/img/Sản Phẩm/" . str_replace("../../../public/assets/img/Sản Phẩm/", "", $product['picture_path']);
+            $absolute_dir = realpath($image_dir);
+            $main_image = '';
+            if ($absolute_dir) {
+                $webp_images = glob($absolute_dir . '/*.webp') ?: [];
+                $jpg_images = glob($absolute_dir . '/*.jpg') ?: [];
+                $jpeg_images = glob($absolute_dir . '/*.jpeg') ?: [];
+                $png_images = glob($absolute_dir . '/*.png') ?: [];
+                $images = array_merge($webp_images, $jpg_images, $jpeg_images, $png_images);
+                $main_image = !empty($images) ? $images[0] : '';
+            }
+            $url_path = $main_image ? str_replace(['\\', $_SERVER['DOCUMENT_ROOT']], ['/', ''], $main_image) : '';
+            ?>
+            <li>
+                <div class="product-img">
+                    <a href="/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?php echo $product['id_product']; ?>" class="product-display">
+                        <?php if ($url_path): ?>
+                            <img class="image" src="<?php echo $url_path; ?>" alt="">
+                        <?php endif; ?>
+                    </a>
+                    <a class="product-buy" href="/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?php echo $product['id_product']; ?>">Mua ngay</a>
+                </div>
+                <div class="product-name">
+                    <a class="name" href="/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?php echo $product['id_product']; ?>"><?php echo htmlspecialchars($product['product_name']); ?></a>
+                </div>
+                <div class="product-price">
+                    <?php echo isset($product['price']) ? number_format($product['price']) . ' đ' : ''; ?>
+                </div>
+            </li>
+        <?php endforeach; ?>
     </ul>
-    <a href="">
+    <a href="/WEB_2/app/controller/main.php?act=products&product_type=phothong">
         <h1 class="product-extend">see more <i class="fa-solid fa-chevron-right"></i></h1>
     </a>
 </div>

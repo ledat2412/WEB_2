@@ -2,6 +2,8 @@
 session_start();
 ob_start();
 
+require_once __DIR__ . '/../model/order_items.php';
+
 // if (!isset($_SESSION['user_id'])) {
 //     header("Location: /WEB_2/app/view/log/signin-admin.php");
 //     exit();
@@ -28,6 +30,9 @@ if (isset($_GET['act'])) {
             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/404notfound/404.php";
             exit();
         case 'home':
+            $orderItemsModel = new OrderItems();
+            $bestSellers = $orderItemsModel->getBestSellerProducts();
+            $normalProducts = $orderItemsModel->getNormalProducts();
             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/base/home.php";
             break;
         case 'login':
@@ -66,24 +71,24 @@ if (isset($_GET['act'])) {
                         $userTierModel = new UserTier();
 
                         // GIÁ TRỊ THỤC TẾ
-                        // $tierInfo = $userTierModel->getUserTierInfo($user_id);
-                        // $total_spent = $tierInfo['total_spent'];
-                        // $rank = $tierInfo['rank'];
+                        $tierInfo = $userTierModel->getUserTierInfo($user_id);
+                        $total_spent = $tierInfo['total_spent'];
+                        $rank = $tierInfo['rank'];
                         // GIÁ TRỊ GIẢ LẬP
-                        $total_spent = 000000;
-                        if ($total_spent < 1000000) {
-                            $rank = 'Not a member';
-                        } elseif ($total_spent < 5000000) {
-                            $rank = 'Bronze';
-                        } elseif ($total_spent < 9000000) {
-                            $rank = 'Silver';
-                        } elseif ($total_spent < 15000000) {
-                            $rank = 'Platinum';
-                        } elseif ($total_spent >= 20000000) {
-                            $rank = 'Diamond';
-                        } else {
-                            $rank = 'Platinum';
-                        }
+                        // $total_spent = 000000;
+                        // if ($total_spent < 1000000) {
+                        //     $rank = 'Not a member';
+                        // } elseif ($total_spent < 5000000) {
+                        //     $rank = 'Bronze';
+                        // } elseif ($total_spent < 9000000) {
+                        //     $rank = 'Silver';
+                        // } elseif ($total_spent < 15000000) {
+                        //     $rank = 'Platinum';
+                        // } elseif ($total_spent >= 20000000) {
+                        //     $rank = 'Diamond';
+                        // } else {
+                        //     $rank = 'Platinum';
+                        // }
 
                         // Nếu muốn dùng giá trị thực tế, hãy comment đoạn trên và bỏ comment đoạn dưới:
                         // $tierInfo = $userTierModel->getUserTierInfo($user_id);
@@ -209,10 +214,16 @@ if (isset($_GET['act'])) {
             }
             break;
         default:
+            $orderItemsModel = new OrderItems();
+            $bestSellers = $orderItemsModel->getBestSellerProducts();
+            $normalProducts = $orderItemsModel->getNormalProducts();
             include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/base/home.php";
             break;
     }
 } else {
+    $orderItemsModel = new OrderItems();
+    $bestSellers = $orderItemsModel->getBestSellerProducts();
+    $normalProducts = $orderItemsModel->getNormalProducts();
     include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/base/home.php";
 }
 

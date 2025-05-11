@@ -146,6 +146,14 @@
                             </label>
                         </div>
                     </div>
+                    <?php if (isset($_GET['act'])): ?>
+                        <input type="hidden" name="act" value="<?= htmlspecialchars($_GET['act']) ?>">
+                    <?php else: ?>
+                        <input type="hidden" name="act" value="products">
+                    <?php endif; ?>
+                    <?php if (isset($_GET['product_type']) && $_GET['product_type'] !== ''): ?>
+                        <input type="hidden" name="product_type" value="<?= htmlspecialchars($_GET['product_type']) ?>">
+                    <?php endif; ?>
                     <div class="button-container">
                         <button type="button" class="button reset-button" onclick="resetFilter()">Thiết lập lại</button>
                         <button type="submit" class="button apply-button">Áp dụng</button>
