@@ -1,3 +1,7 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) session_start();
+$user_orders = $_SESSION['user_orders'] ?? [];
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -28,10 +32,6 @@
 <body>
     <div class="main-content-infor">
         <h2>Đơn hàng của bạn</h2>
-        <?php
-        // Lấy danh sách đơn hàng từ session (ưu tiên session, không dùng biến $orders cũ)
-        $user_orders = $_SESSION['user_orders'] ?? [];
-        ?>
         <?php if (!empty($user_orders)): ?>
             <table class="order-list-table">
                 <tr>

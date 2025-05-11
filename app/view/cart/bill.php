@@ -35,6 +35,31 @@ $total = $bill['total'];
 $total_with_shipping = $bill['total_with_shipping'];
 $cart_items = $bill['cart_items'];
 
+// Lưu đơn hàng vào danh sách đơn hàng của user trong session (chỉ thêm nếu chưa có)
+if (!isset($_SESSION['user_orders'])) {
+    $_SESSION['user_orders'] = [];
+}
+$exists = false;
+foreach ($_SESSION['user_orders'] as $order) {
+    if ($order['id_order'] == $bill['id_order']) {
+        $exists = true;
+        break;
+    }
+}
+if (!$exists) {
+    $_SESSION['user_orders'][] = [
+        'id_order' => $bill['id_order'],
+        'cart_items' => $cart_items,
+        'address' => $address,
+        'payment_method' => $payment_method,
+        'ship_method' => $ship_method,
+        'shipping_cost' => $shipping_cost,
+        'total' => $total,
+        'total_with_shipping' => $total_with_shipping,
+        'order_time' => date('Y-m-d H:i:s')
+    ];
+}
+
 // Lấy thông tin user từ session nếu có
 $user = $_SESSION['user'] ?? [];
 $username = $user['username'] ?? '';
