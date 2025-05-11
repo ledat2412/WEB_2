@@ -43,7 +43,9 @@ class ProductController {
             $sex_id = $_POST['sex_id'];
             $id_product_variant = $_POST['id_product_variant'];
             $description_id = $_POST['description_id'];
-            $this->productModel->addProduct($size, $picture_path, $price, $stock, $color_id, $material_id, $sex_id, $id_product_variant, $description_id);
+            $category_id = $_POST['category_id'];
+            $brand_id = $_POST['brand_id'];
+            $this->productModel->addProduct($size, $picture_path, $price, $stock, $color_id, $material_id, $sex_id, $id_product_variant, $description_id, $category_id, $brand_id);
         }
         header("Location: ../view/admin/product.php?success=addProduct");
     }
