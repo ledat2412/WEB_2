@@ -91,26 +91,50 @@ $error_checkout = '';
 
 // Lấy lựa chọn ship_method từ session hoặc mặc định
 $selected_ship = $_SESSION['selected_ship_method'] ?? 'standard';
+// Lấy lựa chọn payment_method từ session hoặc mặc định
+$selected_payment = $_SESSION['selected_payment_method'] ?? (!empty($_SESSION['card_payment']) ? 'card' : 'cash');
 
 // Xử lý khi bấm "Đặt hàng" -> chuyển sang trang xác nhận
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'checkout') {
-    $_SESSION['checkout_info'] = [
-        'id_user' => $_SESSION['user_id'],
-        'id_address' => $default_address['id_address'] ?? null,
-        'payment_method' => $_POST['payment_method'] ?? 'cash',
-        'ship_method' => $_POST['ship_method'] ?? 'standard',
-        'cart_items' => $cart_items,
-        'total' => $total,
-        'shipping_cost' => ($selected_ship === 'express') ? 65000 : 40000,
-        'total_with_shipping' => $total_with_shipping
-    ];
-    header('Location: /WEB_2/app/view/cart/xacnhan.php');
-    exit();
+    // Kiểm tra giỏ hàng rỗng
+    if (count($cart_items) === 0) {
+        $error_checkout = 'Giỏ hàng của bạn đang trống!';
+    } else if (empty($default_address) || empty($default_address['id_address'])) {
+        $error_checkout = 'Vui lòng chọn địa chỉ giao hàng trước khi đặt hàng!';
+    } else {
+        // Kiểm tra phương thức thanh toán
+        $payment_method = $_POST['payment_method'] ?? 'cash';
+        if ($payment_method === 'card' && empty($_SESSION['card_info'])) {
+            $error_checkout = 'Vui lòng nhập thông tin thẻ trước khi thanh toán!';
+        }
+    }
+    // Nếu không có lỗi thì chuyển trang, ngược lại giữ nguyên trang và hiển thị lỗi
+    if (empty($error_checkout)) {
+        $_SESSION['checkout_info'] = [
+            'id_user' => $_SESSION['user_id'],
+            'id_address' => $default_address['id_address'] ?? null,
+            'payment_method' => $payment_method,
+            'ship_method' => $_POST['ship_method'] ?? 'standard',
+            'cart_items' => $cart_items,
+            'total' => $total,
+            'shipping_cost' => ($selected_ship === 'express') ? 65000 : 40000,
+            'total_with_shipping' => $total_with_shipping
+        ];
+        header('Location: /WEB_2/app/view/cart/xacnhan.php');
+        exit();
+    }
 }
 
 // Xử lý AJAX lưu ship_method vào session
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ship_method']) && !isset($_POST['action'])) {
     $_SESSION['selected_ship_method'] = $_POST['ship_method'];
+    echo 'ok';
+    exit();
+}
+
+// Xử lý AJAX lưu payment_method vào session
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['payment_method']) && !isset($_POST['action'])) {
+    $_SESSION['selected_payment_method'] = $_POST['payment_method'];
     echo 'ok';
     exit();
 }
@@ -121,7 +145,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ship_method']) && !is
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/WEB_2/public/assets/css/Web.css">
     <link rel="stylesheet" href="/WEB_2/public/assets/css/cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -159,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ship_method']) && !is
                         <img src="<?php echo htmlspecialchars($url_path); ?>" alt="product image">
                     </div>
                     <div class="item-details">
-                        <a href="/web/SanPham/<?php echo str_replace(' ', '-', $item['product_name']); ?>.html">
+                        <a href="/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?php echo urlencode($item['id_product']); ?>">
                             <h2 class="item-name"><?php echo $item['product_name']; ?></h2>
                         </a>
                         <p class="item-price"><?php echo number_format($item['price'], 0, ',', '.'); ?> ₫</p>
@@ -213,9 +236,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ship_method']) && !is
 
         <h3>Giao hàng</h3>
         <div class="shipping-options">
-            <input type="radio" id="standard" name="shipping" value="40000" <?php if ($selected_ship === 'standard') echo 'checked'; ?>>
+            <input type="radio" id="standard" name="shipping" value="standard" <?php if ($selected_ship === 'standard') echo 'checked'; ?>>
             <label for="standard">Chuyển phát thường: 40.000 ₫</label><br>
-            <input type="radio" id="express" name="shipping" value="65000" <?php if ($selected_ship === 'express') echo 'checked'; ?>>
+            <input type="radio" id="express" name="shipping" value="express" <?php if ($selected_ship === 'express') echo 'checked'; ?>>
             <label for="express">Hỏa tốc: 65.000 ₫</label><br>
         </div>
 
@@ -236,9 +259,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ship_method']) && !is
         <div class="payment-method">
             <h4>Chọn hình thức thanh toán</h4>
             <div class="payment-options">
-                <input type="radio" id="cashOnDelivery" name="payment" value="cash" <?php if (empty($_SESSION['card_payment'])) echo 'checked'; ?>>
+                <input type="radio" id="cashOnDelivery" name="payment" value="cash" <?php if ($selected_payment === 'cash') echo 'checked'; ?>>
                 <label for="cashOnDelivery">Thanh toán khi nhận hàng</label><br>
-                <input type="radio" id="creditCard" name="payment" value="card" <?php if (!empty($_SESSION['card_payment'])) echo 'checked'; ?>>
+                <input type="radio" id="creditCard" name="payment" value="card" <?php if ($selected_payment === 'card') echo 'checked'; ?>>
                 <label for="creditCard">Thanh toán bằng thẻ Visa/MasterCard</label><br>
                 <?php if (!empty($_SESSION['card_info'])): ?>
                     <div id="card-info-box" class="card-info-box" style="margin:10px 0; padding:10px; border:1px solid #ccc; border-radius:6px;">
@@ -276,7 +299,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ship_method']) && !is
         <div class="line"></div>
         <form method="POST" action="">
             <input type="hidden" name="action" value="checkout">
-            <input type="hidden" id="payment_method_input" name="payment_method" value="<?php echo !empty($_SESSION['card_payment']) ? 'card' : 'cash'; ?>">
+            <input type="hidden" id="payment_method_input" name="payment_method" value="<?php echo $selected_payment; ?>">
             <input type="hidden" id="ship_method_input" name="ship_method" value="<?php echo $selected_ship; ?>">
             <button class="checkout" type="submit">Đặt hàng</button>
         </form>
@@ -334,11 +357,20 @@ document.addEventListener('DOMContentLoaded', function() {
     var shippingRadios = document.querySelectorAll('input[name="shipping"]');
     shippingRadios.forEach(function(radio) {
         radio.addEventListener('change', function() {
-            var shipping = parseInt(document.querySelector('input[name="shipping"]:checked').value);
+            var shippingMethod = document.querySelector('input[name="shipping"]:checked').value;
+            var shipping = (shippingMethod === 'express') ? 65000 : 40000;
             var totalWithShipping = subtotal + shipping;
             document.getElementById('cart-total-display').textContent = formatCurrency(totalWithShipping);
         });
     });
+
+    // Khi load lại trang, cập nhật tổng tiền đúng phương thức ship
+    var checkedShip = document.querySelector('input[name="shipping"]:checked');
+    if (checkedShip) {
+        var shipping = (checkedShip.value === 'express') ? 65000 : 40000;
+        var totalWithShipping = subtotal + shipping;
+        document.getElementById('cart-total-display').textContent = formatCurrency(totalWithShipping);
+    }
 
     var btn = document.getElementById('change-address-btn');
     var modal = document.getElementById('address-list-modal');
@@ -384,6 +416,12 @@ document.addEventListener('DOMContentLoaded', function() {
     paymentRadios.forEach(function(radio) {
         radio.addEventListener('change', function() {
             paymentInput.value = this.value;
+            // Gửi AJAX lưu vào session
+            fetch(window.location.pathname, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'payment_method=' + this.value
+            });
         });
     });
 
@@ -391,7 +429,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var shipInput = document.getElementById('ship_method_input');
     shipRadios.forEach(function(radio) {
         radio.addEventListener('change', function() {
-            var method = (this.value == "65000") ? "express" : "standard";
+            var method = this.value; // 'standard' hoặc 'express'
             shipInput.value = method;
             // Gửi AJAX lưu vào session
             fetch(window.location.pathname, {
@@ -401,6 +439,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+
+    // Khi load lại trang, cập nhật ship_method_input cho đúng
+    var checkedShip = document.querySelector('input[name="shipping"]:checked');
+    if (checkedShip && shipInput) {
+        shipInput.value = checkedShip.value;
+    }
 });
 </script>
 

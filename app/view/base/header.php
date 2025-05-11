@@ -218,14 +218,29 @@
             <div class="guest-icon-shopping">
                 <?php
                 if(isset($_SESSION['username'])) {
+                    // Lấy số lượng sản phẩm trong giỏ hàng của user hiện tại
+                    require_once $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/model/cart.php";
+                    $cartModel = new Cart();
+                    $user_id = $_SESSION['user_id'] ?? null;
+                    $cart_count = 0;
+                    if ($user_id) {
+                        $cart_items = $cartModel->getCartByUser($user_id);
+                        $cart_count = 0;
+                        foreach ($cart_items as $item) {
+                            $cart_count += $item['quantity'];
+                        }
+                    }
+                    $cart_count_display = ($cart_count > 99) ? '99+' : $cart_count;
                     echo '<a href="/WEB_2/app/controller/main.php?act=cart" class="left-icon-shopping">
-                    <i class="fa-solid fa-cart-shopping" id="icon-shopping"></i>
-                    <div class="total-products">3</div>
-                </a>';
+                        <i class="fa-solid fa-cart-shopping" id="icon-shopping"></i>';
+                    if ($cart_count > 0) {
+                        echo '<div class="total-products">' . $cart_count_display . '</div>';
+                    }
+                    echo '</a>';
                 } else {
                     echo '<a href="/WEB_2/app/view/log/signin.php" class="guest-left-icon-shopping">
-                    <i class="fa-solid fa-cart-shopping" id="icon-shopping"></i>
-                </a>';
+                        <i class="fa-solid fa-cart-shopping" id="icon-shopping"></i>
+                    </a>';
                 }
                 ?>
             </div>

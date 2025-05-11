@@ -1,0 +1,220 @@
+/* Làm lại hoàn toàn giao diện xác nhận đơn hàng */
+body {
+    background: #f3f3f3;
+}
+
+.xacnhan-outer {
+    width: 100vw;
+    min-height: 100vh;
+    background: #f3f3f3;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.xacnhan-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 900px;
+    max-width: 98vw;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    min-height: 400px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.xacnhan-left, .xacnhan-right {
+    background: #fff;
+    padding: 32px 24px 32px 24px;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    max-height: 650px;
+    overflow-y: auto;
+}
+
+.xacnhan-left {
+    width: 50%;
+    border-right: 1.5px solid #f0f0f0;
+}
+
+.xacnhan-right {
+    width: 50%;
+    min-width: 260px;
+}
+
+.xacnhan-left h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #222;
+}
+
+.xacnhan-left h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: #222;
+}
+
+.xacnhan-product-list {
+    margin-bottom: 18px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.xacnhan-product-item {
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    padding: 16px 18px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+    border: 1px solid #f0f0f0;
+}
+
+.xacnhan-product-item strong {
+    font-size: 1.08rem;
+    color: #222;
+}
+
+.xacnhan-product-item div {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.xacnhan-right h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: #222;
+    text-align: left;
+}
+
+.xacnhan-info-block {
+    font-size: 1.05rem;
+    color: #222;
+    margin-bottom: 18px;
+    line-height: 1.7;
+    background: #f7f7f7;
+    border-radius: 8px;
+    padding: 16px 18px;
+    border: 1px solid #f0f0f0;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.xacnhan-info-block strong {
+    font-weight: 600;
+}
+
+.xacnhan-total-block {
+    margin-top: 10px;
+    font-size: 1.08rem;
+    color: #222;
+    background: #f7f7f7;
+    border-radius: 8px;
+    padding: 12px 18px;
+    border: 1px solid #f0f0f0;
+    font-weight: 600;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.xacnhan-btn {
+    width: 100%;
+    display: block;
+    background: #28a745;
+    color: #fff !important;
+    border: none;
+    padding: 14px 0;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 18px;
+    text-align: center;
+    transition: background 0.2s;
+    box-shadow: none;
+    text-decoration: none;
+}
+
+.xacnhan-btn:hover {
+    background: #218838;
+    color: #fff;
+}
+
+.back-to-cart-box .continue-shopping {
+    width: 100%;
+    display: block;
+    background: #e53935;
+    color: #fff !important;
+    border: none;
+    padding: 14px 0;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 18px;
+    text-align: center;
+    transition: background 0.2s;
+    box-shadow: none;
+    text-decoration: none;
+}
+
+.back-to-cart-box .continue-shopping:hover {
+    background: #b71c1c;
+    color: #fff;
+}
+
+.back-to-cart-box {
+    margin-top: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    text-align: left;
+}
+
+.back-to-cart-box .fa-arrow-left {
+    margin-right: 8px;
+    font-size: 1.08rem;
+    vertical-align: middle;
+}
+
+@media (max-width: 1100px) {
+    .xacnhan-container {
+        width: 99vw;
+    }
+}
+
+@media (max-width: 900px) {
+    .xacnhan-outer {
+        padding-top: 20px;
+    }
+    .xacnhan-container {
+        flex-direction: column;
+        width: 99vw;
+        min-width: 0;
+        margin: 0 auto;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .xacnhan-left, .xacnhan-right {
+        width: 100%;
+        border-radius: 0;
+        border-right: none;
+        padding: 18px 10px;
+        max-height: none;
+        overflow: visible;
+    }
+    .xacnhan-left {
+        border-bottom: 1.5px solid #f0f0f0;
+    }
+}
