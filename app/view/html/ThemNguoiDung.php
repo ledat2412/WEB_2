@@ -33,13 +33,13 @@
         </a>
         <ul class="side-menu top">
             <li class="active">
-                <a href="../../views/html/admin.php">
+                <a href="../../view/html/admin.php">
                     <i class="fa-solid fa-chart-line"></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="../../views/html/Quanlycauhinh.php#">
+                <a href="../../view/html/Quanlycauhinh.php#">
                     <i class="fa-solid fa-user"></i>
                     <span class="text">Users</span>
                 </a>

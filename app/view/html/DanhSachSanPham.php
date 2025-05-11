@@ -65,13 +65,13 @@ function getFirstImageUrl($picture_path) {
         </a>
         <ul class="side-menu top">
             <li class="active">
-                <a href="../../views/html/admin.php">
+                <a href="../../view/html/admin.php">
                     <i class="fa-solid fa-chart-line"></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="../../views/html/Quanlycauhinh.php">
+                <a href="../../view/html/Quanlycauhinh.php">
                     <i class="fa-solid fa-user"></i>
                     <span class="text">Users</span>
                 </a>
@@ -83,7 +83,7 @@ function getFirstImageUrl($picture_path) {
                 </a>
             </li>
             <li>
-                <a href="../../views/html/DonHang.php">
+                <a href="../../controller/handle/orders_contronller.php">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="text">Đơn hàng</span>
                 </a>
@@ -125,7 +125,7 @@ function getFirstImageUrl($picture_path) {
                     <h1>Danh Sách</h1>
                     <ul class="list-position">
                         <li>
-                            <a href="../../views/html/admin.php">Home</a>
+                            <a href="../../view/html/admin.php">Home</a>
                         </li>
                         <li><i class="fa-solid fa-chevron-right"></i></li>
                         <li>
