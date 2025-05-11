@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../public/css/admin.css">
+    <link rel="stylesheet" href="../../../public/assets/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Admin</title>
@@ -17,35 +17,20 @@
                         <h1>Hóa đơn mua hàng</h1>
                     </li>
                     <li class="receipt-title-item">
-                        <h2>Mã: 3123411115</h2>
+                        <h2 id="receipt-order-id">Mã: ---</h2>
                     </li>
                     <li class="receipt-title-item">
-                        <h4>Ngày: 21/10/2024</h4>
+                        <h4 id="receipt-order-date">Ngày: ---</h4>
                     </li>
                 </ul>
                 <div class="close-receipt">
-                    <a href="#top-customer">
+                    <a href="javascript:void(0);" id="close-receipt">
                         <i class="fa-solid fa-xmark"></i>
                     </a>
                 </div>
             </div>
-            <div class="information">
-                <div class="information-title">
-                    <label class="information-label">Khách hàng</label>
-                    <div class="information-input">Lý Minh Huy</div>
-                </div>
-                <div class="information-title">
-                    <label class="information-label">Mã khách hàng</label>
-                    <div class="information-input">3123411115</div>
-                </div>
-                <div class="information-title">
-                    <label class="information-label">Số điện thoại</label>
-                    <div class="information-input">0931792138</div>
-                </div>
-                <div class="information-title">
-                    <label class="information-label">Địa chỉ</label>
-                    <div class="information-input">112/24/20 An Bình P5 Q5</div>
-                </div>
+            <div class="information" id="receipt-customer-info">
+                <!-- Thông tin khách hàng sẽ được load bằng JS -->
             </div>
             <div class="receipt-detail">
                 <table class="receipt-table">
@@ -54,106 +39,8 @@
                         <th class="receipt-table-header">Số lượng</th>
                         <th class="receipt-table-header">Thành tiền</th>
                     </thead>
-                    <tbody>
-                        <tr class="receipt-table-row">
-                            <td class="receipt-table-item">ARPU001-6V</td>
-                            <td class="receipt-table-item">5</td>
-                            <td class="receipt-table-item">10.000.000</td>
-                        </tr>
-                        <tr class="receipt-table-row">
-                            <td class="receipt-table-item">ABAS081-1</td>
-                            <td class="receipt-table-item">5</td>
-                            <td class="receipt-table-item">10.000.000</td>
-                        </tr>
-                        <tr class="receipt-table-row">
-                            <td class="receipt-table-item">ARZS003-13</td>
-                            <td class="receipt-table-item">5</td>
-                            <td class="receipt-table-item">5.000.000</td>
-                        </tr>
-                        <tr class="receipt-table-row">
-                            <td class="receipt-table-item">ARHT020-9V</td>
-                            <td class="receipt-table-item">5</td>
-                            <td class="receipt-table-item">5.000.000</td>
-                        </tr>
-                        <tr class="receipt-table-row">
-                            <td class="receipt-table-item"></td>
-                            <td class="receipt-table-item" style="font-size: 20px;">Tổng tiền: </td>
-                            <td class="receipt-table-item" style="font-size: 20px;">30.000.000</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div id="top-customer" class="top-customer-list-container">
-        <div class="top-customer-list">
-            <div class="top-customer-list-header">
-                <h3>Khách hàng tiềm năng</h3>
-                <div class="close">
-                    <a href="">
-                        <i class="fa-solid fa-xmark"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="top-customer-list-body">
-                <table class="top-customer-list-table">
-                    <theading>
-                        <th class="top-customer-list-table-header">STT</th>
-                        <th class="top-customer-list-table-header">Khách hàng</th>
-                        <th class="top-customer-list-table-header">Doanh thu</th>
-                        <th class="top-customer-list-table-header">Hóa đơn</th>
-                    </theading>
-                    <tbody>
-                        <tr class="top-customer-list-table-row">
-                            <td class="top-customer-list-table-data">1</td>
-                            <td class="top-customer-list-table-data">Minh Huy</td>
-                            <td class="top-customer-list-table-data">30.000.000</td>
-                            <td class="top-customer-list-table-data">
-                                <a href="#receipt">
-                                    <i class="fa-solid fa-receipt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr class="top-customer-list-table-row" style="background-color: #f8f6f6;">
-                            <td class="top-customer-list-table-data">2</td>
-                            <td class="top-customer-list-table-data">Tôn Quyền</td>
-                            <td class="top-customer-list-table-data">26.000.000</td>
-                            <td class="top-customer-list-table-data">
-                                <a href="#receipt">
-                                    <i class="fa-solid fa-receipt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr class="top-customer-list-table-row">
-                            <td class="top-customer-list-table-data">3</td>
-                            <td class="top-customer-list-table-data">Võ Thị Thương</td>
-                            <td class="top-customer-list-table-data">15.000.000</td>
-                            <td class="top-customer-list-table-data">
-                                <a href="#receipt">
-                                    <i class="fa-solid fa-receipt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr class="top-customer-list-table-row" style="background-color: #f8f6f6">
-                            <td class="top-customer-list-table-data">4</td>
-                            <td class="top-customer-list-table-data">Phương Nhi</td>
-                            <td class="top-customer-list-table-data">10.000.000</td>
-                            <td class="top-customer-list-table-data">
-                                <a href="#receipt">
-                                    <i class="fa-solid fa-receipt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr class="top-customer-list-table-row">
-                            <td class="top-customer-list-table-data">5</td>
-                            <td class="top-customer-list-table-data">Đức Đạt</td>
-                            <td class="top-customer-list-table-data">5.000.000</td>
-                            <td class="top-customer-list-table-data">
-                                <a href="#receipt">
-                                    <i class="fa-solid fa-receipt"></i>
-                                </a>
-                            </td>
-                        </tr>
+                    <tbody id="receipt-product-list">
+                        <!-- Sản phẩm sẽ được load bằng JS -->
                     </tbody>
                 </table>
             </div>
@@ -172,19 +59,19 @@
                 </a>
             </li>   
             <li>
-                <a href="../../views/html/Quanlycauhinh.php">
+                <a href="../../view/html/Quanlycauhinh.php">
                     <i class="fa-solid fa-user"></i>
                     <span class="text">Users</span>
                 </a>
             </li>
             <li>
-                <a href="../../views/html/DanhSachSanPham.php">
+                <a href="../../view/html/DanhSachSanPham.php">
                     <i class="fa-solid fa-shop"></i>
                     <span class="text">Danh sách</span>
                 </a>
             </li>
             <li>
-                <a href="../../views/html/DonHang.php">
+                <a href="../../view/html/DonHang.php">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="text">Đơn hàng</span>
                 </a>
@@ -226,11 +113,11 @@
                     <h1>Thống kê</h1>
                     <ul class="list-position">
                         <li>
-                            <a href="../../views/html/admin.php">Thống kê</a>
+                            <a href="../../view/html/admin.php">Thống kê</a>
                         </li>
                         <li><i class="fa-solid fa-chevron-right"></i></li>
                         <li>
-                            <a href="../../views/html/admin.php">Home</a>
+                            <a href="../../view/html/admin.php">Home</a>
                         </li>
                     </ul>
                 </div>
@@ -265,42 +152,164 @@
                     </span>
                 </li>
             </ul>
-
-            <!-- <div class="chart-datetime">
-                <div class="datetime">
-                    <input type="date">
-                    <input type="date">
-                </div>
-                
-            </div>
-
-            <div class="chart">
-                <canvas id="chart-bar">
-                </canvas>
-            </div> -->
-
-            <div class="chart-datetime">
-                <div class="datetime">
-                    <input type="date">
-                    <input type="date">
-                </div>
-            </div>
-
-
+            <form method="GET" action="admin.php" class="datetime" style="margin-bottom: 20px;">
+                                Từ: 
+                                <input type="date" name="from_date" value="<?php echo isset($_GET['from_date']) ? htmlspecialchars($_GET['from_date']) : ''; ?>">
+                                &nbsp;&nbsp;Đến: 
+                                <input type="date" name="to_date" value="<?php echo isset($_GET['to_date']) ? htmlspecialchars($_GET['to_date']) : ''; ?>">
+                                &nbsp;&nbsp;<button type="submit" name="statistic">Thống kê</button>
+                            </form>
             <div class="customer-chart-container">
-                <table class="statis_table">
+                
+                <table class="table-user">
                     <thead>
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <td>STT</td>
+                            <td>Username</td>
+                            <td>Email</td>
+                            <td>Tổng tiền</td>
+                            <td>Hóa đơn</td>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?php
+                        include_once '../../../app/model/database.php';
+                        $stt = 1;
+                        $data = [];
+
+                        if (
+                            isset($_GET['statistic']) &&
+                            !empty($_GET['from_date']) &&
+                            !empty($_GET['to_date'])
+                        ) {
+                            $startDate = $_GET['from_date'] . " 00:00:00";
+                            $endDate = $_GET['to_date'] . " 23:59:59";
+                            $db = new database();
+                            // Lấy tổng tiền từng user trong khoảng thời gian
+                            $sql = "SELECT 
+                                        u.id_users,
+                                        u.username,
+                                        u.email,
+                                        SUM(oi.price * oi.quantity) AS total_purchase
+                                    FROM orders o 
+                                    JOIN users u ON o.id_user = u.id_users
+                                    JOIN order_items oi ON o.id_order = oi.id_order
+                                    WHERE o.order_date >= ? AND o.order_date <= ?
+                                    GROUP BY u.id_users, u.username, u.email
+                                    ORDER BY total_purchase DESC
+                                    LIMIT 5";
+                            $conn = $db->connect();
+                            $stmt = $conn->prepare($sql);
+                            if ($stmt) {
+                                $stmt->bind_param("ss", $startDate, $endDate);
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+                                $data = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+                                $stmt->close();
+                            }
+                        }
+
+                        if (!empty($data)) {
+                            foreach ($data as $row) {
+                                echo '<tr>';
+                                echo '<td>' . $stt++ . '</td>';
+                                echo '<td>' . htmlspecialchars($row['username']) . '</td>';
+                                echo '<td>' . htmlspecialchars($row['email']) . '</td>';
+                                echo '<td>' . number_format($row['total_purchase'], 0, ',', '.') . ' đ</td>';
+                                echo '<td><a href="ChiTietDonHang.php?id_user=' . $row['id_users'] . '&from=' . htmlspecialchars($_GET['from_date']) . '&to=' . htmlspecialchars($_GET['to_date']) . '" target="_blank">Chi tiết</a></td>';
+                                echo '</tr>';
+                            }
+                        } else {
+                            echo '<tr><td colspan="5" style="text-align:center;">Vui lòng chọn khoảng thời gian và nhấn Thống kê</td></tr>';
+                        }
+                        ?>
+                    </tbody>
                 </table>
+            </div>
+
             </div>
         </main>
     </section>
     <script src ="../../../public/js/admin.js"></script>
     <script src ="../../../public/js/chart-bar.js"></script>
     <script src="../../../public/js/Click.js"></script>
+    <script>
+    // Hiện popup hóa đơn chi tiết từng đơn hàng
+    document.addEventListener('DOMContentLoaded', function() {
+        // Gắn sự kiện cho các nút "Chi tiết" trong bảng khách hàng
+        document.querySelectorAll('a[href^="ChiTietDonHang.php"], a.show-receipt').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                // Nếu là link mở tab mới thì bỏ qua
+                if (this.target === '_blank') return;
+                e.preventDefault();
+                // Lấy id_user hoặc id_order từ data hoặc url
+                let url = this.getAttribute('href');
+                let params = new URLSearchParams(url.split('?')[1]);
+                let id_order = this.dataset.orderid || params.get('id_order');
+                let id_user = this.dataset.userid || params.get('id_user');
+                // Ưu tiên lấy id_order, nếu không có thì lấy id_user và lấy đơn hàng đầu tiên của user
+                if (id_order) {
+                    showReceiptDetail(id_order);
+                } else if (id_user) {
+                    fetch('../../../app/view/html/get_first_order_of_user.php?id_user=' + id_user)
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.id_order) showReceiptDetail(data.id_order);
+                        });
+                }
+            });
+        });
+
+        // Đóng popup
+        document.getElementById('close-receipt').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('receipt').style.display = 'none';
+        });
+
+        // Hàm load chi tiết hóa đơn
+        function showReceiptDetail(id_order) {
+            fetch('../../../app/view/html/order_detail_ajax.php?id_order=' + id_order)
+                .then(res => res.json())
+                .then(data => {
+                    // Hiển thị mã hóa đơn và ngày
+                    document.getElementById('receipt-order-id').innerText = 'Mã: ' + (data.id_order || '---');
+                    document.getElementById('receipt-order-date').innerText = 'Ngày: ' + (data.order_date || '---');
+                    // Hiển thị thông tin khách hàng
+                    let infoHtml = '';
+                    infoHtml += '<div class="information-title"><label class="information-label">Khách hàng</label><div class="information-input">' + (data.username || '') + '</div></div>';
+                    infoHtml += '<div class="information-title"><label class="information-label">Email</label><div class="information-input">' + (data.email || '') + '</div></div>';
+                    infoHtml += '<div class="information-title"><label class="information-label">Số điện thoại</label><div class="information-input">' + (data.phone || '') + '</div></div>';
+                    infoHtml += '<div class="information-title"><label class="information-label">Địa chỉ</label><div class="information-input">' + (data.address || '') + '</div></div>';
+                    document.getElementById('receipt-customer-info').innerHTML = infoHtml;
+                    // Hiển thị danh sách sản phẩm
+                    let tbody = document.getElementById('receipt-product-list');
+                    tbody.innerHTML = '';
+                    let total = 0;
+                    if (data.items && data.items.length > 0) {
+                        data.items.forEach(function(item) {
+                            let line_total = item.quantity * item.price;
+                            total += line_total;
+                            let tr = document.createElement('tr');
+                            tr.className = 'receipt-table-row';
+                            tr.innerHTML = '<td class="receipt-table-item">' + (item.product_name || '') + '</td>' +
+                                '<td class="receipt-table-item">' + item.quantity + '</td>' +
+                                '<td class="receipt-table-item">' + Number(line_total).toLocaleString() + ' đ</td>';
+                            tbody.appendChild(tr);
+                        });
+                    } else {
+                        let tr = document.createElement('tr');
+                        tr.innerHTML = '<td colspan="3" style="text-align:center;">Không có sản phẩm</td>';
+                        tbody.appendChild(tr);
+                    }
+                    // Tổng tiền
+                    let totalRow = document.createElement('tr');
+                    totalRow.className = 'receipt-table-row';
+                    totalRow.innerHTML = '<td></td><td style="font-size: 20px;">Tổng tiền: </td><td style="font-size: 20px;">' + total.toLocaleString() + ' đ</td>';
+                    tbody.appendChild(totalRow);
+                    document.getElementById('receipt').style.display = 'block';
+                });
+        }
+    });
+    </script>
 </body>
 </html>

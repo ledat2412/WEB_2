@@ -22,6 +22,7 @@ class database
         if ($this->conn->connect_error) {
             die("Kết nối thất bại: " . $this->conn->connect_error);
         }
+        return $this->conn;
     }
 
     // Hàm thực thi câu lệnh SQL mà không có tham số

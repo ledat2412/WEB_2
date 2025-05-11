@@ -34,7 +34,7 @@
         </a>
         <ul class="side-menu top">
             <li class="active">
-                <a href="../../views/html/admin.php">
+                <a href="../../view/html/admin.php">
                     <i class="fa-solid fa-chart-line"></i>
                     <span class="text">Dashboard</span>
                 </a>
@@ -46,13 +46,13 @@
                 </a>
             </li>
             <li>
-                <a href="../../views/html/DanhSachSanPham.php">
+                <a href="../../view/html/DanhSachSanPham.php">
                     <i class="fa-solid fa-shop"></i>
                     <span class="text">Danh sách</span>
                 </a>
             </li>
             <li>
-                <a href="../../views/html/DonHang.php">
+                <a href="../../view/html/DonHang.php">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="text">Đơn hàng</span>
                 </a>
@@ -94,11 +94,11 @@
                     <h1>Users</h1>
                     <ul class="list-position">
                         <li>
-                            <a href="../../views/html/admin.php">Home</a>
+                            <a href="../../view/html/admin.php">Home</a>
                         </li>
                         <li><i class="fa-solid fa-chevron-right"></i></li>
                         <li>
-                            <a href="../../views/html/Quanlycauhinh.php#">Users</a>
+                            <a href="../../view/html/Quanlycauhinh.php#">Users</a>
                         </li>
                     </ul>
                 </div>
@@ -126,14 +126,12 @@
                 </thead>
                 <tbody>
                     <?php
-                        // Sửa lại đường dẫn include cho đúng với cấu trúc thư mục thực tế
                         include_once "../../../app/model/database.php";
                         include_once "../../../app/model/users.php";
                         include_once "../../../app/model/roles.php";
 
                         $db = new database();
 
-                        // Sửa lại tên bảng cho đúng: user -> users
                         $result = $db->getData("SELECT * FROM users u JOIN roles r ON u.role = r.id_role");
                         if(!empty($result)){
                             $stt = 1;
@@ -157,10 +155,10 @@
                             echo '</td>';
                             echo '<td data-label="Tác vụ">';
                                 echo '<a href = "../../view/html/CapNhatThongTin.php?get_id='.$data['id_users'].'&get_id_role='.$data['role'].'">';
-                                    echo '<i class="fa-solid fa-pen-to-square"></i>';
+                                    echo '<i class="fa-solid fa-pen-to-square">&nbsp;</i>';
                                 echo '</a>';
                                 echo '<a onclick="openPopup('.$data['id_users'].',);return false;">';
-                                        echo '<i class="fa-regular fa-x"></i>
+                                        echo '<i class="fa-solid fa-x"></i>
                                     </a>';
                             echo '</td>';
                         echo '</tr>';
