@@ -16,20 +16,18 @@ class Auth {
             $confirm_password = $_POST['confirm_password'];
 
             if($password !== $confirm_password) {
-                header("Location: ../view/log/signup.php?error=Mật khẩu không khớp");
+                header("Location: /WEB_2/register?error=" . urlencode("Mật khẩu không khớp"));
                 return;
             }
 
-
             $this->user = new Users($username, $email, $password);
-            
 
             $result = $this->user->register();
             
             if($result == "Đăng ký thành công") {
-                header("Location: ../view/log/signin.php?success=register");
+                header("Location: /WEB_2/register?success=register");
             } else {
-                header("Location: ../view/log/signup.php?error=" . urlencode($result));
+                header("Location: /WEB_2/register?error=" . urlencode($result));
             }
         }
     }
@@ -44,11 +42,9 @@ class Auth {
             $result = $this->user->login($account, $password);
             
             if($result == "Đăng nhập thành công") {
-
                 header("Location: /WEB_2/Lining");
-
             } else {
-                header("Location: ../view/log/signin.php?error=" . urlencode($result));
+                header("Location: /WEB_2/login?error=" . urlencode($result));
             }
         }
     }
@@ -64,15 +60,13 @@ class Auth {
             $result = $this->user->loginforadmin($account, $password);
             
             if($result == "Đăng nhập thành công") {
-
-                
                 if(isset($_SESSION['role']) && $_SESSION['role'] == 1) {
-                    header("Location: /WEB_2/app/view/html/admin.php");
+                    header("Location: /WEB_2/admin/home");
                 } else {
                     header("Location: /WEB_2/Lining");
                 }
             } else {
-                header("Location: ../view/log/signin.php?error=" . urlencode($result));
+                header("Location: /WEB_2/login?error=" . urlencode($result));
             }
         }
     }

@@ -35,6 +35,7 @@ RewriteRule ^([^/]+)/?$ app/controller/main.php?act=$1 [L,QSA]
 
 # Rewrite 404 error page
 RewriteRule ^error/?$ app/controller/main.php?act=error [L,QSA]
+
 # Admin panel rewrite rules
 RewriteRule ^admin/home/?$ app/view/html/admin.php [L,QSA]
-
+RewriteRule ^admin/?$ app/controller/main.php?act=admin [L,QSA]

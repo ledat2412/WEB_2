@@ -179,13 +179,14 @@ if (isset($_GET['act'])) {
             break;
         case 'admin':
             if (!isset($_SESSION['user_id'])) {
-                header("Location: /WEB_2/app/view/log/signin-admin.php");
+                // Không redirect nữa, mà include thẳng file đăng nhập admin
+                include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/log/signin-admin.php";
                 exit();
             } else {
                 if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
                     // Nếu không có action, chuyển hướng sang dashboard
                     if (!isset($_GET['action'])) {
-                        header("Location: /WEB_2/app/view/html/admin.php");
+                        header("Location: /WEB_2/admin/home");
                         exit();
                     }
                     include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/admin/sidebar.php";
