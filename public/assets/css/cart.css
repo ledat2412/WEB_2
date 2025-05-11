@@ -145,8 +145,7 @@ h2 {
     border: none;
     cursor: pointer;
     margin-top: 5px;
-    margin-bottom: 20px;   
-}
+    margin-bottom: 20px;   }
 
 .discount-code{
     margin-bottom: 20px;
@@ -183,5 +182,17 @@ h2 {
     border: none;
     cursor: pointer;
   }
+  
+  .change-address-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+  
+
   
   

@@ -3,14 +3,20 @@ session_start();
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $input = $_POST;  // Sử dụng $_POST thay vì json_decode() vì AJAX gửi data dưới dạng URL encoded
+    $input = $_POST;
 
-    // Xử lý khi cập nhật số lượng
-    if ($input['action'] === 'update') {
-        $id_cart = $input['id_cart'];
-        $quantity = intval($input['quantity']);
+    // Kiểm tra hành động cập nhật
+    if (isset($input['action']) && $input['action'] === 'update') {
+        $id_cart = $input['id_cart'] ?? null;
+        $quantity = isset($input['quantity']) ? intval($input['quantity']) : null;
 
-        // Kiểm tra nếu sản phẩm tồn tại trong giỏ hàng
+        // Kiểm tra dữ liệu hợp lệ
+        if ($id_cart === null || $quantity === null || $quantity < 1) {
+            echo json_encode(['success' => false, 'message' => 'Dữ liệu không hợp lệ.']);
+            exit;
+        }
+
+        // Kiểm tra sản phẩm có tồn tại trong giỏ hàng không
         if (isset($_SESSION['cart'][$id_cart])) {
             // Cập nhật số lượng sản phẩm
             $_SESSION['cart'][$id_cart]['quantity'] = $quantity;
@@ -19,9 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $subtotal = $_SESSION['cart'][$id_cart]['price'] * $quantity;
 
             // Tính tổng tiền của giỏ hàng
-            $total = array_sum(array_map(function($item) {
-                return $item['price'] * $item['quantity'];
-            }, $_SESSION['cart']));
+            $total = 0;
+            foreach ($_SESSION['cart'] as $item) {
+                $total += $item['price'] * $item['quantity'];
+            }
 
             // Thêm phí vận chuyển
             $shipping_cost = 40000;
@@ -38,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['success' => false, 'message' => 'Sản phẩm không tồn tại trong giỏ hàng.']);
         }
     } else {
-        echo json_encode(['success' => false, 'message' => 'Yêu cầu không hợp lệ.']);
+        echo json_encode(['success' => false, 'message' => 'Hành động không hợp lệ.']);
     }
 } else {
     echo json_encode(['success' => false, 'message' => 'Phương thức không được hỗ trợ.']);

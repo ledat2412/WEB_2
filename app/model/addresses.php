@@ -32,6 +32,12 @@ class Addresses {
         return $this->db->getData($sql);
     }
 
+    public function getAddressById($id_address) {
+        $sql = "SELECT * FROM addresses WHERE id_address = ?";
+        $stmt = $this->db->handle($sql, [$id_address]);
+        return $this->db->getData($stmt);
+    }
+
     public function getAddressesByUser($id_user) {
         $sql = "SELECT * FROM addresses WHERE id_user = ?";
         $stmt = $this->db->handle($sql, [$id_user]);

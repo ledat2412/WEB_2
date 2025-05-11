@@ -1,7 +1,6 @@
 <?php
-require_once '../model/cart.php';
-require_once '../model/product.php'; // Thêm model Product vào để lấy thông tin sản phẩm
-
+require_once __DIR__ . '/../model/cart.php';
+require_once __DIR__ . '/../model/product.php';
 
 class CartController {
     private $cartModel;
