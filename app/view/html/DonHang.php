@@ -39,19 +39,19 @@
         </a>
         <ul class="side-menu top">
             <li class="active">
-                <a href="../../views/html/admin.php">
+                <a href="../../view/html/admin.php">
                     <i class="fa-solid fa-chart-line"></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="../../views/html/Quanlycauhinh.php#">
+                <a href="../../view/html/Quanlycauhinh.php#">
                     <i class="fa-solid fa-user"></i>
                     <span class="text">Users</span>
                 </a>
             </li>
             <li>
-                <a href="../../views/html/DanhSachSanPham.php">
+                <a href="../../view/html/DanhSachSanPham.php">
                     <i class="fa-solid fa-shop"></i>
                     <span class="text">Danh sách</span>
                 </a>
@@ -99,11 +99,11 @@
                     <h1>Dashboard</h1>
                     <ul class="list-position">
                         <li>
-                            <a href="../../views/html/admin.php">Home</a>
+                            <a href="../../view/html/admin.php">Home</a>
                         </li>
                         <li><i class="fa-solid fa-chevron-right"></i></li>
                         <li>
-                            <a href="../../views/html/admin.php">Đơn hàng</a>
+                            <a href="../../view/html/admin.php">Đơn hàng</a>
                         </li>
                     </ul>
                 </div>
