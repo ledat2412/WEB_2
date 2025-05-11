@@ -1,6 +1,6 @@
 <?php
-require_once '../model/cart.php';
-require_once '../model/product.php'; // Thêm model Product vào để lấy thông tin sản phẩm
+require_once __DIR__ . '/../model/cart.php';
+require_once __DIR__ . '/../model/product.php'; // Thêm model Product vào để lấy thông tin sản phẩm
 
 
 class CartController {
@@ -43,9 +43,9 @@ class CartController {
     //     return $this->cartModel->deleteCartItem($id_cart);
     // }
 
-    public function updateCartItem($id_cart, $quantity) {
-        return $this->cartModel->updateCartItem($id_cart, $quantity);
-    }
+    // public function updateCartItem($id_cart, $quantity) {
+    //     return $this->cartModel->updateCartItem($id_cart, $quantity);
+    // }
 
     // public function clearCart($id_user) {
     //     return $this->cartModel->clearCart($id_user);
@@ -99,28 +99,28 @@ class CartController {
         }
     }
 
-    // Cập nhật số lượng (AJAX)
-    public function updateQuantity($id_user, $id_product, $quantity) {
-        // Kiểm tra nếu sản phẩm có trong giỏ hàng
-        $existing_cart_item = $this->cartModel->getCartItem($id_user, $id_product);
-        if ($existing_cart_item) {
-            // Cập nhật số lượng sản phẩm
-            $this->cartModel->updateQuantityByUserAndProduct($id_user, $id_product, $quantity);
+    // // Cập nhật số lượng (AJAX)
+    // public function updateQuantity($id_user, $id_product, $quantity) {
+    //     // Kiểm tra nếu sản phẩm có trong giỏ hàng
+    //     $existing_cart_item = $this->cartModel->getCartItem($id_user, $id_product);
+    //     if ($existing_cart_item) {
+    //         // Cập nhật số lượng sản phẩm
+    //         $this->cartModel->updateQuantityByUserAndProduct($id_user, $id_product, $quantity);
 
-            // Tính lại tổng tiền giỏ hàng
-            $updatedCart = $this->cartModel->getCartByUser($id_user);
-            $total = 0;
-            foreach ($updatedCart as $item) {
-                $total += $item['price'] * $item['quantity'];
-            }
+    //         // Tính lại tổng tiền giỏ hàng
+    //         $updatedCart = $this->cartModel->getCartByUser($id_user);
+    //         $total = 0;
+    //         foreach ($updatedCart as $item) {
+    //             $total += $item['price'] * $item['quantity'];
+    //         }
 
-            // Trả về kết quả JSON (tổng tiền mới)
-            header('Content-Type: application/json');
-            echo json_encode(['success' => true, 'total' => $total]);
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Sản phẩm không có trong giỏ hàng']);
-        }
-    }
+    //         // Trả về kết quả JSON (tổng tiền mới)
+    //         header('Content-Type: application/json');
+    //         echo json_encode(['success' => true, 'total' => $total]);
+    //     } else {
+    //         echo json_encode(['status' => 'error', 'message' => 'Sản phẩm không có trong giỏ hàng']);
+    //     }
+    // }
 
     // Xóa 1 sản phẩm khỏi giỏ
     public function removeFromCart($id_cart) {

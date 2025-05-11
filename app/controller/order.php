@@ -99,5 +99,43 @@ class Orders {
         $sql = "DELETE FROM orders WHERE id_order = ?";
         return $this->db->handle($sql, [$id_order]);
     }
+    public function viewDetail() {
+        session_start();
+
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        if (!isset($_SESSION['user'])) {
+            echo "Vui lòng đăng nhập để xem đơn hàng.";
+            exit;
+        }
+
+        if (!isset($_GET['id_order'])) {
+            echo "Không tìm thấy mã đơn hàng.";
+            exit;
+        }
+
+        $id_order = $_GET['id_order'];
+        $id_user = $_SESSION['user']['id_users'];
+
+        $orderModel = new Orders();
+        $orderItemsModel = new OrderItems();
+
+        try {
+            $order = $orderModel->getOrder($id_order);
+
+            if (!$order || $order[0]['id_user'] != $id_user) {
+                echo "Bạn không có quyền truy cập đơn hàng này.";
+                exit;
+            }
+
+            $items = $orderModel->getOrderItems($id_order);
+
+            // Dữ liệu đã sẵn sàng, đưa sang view
+            include __DIR__ . '/../views/order/order_detail.php';
+
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+            exit;
+        }
+    }
 }
 ?>

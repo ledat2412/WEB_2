@@ -92,33 +92,20 @@ $error_checkout = '';
 // Lấy lựa chọn ship_method từ session hoặc mặc định
 $selected_ship = $_SESSION['selected_ship_method'] ?? 'standard';
 
+// Xử lý khi bấm "Đặt hàng" -> chuyển sang trang xác nhận
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'checkout') {
-    require_once '../model/orders.php';
-    require_once '../model/order_items.php';
-
-    $id_user = $_SESSION['user_id'];
-    $id_address = $default_address['id_address'];
-    $payment_method = $_POST['payment_method'] ?? 'cash';
-    $ship_method = $_POST['ship_method'] ?? 'standard';
-    $_SESSION['selected_ship_method'] = $ship_method; // Lưu vào session
-    $ordersModel = new Orders();
-    $orderItemsModel = new OrderItems();
-
-    $cart_items = $cartController->viewCart($id_user);
-
-    if (count($cart_items) === 0) {
-        $error_checkout = 'Giỏ hàng của bạn đang trống, không thể đặt hàng!';
-    } else {
-        $id_order = $ordersModel->addOrder($id_user, $id_address, $payment_method, $ship_method, 'pending');
-        foreach ($cart_items as $item) {
-            $orderItemsModel->addOrderItem($id_order, $item['id_product'], $item['quantity'], $item['price']);
-        }
-        $cartController->clearCart($id_user);
-        unset($_SESSION['card_info']);
-        unset($_SESSION['card_payment']);
-        header('Location: /WEB_2/app/controller/main.php?act=order_success&id_order=' . $id_order);
-        exit();
-    }
+    $_SESSION['checkout_info'] = [
+        'id_user' => $_SESSION['user_id'],
+        'id_address' => $default_address['id_address'] ?? null,
+        'payment_method' => $_POST['payment_method'] ?? 'cash',
+        'ship_method' => $_POST['ship_method'] ?? 'standard',
+        'cart_items' => $cart_items,
+        'total' => $total,
+        'shipping_cost' => ($selected_ship === 'express') ? 65000 : 40000,
+        'total_with_shipping' => $total_with_shipping
+    ];
+    header('Location: /WEB_2/app/view/cart/xacnhan.php');
+    exit();
 }
 
 // Xử lý AJAX lưu ship_method vào session
