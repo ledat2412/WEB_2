@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
     unset($_SESSION['card_info']);
     unset($_SESSION['card_payment']);
     unset($_SESSION['selected_ship_method']); // Reset ship_method về mặc định sau khi đặt hàng
-    header('Location: /WEB_2/app/view/cart/bill.php');
+    header('Location: /WEB_2/cart/success');
     exit();
 }
 ?>

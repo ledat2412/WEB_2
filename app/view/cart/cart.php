@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             'shipping_cost' => ($selected_ship === 'express') ? 65000 : 40000,
             'total_with_shipping' => $total_with_shipping
         ];
-        header('Location: /WEB_2/app/view/cart/xacnhan.php');
+        header('Location: /WEB_2/cart/confirm');
         exit();
     }
 }
@@ -182,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['payment_method']) && 
                         <img src="<?php echo htmlspecialchars($url_path); ?>" alt="product image">
                     </div>
                     <div class="item-details">
-                        <a href="/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?php echo urlencode($item['id_product']); ?>">
+                        <a href="/WEB_2/products/detail/<?php echo urlencode($item['id_product']); ?>">
                             <h2 class="item-name"><?php echo $item['product_name']; ?></h2>
                         </a>
                         <p class="item-price"><?php echo number_format($item['price'], 0, ',', '.'); ?> ₫</p>
@@ -272,7 +272,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['payment_method']) && 
                     </div>
                 <?php endif; ?>
             </div>
-            <button id="confirm-card-btn" style="display:none;" onclick="window.location.href='/WEB_2/app/view/cart/cart-payment.php'">
+            <button id="confirm-card-btn" style="display:none;" onclick="window.location.href='/WEB_2/cart/card'">
                 <?php echo !empty($_SESSION['card_info']) ? 'Chỉnh thông tin thẻ' : 'Xác nhận thanh toán thẻ'; ?>
             </button>
             <form method="POST" style="display:inline;">
@@ -407,7 +407,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var addNewAddressBtn = document.getElementById('add-new-address-btn');
     if (addNewAddressBtn) {
         addNewAddressBtn.onclick = function() {
-            window.location.href = '/WEB_2/app/controller/main.php?act=information&skibidiyetyet=addresses';
+            window.location.href = '/WEB_2/address';
         };
     }
 

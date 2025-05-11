@@ -16,29 +16,34 @@
         <!-- sorting bar -->
         <div class="sorting-bar">
             <div class="sorting-options">
-                <label for="sorting">Default sorting</label>
-                <select id="sorting">
-                    <option value="default">Default sorting</option>
-                    <option value="price-low-high">Price: Low to High</option>
-                    <option value="price-high-low">Price: High to Low</option>
-                    <option value="popularity">Popularity</option>
-                    <option value="rating">Rating</option>
-                </select>
+                <form id="sortForm" method="get" style="display:inline;">
+                    <label for="sorting">Default sorting</label>
+                    <select id="sorting" name="sort" onchange="document.getElementById('sortForm').submit()">
+                        <option value="default" <?= (!isset($_GET['sort']) || $_GET['sort'] == 'default') ? 'selected' : '' ?>>Default sorting</option>
+                        <option value="price-low-high" <?= (isset($_GET['sort']) && $_GET['sort'] == 'price-low-high') ? 'selected' : '' ?>>Price: Low to High</option>
+                        <option value="price-high-low" <?= (isset($_GET['sort']) && $_GET['sort'] == 'price-high-low') ? 'selected' : '' ?>>Price: High to Low</option>
+                        <option value="popularity" <?= (isset($_GET['sort']) && $_GET['sort'] == 'popularity') ? 'selected' : '' ?>>Popularity</option>
+                    </select>
+                    <?php
+                    // Preserve all current filters as hidden inputs
+                    foreach ($_GET as $key => $val) {
+                        if ($key === 'sort' || $key === 'page') continue;
+                        if (is_array($val)) {
+                            foreach ($val as $v) {
+                                echo '<input type="hidden" name="' . htmlspecialchars($key) . '[]" value="' . htmlspecialchars($v) . '">';
+                            }
+                        } else {
+                            echo '<input type="hidden" name="' . htmlspecialchars($key) . '" value="' . htmlspecialchars($val) . '">';
+                        }
+                    }
+                    ?>
+                </form>
             </div>
             <div class="view-options">
-                <button class="view-btn list-view active">
-                    <span class="icon">☰</span>
-                </button>
-                <button class="view-btn grid-view">
-                    <span class="icon">▦</span>
-                </button>
-                <button class="view-btn compact-view">
-                    <span class="icon" style="color: orange;">▤</span>
-                </button>
             </div>
             <div class="results-info">
-                Tổng sản phẩm khác nhau: <?= count($unique_shoe_codes) ?><br>
-                Sản phẩm khác nhau sau khi lọc: <?= isset($filtered_unique_shoe_codes) ? count($filtered_unique_shoe_codes) : count($unique_shoe_codes) ?>
+                Sản phẩm: <?= count($unique_shoe_codes) ?><br>
+                Sản phẩm sau khi lọc: <?= isset($filtered_unique_shoe_codes) ? count($filtered_unique_shoe_codes) : count($unique_shoe_codes) ?>
             </div>
         </div>
         <!-- sản phẩm và filter -->
@@ -297,6 +302,26 @@
                     }
                 }
 
+                // --- SORTING LOGIC ---
+                $sort = $_GET['sort'] ?? 'default';
+                if ($sort === 'price-low-high') {
+                    usort($filtered, function($a, $b) { return $a['price'] <=> $b['price']; });
+                } elseif ($sort === 'price-high-low') {
+                    usort($filtered, function($a, $b) { return $b['price'] <=> $a['price']; });
+                } elseif ($sort === 'popularity') {
+                    // Popularity: sort by order_count (descending)
+                    if (!isset($order_count)) $order_count = [];
+                    usort($filtered, function($a, $b) use ($order_count) {
+                        $oa = $order_count[$a['id_product']] ?? 0;
+                        $ob = $order_count[$b['id_product']] ?? 0;
+                        return $ob <=> $oa;
+                    });
+                } elseif ($sort === 'rating') {
+                    // If you have rating data, sort by it. Otherwise, skip or use a placeholder.
+                    // usort($filtered, function($a, $b) { return ($b['rating'] ?? 0) <=> ($a['rating'] ?? 0); });
+                }
+                // --- END SORTING LOGIC ---
+
                 // Pagination logic (chỉ hiển thị 3 sản phẩm mỗi trang)
                 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
                 $per_page = 12;
@@ -324,7 +349,7 @@
                         $url_path = $main_image ? str_replace(['\\', $_SERVER['DOCUMENT_ROOT']], ['/', ''], $main_image) : '';
                         ?>
                         <div class='product-item'>
-                            <a href='/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?= $item['id_product'] ?>' style='text-decoration: none; color: inherit;'>
+                            <a href='/WEB_2/products/detail/<?= $item['id_product'] ?>' style='text-decoration: none; color: inherit;'>
                                 <?php if ($url_path): ?>
                                     <img src='<?= $url_path ?>' alt='<?= $item['product_name'] ?>' class='product-image'>
                                 <?php endif; ?>

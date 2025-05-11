@@ -20,10 +20,10 @@ class Auth {
                 return;
             }
 
-            // Tạo đối tượng Users chỉ với thông tin cần thiết
+
             $this->user = new Users($username, $email, $password);
             
-            // Gọi phương thức register
+
             $result = $this->user->register();
             
             if($result == "Đăng ký thành công") {
@@ -33,28 +33,20 @@ class Auth {
             }
         }
     }
-    // Xử lý đăng nhập
+
     public function handleLogin() {
         if(isset($_POST['signIn'])) {
             $account = $_POST['account'];
             $password = $_POST['password'];
 
-            // Tạo đối tượng Users
             $this->user = new Users("", "", "");
             
-            // Gọi phương thức login
             $result = $this->user->login($account, $password);
             
             if($result == "Đăng nhập thành công") {
-                // Debug: In ra thông tin session
-                // var_dump($_SESSION);
+
                 header("Location: /WEB_2/Lining");
-                // Chuyển hướng dựa vào role
-                // if(isset($_SESSION['role']) && $_SESSION['role'] == 1) {
-                //     header("Location: /WEB_2/app/view/admin/dashboard.php");
-                // } else {
-                //     header("Location: /WEB_2/Lining");
-                // }
+
             } else {
                 header("Location: ../view/log/signin.php?error=" . urlencode($result));
             }
@@ -72,10 +64,8 @@ class Auth {
             $result = $this->user->loginforadmin($account, $password);
             
             if($result == "Đăng nhập thành công") {
-                // Debug: In ra thông tin session
-                var_dump($_SESSION);
+
                 
-                // Chuyển hướng dựa vào role
                 if(isset($_SESSION['role']) && $_SESSION['role'] == 1) {
                     header("Location: /WEB_2/app/view/html/admin.php");
                 } else {
@@ -107,8 +97,7 @@ if(isset($_POST['signUp'])) {
 } elseif(isset($_GET['logout'])) {
     $auth->handleLogout();
 
-// } else {
-//     header("Location: /WEB_2/Lining");
+
     exit();
 }
 ?>

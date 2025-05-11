@@ -99,7 +99,7 @@ $cart_items = $bill['cart_items'];
     </div>
 
     <div class="bill-buttons">
-        <a href="/WEB_2/app/controller/main.php?act=cart"><button class="bill-btn bill-btn-back">Quay lại giỏ hàng</button></a>
+        <a href="/WEB_2/cart"><button class="bill-btn bill-btn-back">Quay lại giỏ hàng</button></a>
         <a href="/WEB_2"><button class="bill-btn bill-btn-home">Về trang chủ</button></a>
     </div>
 </div>

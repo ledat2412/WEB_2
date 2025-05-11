@@ -46,7 +46,7 @@
                 </a>
             </li>
             <li>
-                <a href="../../view/html/DanhSachSanPham.php">
+                <a href="../../controller/handle/listProduct_contronller.php">
                     <i class="fa-solid fa-shop"></i>
                     <span class="text">Danh sách</span>
                 </a>

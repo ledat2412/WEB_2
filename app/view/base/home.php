@@ -89,15 +89,15 @@
             ?>
             <li>
                 <div class="product-img">
-                    <a href="/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?php echo $product['id_product']; ?>" class="product-display">
+                    <a href="/WEB_2/products/detail/<?php echo $product['id_product']; ?>" class="product-display">
                         <?php if ($url_path): ?>
                             <img class="image" src="<?php echo $url_path; ?>" alt="">
                         <?php endif; ?>
                     </a>
-                    <a class="product-buy" href="/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?php echo $product['id_product']; ?>">Mua ngay</a>
+                    <a class="product-buy" href="/WEB_2/products/detail/<?php echo $product['id_product']; ?>">Mua ngay</a>
                 </div>
                 <div class="product-name">
-                    <a class="name" href="/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?php echo $product['id_product']; ?>"><?php echo htmlspecialchars($product['product_name']); ?></a>
+                    <a class="name" href="/WEB_2/products/detail/<?php echo $product['id_product']; ?>"><?php echo htmlspecialchars($product['product_name']); ?></a>
                 </div>
                 <div class="product-price">
                     <?php echo isset($product['price']) ? number_format($product['price']) . ' đ' : ''; ?>
@@ -105,7 +105,7 @@
             </li>
         <?php endforeach; ?>
     </ul>
-    <a href="/WEB_2/app/controller/main.php?act=products&product_type=banchay">
+    <a href="/WEB_2/products?product_type=banchay">
         <h1 class="product-extend">see more <i class="fa-solid fa-chevron-right"></i></h1>
     </a>
     <h1 class="product-heading" id="product-heading-3">Sản Phẩm Phổ Thông</h1>
@@ -142,15 +142,15 @@
             ?>
             <li>
                 <div class="product-img">
-                    <a href="/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?php echo $product['id_product']; ?>" class="product-display">
+                    <a href="/WEB_2/products/detail/<?php echo $product['id_product']; ?>" class="product-display">
                         <?php if ($url_path): ?>
                             <img class="image" src="<?php echo $url_path; ?>" alt="">
                         <?php endif; ?>
                     </a>
-                    <a class="product-buy" href="/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?php echo $product['id_product']; ?>">Mua ngay</a>
+                    <a class="product-buy" href="/WEB_2/products/detail/<?php echo $product['id_product']; ?>">Mua ngay</a>
                 </div>
                 <div class="product-name">
-                    <a class="name" href="/WEB_2/app/controller/main.php?act=products&action=product_detail&id=<?php echo $product['id_product']; ?>"><?php echo htmlspecialchars($product['product_name']); ?></a>
+                    <a class="name" href="/WEB_2/products/detail/<?php echo $product['id_product']; ?>"><?php echo htmlspecialchars($product['product_name']); ?></a>
                 </div>
                 <div class="product-price">
                     <?php echo isset($product['price']) ? number_format($product['price']) . ' đ' : ''; ?>
@@ -158,7 +158,7 @@
             </li>
         <?php endforeach; ?>
     </ul>
-    <a href="/WEB_2/app/controller/main.php?act=products&product_type=phothong">
+    <a href="/WEB_2/products?product_type=phothong">
         <h1 class="product-extend">see more <i class="fa-solid fa-chevron-right"></i></h1>
     </a>
 </div>

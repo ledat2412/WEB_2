@@ -10,6 +10,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^products/([^/]+)/?$ app/controller/main.php?act=products&variant=$1 [L,QSA]
 
+# Product detail rewrite
+RewriteRule ^products/detail/([0-9]+)/?$ app/controller/main.php?act=products&action=product_detail&id=$1 [L,QSA]
+
 # Rewrite for authentication
 RewriteRule ^login/?$ app/controller/main.php?act=login [L,QSA]
 RewriteRule ^register/?$ app/controller/main.php?act=register [L,QSA]
@@ -19,6 +22,12 @@ RewriteRule ^address/?$ app/controller/main.php?act=information&skibidiyetyet=ad
 RewriteRule ^order/?$ app/controller/main.php?act=information&skibidiyetyet=order [L,QSA]
 RewriteRule ^notification/?$ app/controller/main.php?act=information&skibidiyetyet=notification [L,QSA]
 
+# Rewrite for cart
+RewriteRule ^cart/?$ app/controller/main.php?act=cart [L,QSA]
+RewriteRule ^cart/card/?$ app/view/cart/cart-payment.php [L,QSA]
+RewriteRule ^cart/confirm/?$ app/view/cart/xacnhan.php [L,QSA]
+RewriteRule ^cart/success/?$ app/view/cart/bill.php [L,QSA]
+
 # Rewrite for other pages
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -27,5 +36,5 @@ RewriteRule ^([^/]+)/?$ app/controller/main.php?act=$1 [L,QSA]
 # Rewrite 404 error page
 RewriteRule ^error/?$ app/controller/main.php?act=error [L,QSA]
 # Admin panel rewrite rules
-RewriteRule ^admin/home/?$ app/controller/admin.php?act=login&action=dashboard [L,QSA]
+RewriteRule ^admin/home/?$ app/view/html/admin.php [L,QSA]
 

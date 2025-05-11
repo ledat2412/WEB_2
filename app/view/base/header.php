@@ -231,7 +231,7 @@
                         }
                     }
                     $cart_count_display = ($cart_count > 99) ? '99+' : $cart_count;
-                    echo '<a href="/WEB_2/app/controller/main.php?act=cart" class="left-icon-shopping">
+                    echo '<a href="/WEB_2/cart" class="left-icon-shopping">
                         <i class="fa-solid fa-cart-shopping" id="icon-shopping"></i>';
                     if ($cart_count > 0) {
                         echo '<div class="total-products">' . $cart_count_display . '</div>';
