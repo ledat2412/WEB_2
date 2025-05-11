@@ -66,6 +66,41 @@
         public function addImage() {
             echo '<img src="../../../public/img/' . htmlspecialchars($_FILES['product_img']['name']) . '" alt="Hình ảnh" style="width: 70px; height: 70px;">';
         }
-        
+
+        public function getSexList() {
+            $sql = "SELECT * FROM sex";
+            $result = $this->db->conn->query($sql);
+            $sexList = [];
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $sexList[] = $row;
+                }
+            }
+            return $sexList;
+        }
+
+        public function getColorList() {
+            $sql = "SELECT * FROM colors";
+            $result = $this->db->conn->query($sql);
+            $colorList = [];
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $colorList[] = $row;
+                }
+            }
+            return $colorList;
+        }
+
+        public function getMaterialList() {
+            $sql = "SELECT * FROM materials";
+            $result = $this->db->conn->query($sql);
+            $materialList = [];
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $materialList[] = $row;
+                }
+            }
+            return $materialList;
+        }
     }
 ?>

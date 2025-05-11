@@ -90,7 +90,13 @@
                         <div class="repair-infor">
                             <label for="">Vật liệu: </label>
                             <br>
-                            <input type="text" name="materialNew" value="<?php echo htmlspecialchars($product['material_name']); ?>">
+                            <select name="materialNew">
+                                <?php foreach ($materialList as $material): ?>
+                                    <option value="<?php echo htmlspecialchars($material['name']); ?>" <?php if ($product['material_name'] == $material['name']) echo 'selected'; ?>>
+                                        <?php echo htmlspecialchars($material['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="repair-infor"> 
                             <label for="">Giá bán: </label>
@@ -105,28 +111,24 @@
                         <div class="repair-infor">
                             <label for="">Giới tính: </label>
                             <br>
-                            <input type="text" name="sexNew" value="<?php echo htmlspecialchars($product['sex_name']); ?>" >
+                            <select name="sexNew">
+                                <?php foreach ($sexList as $sex): ?>
+                                    <option value="<?php echo htmlspecialchars($sex['name']); ?>" <?php if ($product['sex_name'] == $sex['name']) echo 'selected'; ?>>
+                                        <?php echo htmlspecialchars($sex['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="repair-infor">
-                            <div class="color-pick">
-                                <label for="">Màu</label>
-                                <label class="color-option">
-                                    <input type="radio" name="colorNew" value="red" <?php if($product['color_name']=='red') echo 'checked'; ?>>
-                                    <span class="color-circle" style="background-color: red;"></span>
-                                </label>
-                                <label class="color-option">
-                                    <input type="radio" name="colorNew" value="blue" <?php if($product['color_name']=='blue') echo 'checked'; ?>>
-                                    <span class="color-circle" style="background-color: blue;"></span>
-                                </label>
-                                <label class="color-option">
-                                    <input type="radio" name="colorNew" value="yellow" <?php if($product['color_name']=='yellow') echo 'checked'; ?>>
-                                    <span class="color-circle" style="background-color: yellow;"></span>
-                                </label>
-                                <label class="color-option">
-                                    <input type="radio" name="colorNew" value="pink" <?php if($product['color_name']=='pink') echo 'checked'; ?>>
-                                    <span class="color-circle" style="background-color: pink;"></span>
-                                </label>
-                            </div>
+                            <label for="">Màu sắc: </label>
+                            <br>
+                            <select name="colorNew">
+                                <?php foreach ($colorList as $color): ?>
+                                    <option value="<?php echo htmlspecialchars($color['name']); ?>" <?php if ($product['color_name'] == $color['name']) echo 'selected'; ?>>
+                                        <?php echo htmlspecialchars($color['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="repair-infor">
                             <label for="">Mô tả: </label>

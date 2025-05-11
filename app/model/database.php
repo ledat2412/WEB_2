@@ -1,13 +1,12 @@
 <?php
 class database
 {
+    public $conn;
     private $server = "localhost";
     private $user = "root";
     private $pass = "";
     private $database = "lining_1";
 
-    
-    private $conn = null;
     private $result = null;
 
     public function __construct()

@@ -4,6 +4,11 @@
 
     $addProductModel = new addProduct();
 
+    // Lấy danh sách giới tính, màu sắc, vật liệu
+    $sexList = $addProductModel->getSexList();
+    $colorList = $addProductModel->getColorList();
+    $materialList = $addProductModel->getMaterialList();
+
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if(isset($_POST["btn"])) {
             $product_name = $_POST["product_name"];

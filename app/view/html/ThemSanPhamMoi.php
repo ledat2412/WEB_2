@@ -105,43 +105,35 @@
                         <div class="add-infor-new">
                             <label for="">Vật liệu: </label>
                             <br>
-                            <input type="text" required name="product_material">
+                            <select name="product_material">
+                                <?php foreach ($materialList as $material): ?>
+                                    <option value="<?php echo htmlspecialchars($material['name']); ?>">
+                                        <?php echo htmlspecialchars($material['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="add-infor-new">
-                            <div class="sex">
-                                <label for="">Sex: </label>
-                                <div class="sex-option" style="display: flex; gap: 20px; align-items: center;">
-                                    <div style="display: flex; align-items: center; gap: 5px;">
-                                        <input type="radio" name="sex" value="Nữ" style="width: 20px;">
-                                        <label for="">Nữ</label>
-                                    </div>
-                                    <div style="display: flex; align-items: center; gap: 5px;">
-                                        <input type="radio" name="sex" value="Nam" style="width: 20px;">
-                                        <label for="">Nam</label>
-                                    </div>
-                                </div>
-                            </div>
+                            <label for="">Giới tính: </label>
+                            <br>
+                            <select name="sex">
+                                <?php foreach ($sexList as $sex): ?>
+                                    <option value="<?php echo htmlspecialchars($sex['name']); ?>">
+                                        <?php echo htmlspecialchars($sex['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="add-infor-new">
-                            <div class="color-picked">
-                                <label for="">Màu: </label>
-                                <label class="color-option">
-                                    <input type="radio" name="color" value="red">
-                                    <span class="color-circle" style="background-color: red;"></span>
-                                </label>
-                                <label class="color-option">
-                                    <input type="radio" name="color" value="blue">
-                                    <span class="color-circle" style="background-color: blue;"></span>
-                                </label>
-                                <label class="color-option">
-                                    <input type="radio" name="color" value="yellow">
-                                    <span class="color-circle" style="background-color: yellow;"></span>
-                                </label>
-                                <label class="color-option">
-                                    <input type="radio" name="color" value="pink">
-                                    <span class="color-circle" style="background-color: pink;"></span>
-                                </label> 
-                            </div>
+                            <label for="">Màu sắc: </label>
+                            <br>
+                            <select name="color">
+                                <?php foreach ($colorList as $color): ?>
+                                    <option value="<?php echo htmlspecialchars($color['name']); ?>">
+                                        <?php echo htmlspecialchars($color['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="add-infor-new">
                             <label for="">Mô tả: </label>

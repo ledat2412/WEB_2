@@ -4,6 +4,11 @@
 
     $editProductModel = new editProduct();
 
+    // Lấy danh sách giới tính, màu sắc, vật liệu
+    $sexList = $editProductModel->getSexList();
+    $colorList = $editProductModel->getColorList();
+    $materialList = $editProductModel->getMaterialList();
+
     if (isset($_GET['product_id']) && !empty($_GET['product_id'])) {
         $id = $_GET['product_id'];
         $DataProduct = $editProductModel->getProduct($id);
