@@ -1,18 +1,32 @@
 <?php
 session_start();
 
-// Lấy thông tin user từ session nếu có
-$user = $_SESSION['user'] ?? [];
-$username = $user['username'] ?? '';
-$email = $user['email'] ?? '';
-$phone = $user['phone'] ?? '';
+// Lấy id_order từ URL nếu có
+$id_order = $_GET['id_order'] ?? null;
 
-// Lấy thông tin đơn hàng từ session bill_info (được lưu từ xacnhan.php)
-if (empty($_SESSION['bill_info'])) {
-    echo "Không có thông tin đơn hàng để hiển thị.";
-    exit;
+// Nếu có id_order, lấy đơn hàng từ session user_orders
+if ($id_order && isset($_SESSION['user_orders'])) {
+    $order = null;
+    foreach ($_SESSION['user_orders'] as $o) {
+        if ($o['id_order'] == $id_order) {
+            $order = $o;
+            break;
+        }
+    }
+    if (!$order) {
+        echo "Không tìm thấy đơn hàng.";
+        exit;
+    }
+    $bill = $order;
+} else {
+    // Nếu không có id_order, lấy đơn hàng mới nhất từ session bill_info (cũ)
+    if (empty($_SESSION['bill_info'])) {
+        echo "Không có thông tin đơn hàng để hiển thị.";
+        exit;
+    }
+    $bill = $_SESSION['bill_info'];
 }
-$bill = $_SESSION['bill_info'];
+
 $address = $bill['address'];
 $payment_method = $bill['payment_method'];
 $ship_method = $bill['ship_method'];
@@ -20,6 +34,12 @@ $shipping_cost = $bill['shipping_cost'];
 $total = $bill['total'];
 $total_with_shipping = $bill['total_with_shipping'];
 $cart_items = $bill['cart_items'];
+
+// Lấy thông tin user từ session nếu có
+$user = $_SESSION['user'] ?? [];
+$username = $user['username'] ?? '';
+$email = $user['email'] ?? '';
+$phone = $user['phone'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="vi">
