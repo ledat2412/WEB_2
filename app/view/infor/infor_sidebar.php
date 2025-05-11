@@ -12,7 +12,7 @@
             <li><a href="/WEB_2/profile">Thông Tin Hạng Thành Viên</a></li>
             <li><a href="/WEB_2/address">Địa Chỉ</a></li>
             <li><a href="/WEB_2/order">Đơn Hàng</a></li>
-            <li><a href="/WEB_2/notification">Đăng Kí Nhận Thông Báo</a></li>
+            <!-- <li><a href="/WEB_2/notification">Đăng Kí Nhận Thông Báo</a></li> -->
             <li><a href="/WEB_2/logout">Đăng Xuất</a></li>
         </ul>
     </div>

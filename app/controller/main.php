@@ -120,9 +120,9 @@ if (isset($_GET['act'])) {
                         require_once '../model/orders.php';
                         include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/infor/orders.php";
                         break;
-                    case 'notification':
-                        include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/infor/notification.php";
-                        break;
+                    // case 'notification':
+                    //     include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/infor/notification.php";
+                    //     break;
                     default:
                         include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/infor/user_tier.php";
                         break;

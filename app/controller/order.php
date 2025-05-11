@@ -63,7 +63,8 @@ class Orders {
         if ($orders) {
             return $orders;
         } else {
-            throw new Exception("Không có đơn hàng cho người dùng với ID: $id_user");
+            // Trả về mảng rỗng thay vì ném exception
+            return [];
         }
     }
 
