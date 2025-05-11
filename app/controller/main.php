@@ -185,7 +185,7 @@ if (isset($_GET['act'])) {
                 if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
                     // Nếu không có action, chuyển hướng sang dashboard
                     if (!isset($_GET['action'])) {
-                        header("Location: /WEB_2/app/controller/main.php?act=admin&action=dashboard");
+                        header("Location: /WEB_2/app/view/html/admin.php");
                         exit();
                     }
                     include $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/admin/sidebar.php";

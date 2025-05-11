@@ -77,7 +77,7 @@ class Auth {
                 
                 // Chuyển hướng dựa vào role
                 if(isset($_SESSION['role']) && $_SESSION['role'] == 1) {
-                    header("Location: /WEB_2/app/view/admin/dashboard.php");
+                    header("Location: /WEB_2/app/view/html/admin.php");
                 } else {
                     header("Location: /WEB_2/Lining");
                 }
