@@ -8,6 +8,7 @@
     $sexList = $addProductModel->getSexList();
     $colorList = $addProductModel->getColorList();
     $materialList = $addProductModel->getMaterialList();
+    $variantList = $addProductModel->getVariantList();
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if(isset($_POST["btn"])) {

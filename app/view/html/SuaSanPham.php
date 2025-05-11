@@ -1,3 +1,27 @@
+<?php
+function getFirstImageUrl($picture_path) {
+    if (preg_match('/^https?:\/\//', $picture_path)) {
+        return $picture_path;
+    }
+    $relative_path = str_replace('../../../public', '', $picture_path);
+    $base_dir = $_SERVER['DOCUMENT_ROOT'] . '/WEB_2/public';
+    $full_path = $base_dir . $relative_path;
+    if (is_file($full_path)) {
+        return '/WEB_2/public' . $relative_path;
+    }
+    if (is_dir($full_path)) {
+        $extensions = ['webp', 'jpg', 'jpeg', 'png', 'gif'];
+        foreach ($extensions as $ext) {
+            $files = glob($full_path . "/*.$ext");
+            if (!empty($files)) {
+                $web_path = str_replace($_SERVER['DOCUMENT_ROOT'], '', $files[0]);
+                return $web_path;
+            }
+        }
+    }
+    return '/WEB_2/public/assets/img/no-image.png';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,14 +91,10 @@
                             <label for="">Hình ảnh:</label>
                             <br>
                             <div class="image">
-                                <?php if (!empty($product['picture_path'])): ?>
-                                    <img src="<?php echo htmlspecialchars($product['picture_path']); ?>" alt="Hình ảnh sản phẩm" style="width: 140px; height: 70px;">
-                                <?php else: ?>
-                                    <p>Không có hình ảnh</p>
-                                <?php endif; ?>
+                                <img id="preview" src="<?php echo getFirstImageUrl($product['picture_path']); ?>" alt="Hình ảnh sản phẩm" style="width: 140px; height: 70px;">
                             </div>
                             <div class="image">
-                                <input type="file" name="pictureNew" value="<?php echo $product['picture_path']; ?>" style="width: 200px;" alt="Hình sản phẩm">
+                                <input type="file" name="pictureNew" id="pictureNew" style="width: 200px;" alt="Hình sản phẩm" onchange="previewImage(event)">
                             </div>
                         </div>
                         <div class="repair-infor">
@@ -85,7 +105,13 @@
                         <div class="repair-infor">
                             <label for="">Loại sản phẩm: </label>
                             <br>
-                            <input type="text" name="variantNew" value="<?php echo htmlspecialchars($product['product_variant_name']); ?>">
+                            <select name="variantNew">
+                                <?php foreach ($variantList as $variant): ?>
+                                    <option value="<?php echo htmlspecialchars($variant['name']); ?>" <?php if ($product['product_variant_name'] == $variant['name']) echo 'selected'; ?>>
+                                        <?php echo htmlspecialchars($variant['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="repair-infor">
                             <label for="">Vật liệu: </label>
@@ -146,5 +172,17 @@
     </section>
     <script src="/WEB_2/public/js/admin.js"></script>
     <script src="/WEB_2/public/js/chart-bar.js"></script>
+    <script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const output = document.getElementById('preview');
+            output.src = reader.result;
+        };
+        if(event.target.files[0]) {
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    }
+    </script>
 </body>
 </html>

@@ -90,7 +90,13 @@
                         <div class="add-infor-new">
                             <label for="">Loại sản phẩm: </label>
                             <br>
-                            <input type="text" required name="product_variant">
+                            <select name="product_variant">
+                                <?php foreach ($variantList as $variant): ?>
+                                    <option value="<?php echo htmlspecialchars($variant['name']); ?>">
+                                        <?php echo htmlspecialchars($variant['name']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="add-infor-new">
                             <label for="">Giá bán: </label>

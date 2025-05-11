@@ -102,5 +102,17 @@
             }
             return $materialList;
         }
+
+        public function getVariantList() {
+            $sql = "SELECT * FROM product_variant";
+            $result = $this->db->conn->query($sql);
+            $variantList = [];
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $variantList[] = $row;
+                }
+            }
+            return $variantList;
+        }
     }
 ?>

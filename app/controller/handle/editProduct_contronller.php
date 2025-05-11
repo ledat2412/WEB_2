@@ -8,6 +8,7 @@
     $sexList = $editProductModel->getSexList();
     $colorList = $editProductModel->getColorList();
     $materialList = $editProductModel->getMaterialList();
+    $variantList = $editProductModel->getVariantList();
 
     if (isset($_GET['product_id']) && !empty($_GET['product_id'])) {
         $id = $_GET['product_id'];
@@ -31,10 +32,26 @@
                     $sex_id = $product['sex_id'];
                      // Xử lý ảnh
                     if (!empty($_FILES["pictureNew"]["name"])) {
-                        $pictureNew = $_FILES["pictureNew"]["name"];
-                        $target_dir = "../../../public/img/";
-                        $target_file = $target_dir . basename($pictureNew);
+                        $product_variant = $_POST["variantNew"];
+                        $product_code = $product['product_id']; // hoặc mã sản phẩm riêng nếu có
+                        $base_dir = "../../../public/assets/img/Sản Phẩm/";
+                        $variant_folder = trim($product_variant);
+                        if ($variant_folder == '') $variant_folder = 'Khac';
+                        $main_variant_dir = $base_dir . $variant_folder . '/';
+                        if (!is_dir($main_variant_dir)) {
+                            mkdir($main_variant_dir, 0777, true);
+                        }
+                        $sub_folder = trim($product_code);
+                        $sub_folder = preg_replace('/[^\w\-]/u', '', $sub_folder);
+                        if ($sub_folder == '') $sub_folder = 'SanPhamMoi';
+                        $target_dir = $main_variant_dir . $sub_folder . '/';
+                        if (!is_dir($target_dir)) {
+                            mkdir($target_dir, 0777, true);
+                        }
+                        $product_image = $_FILES["pictureNew"]["name"];
+                        $target_file = $target_dir . basename($product_image);
                         move_uploaded_file($_FILES["pictureNew"]["tmp_name"], $target_file);
+                        $pictureNew = $target_dir; // Lưu đường dẫn thư mục vào DB
                     } else {
                         $pictureNew = $product['picture_path']; // giữ ảnh cũ nếu không upload mới
                     }
