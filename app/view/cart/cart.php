@@ -94,7 +94,6 @@ $selected_ship = $_SESSION['selected_ship_method'] ?? 'standard';
 
 // Xử lý khi bấm "Đặt hàng" -> chuyển sang trang xác nhận
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'checkout') {
-    // Lưu thông tin đơn hàng tạm vào session
     $_SESSION['checkout_info'] = [
         'id_user' => $_SESSION['user_id'],
         'id_address' => $default_address['id_address'] ?? null,

@@ -129,7 +129,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
         </div>
         <form method="POST" style="margin-top:20px;">
             <button type="submit" name="confirm_order" class="checkout">Xác nhận đặt hàng</button>
-            <a href="/WEB_2/app/view/cart/bill.php" class="continue-shopping" style="margin-left:10px;">DON DAT HANG</a>
+            <!-- Nút quay lại giỏ hàng chỉ là link, không submit form -->
+            <a href="/WEB_2/app/controller/main.php?act=cart" class="continue-shopping" style="margin-left:10px;">Quay lại giỏ hàng</a>
         </form>
         <?php if (isset($_GET['success'])): ?>
             <div style="color:green; font-weight:bold; margin-top:20px;">Đặt hàng thành công!</div>
