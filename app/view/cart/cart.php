@@ -196,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['payment_method']) && 
                             <div class="item-quantity">
                                 <label for="quantity-<?php echo $item['id_product']; ?>">Số lượng:</label>
                                 <button type="button" class="decrease-btn">-</button>
-                                <input type="number" id="quantity-<?php echo $item['id_product']; ?>" name="quantity" value="<?php echo $item['quantity']; ?>" min="1">
+                                <input type="number" id="quantity-<?php echo $item['id_product']; ?>" name="quantity" value="<?php echo $item['quantity']; ?>" min="1" readonly style="background:#f7f7f7;pointer-events:none;">
                                 <button type="button" class="increase-btn">+</button>
                             </div>
                         </form>
@@ -288,13 +288,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['payment_method']) && 
             <p id="cart-total-display"><?php echo number_format($total_with_shipping, 0, ',', '.'); ?> ₫</p>
         </div>
 
-        <div class="discount-code">
+        <!-- <div class="discount-code">
             <h4>Mã ưu đãi</h4>
             <div class="textdiscotainer">
                 <input type="text" placeholder="Nhập mã ưu đãi">
                 <button>Áp dụng</button>
             </div>
-        </div>
+        </div> -->
 
         <div class="line"></div>
         <form method="POST" action="">

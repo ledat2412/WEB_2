@@ -99,11 +99,11 @@
                     <h1>Dashboard</h1>
                     <ul class="list-position">
                         <li>
-                            <a href="../../view/html/admin.php">Home</a>
+                            <a href="/WEB_2/admin/home">Home</a>
                         </li>
                         <li><i class="fa-solid fa-chevron-right"></i></li>
                         <li>
-                            <a href="../../view/html/admin.php">Đơn hàng</a>
+                            <a href="/WEB_2/admin/orders">Đơn hàng</a>
                         </li>
                     </ul>
                 </div>

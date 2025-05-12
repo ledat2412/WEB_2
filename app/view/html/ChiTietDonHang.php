@@ -58,11 +58,16 @@
                         <h4>Ngày: <?php echo htmlspecialchars($order_date); ?></h4>
                     </li>
                 </ul>
-                <div class="close-receipt">
+                <!-- <div class="close-receipt">
                     <a href="javascript:void(0);" id="close-receipt-popup">
                         <i class="fa-solid fa-xmark"></i>
                     </a>
-                </div>
+                </div> -->
+                <div id="receipt" style="display:none;">
+    <a href="#" id="close-receipt-popup">Đóng</a>
+    <iframe id="receipt-iframe" src="" style="width:100%; height:500px; border:none;"></iframe>
+</div>
+
             </div>
             <div class="information">
                 <div class="information-title">
@@ -118,6 +123,79 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="receipt-footer">
+            <?php
+// Kiểm tra có tham số id_order và đảm bảo là số
+if (isset($_GET['id_order']) && is_numeric($_GET['id_order'])) {
+    $order_id = (int) $_GET['id_order'];
+
+    // Lấy dữ liệu từ các hàm xử lý (giả định các hàm này đã được định nghĩa và hoạt động)
+    $order = $orders->getOrderById($order_id);
+    $items = $orders->getOrderItems($order_id);
+    $user = $orders->getUserByOrderId($order_id);
+    $address = $orders->getAddressByOrderId($order_id);
+
+    // Kiểm tra dữ liệu tồn tại
+    if (!$order || !$items) {
+        echo "<p style='color:red;'>Không tìm thấy thông tin đơn hàng.</p>";
+        exit;
+    }
+
+    // Gộp thông tin người dùng và địa chỉ
+    $customer = [
+        'username' => !empty($user[0]['username']) ? $user[0]['username'] : 'Không xác định',
+        'email'    => !empty($user[0]['email']) ? $user[0]['email'] : 'Không xác định',
+        'address'  => !empty($address[0]['address']) ? $address[0]['address'] : 'Không xác định'
+    ];
+
+    // Tính tổng tiền
+    $total = 0;
+    foreach ($items as $item) {
+        $total += $item['quantity'] * $item['price'];
+    }
+?>
+    <div id="receipt" style="font-family: Arial, sans-serif; max-width: 800px; margin: auto;">
+        <h2>HÓA ĐƠN MUA HÀNG</h2>
+
+        <p><strong>Khách hàng:</strong> <?= htmlspecialchars($customer['username']) ?></p>
+        <p><strong>Email:</strong> <?= htmlspecialchars($customer['email']) ?></p>
+        <p><strong>Địa chỉ giao hàng:</strong> <?= htmlspecialchars($customer['address']) ?></p>
+        <p><strong>Ngày đặt hàng:</strong> <?= htmlspecialchars($order['order_date']) ?></p>
+        <p><strong>Trạng thái:</strong> <?= htmlspecialchars($order['status']) ?></p>
+
+        <br>
+        <table border="1" cellpadding="10" cellspacing="0" width="100%">
+            <thead style="background-color: #f2f2f2;">
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Tạm tính</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($items as $item): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($item['product_name']) ?></td>
+                        <td><?= (int) $item['quantity'] ?></td>
+                        <td><?= number_format($item['price'], 0, ',', '.') ?> VNĐ</td>
+                        <td><?= number_format($item['quantity'] * $item['price'], 0, ',', '.') ?> VNĐ</td>
+                    </tr>
+                <?php endforeach; ?>
+                <tr>
+                    <td colspan="3" align="right"><strong>Tổng cộng:</strong></td>
+                    <td><strong><?= number_format($total, 0, ',', '.') ?> VNĐ</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<?php
+} else {
+    echo "<p style='color:red;'>Thiếu mã đơn hàng hợp lệ.</p>";
+}
+?>
+
         </div>
     </div>
         <a href="#" class="logo">
@@ -221,7 +299,7 @@
                                         echo '<td>' . $stt++ . '</td>';
                                         echo '<td>' . $order_id . '</td>';
                                         echo '<td>' . number_format($total, 0, ',', '.') . ' đ</td>';
-                                        // Nút hóa đơn, khi nhấn sẽ hiện popup #receipt
+                                        // Nút hóa đơn, truyền id_order vào data-orderid
                                         echo '<td><a href="#" class="show-receipt" data-orderid="' . $order_id . '"><i class="fa-solid fa-receipt"></i></a></td>';
                                         echo '</tr>';
                                     }
@@ -249,7 +327,19 @@
         receiptLinks.forEach(function(link) {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.getElementById('receipt').style.display = 'block';
+                var id_order = this.getAttribute('data-orderid');
+                if (id_order) {
+                    // Thay đổi URL để truyền id_order lên, reload lại trang với id_order mới
+                    var url = new URL(window.location.href);
+                    url.searchParams.set('id_order', id_order);
+                    window.location.href = url.toString();
+                }
+                if (id_order) {
+                    // Thay đổi URL để truyền id_order lên, reload lại trang với id_order mới
+                    var url = new URL(window.location.href);
+                    url.searchParams.set('id_order', id_order);
+                    window.location.href = url.toString();
+                }
             });
         });
         // Đóng popup khi nhấn nút đóng
@@ -264,5 +354,34 @@
         document.getElementById('receipt').style.display = 'none';
     });
     </script>
+<!-- 
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var receiptLinks = document.querySelectorAll('.show-receipt');
+    receiptLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var id_order = this.getAttribute('data-orderid');
+            if (id_order) {
+                // Mở popup và truyền ID đơn hàng vào URL của iframe
+                document.getElementById('receipt').style.display = 'block';
+                document.getElementById('receipt-iframe').src = 'receipt.php?id_order=' + id_order;
+            }
+        });
+    });
+
+    var closeReceipt = document.getElementById('close-receipt-popup');
+    if (closeReceipt) {
+        closeReceipt.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('receipt').style.display = 'none';
+        });
+    }
+
+    // Ẩn popup khi load trang
+    document.getElementById('receipt').style.display = 'none';
+});
+</script> -->
+
 </body>
 </html>

@@ -29,9 +29,19 @@ class listProduct {
         return $this->db->getData($sql);
     }
     
+    // Xóa sản phẩm theo id (an toàn với ràng buộc khóa ngoại)
     public function deleteListProductById($id) {
-        // Sửa lại tên cột cho đúng với database (id_product thay vì product_id)
-        $this->db->handle("DELETE FROM product WHERE id_product = '$id'");
+        $id = intval($id);
+        $db = new database();
+
+        // Xóa các bản ghi liên quan trong bảng cart trước
+        $db->handle("DELETE FROM cart WHERE id_product = $id");
+
+        // Xóa các bản ghi liên quan trong bảng order_items trước
+        $db->handle("DELETE FROM order_items WHERE id_product = $id");
+
+        // Sau đó mới xóa sản phẩm
+        return $db->handle("DELETE FROM product WHERE id_product = $id");
     }
 }
 

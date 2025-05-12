@@ -1,19 +1,32 @@
 <?php
-    include_once "../../../app/model/users.php";
-    include_once "../../../app/model/roles.php";
+include_once "../../../app/model/database.php";
+include_once "../../../app/model/users.php";
+include_once "../../../app/model/roles.php";
 
-    $db = new database();
+$db = new database();
 
-    if($_SERVER['REQUEST_METHOD'] === "POST"){
-        if(isset($_POST['adduser'])){
-            $email = $_POST['email'];
-            $username = $_POST['username'];
-            $pass = $_POST['pass'];
+$error = '';
+$success = '';
 
-            $role_id = $db->getInsertId();
-            $users = $db->handle("INSERT INTO users(email, username, password, role, status) VALUES('$email', '$username', '$pass', '$role_id', '0')");
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn'])) {
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+    $role = intval($_POST['role']);
+
+    // Kiểm tra username hoặc email đã tồn tại chưa
+    $check = $db->getData("SELECT * FROM users WHERE username = '$username' OR email = '$email'");
+    if (!empty($check)) {
+        $error = "Username hoặc email đã tồn tại!";
+    } else {
+        $sql = "INSERT INTO users (username, email, password, role) VALUES ('$username', '$email', '$password', $role)";
+        if ($db->handle($sql)) {
+            $success = "Thêm người dùng thành công!";
+        } else {
+            $error = "Có lỗi khi thêm người dùng!";
         }
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -106,6 +119,12 @@
                     </div>
                 </div>
             </form>
+            <?php if (!empty($error)): ?>
+                <div style="color:red;font-weight:bold;"><?php echo $error; ?></div>
+            <?php endif; ?>
+            <?php if (!empty($success)): ?>
+                <div style="color:green;font-weight:bold;"><?php echo $success; ?></div>
+            <?php endif; ?>
         </main>
     </section>
     <script src ="/admin/js/admin.js"></script>

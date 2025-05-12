@@ -17,7 +17,7 @@
     <header class="header">
         <!-- Div Left -->
         <div class="header-left">
-            <a href="#modal" class="open-modal-button">Contact Us</a>
+            <!-- <a href="#modal" class="open-modal-button">Contact Us</a>
             <div id="modal" class="modal-background">
                 <a href="#!" class="modal-overlay"></a>
                 <div class="modal-content">
@@ -36,7 +36,7 @@
                     </form>
                     <a href="#!" class="close-button"><i class="fa-solid fa-x"></i></a>
                 </div>
-            </div>
+            </div> -->
         </div>
         <!-- Div Center -->
         <div class="header-center">
@@ -305,7 +305,7 @@
             <li><a href="/WEB_2/app/view/log/signin.php">Giỏ hàng</a></li>
 
             <li>
-                <div class="contact-us" id="contactUs">
+                <!-- <div class="contact-us" id="contactUs">
                     <h2>Liên hệ với chúng tôi</h2>
                     <form action="submit-form.php" method="POST" class="contact-form">
                         <div class="form-group">
@@ -325,7 +325,7 @@
 
                         <button type="submit" class="submit-btn">Gửi</button>
                     </form>
-                </div>
+                </div> -->
             </li>
         </ul>
     </div>

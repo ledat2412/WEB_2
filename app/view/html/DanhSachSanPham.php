@@ -125,11 +125,11 @@ function getFirstImageUrl($picture_path) {
                     <h1>Danh Sách</h1>
                     <ul class="list-position">
                         <li>
-                            <a href="../../view/html/admin.php">Home</a>
+                            <a href="/WEB_2/admin/home">Home</a>
                         </li>
                         <li><i class="fa-solid fa-chevron-right"></i></li>
                         <li>
-                            <a href="">Danh Sách</a>
+                            <a href="/WEB_2/admin/products">Danh Sách</a>
                         </li>
                     </ul>
                 </div>

@@ -94,11 +94,11 @@
                     <h1>Users</h1>
                     <ul class="list-position">
                         <li>
-                            <a href="../../view/html/admin.php">Home</a>
+                            <a href="/WEB_2/admin/home">Home</a>
                         </li>
                         <li><i class="fa-solid fa-chevron-right"></i></li>
                         <li>
-                            <a href="../../view/html/Quanlycauhinh.php#">Users</a>
+                            <a href="/WEB_2/admin/users">Users</a>
                         </li>
                     </ul>
                 </div>
