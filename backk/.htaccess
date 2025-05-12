@@ -1,0 +1,54 @@
+RewriteEngine On
+RewriteBase /WEB_2/
+
+# Rewrite for homepage
+RewriteRule ^/?$ app/controller/main.php?act=home [L,QSA]
+RewriteRule ^Lining/?$ app/controller/main.php?act=home [L,QSA]
+
+# Rewrite for products (truyền variant)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^products/([^/]+)/?$ app/controller/main.php?act=products&variant=$1 [L,QSA]
+
+# Product detail rewrite
+RewriteRule ^products/detail/([0-9]+)/?$ app/controller/main.php?act=products&action=product_detail&id=$1 [L,QSA]
+
+# Rewrite for authentication
+RewriteRule ^login/?$ app/controller/main.php?act=login [L,QSA]
+RewriteRule ^register/?$ app/controller/main.php?act=register [L,QSA]
+RewriteRule ^logout/?$ app/controller/Auth.php?logout=true [L,QSA]
+RewriteRule ^profile/?$ app/controller/main.php?act=information&skibidiyetyet=user_tier [L,QSA]
+RewriteRule ^address/?$ app/controller/main.php?act=information&skibidiyetyet=addresses [L,QSA]
+RewriteRule ^order/?$ app/controller/main.php?act=information&skibidiyetyet=order [L,QSA]
+RewriteRule ^notification/?$ app/controller/main.php?act=information&skibidiyetyet=notification [L,QSA]
+
+# Rewrite for cart
+RewriteRule ^cart/?$ app/controller/main.php?act=cart [L,QSA]
+RewriteRule ^cart/card/?$ app/view/cart/cart-payment.php [L,QSA]
+RewriteRule ^cart/confirm/?$ app/view/cart/xacnhan.php [L,QSA]
+RewriteRule ^cart/success/?$ app/view/cart/bill.php [L,QSA]
+
+# Rewrite for other pages
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/?$ app/controller/main.php?act=$1 [L,QSA]
+
+# Rewrite 404 error page
+RewriteRule ^error/?$ app/controller/main.php?act=error [L,QSA]
+
+# Admin panel rewrite rules
+RewriteRule ^admin/home/?$ app/view/html/admin.php [L,QSA]
+RewriteRule ^admin/?$ app/controller/main.php?act=admin [L,QSA]
+RewriteRule ^admin/users/?$ app/view/html/Quanlycauhinh.php [L,QSA]
+RewriteRule ^admin/products/?$ app/controller/handle/listProduct_contronller.php [L,QSA]
+RewriteRule ^admin/orders/?$ app/controller/handle/orders_contronller.php [L,QSA]
+RewriteRule ^admin/orders/detail/?$ app/view/html/ChiTietDonHang.php [L,QSA]
+RewriteRule ^admin/users/add?$ app/view/html/ThemNguoiDung.php [L,QSA]
+RewriteRule ^admin/products/add/?$ app/controller/handle/addProduct_contronller.php [L,QSA]
+RewriteRule ^admin/products/edit/?$ app/controller/handle/editProduct_contronller.php [L,QSA]
+
+
+
+
+
+

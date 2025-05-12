@@ -1,0 +1,74 @@
+1. app\view\infor\addresses.php
+   - Table (bảng)
+   - Column (cột)
+   - Form (biểu mẫu)
+   - Input field (trường nhập liệu)
+   - Button (nút)
+   - Edit/Update (chỉnh sửa/cập nhật)
+   - Delete (xóa)
+   - Add (thêm)
+   - POST request (yêu cầu POST)
+   - Session (phiên làm việc)
+   - Variable initialization (khởi tạo biến)
+   - Data binding (liên kết dữ liệu)
+   - HTML rendering (kết xuất HTML)
+   - JavaScript event (sự kiện JS)
+   - Confirmation dialog (hộp thoại xác nhận)
+
+2. app\controller\addresses.php
+   - Controller (bộ điều khiển)
+   - Method/function (phương thức/hàm)
+   - Handle request (xử lý yêu cầu)
+   - Add/Update/Delete logic (logic thêm/sửa/xóa)
+   - Session authentication (xác thực phiên)
+   - User identification (xác định người dùng)
+   - Redirect (chuyển hướng)
+   - HTTP header (tiêu đề HTTP)
+   - Data validation (kiểm tra dữ liệu)
+   - Error handling (xử lý lỗi)
+   - Model interaction (tương tác với model)
+   - POST data (dữ liệu POST)
+   - CRUD operation (thao tác CRUD): 
+     CRUD là viết tắt của Create (Tạo mới), Read (Đọc/xem), Update (Cập nhật), Delete (Xóa). 
+     Đây là bốn thao tác cơ bản nhất khi làm việc với dữ liệu trong hệ thống phần mềm hoặc cơ sở dữ liệu.
+     - Create: Thêm mới dữ liệu.
+     - Read: Lấy/xem dữ liệu.
+     - Update: Sửa/cập nhật dữ liệu.
+     - Delete: Xóa dữ liệu.
+   - Khi truy vấn (Read/Lấy dữ liệu) cần lưu ý:
+     + Sử dụng câu lệnh SQL SELECT đúng với tên bảng và tên cột trong database.
+     + Kiểm tra kỹ điều kiện WHERE để tránh lấy sai hoặc quá nhiều dữ liệu.
+     + Luôn kiểm tra dữ liệu trả về (có thể rỗng/null).
+     + Nếu truy vấn theo user, cần đảm bảo chỉ lấy dữ liệu đúng user (bảo mật).
+     + Sử dụng prepared statement để tránh lỗi SQL Injection.
+     + Nếu dữ liệu lớn, nên phân trang (pagination) khi hiển thị.
+     + Kiểm tra quyền truy cập trước khi cho phép xem dữ liệu nhạy cảm.
+
+3. app\model\addresses.php
+   - Model (mô hình)
+   - Database connection (kết nối cơ sở dữ liệu)
+   - SQL query (truy vấn SQL)
+   - Table creation (tạo bảng)
+   - Primary key (khóa chính)
+   - Foreign key (khóa ngoại)
+   - Data insertion (chèn dữ liệu)
+   - Data selection (lấy dữ liệu)
+   - Data update (cập nhật dữ liệu)
+   - Data deletion (xóa dữ liệu)
+   - Prepared statement (câu lệnh chuẩn bị)
+   - Parameter binding (gán tham số)
+   - Return value (giá trị trả về)
+   - Object instantiation (khởi tạo đối tượng)
+
+4. app\controller\main.php
+   - Routing (định tuyến)
+   - Include/require (nhúng file)
+   - Switch-case (cấu trúc điều kiện)
+   - Session check (kiểm tra phiên)
+   - View rendering (kết xuất view)
+   - User authentication (xác thực người dùng)
+   - Dynamic content loading (tải nội dung động)
+   - GET parameter (tham số GET)
+   - Sidebar (thanh bên)
+   - Data passing (truyền dữ liệu)
+   - Access control (kiểm soát truy cập)

@@ -1,0 +1,107 @@
+/*=======footer=======*/
+
+.footer-main {
+    display: block;
+    padding: 15px 0;
+    box-sizing: border-box;
+    background-color: var(--header-color);
+    width: 100%;
+}
+
+.footer {    
+    /* margin: 0 auto;  */
+    /* max-width: 1200px;*/
+    /* text-align: center;  */
+    margin: 0 115px;
+}
+
+.footer-information {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* width 100% là khi phần footer margin ra trái phải 115 sẽ lấy chiều rộng trình duyệt - 115 -155 = chiều 
+    rộng trình duyệt, thì lúc này chiều rộng trình duyệt sẽ là cái vừa tính và width 100% sẽ lấy toàn bộ cái vừa tính
+    để làm chiều rộng cho footer-information */
+}
+
+.footer-list {
+    margin: 0;
+    padding: 0 12px;
+    flex-basis: 20%;
+    list-style-type: none;
+    /* flex-basis: có tác dụng để cho một thẻ có thể chiếm bao nhiêu % của thẻ cha, có thể dùng px 
+    flex-basis 25% có nghĩa là một thẻ ul đang chiếm 25% chiều rộng của thẻ cha */
+}
+
+.footer-heading {
+    margin-bottom: 25px;
+}
+
+ .heading {
+     font-size: 15px;
+     font-weight: 600;
+    text-transform: uppercase;
+}
+
+.footer-infor {
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+.footer-name {
+    font-size: 15px;
+    text-decoration: none;
+    color: var(--text-color);
+    text-transform: uppercase;
+}
+
+.footer-name:hover {
+    color: var(--emphasis-color);
+}
+
+.footer-paragrahp {
+    margin: 10px 0;
+}
+
+.footer-input input {
+    margin-top: 40px;
+}
+
+.footer-email {
+    border: none;
+    outline: none;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+}
+
+.footer-submit-font {
+    text-decoration: none;
+}
+
+.footer-submit {
+    border: none;
+    outline: none;
+    padding: 6px 12px;
+    background-color: var(--emphasis-color);
+    color: white;
+}
+
+.footer-items {
+    display: inline-block;
+}
+
+.footer-icon {
+    list-style: none;
+    margin: 10px 25px 0 0;
+    display: inline-block;
+}
+
+.icon {
+    color: black;
+    font-size: 20px;
+}
+
+.text{
+    text-decoration-style: solid
+}

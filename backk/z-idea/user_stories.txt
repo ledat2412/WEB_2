@@ -1,0 +1,165 @@
+shoe store all function
+search 
+profile
+cart
+
+
++-----------------+          +-----------------+          +------------------+
+|     Người dùng  | -------> |    Giỏ hàng     | -------> |    Đặt hàng      |
++-----------------+          +-----------------+          +------------------+
+        |                          |                              |
+        v                          v                              v
+  Đăng ký / đăng nhập       Thêm / sửa / xoá SP        Thanh toán / địa chỉ
+        |
+        v
+    Duyệt sản phẩm
+        |
+        v
+     Xem đơn hàng
+ 
+
+https://en.wikipedia.org/wiki/User_story         | User_story
+https://viblo.asia/p/user-story-la-gi-va-tieu-chi-chap-nhan-maGK7W8BKj2
+list at least 20 main actions
+first your position will be user(customer) you entry the site for reason 
+the mission of this task will be expressed from the software user’s perspective
+-As a sporty female, I want to find the most populer at the first roll at homepage, to find for me the most unique shoe style and the most comfort to wear
+-As DATBILL, I want to add to cart which i could change all the typical thing about my shoe, so that i can moddify more about my shoe at last 
+-As DATBILL, I want the type shoe seperate and the shoe can be purchase seperate bill, so that i can change the location from where to ship and easy to manage 
+-As DATBILL, I want to see many variety of the shoe picture and the color to choose in the first homepage, so it can be more algile to more varient to do choose when I go to detail page  
+-As BILL, I want to add/change/delete  product that had been in the cart 
+-As Toan Ragequit, i want to add the 
+
+
+User phải đăng nhập đăng ký để thêm vào giỏ hàng 
+User cần có thể xem những sản phẩm ở landpage- có sản phầm nổi bật- sàn phầm bán chạy
+User cần duyệt xem sản phẩm 
+User cần xem 1 mẫu, có số lượng 
+User cần xem màu, có đi với chất liệu, size giày
+User cần add to cart
+User cần thay đổi màu, số lượng, chất liệu, size giày trong cart
+User cần xoá một sản phầm - sản phầm đó có thể có nhiều số lượng trong cùng một màu, chất, size -> vẫn phải xoá hết (phải có notice)
+User cần đặt hàng 
+User cần thay đổi số lượng hàng lần cuối và có thể tách đơn và món hàng tách đơn quay lại cart chờ lần sau
+User có thể thêm thông tin khách hàng nếu như đã log in và có thể lưu nhiều địa chỉ có thể thay đổi trong order
+User có thể huỷ đơn hàng khi mà đã đặt nếu trạng thái chưa xác nhận
+Admin đăng nhập vào trang landpage user để vào phần dashboard  
+Admin cần thêm đồ vào shop
+Admin cần phải thêm description 
+Admin cần có thể thay đổi sản phầm 
+Admin có thể xoá sàn phầm 
+Admin có thể block sản phầm(ngưng bán-vẫn hiện nhưng mà khong thể nào mua hay thêm vào giỏ hàng)
+Admin cần phải duyệt sàn phảm trong order và phải cập nhật trạng thái của order 
+Admin cần phải xem tổng doanh thu của shop 
+Admin cần phải xem các giày bán chạy và có thể thay đổi giày nào lên top trong phần landpage 
+
+
+
+
+summary about db 
++product should have 
+-names
+-code 
+-size
+-quantity
+-type
+-color 
+-material
+-price 
++description should have
+-forms
+-id_pic
+-id_text
++cart should have
+-product name
+-type
+-color 
+-material
+-quantity
+-total price 
+oder 
+
+xin chao Bé Đạt 
+
+huy gà.
+
+
+Hoạt động của hệ thống quản lý việc đăng ký học qua mạng của một trường học 
+được mô tả như sau:
+Khi các sinh viên (SV) muốn đăng ký học thì họ phải gửi các phiếu đăng ký 
+trong đó điền đầy đủ thông tin về họ tên, số chứng minh thư và mã số 
+của những lớp học mà SV muốn tham gia. 
+Hệ thống kiểm tra từng lớp học được đăng ký
+có còn tiếp nhận SV không bằng cách tra cứu tiếp Danh sách lớp. Các dữ liệu 
+trong tệp này cho biết lớp học nào còn tiếp nhận SV, lớp học nào đã bị hủy bỏ 
+và lớp học nào đã đủ SV. Từ đó hệ thống có thể xác định được những lựa chọn 
+nào của SV được chấp nhận và những lựa chọn nào bị từ chối.
+Những SV nào được chấp nhận nguyện vọng sẽ được ghi danh vào những lớp mà SV
+đăng ký. Tên và số chứng minh thư của các SV này sẽ được cập nhập vào lớp 
+Danh sách lớp và sĩ số lớp học sẽ được tính lại. Nếu lớp học đó đã đủ SV 
+thì mã lớp học đó sẽ được đánh dấu là đã khóa sổ. Các dữ liệu về SV mới và
+những dữ liệu bổ sung hoặc thay đổi của SV cũ trong quá trình ghi danh 
+này cũng được cập nhập vào tệp Hồ sơ SV chung trong toàn trường.
+Cuối cùng, hệ thống sẽ gửi cho SV những bản thông báo trong đó liệt kê 
+danh sách những lớp học mà họ đã đăng ký.
+
+Hệ thống mượn sách thư viện cho phép bạn đọc 
+(sinh viên, giảng viên, cán bộ...) 
+đăng nhập bằng tài khoản cá nhân để tìm kiếm và gửi yêu cầu mượn sách. 
+Sau khi người dùng nhập thông tin tìm kiếm (tên sách, tác giả hoặc mã sách), 
+hệ thống sẽ kiểm tra tình trạng sách (còn hay đã mượn hết). 
+Nếu sách còn và bạn đọc đủ điều kiện 
+(chưa quá hạn mượn, không bị khóa quyền mượn, 
+chưa vượt quá số lượng sách được phép mượn), 
+hệ thống sẽ tự động tạo phiếu mượn, ghi nhận ngày mượn và ngày hẹn trả.
+
+[Bạn đọc]
+   |
+   | Đăng nhập bằng tài khoản cá nhân
+   v
+[Hệ thống xác thực tài khoản]
+   |
+   |--> Nếu hợp lệ --> Tiếp tục
+   |--> Nếu không hợp lệ --> Thông báo lỗi đăng nhập
+   v
+[Người dùng nhập thông tin tìm kiếm (tên sách, mã sách, tác giả)]
+   |
+   v
+[Hệ thống kiểm tra sách trong cơ sở dữ liệu]
+   |
+   |--> Nếu sách không có --> Thông báo "Không tìm thấy sách"
+   |--> Nếu có --> Kiểm tra tình trạng sách
+   |
+   |--> Nếu sách đã được mượn hết --> Thông báo "Sách đã hết"
+   |--> Nếu sách còn:
+         |
+         v
+     [Hệ thống kiểm tra điều kiện người mượn]
+         - Có bị khóa quyền mượn?
+         - Có quá hạn mượn chưa trả?
+         - Có vượt quá số lượng sách được phép mượn?
+         |
+         |--> Nếu không đạt điều kiện --> Thông báo từ chối mượn
+         |--> Nếu đạt điều kiện:
+              |
+              v
+          [Tạo phiếu mượn]
+              - Ghi nhận: mã bạn đọc, mã sách
+              - Ngày mượn
+              - Ngày hẹn trả
+              |
+              v
+          [Thông báo mượn thành công cho bạn đọc]
+
+
+some feature could do till end 
+
+request to change password by send email for verification
+
+2 key verify when sign up 
+
+delete account by request admin in that amount day (in admin that nofication should pop up on first or second)
+
+when typing username i want it immediately check username first and then typing email it will check eventually
+
+thêm phần ẩn sản phẩm vào bên admin 

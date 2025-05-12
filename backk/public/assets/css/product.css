@@ -1,0 +1,376 @@
+.main-container {
+    max-width: 1320px;
+    margin: 110px auto;
+    padding: 40px;
+}
+
+/* Sorting Bar Layout */
+.sorting-bar {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center; 
+    max-width:1320px;  
+    padding: 10px 20px; 
+    background-color: #fff; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
+    margin: auto;
+}
+
+.sorting-options {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.sorting-options label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.sorting-options select {
+    padding: 5px 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+
+.view-options {
+    display: flex;
+    gap: 10px; 
+}
+
+.view-btn {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.view-btn:hover {
+    background-color: #f0f0f0;
+    color: #ff6600;
+}
+
+.view-btn.active {
+    background-color: #ff6600;
+    color: #fff;
+    font-weight: bold;
+}
+
+.results-info {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+
+@media (max-width: 768px) {
+    .sorting-bar {
+        flex-direction: column; 
+        align-items: flex-start;
+        gap: 15px; 
+    }
+
+    .view-options {
+        gap: 5px;
+    }
+} 
+
+/* Container Layout */
+.container {
+    display: flex;
+    flex-direction: row; 
+    gap: 20px;
+    max-width: 1400px;
+    margin: 30px auto;
+    /* padding: 40px; */
+}
+
+
+
+
+/* Filter Section */
+.filter-section {
+    width: 25%; /* Left side filter section */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.checkbox-group, .color-group {
+    margin-bottom: 20px;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column; /* Arrange items in a vertical column */
+    gap: 10px; 
+}
+
+.checkbox-group label {
+    font-size: 17px; /* Adjust label text size if needed */
+    cursor: pointer; /* Make labels clickable */
+}
+
+.color-group .color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 8px;
+    border: 1px solid #ddd;
+}
+
+.color.black { background-color: black; }
+.color.red { background-color: red; }
+.color.blue { background-color: blue; }
+.color.green { background-color: green; }
+.color.yellow { background-color: yellow; }
+
+.price-range {
+    margin-bottom: 20px;
+}
+
+.price-range input[type="range"] {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.price-label {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.filter-btn {
+    display: inline-block;
+    background-color: #ff6600;
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+/* ----------------- */
+
+
+
+
+
+
+
+.filter-header {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color:#ec2a2a;
+}
+
+.filter-section h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color:#ec2a2a;
+}
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-option {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+
+.filter-option:hover {
+    background-color:#f7f2f2;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.reset-button {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.apply-button {
+    background-color: #ec2a2a;
+    color: #fff;
+}
+.filter-option:hover
+{
+    color: #ec2a2a;
+}
+
+
+
+
+
+/* ----------------- */
+/* Product Section */
+.product-specific .product-list li:hover .product-buy {
+    bottom: 0px;
+}
+.product-specific {
+    width: 75%; /* Right side product section */
+}
+
+.product-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product-list-specific {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+
+.product-specific .product-img {
+    margin: 0 auto; 
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.product-specific .product-display {
+    display: block;
+}
+
+.product-specific .image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: 0.3s ease-in-out;
+}
+
+.product-specific .image:hover {
+    transform: scale(1.1); /* Phóng to ảnh 10% khi hover */
+}
+
+.product-specific .product-buy {
+    width: 100%;
+    bottom: -40px;
+    opacity: 0.75;
+    color: white;
+    display: block;
+    padding: 5px 0;
+    font-size: 15px;
+    font-weight: 500;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: black;
+    transition: 0.25s ease-in-out;
+}
+
+.product-specific .product-name {
+    display: block;
+    font-size: 95%;
+    margin-top: 10px;
+    margin-bottom: 13px;
+}
+
+.product-specific .name {
+    color: black;
+    text-decoration: none;
+}
+
+.product-specific .product-price {
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: var(--emphasis-color);
+}
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; 
+    }
+    .filter-section, .product-specific {
+        width: 100%; 
+    }
+    .product-list {
+        grid-template-columns: 1fr; 
+    }
+}
+
+/* paging */
+.pageing{
+    text-align: center;
+    margin-top: 40px;
+}
+.pagination {
+    display: inline-block;
+
+  }
+  
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+  }
+  
+  .pagination a.active {
+    background-color: var(--emphasis-color);
+    color: white;
+  }
+  
+  .pagination a:hover:not(.active) {background-color: #ddd;}
