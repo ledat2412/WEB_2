@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../public/assets/css/admin.css">
+    <link rel="stylesheet" href="/WEB_2/public/assets/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Admin</title>
@@ -39,25 +39,25 @@
         </a>
         <ul class="side-menu top">
             <li class="active">
-                <a href="../../view/html/admin.php">
+                <a href="/WEB_2/admin/home">
                     <i class="fa-solid fa-chart-line"></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="../../view/html/Quanlycauhinh.php#">
+                <a href="/WEB_2/admin/users">
                     <i class="fa-solid fa-user"></i>
                     <span class="text">Users</span>
                 </a>
             </li>
             <li>
-                <a href="../../controller/handle/listProduct_contronller.php ">
+                <a href="/WEB_2/admin/products">
                     <i class="fa-solid fa-shop"></i>
                     <span class="text">Danh sách</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/WEB_2/admin/orders">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="text">Đơn hàng</span>
                 </a>
@@ -250,10 +250,10 @@
         });
     </script>
 
-    <script src="/admin/js/admin.js"></script>
-    <script src="/admin/js/chart-bar.js"></script>
+    <script src="/WEB_2/public/js/admin.js"></script>
+    <script src="/WEB_2/public/js/chart-bar.js"></script>
     <!-- <script src ="../../../public/js/LocDonHang.js"></script> -->
-    <script src="/admin/js/Click.js"></script>
+    <script src="/WEB_2/public/js/Click.js"></script>
 </body>
 
 </html>

@@ -39,3 +39,13 @@ RewriteRule ^error/?$ app/controller/main.php?act=error [L,QSA]
 # Admin panel rewrite rules
 RewriteRule ^admin/home/?$ app/view/html/admin.php [L,QSA]
 RewriteRule ^admin/?$ app/controller/main.php?act=admin [L,QSA]
+RewriteRule ^admin/users/?$ app/view/html/Quanlycauhinh.php [L,QSA]
+RewriteRule ^admin/products/?$ app/controller/handle/listProduct_contronller.php [L,QSA]
+RewriteRule ^admin/orders/?$ app/controller/handle/orders_contronller.php [L,QSA]
+RewriteRule ^admin/users/add?$ app/view/html/ThemNguoiDung.php [L,QSA]
+
+
+
+
+
+

@@ -32,7 +32,7 @@ function getFirstImageUrl($picture_path) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../public/assets/css/admin.css">
+    <link rel="stylesheet" href="/WEB_2/public/assets/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Admin</title>
@@ -65,25 +65,25 @@ function getFirstImageUrl($picture_path) {
         </a>
         <ul class="side-menu top">
             <li class="active">
-                <a href="../../view/html/admin.php">
+                <a href="/WEB_2/admin/home">
                     <i class="fa-solid fa-chart-line"></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="../../view/html/Quanlycauhinh.php">
+                <a href="/WEB_2/admin/users">
                     <i class="fa-solid fa-user"></i>
                     <span class="text">Users</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/WEB_2/admin/products">
                     <i class="fa-solid fa-shop"></i>
                     <span class="text">Danh sách</span>
                 </a>
             </li>
             <li>
-                <a href="../../controller/handle/orders_contronller.php">
+                <a href="/WEB_2/admin/orders">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="text">Đơn hàng</span>
                 </a>
@@ -136,7 +136,7 @@ function getFirstImageUrl($picture_path) {
             </div>
             <div class="Add-product-container">
                 <div class="Add-product">
-                    <a href="../../controller/handle/addProduct_contronller.php">
+                    <a href="/WEB_2/admin/products/add">
                         <button class="Add-product-content">
                             <span>
                                 &#43; Thêm sản phẩm mới
@@ -204,8 +204,8 @@ function getFirstImageUrl($picture_path) {
             document.getElementById('warning-notify').classList.remove('active');
         }
     </script>
-    <script src ="../../../public/js/admin.js"></script>
-    <script src ="../../../public/js/chart-bar.js"></script>
-    <script src="../../../public/js/Click.js"></script>
+    <script src="/WEB_2/public/js/admin.js"></script>
+    <script src="/WEB_2/public/js/chart-bar.js"></script>
+    <script src="/WEB_2/public/js/Click.js"></script>
 </body>
 </html>
