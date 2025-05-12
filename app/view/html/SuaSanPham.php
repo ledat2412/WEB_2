@@ -27,7 +27,7 @@ function getFirstImageUrl($picture_path) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../public/assets/css/admin.css">
+    <link rel="stylesheet" href="/WEB_2/public/assets/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Admin</title>
@@ -162,7 +162,7 @@ function getFirstImageUrl($picture_path) {
                             <textarea name="descriptionNew" style="width: 100%; resize: none; margin-top: 5px;"><?php echo htmlspecialchars($product['description_content']); ?></textarea>
                         </div>
                         <div class="repair-submit">
-                            <a href="../../controller/handle/listProduct_contronller.php" class="return">Thoát</a>
+                            <a href="/WEB_2/admin/products" class="return">Thoát</a>
                             <input type="submit" name="btn_repair" value="Sửa Thông Tin">
                         </div>
                     </div>

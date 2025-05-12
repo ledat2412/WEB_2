@@ -57,6 +57,14 @@
             </a>
         </nav>
         <main>
+            <?php
+            if (!isset($variantList) || !isset($materialList) || !isset($sexList) || !isset($colorList)) {
+                // Nếu truy cập trực tiếp, require controller để lấy dữ liệu
+                require_once $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/controller/handle/addProduct_contronller.php";
+                // Sau khi require, return để tránh include view lần 2
+                return;
+            }
+            ?>
             <form class="add-new" method="post" action="" enctype="multipart/form-data">
                 <div class="add-product-new">
                     <div class="add-heading-new">

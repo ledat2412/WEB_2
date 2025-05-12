@@ -30,12 +30,29 @@
             return $this->db->getData($sql);
         }
 
-        public function updateProduct($descriptionNew, $description_id, $materialNew, $material_id, $sexNew, $sex_id, $colorNew, $color_id, $variantNew, $variant_id, $nameNew, $stockNew, $priceNew, $pictureNew, $id) {
+        public function updateProduct($descriptionNew, $description_id, $materialNew, $material_id, $sexNew, $sex_id, $colorNew, $color_id, $variantNew, $variant_id, $nameNew, $stockNew, $priceNew, $pictureNew, $id, $old_color_name) {
             // Cập nhật các bảng con
             $this->db->handle("UPDATE descriptions SET content = '$descriptionNew' WHERE id_description = '$description_id'");
             $this->db->handle("UPDATE materials SET name = '$materialNew' WHERE id_material = '$material_id'");
             $this->db->handle("UPDATE sex SET name = '$sexNew' WHERE id_sex = '$sex_id'");
-            $this->db->handle("UPDATE colors SET name = '$colorNew' WHERE id_color = '$color_id'");
+            
+            // Chỉ update color_id trong bảng product, không update bảng colors nếu không đổi tên màu
+            // Nếu cần đổi tên màu, kiểm tra trước:
+            if ($colorNew != $old_color_name) {
+                // Kiểm tra màu đã tồn tại chưa
+                $check = $this->db->getData("SELECT id_color FROM colors WHERE name='$colorNew'");
+                if ($check && count($check) > 0) {
+                    // Đã tồn tại, lấy id_color đó để update vào product
+                    $color_id = $check[0]['id_color'];
+                } else {
+                    // Chưa có, thêm mới
+                    $this->db->handle("INSERT INTO colors (name) VALUES ('$colorNew')");
+                    $color_id = $this->db->getInsertId();
+                }
+                // Update product với color_id mới
+                $this->db->handle("UPDATE product SET color_id='$color_id' WHERE id_product='$id'");
+            }
+
             $this->db->handle("UPDATE product_variant SET name = '$variantNew' WHERE id_product_variant = '$variant_id'");
 
             // Cập nhật bảng chính PRODUCT
@@ -96,6 +113,4 @@
             return $variantList;
         }
     }
-
-    
 ?>

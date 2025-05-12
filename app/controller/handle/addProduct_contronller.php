@@ -66,9 +66,10 @@
                 $product_variant,
                 $product_code
             );
-            header("Location: listProduct_contronller.php");
+            header("Location: /WEB_2/admin/products");
             exit();
         }
     }
-    include_once "../../view/html/ThemSanPhamMoi.php";
+    // Đúng đường dẫn view (dùng đường dẫn vật lý tuyệt đối)
+    include_once $_SERVER['DOCUMENT_ROOT'] . "/WEB_2/app/view/html/ThemSanPhamMoi.php";
 ?>

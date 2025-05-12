@@ -179,7 +179,7 @@ function getFirstImageUrl($picture_path) {
                                 echo '<td>' . $product["sex_name"] . '</td>'; 
                                 echo '<td> <textarea style="height: 7vh; width: 12vw; resize: none">' . (isset($product["content"]) ? $product["content"] : '') . '</textarea></td>'; 
                                 echo '<td>
-                                        <a href="../../controller/handle/editProduct_contronller.php?product_id=' . urlencode($product["product_id"]) . '">
+                                        <a href="/WEB_2/admin/products/edit?product_id=' . urlencode($product["product_id"]) . '">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                         <a href="javascript:void(0);" onclick="deleteProduct(' . $product["product_id"] . ')">

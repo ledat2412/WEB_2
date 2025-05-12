@@ -13,7 +13,8 @@
     if(isset($_POST["button_delete"])) {
         $id = $_POST["product_id_delete"];
         $listProductModel->deleteListProductById($id);
-        header("location: listProduct_contronller.php");
+        header("Location: /WEB_2/admin/products");
+        exit();
     }
 
     include_once "../../view/html/DanhSachSanPham.php";
