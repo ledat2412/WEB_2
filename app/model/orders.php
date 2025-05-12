@@ -101,5 +101,33 @@ class Orders {
         $sql = "DELETE FROM orders WHERE id_order = ?";
         return $this->db->handle($sql, [$id_order]);
     }
+
+    // Lọc đơn hàng theo trạng thái, quận, ngày
+    public function getOrdersFiltered($status = '', $district = '', $from_date = '', $to_date = '') {
+        $where = [];
+        if ($status !== '') {
+            $where[] = "o.status = '" . $this->db->conn->real_escape_string($status) . "'";
+        }
+        if ($district !== '') {
+            $where[] = "a.address LIKE '%" . $this->db->conn->real_escape_string($district) . "%'";
+        }
+        if ($from_date !== '') {
+            $where[] = "DATE(o.order_date) >= '" . $this->db->conn->real_escape_string($from_date) . "'";
+        }
+        if ($to_date !== '') {
+            $where[] = "DATE(o.order_date) <= '" . $this->db->conn->real_escape_string($to_date) . "'";
+        }
+        $where_sql = '';
+        if ($where) {
+            $where_sql = 'WHERE ' . implode(' AND ', $where);
+        }
+        $sql = "SELECT o.*, u.username, a.address 
+                FROM orders o
+                LEFT JOIN users u ON o.id_user = u.id_users
+                LEFT JOIN addresses a ON o.id_address = a.id_address
+                $where_sql
+                ORDER BY o.order_date DESC";
+        return $this->db->getData($sql);
+    }
 }
 ?>

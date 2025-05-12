@@ -1,3 +1,9 @@
+<?php
+// Thêm dòng này ở đầu file để đảm bảo session được khởi tạo
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,17 +98,17 @@
             <div class="image-contain">
                 <a href="#" class="infor">
                     <button class="Button">
-                        <img src="/img/ảnh đại diện.jpg" alt="ảnh đại diện">
+                        <img src="/WEB_2/public/assets/img/ảnh đại diện.jpg" alt="ảnh đại diện">
                     </button>
                 </a>
                 <div class="button-infor">
                     <div class="infor-ava">
                         <label for="">Họ và Tên:</label>
-                        <h3>Tôn Quyền</h3>
+                        <h3><?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Chưa đăng nhập'; ?></h3>
                     </div>
                     <div class="infor-ava">
                         <label for="">Quyền hạn:</label>
-                        <h3>Admin</h3>
+                        <h3><?php echo isset($_SESSION['role']) ? htmlspecialchars($_SESSION['role']) : 'Admin'; ?></h3>
                     </div>
                 </div>
             </div>
@@ -231,9 +237,8 @@
             </div>
         </main>
     </section>
-    <script src ="../../../public/js/admin.js"></script>
-    <script src ="../../../public/js/chart-bar.js"></script>
-    <script src="../../../public/js/Click.js"></script>
+    <script src="/WEB_2/public/assets/js/admin.js"></script>
+    <script src="/WEB_2/public/assets/js/Click.js"></script>
     <script>
     // Hiện popup hóa đơn chi tiết từng đơn hàng
     document.addEventListener('DOMContentLoaded', function() {

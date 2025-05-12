@@ -118,7 +118,7 @@ function getFirstImageUrl($picture_path) {
                             <br>
                             <select name="materialNew">
                                 <?php foreach ($materialList as $material): ?>
-                                    <option value="<?php echo htmlspecialchars($material['name']); ?>" <?php if ($product['material_name'] == $material['name']) echo 'selected'; ?>>
+                                    <option value="<?php echo $material['id_material']; ?>" <?php if ($product['material_id'] == $material['id_material']) echo 'selected'; ?>>
                                         <?php echo htmlspecialchars($material['name']); ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -139,7 +139,7 @@ function getFirstImageUrl($picture_path) {
                             <br>
                             <select name="sexNew">
                                 <?php foreach ($sexList as $sex): ?>
-                                    <option value="<?php echo htmlspecialchars($sex['name']); ?>" <?php if ($product['sex_name'] == $sex['name']) echo 'selected'; ?>>
+                                    <option value="<?php echo $sex['id_sex']; ?>" <?php if ($product['sex_id'] == $sex['id_sex']) echo 'selected'; ?>>
                                         <?php echo htmlspecialchars($sex['name']); ?>
                                     </option>
                                 <?php endforeach; ?>

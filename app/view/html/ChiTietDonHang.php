@@ -39,11 +39,10 @@
                     $order_date = $row['order_date'];
                 }
 
+                // KHÔNG gọi $ordersModel->getOrderItems nếu trong model có join bảng products!
+                // Lấy danh sách sản phẩm chỉ từ order_items để tránh lỗi không có bảng products
                 $products = [];
-                $result = $ordersModel->getOrderItems($order_id);
-                if (is_array($result)) {
-                    $products = $result;
-                }
+                $products = $db->getData("SELECT * FROM order_items WHERE id_order = '$order_id'");
             }
             ?>
             <div class="receipt-header">
@@ -59,7 +58,7 @@
                     </li>
                 </ul>
                 <div class="close-receipt">
-                    <a href="javascript:void(0);" id="close-receipt-popup">
+                    <a href="javascript:void(0); return" id="close-receipt-popup">
                         <i class="fa-solid fa-xmark"></i>
                     </a>
                 </div>
@@ -162,9 +161,23 @@
                     <button type="submit" class="button-search"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
-            <a href="#" class="infor">
-                <img src="/img/ảnh đại diện.jpg" alt="ảnh đại diện">
-            </a>
+            <div class="image-contain">
+                <a href="#" class="infor">
+                    <button class="Button">
+                        <img src="/WEB_2/public/assets/img/ảnh đại diện.jpg" alt="ảnh đại diện">
+                    </button>
+                </a>
+                <div class="button-infor">
+                    <div class="infor-ava">
+                        <label for="">Họ và Tên:</label>
+                        <h3><?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Chưa đăng nhập'; ?></h3>
+                    </div>
+                    <div class="infor-ava">
+                        <label for="">Quyền hạn:</label>
+                        <h3><?php echo isset($_SESSION['role']) ? htmlspecialchars($_SESSION['role']) : 'Admin'; ?></h3>
+                    </div>
+                </div>
+            </div>
         </nav>
         <main>
             <div class="heading-title">
@@ -222,7 +235,7 @@
                                         echo '<td>' . $order_id . '</td>';
                                         echo '<td>' . number_format($total, 0, ',', '.') . ' đ</td>';
                                         // Nút hóa đơn, khi nhấn sẽ hiện popup #receipt
-                                        echo '<td><a href="#" class="show-receipt" data-orderid="' . $order_id . '"><i class="fa-solid fa-receipt"></i></a></td>';
+                                        echo '<td><a href="?id_order=' . $order_id . '#receipt"><i class="fa-solid fa-receipt"></i></a></td>';
                                         echo '</tr>';
                                     }
                                 } else {
@@ -242,6 +255,8 @@
     <script src ="../../../public/assets/js/admin.js"></script>
     <script src ="../../../public/assets/js/chart-bar.js"></script>
     <script src="../../../public/assets/js/Click.js"></script>
+    <script src="/WEB_2/public/assets/js/admin.js"></script>
+    <script src="/WEB_2/public/assets/js/Click.js"></script>
     <script>
     // Khi nhấn icon hóa đơn sẽ hiện popup id="receipt"
     document.addEventListener('DOMContentLoaded', function() {
@@ -262,6 +277,12 @@
         }
         // Ẩn popup khi load trang
         document.getElementById('receipt').style.display = 'none';
+
+        // Nếu có id_order trên URL thì tự động mở popup
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('id_order')) {
+            document.getElementById('receipt').style.display = 'block';
+        }
     });
     </script>
 </body>

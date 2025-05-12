@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/WEB_2/public/assets/css/admin.css">
+    <link rel="stylesheet" href="/Web_2/public/assets/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Admin</title>
@@ -39,25 +39,25 @@
         </a>
         <ul class="side-menu top">
             <li class="active">
-                <a href="/WEB_2/admin/home">
+                <a href="/Web_2/app/view/html/admin.php">
                     <i class="fa-solid fa-chart-line"></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="/WEB_2/admin/users">
+                <a href="/Web_2/app/view/html/Quanlycauhinh.php#">
                     <i class="fa-solid fa-user"></i>
                     <span class="text">Users</span>
                 </a>
             </li>
             <li>
-                <a href="/WEB_2/admin/products">
+                <a href="/Web_2/app/controller/handle/listProduct_contronller.php ">
                     <i class="fa-solid fa-shop"></i>
                     <span class="text">Danh sách</span>
                 </a>
             </li>
             <li>
-                <a href="/WEB_2/admin/orders">
+                <a href="#">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="text">Đơn hàng</span>
                 </a>
@@ -78,17 +78,17 @@
             <div class="image-contain">
                 <a href="#" class="infor">
                     <button class="Button">
-                        <img src="/img/ảnh đại diện.jpg" alt="ảnh đại diện">
+                        <img src="/WEB_2/public/assets/img/ảnh đại diện.jpg" alt="ảnh đại diện">
                     </button>
                 </a>
                 <div class="button-infor">
                     <div class="infor-ava">
                         <label for="">Họ và Tên:</label>
-                        <h3>Tôn Quyền</h3>
+                        <h3><?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Chưa đăng nhập'; ?></h3>
                     </div>
                     <div class="infor-ava">
                         <label for="">Quyền hạn:</label>
-                        <h3>Admin</h3>
+                        <h3><?php echo isset($_SESSION['role']) ? htmlspecialchars($_SESSION['role']) : 'Admin'; ?></h3>
                     </div>
                 </div>
             </div>
@@ -172,17 +172,6 @@
                 </form>
             </div>
 
-            <div class="time-filter">
-                <div class="Date">
-                    <label>Từ ngày</label>
-                    <input type="date">
-                </div>
-                <div class="Date">
-                    <label>Đến ngày</label>
-                    <input type="date">
-                </div>
-            </div>
-
             <table class="table-order">
                 <thead>
                     <tr>
@@ -250,10 +239,8 @@
         });
     </script>
 
-    <script src="/WEB_2/public/js/admin.js"></script>
-    <script src="/WEB_2/public/js/chart-bar.js"></script>
-    <!-- <script src ="../../../public/js/LocDonHang.js"></script> -->
-    <script src="/WEB_2/public/js/Click.js"></script>
+    <script src="/WEB_2/public/assets/js/admin.js"></script>
+    <script src="/WEB_2/public/assets/js/Click.js"></script>
 </body>
 
 </html>
