@@ -1,16 +1,34 @@
 <?php 
-// Sửa lại đường dẫn include cho đúng với cấu trúc thư mục thực tế
 include_once "../../../app/model/database.php";
-// Nếu cần thao tác với user, có thể include thêm users.php
-// include_once "../../../app/model/users.php";
-
 $db = new database();
 
-if($_SERVER['REQUEST_METHOD'] === "POST" )
-    if(isset($_POST['del']) && isset($_POST['del_id'])){
-        $get_id = $_POST['del_id'];
-        // Sửa lại tên bảng cho đúng là 'users' thay vì 'user'
-        $delete = $db->handle("DELETE FROM users WHERE id_users = '$get_id'");
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['del_id'])) {
+    $id = intval($_POST['del_id']);
+
+    // Lấy tất cả id_order của user này
+    $orders = $db->getData("SELECT id_order FROM orders WHERE id_user = $id");
+    if (!empty($orders)) {
+        foreach ($orders as $order) {
+            $order_id = intval($order['id_order']);
+            // Xóa order_items trước (tránh lỗi khóa ngoại)
+            $db->handle("DELETE FROM order_items WHERE id_order = $order_id");
+        }
     }
-    header('location: Quanlycauhinh.php');
+
+    // Xóa các bản ghi liên quan trong bảng cart trước (tránh lỗi khóa ngoại)
+    $db->handle("DELETE FROM cart WHERE id_user = $id");
+
+    // Xóa các bản ghi liên quan trong bảng orders trước (nếu có)
+    $db->handle("DELETE FROM orders WHERE id_user = $id");
+
+    // Xóa các bản ghi liên quan trong bảng addresses sau khi đã xóa orders
+    $db->handle("DELETE FROM addresses WHERE id_user = $id");
+
+    // Sau đó mới xóa user
+    $db->handle("DELETE FROM users WHERE id_users = $id");
+
+    // Chuyển hướng về trang quản lý người dùng
+    header("Location: /WEB_2/admin/users");
+    exit();
+}
 ?>

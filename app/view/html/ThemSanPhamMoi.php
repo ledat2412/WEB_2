@@ -47,10 +47,10 @@
                 <i class="fa-solid fa-bars"></i>
             </a>
             <form action="#">
-                <div class="form-input">
+                <!-- <div class="form-input">
                     <input type="search" placeholder="Tìm kiếm">
                     <button type="submit" class="button-search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
+                </div> -->
             </form>
             <a href="#" class="infor">
                 <img src="/WEB_2/public/assets/img/ảnh đại diện.jpg" alt="ảnh đại diện">
@@ -110,6 +110,11 @@
                             <label for="">Giá bán: </label>
                             <br>
                             <input type="text" required name="product_price">
+                        </div>
+                        <div class="add-infor-new">
+                            <label for="">kích thước: </label>
+                            <br>
+                            <input type="text" required name="product_size">
                         </div>
                         <div class="add-infor-new">
                             <label for="">Số lượng: </label>

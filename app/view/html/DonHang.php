@@ -70,10 +70,10 @@
                 <i class="fa-solid fa-bars"></i>
             </a>
             <form action="#">
-                <div class="form-input">
+                <!-- <div class="form-input">
                     <input type="search" placeholder="Tìm kiếm">
                     <button type="submit" class="button-search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
+                </div> -->
             </form>
             <div class="image-contain">
                 <a href="#" class="infor">
@@ -109,7 +109,7 @@
                 </div>
             </div>
 
-            <ul class="box-order">
+            <!-- <ul class="box-order">
                 <li>
                     <i class="fa-solid fa-box"></i>
                     <span class="text">
@@ -138,7 +138,7 @@
                         <p>300</p>
                     </span>
                 </li>
-            </ul>
+            </ul> -->
 
             <div class="content-filter">
                 <form action="" method="post">

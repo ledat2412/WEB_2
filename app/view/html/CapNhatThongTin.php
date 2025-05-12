@@ -47,10 +47,10 @@
                     <i class="fa-solid fa-bars"></i>
             </a>
             <form action="#">
-                <div class="form-input">
+                <!-- <div class="form-input">
                     <input type="search" placeholder="Tìm kiếm">
                     <button type="submit" class="button-search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
+                </div> -->
             </form>
             <a href="#" class="infor">
                 <img src="/img/ảnh đại diện.jpg" alt="ảnh đại diện">

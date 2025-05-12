@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
                 <?php foreach ($cart_items as $item): ?>
                     <div class="xacnhan-product-item">
                         <strong><?php echo htmlspecialchars($item['product_name']); ?></strong>
-                        <div>Size: <?php echo htmlspecialchars($item['size']); ?></div>
+                        <div>Size: <?php echo htmlspecialchars(isset($item['size']) && $item['size'] !== null ? $item['size'] : '', ENT_QUOTES, 'UTF-8'); ?></div>
                         <div>Số lượng: <?php echo $item['quantity']; ?></div>
                         <div>Giá: <?php echo number_format($item['price'], 0, ',', '.'); ?> ₫</div>
                         <div>Tạm tính: <?php echo number_format($item['price'] * $item['quantity'], 0, ',', '.'); ?> ₫</div>
@@ -109,9 +109,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
             <h2>Thông tin giao hàng</h2>
             <div class="xacnhan-info-block">
                 <?php if (!empty($address)): ?>
-                    <strong>Người nhận:</strong> <?php echo htmlspecialchars($address['recive_name'] ?? ''); ?><br>
-                    <strong>Điện thoại:</strong> <?php echo htmlspecialchars($address['phone'] ?? ''); ?><br>
-                    <strong>Địa chỉ:</strong> <?php echo htmlspecialchars($address['address'] ?? ''); ?>
+                    <strong>Người nhận:</strong> <?php echo htmlspecialchars(isset($address['recive_name']) && $address['recive_name'] !== null ? $address['recive_name'] : '', ENT_QUOTES, 'UTF-8'); ?><br>
+                    <strong>Điện thoại:</strong> <?php echo htmlspecialchars(isset($address['phone']) && $address['phone'] !== null ? $address['phone'] : '', ENT_QUOTES, 'UTF-8'); ?><br>
+                    <strong>Địa chỉ:</strong> <?php echo htmlspecialchars(isset($address['address']) && $address['address'] !== null ? $address['address'] : '', ENT_QUOTES, 'UTF-8'); ?>
                 <?php else: ?>
                     <span style="color:red;">Không tìm thấy địa chỉ giao hàng!</span>
                 <?php endif; ?>

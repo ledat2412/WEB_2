@@ -21,6 +21,8 @@
             $product_material = $_POST["product_material"];
             $product_sex = $_POST["sex"];
             $product_variant = $_POST["product_variant"];
+            // Sửa tên biến cho đúng với input form
+            $product_size = $_POST["product_size"]; // hoặc $_POST["product_sizes"] nếu bạn dùng tên đó
 
             // Đảm bảo chỉ có một thư mục loại sản phẩm (giữ nguyên tên gốc, không chuyển về thường, không bỏ dấu)
             $base_dir = "../../../public/assets/img/Sản Phẩm/";
@@ -53,7 +55,7 @@
                 $picture_path = "";
             }
 
-            // Thêm sản phẩm (truyền $picture_path thay vì tên file)
+            // Thêm sản phẩm (truyền $product_size vào đúng tham số)
             $addProductModel->addProduct(
                 $product_name,
                 $picture_path,
@@ -64,7 +66,8 @@
                 $product_material,
                 $product_sex,
                 $product_variant,
-                $product_code
+                $product_code,
+                $product_size // Đảm bảo truyền biến này
             );
             header("Location: /WEB_2/admin/products");
             exit();

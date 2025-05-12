@@ -90,10 +90,10 @@ if (session_status() === PHP_SESSION_NONE) {
                     <i class="fa-solid fa-bars"></i>
             </a>
             <form action="#">
-                <div class="form-input">
+                <!-- <div class="form-input">
                     <input type="search" placeholder="Tìm kiếm">
                     <button type="submit" class="button-search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
+                </div> -->
             </form>
             <div class="image-contain">
                 <a href="#" class="infor">
@@ -129,7 +129,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 </div>
             </div>
 
-            <ul class="box-infor">
+            <!-- <ul class="box-infor">
                 <li>
                     <i class="fa-solid fa-bag-shopping"></i>
                     <span class="text">
@@ -157,7 +157,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <p>57.6 Triệu</p>
                     </span>
                 </li>
-            </ul>
+            </ul> -->
             <form method="GET" action="/WEB_2/admin/home" class="datetime" style="margin-bottom: 20px;">
                 Từ: 
                 <input type="date" name="from_date" value="<?php echo isset($_GET['from_date']) ? htmlspecialchars($_GET['from_date']) : ''; ?>">

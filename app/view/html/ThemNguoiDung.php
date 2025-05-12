@@ -8,11 +8,12 @@ $db = new database();
 $error = '';
 $success = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['adduser'])) {
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
-    $role = intval($_POST['role']);
+    $password = trim($_POST['pass']);
+    // Gán role mặc định là 0 (user), bạn có thể sửa lại nếu muốn chọn role
+    $role = 0;
 
     // Kiểm tra username hoặc email đã tồn tại chưa
     $check = $db->getData("SELECT * FROM users WHERE username = '$username' OR email = '$email'");
@@ -77,10 +78,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn'])) {
                     <i class="fa-solid fa-bars"></i>
             </a>
             <form action="#">
-                <div class="form-input">
+                <!-- <div class="form-input">
                     <input type="search" placeholder="Tìm kiếm">
                     <button type="submit" class="button-search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
+                </div> -->
             </form>
             <a href="#" class="infor">
                 <img src="/img/ảnh đại diện.jpg" alt="ảnh đại diện">
