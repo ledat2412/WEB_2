@@ -147,7 +147,7 @@
                             <textarea style="width: 770px; resize: none; height: 60px;" name="product_description"></textarea>
                         </div>
                         <div class="add-submit-new">
-                            <a href="../../controller/handle/listProduct_contronller.php" class="return-new">
+                            <a href="/WEB_2/app/controller/handle/listProduct_contronller.php" class="return-new">
                                 Thoát
                             </a>
                             <div class="enter-add-new">
