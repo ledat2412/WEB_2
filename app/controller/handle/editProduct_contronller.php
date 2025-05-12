@@ -17,14 +17,14 @@
             $product = $DataProduct[0];
             if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if (isset($_POST["btn_repair"])) {
-                    $nameNew = $_POST["nameNew"];
-                    $variantNew = trim($_POST["variantNew"]);
-                    $stockNew = $_POST["stockNew"];
-                    $priceNew = $_POST["priceNew"];
-                    $sexNew = $_POST["sexNew"];
-                    $colorNew = $_POST["colorNew"];
-                    $descriptionNew = $_POST["descriptionNew"];
-                    $materialNew = trim($_POST["materialNew"]);
+                    $nameNew = isset($_POST["nameNew"]) ? $_POST["nameNew"] : '';
+                    $variantNew = isset($_POST["variantNew"]) ? $_POST["variantNew"] : '';
+                    $stockNew = isset($_POST["stockNew"]) ? $_POST["stockNew"] : '';
+                    $priceNew = isset($_POST["priceNew"]) ? $_POST["priceNew"] : '';
+                    $sexNew = isset($_POST["sexNew"]) ? $_POST["sexNew"] : '';
+                    $colorNew = isset($_POST["colorNew"]) ? $_POST["colorNew"] : '';
+                    $descriptionNew = isset($_POST["descriptionNew"]) ? $_POST["descriptionNew"] : '';
+                    $materialNew = isset($_POST["materialNew"]) ? $_POST["materialNew"] : '';
                     $description_id = $product['description_id'];
                     $material_id = $product['material_id'];
                     $color_id = $product['color_id'];
@@ -55,7 +55,17 @@
                     } else {
                         $pictureNew = $product['picture_path']; // giữ ảnh cũ nếu không upload mới
                     }
-                    if ($nameNew != $product['product_name'] || $variantNew != $product['product_variant_name'] || $stockNew != $product['stock'] || $priceNew != $product['price'] || $pictureNew != $product['picture_path'] || $materialNew != $product['material_name'] || $descriptionNew != $product['description_content'] || $sexNew != $product['sex_name'] || $colorNew != $product['color_name']) {
+                    if (
+                        $nameNew != $product['product_name'] ||
+                        $variantNew != $product['product_variant_name'] ||
+                        $stockNew != $product['stock'] ||
+                        $priceNew != $product['price'] ||
+                        $pictureNew != $product['picture_path'] ||
+                        $materialNew != $product['material_id'] ||
+                        $descriptionNew != $product['description_content'] ||
+                        $sexNew != $product['sex_id'] ||
+                        $colorNew != $product['color_name']
+                    ) {
                         $old_color_name = $product['color_name'];
                         $editProductModel->updateProduct(
                             $descriptionNew, $description_id, $materialNew, $material_id, $sexNew, $sex_id,

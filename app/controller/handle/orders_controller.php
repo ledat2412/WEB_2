@@ -59,3 +59,13 @@
         }
     }
 ?>
+
+<?php
+$district = isset($_POST['district']) ? $_POST['district'] : '';
+$status = isset($_POST['status']) ? $_POST['status'] : '';
+$from_date = isset($_POST['from_date']) ? $_POST['from_date'] : '';
+$to_date = isset($_POST['to_date']) ? $_POST['to_date'] : '';
+
+$orderModel = new orders();
+$order_product = $orderModel->getFilterOrders($district, $status, $from_date, $to_date);
+?>

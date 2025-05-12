@@ -204,8 +204,7 @@ function getFirstImageUrl($picture_path) {
             document.getElementById('warning-notify').classList.remove('active');
         }
     </script>
-    <script src="/WEB_2/public/js/admin.js"></script>
-    <script src="/WEB_2/public/js/chart-bar.js"></script>
-    <script src="/WEB_2/public/js/Click.js"></script>
+    <script src="/WEB_2/public/assets/js/admin.js"></script>
+    <script src="/WEB_2/public/assets/js/Click.js"></script>
 </body>
 </html>
