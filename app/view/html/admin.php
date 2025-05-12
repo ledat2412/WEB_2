@@ -152,13 +152,13 @@
                     </span>
                 </li>
             </ul>
-            <form method="GET" action="admin.php" class="datetime" style="margin-bottom: 20px;">
-                                Từ: 
-                                <input type="date" name="from_date" value="<?php echo isset($_GET['from_date']) ? htmlspecialchars($_GET['from_date']) : ''; ?>">
-                                &nbsp;&nbsp;Đến: 
-                                <input type="date" name="to_date" value="<?php echo isset($_GET['to_date']) ? htmlspecialchars($_GET['to_date']) : ''; ?>">
-                                &nbsp;&nbsp;<button type="submit" name="statistic">Thống kê</button>
-                            </form>
+            <form method="GET" action="/WEB_2/admin/home" class="datetime" style="margin-bottom: 20px;">
+                Từ: 
+                <input type="date" name="from_date" value="<?php echo isset($_GET['from_date']) ? htmlspecialchars($_GET['from_date']) : ''; ?>">
+                &nbsp;&nbsp;Đến: 
+                <input type="date" name="to_date" value="<?php echo isset($_GET['to_date']) ? htmlspecialchars($_GET['to_date']) : ''; ?>">
+                &nbsp;&nbsp;<button type="submit" name="statistic">Thống kê</button>
+            </form>
             <div class="customer-chart-container">
                 
                 <table class="table-user">
@@ -216,7 +216,8 @@
                                 echo '<td>' . htmlspecialchars($row['username']) . '</td>';
                                 echo '<td>' . htmlspecialchars($row['email']) . '</td>';
                                 echo '<td>' . number_format($row['total_purchase'], 0, ',', '.') . ' đ</td>';
-                                echo '<td><a href="ChiTietDonHang.php?id_user=' . $row['id_users'] . '&from=' . htmlspecialchars($_GET['from_date']) . '&to=' . htmlspecialchars($_GET['to_date']) . '" target="_blank">Chi tiết</a></td>';
+                                // Sửa đường dẫn chi tiết hóa đơn sang dạng rewrite
+                                echo '<td><a href="/WEB_2/admin/orders/detail?id_user=' . $row['id_users'] . '&from=' . htmlspecialchars($_GET['from_date']) . '&to=' . htmlspecialchars($_GET['to_date']) . '" target="_blank">Chi tiết</a></td>';
                                 echo '</tr>';
                             }
                         } else {
