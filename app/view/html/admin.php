@@ -103,11 +103,11 @@ if (session_status() === PHP_SESSION_NONE) {
                 </a>
                 <div class="button-infor">
                     <div class="infor-ava">
-                        <label for="">Họ và Tên:</label>
+                        <label for="">Tên đăng nhập:</label>
                         <h3><?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Chưa đăng nhập'; ?></h3>
                     </div>
                     <div class="infor-ava">
-                        <label for="">Quyền hạn:</label>
+                        <label for="">Mật khẩu :</label>
                         <h3><?php echo isset($_SESSION['role']) ? htmlspecialchars($_SESSION['role']) : 'Admin'; ?></h3>
                     </div>
                 </div>
